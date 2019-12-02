@@ -9,7 +9,7 @@ public class GamePanel {
 
 	private JFrame frame;
 	
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); /*prende le dimensioni dello schermo*/
 	double width = screenSize.getWidth();
 	double height = screenSize.getHeight();
 	

@@ -5,9 +5,15 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import game.patterns.state.Modalita;
+import game.patterns.state.Stato;
+import game.patterns.state.StatoGameOver;
+import game.patterns.state.StatoStart;
+
 public class GamePanel {
 
 	private JFrame frame;
+	private Modalita modalita;
 	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	double width = screenSize.getWidth();
@@ -15,6 +21,19 @@ public class GamePanel {
 	
 	int w= (int)((width*40)/100);
 	int h= (int)((height*90)/100);
+	
+	//Singleton
+	private static GamePanel istance = null; // riferimento all' istanza
+	
+//	public GamePanel() {
+//		initialize();
+//	}
+	
+	public static GamePanel getIstance() {
+		if (istance == null)
+			istance = new GamePanel();
+		return istance;
+	}
 
 	/**
 	 * Launch the application.
@@ -23,8 +42,14 @@ public class GamePanel {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GamePanel window = new GamePanel();
-					window.frame.setVisible(true);
+					GamePanel window = GamePanel.getIstance();
+					window.setModalita(new Modalita());
+					window.setFrame(new StatoStart());
+					window.getFrame().setVisible(true);
+//					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//					frame.setSize(w,h);
+					window.getFrame().setTitle("13 Light Years");
+					window.getFrame().setVisible(true); 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -33,22 +58,28 @@ public class GamePanel {
 	}
 
 	/**
-	 * Create the application.
-	 */
-	public GamePanel() {
-		initialize();
-	}
-
-	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(w,h);
-		frame.setTitle("13 Light Years");
-		frame.setLocationRelativeTo(null);
-		
+	
+	public void updateModalita(String string) {
+		Stato stato = modalita.getStatoModalita();
+    	stato.gestioneStato(modalita, string);
+	}
+
+	public Modalita getModalita() {
+		return modalita;
+	}
+
+	public void setModalita(Modalita modalita) {
+		this.modalita = modalita;
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 
 }

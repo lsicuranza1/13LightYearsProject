@@ -1,3 +1,4 @@
+package game;
 import java.awt.Dimension;
 import java.awt.geom.AffineTransform;
 import java.awt.Graphics;

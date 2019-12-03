@@ -1,6 +1,7 @@
 package game.patterns.state;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -210,7 +211,9 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    	gamePanel.updateModalita("game_over");
+    	//gamePanel.updateModalita("game_over");
+
+    	gamePanel.updateModalita("in_esecuzione");
     	
          
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -218,6 +221,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     	System.out.println("ciao");
+    	gamePanel.updateModalita("game_over");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -280,10 +284,15 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("in_esecuzione"))
+		if (stato.equals("in_esecuzione")) {
 			modalita.setStatoModalita(new StatoInEsecuzione());
-		//TODO togliere
-		else if (stato.equals("game_over")) {
+			gamePanel.getFrame().setVisible(false);
+			gamePanel.setFrame(new StatoInEsecuzione());
+			gamePanel.getFrame().setVisible(true);
+			gamePanel.getFrame().setTitle("13 Light Years");
+		//TODO togliere;
+			
+		}else if (stato.equals("game_over")) {
 			modalita.setStatoModalita(new StatoGameOver());
 			gamePanel.getFrame().setVisible(false);
 			gamePanel.setFrame(new StatoGameOver());
@@ -291,6 +300,12 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 			gamePanel.getFrame().setTitle("13 Light Years");
 			
 		}
+		
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
 		
 	}
 

@@ -1,23 +1,19 @@
-package game;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package game.patterns.state;
 
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
+import game.GamePanel;
+import game.Settings;
 
-/**
- *
- * @author enryc
- */
-public class NewJFrame extends javax.swing.JFrame {
+public class StatoStart extends javax.swing.JFrame implements Stato {
+	
+	GamePanel gamePanel = GamePanel.getIstance();
     
     Dimension dim;
     public static Clip gameClip;
@@ -35,13 +31,12 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public StatoStart() {
         
         // logo del gioco
         Image iconaFrame;
-        iconaFrame = new ImageIcon(getClass().getResource("../resources/images/logo_game.png")).getImage();
+        iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
         this.setIconImage(iconaFrame);
-
         // fisso le dimensioni della finestra  Menù a partire da quelle dinamiche dello schermo del pc
         dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
         dim.setSize(1000, 600);  // setto larghezza e altezza, da me scelti, per la finestra Menù
@@ -49,7 +44,7 @@ public class NewJFrame extends javax.swing.JFrame {
         
         
         // ridimensiono lo sfondo in base alle dimensioni della schermata menù
-        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/sfondo_menu.png"), dim.width, dim.height);
+        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width, dim.height);
         
         // Gif della Terra
         //nt w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1/3;
@@ -215,12 +210,14 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+    	gamePanel.updateModalita("game_over");
+    	
          
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+    	System.out.println("ciao");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -232,6 +229,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+    	System.out.println("ciao");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -277,10 +275,26 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel sfondo;
     // End of variables declaration//GEN-END:variables
+    
+	
+	
+	@Override
+	public void gestioneStato(Modalita modalita, String stato) {
+		if (stato.equals("in_esecuzione"))
+			modalita.setStatoModalita(new StatoInEsecuzione());
+		//TODO togliere
+		else if (stato.equals("game_over")) {
+			modalita.setStatoModalita(new StatoGameOver());
+			gamePanel.getFrame().setVisible(false);
+			gamePanel.setFrame(new StatoGameOver());
+			gamePanel.getFrame().setVisible(true);
+			gamePanel.getFrame().setTitle("13 Light Years");
+			
+		}
+		
+	}
 
-    }
+	
 
-
-
-
-
+ 
+}

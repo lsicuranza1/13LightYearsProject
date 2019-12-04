@@ -16,10 +16,16 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	
 	GamePanel gamePanel = GamePanel.getIstance();
     
-    Dimension dim;
+    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     public static Clip gameClip;
     private boolean back = false;
     public static boolean demo = false;
+    
+    double width = dim.getWidth();
+	double height = dim.getHeight();
+	
+	int w= (int)((width*40)/100);
+	int h= (int)((height*90)/100);
 
     // ridimensiono larghezza e altezza dell'immagine  
     //in base alle dimensioni della finestra menù, che ho deciso io (nuovaW e nuova H)
@@ -39,8 +45,8 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
         this.setIconImage(iconaFrame);
         // fisso le dimensioni della finestra  Menù a partire da quelle dinamiche dello schermo del pc
-        dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
-        dim.setSize(1000, 600);  // setto larghezza e altezza, da me scelti, per la finestra Menù
+        //dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
+        dim.setSize(w, h);  // setto larghezza e altezza, da me scelti, per la finestra Menù
         this.setPreferredSize(dim.getSize());
         
         
@@ -93,11 +99,11 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("13 Light Years");
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(w, h));
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
-        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
+        jPanel1.setMinimumSize(new java.awt.Dimension(w, h));
         jPanel1.setName(""); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(dim.getSize());

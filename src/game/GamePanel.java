@@ -13,13 +13,13 @@ public class GamePanel {
 
 	private JFrame frame;
 	private Modalita modalita;
-	
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); /*prende le dimensioni dello schermo*/
-	double width = screenSize.getWidth();
-	double height = screenSize.getHeight();
-	
-	int w= (int)((width*40)/100);
-	int h= (int)((height*90)/100);
+//	
+//	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//	double width = screenSize.getWidth();
+//	double height = screenSize.getHeight();
+//	
+//	int w= (int)((width*40)/100);
+//	int h= (int)((height*90)/100);
 	
 	//Singleton
 	private static GamePanel istance = null; // riferimento all' istanza

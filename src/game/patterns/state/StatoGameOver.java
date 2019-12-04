@@ -1,23 +1,20 @@
-package game;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package game.patterns.state;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
+
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
+import game.GamePanel;
+import game.Settings;
 
-/**
- *
- * @author enryc
- */
-public class NewJFrame extends javax.swing.JFrame {
+public class StatoGameOver extends javax.swing.JFrame implements Stato {
+	
+	GamePanel gamePanel = GamePanel.getIstance();
     
     Dimension dim;
     public static Clip gameClip;
@@ -35,13 +32,12 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public StatoGameOver() {
         
         // logo del gioco
         Image iconaFrame;
-        iconaFrame = new ImageIcon(getClass().getResource("../resources/images/logo_game.png")).getImage();
+        iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
         this.setIconImage(iconaFrame);
-
         // fisso le dimensioni della finestra  Menù a partire da quelle dinamiche dello schermo del pc
         dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
         dim.setSize(1000, 600);  // setto larghezza e altezza, da me scelti, per la finestra Menù
@@ -49,7 +45,7 @@ public class NewJFrame extends javax.swing.JFrame {
         
         
         // ridimensiono lo sfondo in base alle dimensioni della schermata menù
-        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/sfondo_menu.png"), dim.width, dim.height);
+        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width, dim.height);
         
         // Gif della Terra
         //nt w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1/3;
@@ -88,7 +84,7 @@ public class NewJFrame extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -107,16 +103,8 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.setPreferredSize(dim.getSize());
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setFont(new java.awt.Font("Gabriola", 0, 36)); // NOI18N
-        jButton2.setText("Play");
-        jButton2.setMaximumSize(new java.awt.Dimension(107, 25));
-        jButton2.setMinimumSize(new java.awt.Dimension(107, 25));
-        jButton2.setPreferredSize(new java.awt.Dimension(107, 25));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        
+        
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -124,7 +112,7 @@ public class NewJFrame extends javax.swing.JFrame {
         gridBagConstraints.ipady = 32;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(269, 70, 0, 695);
-        jPanel1.add(jButton2, gridBagConstraints);
+        
 
         jButton3.setFont(new java.awt.Font("Gabriola", 0, 36)); // NOI18N
         jButton3.setText("Scoreboard");
@@ -213,14 +201,11 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+    	System.out.println("ciao");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -232,6 +217,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+    	System.out.println("ciao");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -270,17 +256,28 @@ public class NewJFrame extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+   
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel sfondo;
     // End of variables declaration//GEN-END:variables
+    
+    @Override
+	public void gestioneStato(Modalita modalita, String stato) {
+		// TODO Auto-generated method stub
+		if (stato.equals("start"))
+			modalita.setStatoModalita(new StatoStart());
+	}
 
-    }
+	@Override
+	public void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	
 
-
-
-
+ 
+}

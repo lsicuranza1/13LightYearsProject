@@ -9,12 +9,12 @@ import java.net.URL;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-import game.GamePanel;
+import game.MainFrame;
 import game.Settings;
 
 public class StatoStart extends javax.swing.JFrame implements Stato {
 	
-	GamePanel gamePanel = GamePanel.getIstance();
+	MainFrame mainFrame = MainFrame.getIstance();
     
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     public static Clip gameClip;
@@ -219,7 +219,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         // TODO add your handling code here:
     	//gamePanel.updateModalita("game_over");
 
-    	gamePanel.updateModalita("in_esecuzione");
+    	mainFrame.updateModalita("in_esecuzione");
     	
          
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -227,7 +227,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     	System.out.println("ciao");
-    	gamePanel.updateModalita("game_over");
+    	mainFrame.updateModalita("game_over");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -292,30 +292,22 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("in_esecuzione")) {
 			modalita.setStatoModalita(new StatoInEsecuzione());
-			gamePanel.getFrame().setVisible(false);
-			gamePanel.setFrame(new StatoInEsecuzione());
-			gamePanel.getFrame().setVisible(true);
-			gamePanel.getFrame().setTitle("13 Light Years");
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.setFrame(new StatoInEsecuzione());
+			mainFrame.getFrame().setVisible(true);
+			mainFrame.getFrame().setTitle("13 Light Years");
 		//TODO togliere;
 			
 		}else if (stato.equals("game_over")) {
 			modalita.setStatoModalita(new StatoGameOver());
-			gamePanel.getFrame().setVisible(false);
-			gamePanel.setFrame(new StatoGameOver());
-			gamePanel.getFrame().setVisible(true);
-			gamePanel.getFrame().setTitle("13 Light Years");
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.setFrame(new StatoGameOver());
+			mainFrame.getFrame().setVisible(true);
+			mainFrame.getFrame().setTitle("13 Light Years");
 			
 		}
 		
 	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 
  
 }

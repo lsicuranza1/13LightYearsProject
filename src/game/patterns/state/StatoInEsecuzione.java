@@ -16,15 +16,15 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-import game.GamePanel;
+import game.MainFrame;
 import game.Missile;
 import game.SpaceShip;
 
 
-public class StatoInEsecuzione extends javax.swing.JFrame implements Stato, ActionListener {
+public class StatoInEsecuzione extends javax.swing.JFrame implements Stato {
  
-	GamePanel gamePanel = GamePanel.getIstance();
-    
+	MainFrame mainFrame = MainFrame.getIstance();
+	
     Dimension dim;
     public static Clip gameClip;
     private boolean back = false;
@@ -68,7 +68,7 @@ private void initComponents() {
     java.awt.GridBagConstraints gridBagConstraints;
 
     jPanel1 = new javax.swing.JPanel();
-    panel2 = new javax.swing.JPanel();
+    jPanel2 = new javax.swing.JPanel();
     sfondo = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,12 +77,12 @@ private void initComponents() {
     setPreferredSize(new java.awt.Dimension(1000, 600));
     setResizable(false);
     
-    panel2.setAlignmentX(0.0F);
-    panel2.setMinimumSize(new java.awt.Dimension(1000, 600));
-    panel2.setName(""); // NOI18N
-    panel2.setOpaque(false);
-    panel2.setPreferredSize(dim.getSize());
-    panel2.setLayout(new java.awt.GridBagLayout());
+    jPanel2.setAlignmentX(0.0F);
+    jPanel2.setMinimumSize(new java.awt.Dimension(1000, 600));
+    jPanel2.setName(""); // NOI18N
+    jPanel2.setOpaque(false);
+    jPanel2.setPreferredSize(dim.getSize());
+    jPanel2.setLayout(new java.awt.GridBagLayout());
     
 
     jPanel1.setAlignmentX(0.0F);
@@ -144,7 +144,7 @@ private void initComponents() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
 
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel panel2;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel sfondo;
 	
     @Override

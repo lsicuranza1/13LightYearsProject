@@ -1,5 +1,7 @@
 package game.patterns.state;
 
+import java.awt.Graphics;
+
 public class StatoPausa implements Stato {
  
     @Override
@@ -10,6 +12,12 @@ public class StatoPausa implements Stato {
 		else if(stato.equals("start"))
 			modalita.setStatoModalita(new StatoStart());
 	
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
  
 }

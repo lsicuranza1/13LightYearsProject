@@ -24,8 +24,8 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     double width = dim.getWidth();
 	double height = dim.getHeight();
 	
-	int w= (int)((width*40)/100);
-	int h= (int)((height*90)/100);
+	int w= (int)((width*60)/100);
+	int h= (int)((height*60)/100);
 
     // ridimensiono larghezza e altezza dell'immagine  
     //in base alle dimensioni della finestra menù, che ho deciso io (nuovaW e nuova H)
@@ -51,7 +51,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         
         
         // ridimensiono lo sfondo in base alle dimensioni della schermata menù
-        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width, dim.height);
+        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), w, h);
         
         // Gif della Terra
         //nt w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1/3;

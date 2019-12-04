@@ -1,6 +1,7 @@
 package game.patterns.state;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -10,7 +11,6 @@ import javax.swing.ImageIcon;
 
 import game.GamePanel;
 import game.Settings;
-
 
 public class StatoGameOver extends javax.swing.JFrame implements Stato {
 	
@@ -269,6 +269,12 @@ public class StatoGameOver extends javax.swing.JFrame implements Stato {
 		// TODO Auto-generated method stub
 		if (stato.equals("start"))
 			modalita.setStatoModalita(new StatoStart());
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

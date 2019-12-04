@@ -1,6 +1,7 @@
 package game.patterns.state;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -15,10 +16,16 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	
 	GamePanel gamePanel = GamePanel.getIstance();
     
-    Dimension dim;
+    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     public static Clip gameClip;
     private boolean back = false;
     public static boolean demo = false;
+    
+    double width = dim.getWidth();
+	double height = dim.getHeight();
+	
+	int w= (int)((width*40)/100);
+	int h= (int)((height*90)/100);
 
     // ridimensiono larghezza e altezza dell'immagine  
     //in base alle dimensioni della finestra menù, che ho deciso io (nuovaW e nuova H)
@@ -38,8 +45,8 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
         this.setIconImage(iconaFrame);
         // fisso le dimensioni della finestra  Menù a partire da quelle dinamiche dello schermo del pc
-        dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
-        dim.setSize(1000, 600);  // setto larghezza e altezza, da me scelti, per la finestra Menù
+        //dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
+        dim.setSize(w, h);  // setto larghezza e altezza, da me scelti, per la finestra Menù
         this.setPreferredSize(dim.getSize());
         
         
@@ -92,11 +99,11 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("13 Light Years");
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(w, h));
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
-        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
+        jPanel1.setMinimumSize(new java.awt.Dimension(w, h));
         jPanel1.setName(""); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(dim.getSize());
@@ -210,7 +217,9 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    	gamePanel.updateModalita("game_over");
+    	//gamePanel.updateModalita("game_over");
+
+    	gamePanel.updateModalita("in_esecuzione");
     	
          
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -218,6 +227,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     	System.out.println("ciao");
+    	gamePanel.updateModalita("game_over");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -232,40 +242,6 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     	System.out.println("ciao");
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new NewJFrame().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
@@ -280,10 +256,15 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("in_esecuzione"))
+		if (stato.equals("in_esecuzione")) {
 			modalita.setStatoModalita(new StatoInEsecuzione());
-		//TODO togliere
-		else if (stato.equals("game_over")) {
+			gamePanel.getFrame().setVisible(false);
+			gamePanel.setFrame(new StatoInEsecuzione());
+			gamePanel.getFrame().setVisible(true);
+			gamePanel.getFrame().setTitle("13 Light Years");
+		//TODO togliere;
+			
+		}else if (stato.equals("game_over")) {
 			modalita.setStatoModalita(new StatoGameOver());
 			gamePanel.getFrame().setVisible(false);
 			gamePanel.setFrame(new StatoGameOver());
@@ -291,6 +272,12 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 			gamePanel.getFrame().setTitle("13 Light Years");
 			
 		}
+		
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		// TODO Auto-generated method stub
 		
 	}
 

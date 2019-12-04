@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 import game.patterns.state.Modalita;
 import game.patterns.state.Stato;
-import game.patterns.state.StatoGameOver;
 import game.patterns.state.StatoStart;
 
 public class GamePanel {

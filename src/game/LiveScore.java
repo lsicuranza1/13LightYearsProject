@@ -18,7 +18,7 @@ public class LiveScore {
 				points += multiplier * POINTS_ALIEN;
 			}
 		}
-	} //gdhassdas
+	} 
 	
 	
 }

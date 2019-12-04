@@ -16,16 +16,11 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	
 	MainFrame mainFrame = MainFrame.getIstance();
     
-    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    Dimension dim;
     public static Clip gameClip;
     private boolean back = false;
     public static boolean demo = false;
     
-    double width = dim.getWidth();
-	double height = dim.getHeight();
-	
-	int w= (int)((width*60)/100);
-	int h= (int)((height*60)/100);
 
     // ridimensiono larghezza e altezza dell'immagine  
     //in base alle dimensioni della finestra menù, che ho deciso io (nuovaW e nuova H)
@@ -45,13 +40,13 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
         this.setIconImage(iconaFrame);
         // fisso le dimensioni della finestra  Menù a partire da quelle dinamiche dello schermo del pc
-        //dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
-        dim.setSize(w, h);  // setto larghezza e altezza, da me scelti, per la finestra Menù
+        dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
+        dim.setSize(1000,600);  // setto larghezza e altezza, da me scelti, per la finestra Menù
         this.setPreferredSize(dim.getSize());
         
         
         // ridimensiono lo sfondo in base alle dimensioni della schermata menù
-        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), w, h);
+        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width,dim.height);
         
         // Gif della Terra
         //nt w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1/3;
@@ -72,6 +67,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
       
         sfondo.setPreferredSize(dim.getSize());
         sfondo.setIcon(immagineSfondo);
+        //jPanel1.setSize(dim.getSize());
         
         
     
@@ -99,11 +95,11 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("13 Light Years");
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(w, h));
+        setPreferredSize(new java.awt.Dimension(dim.width,dim.height));
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
-        jPanel1.setMinimumSize(new java.awt.Dimension(w, h));
+        jPanel1.setMinimumSize(new java.awt.Dimension(dim.width,dim.height));
         jPanel1.setName(""); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(dim.getSize());
@@ -211,6 +207,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
         jPanel1.getAccessibleContext().setAccessibleName("");
         jPanel1.getAccessibleContext().setAccessibleDescription("");
+        //jPanel1.setSize(100, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

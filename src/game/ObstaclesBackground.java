@@ -1,6 +1,5 @@
 package game;
 import java.awt.Dimension;
-import java.awt.geom.AffineTransform;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -14,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,9 +41,9 @@ public class ObstaclesBackground extends JPanel {
 
     public ObstaclesBackground() {
         try {
-            asteroidImage = ImageIO.read(getClass().getResource("../images/asteroid-icon.png"));
-            meteoriteImage = ImageIO.read(getClass().getResource("../images/fiery-meteorite-icon.png"));
-            background = ImageIO.read(getClass().getResource("../images/background-space.png"));
+            asteroidImage = ImageIO.read(getClass().getResource("../resources/images/asteroid-icon.png"));
+            meteoriteImage = ImageIO.read(getClass().getResource("../resources/images/fiery-meteorite-icon.png"));
+            background = ImageIO.read(getClass().getResource("../resources/images/background-space.png"));
         } catch (IOException ex) {
             Logger.getLogger(ObstaclesBackground.class.getName()).log(Level.SEVERE, null, ex);
         }

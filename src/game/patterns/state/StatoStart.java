@@ -8,6 +8,7 @@ import java.net.URL;
 
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 import game.MainFrame;
 import game.Settings;
@@ -254,11 +255,14 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("in_esecuzione")) {
+//			mainFrame.getFrame().setVisible(false);
+//			mainFrame.getFrame().remove
+//			mainFrame.setFrame(new StatoInEsecuzione());		
+//			mainFrame.getFrame().setVisible(true);
+//			mainFrame.getFrame().setSize(1000, 600);
+//			mainFrame.getFrame().setTitle("13 Light Years");
 			modalita.setStatoModalita(new StatoInEsecuzione());
-			mainFrame.getFrame().setVisible(false);
-			mainFrame.setFrame(new StatoInEsecuzione());
-			mainFrame.getFrame().setVisible(true);
-			mainFrame.getFrame().setTitle("13 Light Years");
+			
 		//TODO togliere;
 			
 		}else if (stato.equals("game_over")) {

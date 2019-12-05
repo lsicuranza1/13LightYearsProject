@@ -23,14 +23,15 @@ import javax.swing.Timer;
 
 import game.MainFrame;
 import game.Missile;
+import game.PanelProva;
 import game.SpaceShip;
 
 
-public class StatoInEsecuzione extends javax.swing.JFrame implements Stato {
+public class StatoInEsecuzione extends javax.swing.JFrame implements Stato, ActionListener {
  
 	MainFrame mainFrame = MainFrame.getIstance();
 	private SpaceShip spaceShip;
-	private JPanel panel = new JPanel();
+	private PanelProva panel = new PanelProva();
 	private JButton button = new JButton();
     private SpaceShip ship;
     
@@ -38,33 +39,24 @@ public StatoInEsecuzione() {
         System.out.println("In esecuzione");
         
         mainFrame.getFrame().setLayout(new BorderLayout());
-        mainFrame.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//       mainFrame.getFrame().add(panel, BorderLayout.CENTER);
+//        mainFrame.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panel.setBackground(Color.BLACK);
+        mainFrame.getFrame().add(panel, BorderLayout.CENTER);
         mainFrame.getFrame().setVisible(true);
         
-        ship = new SpaceShip(100, 100);
-        
-//        repaint();
-        
+//        ship = new SpaceShip(300, 300);
+        panel.repaint();
     }
 
-private void doDrawing(Graphics g) {
 
-    Graphics2D g2d = (Graphics2D) g;
-    
-    g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
-            spaceShip.getY(), this);
-
-    List<Missile> missiles = spaceShip.getMissiles();
-
-    for (Missile missile : missiles) {
-        
-        g2d.drawImage(missile.getImage(), missile.getX(),
-                missile.getY(), this);
+	
+	@Override
+    public void actionPerformed(ActionEvent e) {
+		panel.updateSpaceShip();
+        panel.repaint();
     }
-}
-
-
+	
+	
     @Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		// TODO Auto-generated method stub

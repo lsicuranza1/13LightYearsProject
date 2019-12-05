@@ -45,7 +45,7 @@ public StatoInEsecuzione() {
         mainFrame.getFrame().setVisible(true);
         
 //        ship = new SpaceShip(300, 300);
-        //panel.repaint();
+        panel.repaint();
     }
 
 
@@ -58,7 +58,11 @@ public StatoInEsecuzione() {
 
 
 	
-	
+	@Override
+    public void actionPerformed(ActionEvent e) {
+		panel.updateSpaceShip();
+        panel.repaint();
+    }
 	
 	
     @Override

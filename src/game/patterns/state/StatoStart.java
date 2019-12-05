@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import game.MainFrame;
-import game.Settings;
+//import game.Settings;
 
 public class StatoStart extends javax.swing.JFrame implements Stato {
 	
@@ -216,11 +216,11 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     	//gamePanel.updateModalita("game_over");
-    	jButton2.setVisible(false);
-    	jButton3.setVisible(false);
-    	jButton4.setVisible(false);
-    	jButton5.setVisible(false);
-    	sfondo.setVisible(false);
+//    	jButton2.setVisible(false);
+//    	jButton3.setVisible(false);
+//    	jButton4.setVisible(false);
+//    	jButton5.setVisible(false);
+//    	sfondo.setVisible(false);
 //		mainFrame.getFrame().removeAll();
 //		mainFrame.getFrame().repaint();
 
@@ -237,8 +237,8 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Settings set = new Settings(this, true, false);
-        set.setVisible(true);
+        //Settings set = new Settings(this, true, false);
+        //set.setVisible(true);
      
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -262,18 +262,16 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("in_esecuzione")) {
-//			mainFrame.getFrame().setVisible(false);
-//			mainFrame.setFrame(new StatoInEsecuzione());		
-//			mainFrame.getFrame().setVisible(true);
-//	        mainFrame.getFrame().repaint();
-			mainFrame.getFrame().setSize(1000, 600);
 			mainFrame.getFrame().setTitle("Gioco");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoInEsecuzione());
-		//TODO togliere;
+		
 			
 		}else if (stato.equals("game_over")) {
 			modalita.setStatoModalita(new StatoGameOver());
-			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
 			mainFrame.setFrame(new StatoGameOver());
 			mainFrame.getFrame().setVisible(true);
 			mainFrame.getFrame().setTitle("13 Light Years");

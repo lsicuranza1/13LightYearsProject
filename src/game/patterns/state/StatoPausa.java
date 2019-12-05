@@ -14,10 +14,6 @@ public class StatoPausa implements Stato {
 	
 	}
 
-	@Override
-	public void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
+
  
 }

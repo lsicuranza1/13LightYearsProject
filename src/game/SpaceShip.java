@@ -33,9 +33,10 @@ public class SpaceShip extends Sprite {
     private void initSpaceShip() {
 
         missiles = new ArrayList<>();
-        
-        loadImage("../resources/images/spaceship.png"); 
+        System.out.println("space");
+        loadImage("src/resources/images/spaceship.png"); 
         getImageDimensions();
+        System.out.println("DImensioni" + this.width + this.height );
     }
 
     public void move() {
@@ -50,8 +51,7 @@ public class SpaceShip extends Sprite {
     
     public void keyPressed(KeyEvent e) {
 
-        int key = e.getKeyCode();
-        //int key = e.getKeyCode();    	
+        int key = e.getKeyCode();    	
         int shoot = e.getKeyCode();
         
         if (isShooting == false) {

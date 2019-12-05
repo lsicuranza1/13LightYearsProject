@@ -2,13 +2,11 @@ package game.patterns.state;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.net.URL;
 
-import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 import game.MainFrame;
@@ -19,9 +17,6 @@ public class StatoGameOver extends javax.swing.JFrame implements Stato {
 	MainFrame mainFrame = MainFrame.getIstance();
     
     Dimension dim;
-    public static Clip gameClip;
-    private boolean back = false;
-    public static boolean demo = false;
     
     private javax.swing.JButton jButton;
     private javax.swing.JPanel jPanel1;
@@ -188,14 +183,17 @@ public class StatoGameOver extends javax.swing.JFrame implements Stato {
 	public void gestioneStato(Modalita modalita, String stato) {
 		// TODO Auto-generated method stub
 		if (stato.equals("start")) {
+			mainFrame.getFrame().setTitle("Start");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoStart());
-			mainFrame.getFrame().setVisible(false);
-			mainFrame.setFrame(new StatoStart());
-			mainFrame.getFrame().setVisible(true);
-			mainFrame.getFrame().setTitle("13 Light Years");
 		}
-		else if (stato.equals("in_esecuzione"))
+		else if (stato.equals("in_esecuzione")) {
+			mainFrame.getFrame().setTitle("Gioco");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoInEsecuzione());
+		}
 	}
 
 	

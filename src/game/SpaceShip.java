@@ -46,7 +46,7 @@ public class SpaceShip extends SpaceshipStructure {
 //        missiles = new ArrayList<>();
 //        
 //    }
-
+    @Override
     public void move() {
     	this.setX(this.getX() + dx);
     	this.setY(this.getY() + dy);
@@ -57,28 +57,28 @@ public class SpaceShip extends SpaceshipStructure {
 
         int key = e.getKeyCode();
         //int key = e.getKeyCode();    	
-        int shoot = e.getKeyCode();
+        //int shoot = e.getKeyCode();
         int x = this.getX();
         int y = this.getY();
         int width = this.getWidth();
         int height = this.getHeight();
         
-        if (isShooting == false) {
-	        if (shoot == KeyEvent.VK_SPACE) {
-	        	if (x<=0-width+10) {
-	        		x=400-8;
-	        		dx=-3;
-	        	}
-	        	if (x>400-8) {
-	        		x=0-width+10;
-	        		dx=3;
-	        	}
+//        if (isShooting == false) {
+	        if (key == KeyEvent.VK_SPACE) {
+//	        	if (x<=0-width+10) {
+//	        		x=400-8;
+//	        		dx=-3;
+//	        	}
+//	        	if (x>400-8) {
+//	        		x=0-width+10;
+//	        		dx=3;
+//	        	}
 	            fire();
 	        }
-        }
+//        }
 
         if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-        	System.out.println("Left");
+
         	if (x<=0-width+10) {
         		x=400-8;
         		dx=-3;
@@ -135,26 +135,31 @@ public class SpaceShip extends SpaceshipStructure {
         }
     }
 
+//    public void fire() {
+//    	int x = this.getX();
+//        int y = this.getY();
+//        int width = this.getWidth();
+//        int height = this.getHeight();
+//        List<Missile> missiles = this.getMissiles();
+//    			missiles.add(new Missile(x + width/2 -9, y + height -90,"/13LightYearsProject/src/resources/images/missile.png"));
+//    	new Thread() {
+//    		@Override
+//    		public void run() {
+//        		try {
+//    	            isShooting = true;
+//        			missiles.add(new Missile(x + width/2 -9, y + height -90,"/13LightYearsProject/src/resources/images/missile.png"));
+//                    Thread.sleep(1000);
+//                    isShooting = false;
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(SpaceShip.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//    		}
+//    	}.start();		
+//    }
     public void fire() {
-    	int x = this.getX();
-        int y = this.getY();
-        int width = this.getWidth();
-        int height = this.getHeight();
-        List<Missile> missiles = this.getMissiles();
-    			missiles.add(new Missile(x + width/2 -9, y + height -90,"/13LightYearsProject/src/resources/images/missile.png"));
-    	new Thread() {
-    		@Override
-    		public void run() {
-        		try {
-    	            isShooting = true;
-        			missiles.add(new Missile(x + width/2 -9, y + height -90,"/13LightYearsProject/src/resources/images/missile.png"));
-                    Thread.sleep(1000);
-                    isShooting = false;
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(SpaceShip.class.getName()).log(Level.SEVERE, null, ex);
-                }
-    		}
-    	}.start();		
+    	Missile missile = new Missile(this.getX() + this.getWidth()/2 -10, this.getY() + this.getHeight() -90,"../resources/images/missile.png");
+    	this.getMissiles().add(missile);
+    	
     }
     
 

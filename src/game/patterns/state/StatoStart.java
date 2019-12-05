@@ -262,20 +262,16 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("in_esecuzione")) {
-//			mainFrame.getFrame().setVisible(false);
-//			mainFrame.setFrame(new StatoInEsecuzione());		
-//			mainFrame.getFrame().setVisible(true);
-//	        mainFrame.getFrame().repaint();
-//			mainFrame.getFrame().setSize(1000, 600);
 			mainFrame.getFrame().setTitle("Gioco");
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoInEsecuzione());
-		//TODO togliere;
+		
 			
 		}else if (stato.equals("game_over")) {
 			modalita.setStatoModalita(new StatoGameOver());
-			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
 			mainFrame.setFrame(new StatoGameOver());
 			mainFrame.getFrame().setVisible(true);
 			mainFrame.getFrame().setTitle("13 Light Years");

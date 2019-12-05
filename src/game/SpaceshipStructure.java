@@ -5,15 +5,15 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-public class SpaceshipStructure extends Sprite{
+public abstract class SpaceshipStructure extends Sprite{
 	
 	private List<Missile> missiles;
-    private boolean visible;
+    //private boolean visible;
 
 	
-	public SpaceshipStructure(int x, int y, String string) {
-		super(x, y, string);
-		visible = true;
+	public SpaceshipStructure(int x, int y, String fileName) {
+		super(x, y, fileName);
+		//visible = true;
 		missiles = new ArrayList<Missile>();
 
 	}
@@ -23,24 +23,17 @@ public class SpaceshipStructure extends Sprite{
 	 }
 	 
 
-	public boolean isVisible() {
-	      return visible;
-	}
+//	public boolean isVisible() {
+//	      return visible;
+//	}
+//
+//	public void setVisible(Boolean visible) {
+//	      this.visible = visible;
+//	}
 
-	public void setVisible(Boolean visible) {
-	      this.visible = visible;
-	}
+	public abstract void fire();
 
-
-	public  void fire() {
-		
-	}
-
-	@Override
-	public void move() {
-		
-		
-	}
+//	public abstract void move();
 
 
 }

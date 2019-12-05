@@ -10,27 +10,31 @@ public class Missile extends Sprite {
 
     private final int BOARD_WIDTH = 1000;
     private final int MISSILE_SPEED = 2;
-    private double x = getX();
-    private double y = getY();
+//    private double x = getX();
+//    private double y = getY();
     private boolean visible;                   //DA CANCELLARE
 
-    public Missile(double d, double e, String path) {
-        super(d, e, path);
-        
-        initMissile();
+    public Missile(int x, int y, String path){
+        super(x, y, path);
+        this.visible = true; 
+//        initMissile();
     }
     
 
-	private void initMissile() {
-        
-        //getImageDimensions();
+//	private void initMissile() {
+//        
+//        //getImageDimensions();
+//    }
+    
+    public boolean isVisible() {
+        return visible;
     }
 
     public void move() {
         
-        y -= MISSILE_SPEED;
-        
-        if (y > BOARD_WIDTH) {
+        this.setY(this.getY() - MISSILE_SPEED);
+        //System.out.println(this.getY() - MISSILE_SPEED);
+        if (this.getY() > BOARD_WIDTH) {
             visible = false;
         }
     }

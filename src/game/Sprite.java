@@ -1,12 +1,10 @@
 package game;
 
-import java.awt.Image;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 
 
@@ -25,6 +23,8 @@ public abstract class Sprite {
         this.rectangle = new Rectangle2D.Double(x, y, this.getWidth(), this.getHeight());
     }
     
+    
+    //------Template method---
     private void loadImage(String imageFileName) {
 //        ImageIcon ii = new ImageIcon(imageName);
 //        image =  ii.getImage();
@@ -65,7 +65,6 @@ public abstract class Sprite {
 	    return this.image.getHeight(null);
 	}
 
-    
     public abstract void move();
     
 }

@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 
 
 
-public abstract class AbstractSprite {
+public abstract class Sprite {
 
     private int x;
     private int y;
@@ -20,7 +20,7 @@ public abstract class AbstractSprite {
     private BufferedImage image;
     
 
-    public AbstractSprite(int x, int y,  String imageFileName) {
+    public Sprite(int x, int y,  String imageFileName) {
         this.x = x;
         this.y = y;
         this.loadImage(imageFileName);

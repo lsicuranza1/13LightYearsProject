@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
  *
  * @author lorenzosic
  */
-public class Missile extends AbstractSprite {
+public class Missile extends Sprite {
 
     private final int BOARD_WIDTH = 1000;
     private final int MISSILE_SPEED = 5;

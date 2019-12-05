@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class Sprite {
+public class AbstractSprite {
 
     protected int x;
     protected int y;
@@ -13,7 +13,7 @@ public class Sprite {
     protected boolean visible;
     protected Image image;
 
-    public Sprite(int x, int y) {
+    public AbstractSprite(int x, int y) {
 
         this.x = x;
         this.y = y;

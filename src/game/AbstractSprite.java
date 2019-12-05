@@ -1,39 +1,53 @@
 package game;
 
 import java.awt.Image;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-public class AbstractSprite {
 
-    protected int x;
-    protected int y;
-    protected int width;
-    protected int height;
-    protected boolean visible;
-    protected Image image;
 
-    public AbstractSprite(int x, int y) {
+public abstract class AbstractSprite {
 
+    private int x;
+    private int y;
+    private Rectangle2D rectangle;
+    private BufferedImage image;
+    
+
+    public AbstractSprite(int x, int y,  String imageFileName) {
         this.x = x;
         this.y = y;
-        visible = true;
-    }
-
-    protected void loadImage(String imageName) {
-
-        ImageIcon ii = new ImageIcon(imageName);
-        image = ii.getImage();
+        this.loadImage(imageFileName);
+        this.rectangle = new Rectangle2D.Double(x, y, this.getWidth(), this.getHeight());
     }
     
-    protected void getImageDimensions() {
+    private void loadImage(String imageFileName) {
+//        ImageIcon ii = new ImageIcon(imageName);
+//        image =  ii.getImage();
+        try {
+			image = ImageIO.read(getClass().getResource(imageFileName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-    }    
+		}
 
-    public Image getImage() {
-        return image;
+    }
+    
+    public Image getImmage() {
+    	 Image asteroidImage = null;
+    	 try {
+             asteroidImage = ImageIO.read(getClass().getResource("../resources/images/asteroid-icon.png"));
+         } catch (IOException ex) {
+             Logger.getLogger(ObstaclesBackground.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    	 return asteroidImage;
     }
 
     public int getX() {
@@ -43,12 +57,27 @@ public class AbstractSprite {
     public int getY() {
         return y;
     }
-
-    public boolean isVisible() {
-        return visible;
+    
+    public void setX(int x) {
+    	this.x = x;
     }
 
-    public void setVisible(Boolean visible) {
-        this.visible = visible;
+    public void setY(int y) {
+    	this.y = y;
     }
+    public BufferedImage getImage() {
+        return image;
+    }
+    
+	public int getWidth() {
+		return this.image.getWidth(null);
+	}
+	
+	public int getHeight() {
+	    return this.image.getHeight(null);
+	}
+
+    
+    public abstract void move();
+    
 }

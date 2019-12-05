@@ -9,12 +9,12 @@ import java.net.URL;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-import game.GamePanel;
+import game.MainFrame;
 import game.Settings;
 
 public class StatoGameOver extends javax.swing.JFrame implements Stato {
 	
-	GamePanel gamePanel = GamePanel.getIstance();
+	MainFrame gamePanel = MainFrame.getIstance();
     
     Dimension dim;
     public static Clip gameClip;
@@ -269,12 +269,6 @@ public class StatoGameOver extends javax.swing.JFrame implements Stato {
 		// TODO Auto-generated method stub
 		if (stato.equals("start"))
 			modalita.setStatoModalita(new StatoStart());
-	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	

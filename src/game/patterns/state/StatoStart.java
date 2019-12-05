@@ -1,17 +1,16 @@
 package game.patterns.state;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 
 import game.MainFrame;
 //import game.Settings;
+import game.Settings;
 
 public class StatoStart extends javax.swing.JFrame implements Stato {
 	
@@ -237,8 +236,8 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        //Settings set = new Settings(this, true, false);
-        //set.setVisible(true);
+        Settings set = new Settings(this, true, false);
+        set.setVisible(true);
      
     }//GEN-LAST:event_jButton4ActionPerformed
 

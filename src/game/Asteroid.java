@@ -7,7 +7,7 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JPanel;
 
-public class Asteroid extends AbstractSprite{
+public class Asteroid extends Sprite{
     JPanel panel;
     int x, y;
     int angle;

@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JPanel;
 
-public class Meteorite extends AbstractSprite{
+public class Meteorite extends Sprite{
 	JPanel panel;
     int x, y;
     int angle;

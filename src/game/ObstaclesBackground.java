@@ -158,8 +158,6 @@ public class ObstaclesBackground extends JPanel {
         	//this.transform.setToTranslation(x,y+=3);
             //this.transform.concatenate(transform2.getRotateInstance(Math.toRadians(angle=angle+5), x/4, y/4));
  
-        	AffineTransform A = new AffineTransform();
-        	A.setToTranslation(x, y+=3);
         	// Stretch it to its dimensions
         	//AffineTransform B = AffineTransform.getScaleInstance(asteroidImage.getWidth(panel), asteroidImage.getHeight(panel));
         	// Rotate it
@@ -170,7 +168,10 @@ public class ObstaclesBackground extends JPanel {
         	
         	//this.transform = (AffineTransform) A.clone();
         	
-           	this.transform.concatenate(A.getTranslateInstance(x,y)));
+           
+            this.transform.setToTranslation(x,y+=3);           
+            this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+5),asteroidImage.getWidth(panel)/2,asteroidImage.getHeight(panel)/2));
+            
            	//this.transform.preConcatenate(C);
            	//this.transform.preConcatenate(D);
            	//this.transform.preConcatenate(D);

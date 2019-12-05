@@ -1,54 +1,37 @@
 package game;
 
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 
-public class Sprite {
+public abstract class Sprite {
 
-    protected int x;
-    protected int y;
-    protected int width;
-    protected int height;
-    protected boolean visible;
-    protected Image image;
+	private double x;
+	private double y;
+	private Rectangle2D rectangle;
+    private ImageIcon imgIcon;
 
-    public Sprite(int x, int y) {
-
+    public Sprite(double x, double y, String imageFileName) {
         this.x = x;
         this.y = y;
-        visible = true;
+        this.imgIcon = new ImageIcon(imageFileName);
+        this.rectangle = new Rectangle2D.Double(x, y, imgIcon.getIconWidth(), imgIcon.getIconHeight());
+    }
+   
+    public ImageIcon getImageIcon() {
+        return imgIcon;
     }
 
-    protected void loadImage(String imageName) {
-
-        ImageIcon ii = new ImageIcon(imageName);
-        image = ii.getImage();
-    }
-    
-    protected void getImageDimensions() {
-
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-    }    
-
-    public Image getImage() {
-        return image;
-    }
-
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
+    
+    public abstract void move(double x, double y);
 
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public void setVisible(Boolean visible) {
-        this.visible = visible;
-    }
 }

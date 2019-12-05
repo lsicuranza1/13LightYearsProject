@@ -8,24 +8,20 @@ import java.net.URL;
 
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
-import game.GamePanel;
+import game.MainFrame;
 import game.Settings;
 
 public class StatoStart extends javax.swing.JFrame implements Stato {
 	
-	GamePanel gamePanel = GamePanel.getIstance();
+	MainFrame mainFrame = MainFrame.getIstance();
     
-    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    Dimension dim;
     public static Clip gameClip;
     private boolean back = false;
     public static boolean demo = false;
     
-    double width = dim.getWidth();
-	double height = dim.getHeight();
-	
-	int w= (int)((width*40)/100);
-	int h= (int)((height*90)/100);
 
     // ridimensiono larghezza e altezza dell'immagine  
     //in base alle dimensioni della finestra menù, che ho deciso io (nuovaW e nuova H)
@@ -45,13 +41,13 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
         this.setIconImage(iconaFrame);
         // fisso le dimensioni della finestra  Menù a partire da quelle dinamiche dello schermo del pc
-        //dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
-        dim.setSize(w, h);  // setto larghezza e altezza, da me scelti, per la finestra Menù
+        dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
+        dim.setSize(1000,600);  // setto larghezza e altezza, da me scelti, per la finestra Menù
         this.setPreferredSize(dim.getSize());
         
         
         // ridimensiono lo sfondo in base alle dimensioni della schermata menù
-        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width, dim.height);
+        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width,dim.height);
         
         // Gif della Terra
         //nt w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1/3;
@@ -72,6 +68,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
       
         sfondo.setPreferredSize(dim.getSize());
         sfondo.setIcon(immagineSfondo);
+        //jPanel1.setSize(dim.getSize());
         
         
     
@@ -99,11 +96,11 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("13 Light Years");
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(w, h));
+        setPreferredSize(new java.awt.Dimension(dim.width,dim.height));
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
-        jPanel1.setMinimumSize(new java.awt.Dimension(w, h));
+        jPanel1.setMinimumSize(new java.awt.Dimension(dim.width,dim.height));
         jPanel1.setName(""); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(dim.getSize());
@@ -211,6 +208,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
         jPanel1.getAccessibleContext().setAccessibleName("");
         jPanel1.getAccessibleContext().setAccessibleDescription("");
+        //jPanel1.setSize(100, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -218,8 +216,15 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     	//gamePanel.updateModalita("game_over");
+    	jButton2.setVisible(false);
+    	jButton3.setVisible(false);
+    	jButton4.setVisible(false);
+    	jButton5.setVisible(false);
+    	sfondo.setVisible(false);
+//		mainFrame.getFrame().removeAll();
+//		mainFrame.getFrame().repaint();
 
-    	gamePanel.updateModalita("in_esecuzione");
+    	mainFrame.updateModalita("in_esecuzione");
     	
          
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -227,7 +232,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     	System.out.println("ciao");
-    	gamePanel.updateModalita("game_over");
+    	mainFrame.updateModalita("game_over");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -257,31 +262,25 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("in_esecuzione")) {
+//			mainFrame.getFrame().setVisible(false);
+//			mainFrame.setFrame(new StatoInEsecuzione());		
+//			mainFrame.getFrame().setVisible(true);
+//	        mainFrame.getFrame().repaint();
+			mainFrame.getFrame().setSize(1000, 600);
+			mainFrame.getFrame().setTitle("Gioco");
 			modalita.setStatoModalita(new StatoInEsecuzione());
-			gamePanel.getFrame().setVisible(false);
-			gamePanel.setFrame(new StatoInEsecuzione());
-			gamePanel.getFrame().setVisible(true);
-			gamePanel.getFrame().setTitle("13 Light Years");
 		//TODO togliere;
 			
 		}else if (stato.equals("game_over")) {
 			modalita.setStatoModalita(new StatoGameOver());
-			gamePanel.getFrame().setVisible(false);
-			gamePanel.setFrame(new StatoGameOver());
-			gamePanel.getFrame().setVisible(true);
-			gamePanel.getFrame().setTitle("13 Light Years");
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.setFrame(new StatoGameOver());
+			mainFrame.getFrame().setVisible(true);
+			mainFrame.getFrame().setTitle("13 Light Years");
 			
 		}
 		
 	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 
  
 }

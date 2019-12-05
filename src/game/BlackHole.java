@@ -1,5 +1,5 @@
 package game;
 
-public class BlackHole {
+public class BlackHole extends AbstractSprite {
 
 }

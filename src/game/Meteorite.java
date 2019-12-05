@@ -1,6 +1,6 @@
 package game;
 
-public class Meteorite extends Sprite {
+public class Meteorite extends AbstractSprite {
 	
     public Meteorite(double x, double y, String imageFileName) {
     	super(x, y, imageFileName);

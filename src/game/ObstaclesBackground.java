@@ -58,14 +58,14 @@ public class ObstaclesBackground extends JPanel {
         	
             public void actionPerformed(ActionEvent e) {
             	
-                if (countToAddAsteroid >= 20) {
+                if (countToAddAsteroid >= 40) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
                     int randX1 = random.nextInt(D_W);
                     asteroids.add(new Asteroid(ObstaclesBackground.this, asteroidImage, randX1, y_asteroid));
                     countToAddAsteroid = 0;
                 }
                 countToAddAsteroid++;
                 
-                if (countToAddMeteorite >= 20) {
+                if (countToAddMeteorite >= 150) {  //maggiore è il valore minore è la frequenza di uscita dei meteoriti (utile per gestione dei livelli)
                     int randX2 = random.nextInt(D_W);
                     meteorites.add(new Meteorite(ObstaclesBackground.this, meteoriteImage, randX2, y_meteorite));
                     countToAddMeteorite = 0;
@@ -143,42 +143,16 @@ public class ObstaclesBackground extends JPanel {
         }
 
         public void drawAsteroid(Graphics g) {
-           // g.drawImage(asteroidImage, x, y, panel);
         	Graphics2D g2d = (Graphics2D) g;
           	g2d.drawImage(asteroidImage, transform, panel);
-          
         }
 
         public void move() {
-        	
-        	 if(angle==361) {
-        		 angle = 0;
-        	 }
-        	
-        	//this.transform.setToTranslation(x,y+=3);
-            //this.transform.concatenate(transform2.getRotateInstance(Math.toRadians(angle=angle+5), x/4, y/4));
- 
-        	AffineTransform A = new AffineTransform();
-        	A.setToTranslation(x, y+=3);
-        	// Stretch it to its dimensions
-        	//AffineTransform B = AffineTransform.getScaleInstance(asteroidImage.getWidth(panel), asteroidImage.getHeight(panel));
-        	// Rotate it
-        	//AffineTransform C = AffineTransform.getRotateInstance(angle += 30);
-        	// Move it to have the same center as above
-        	//AffineTransform D = AffineTransform.getTranslateInstance(x + asteroidImage.getWidth(panel)/2, y + asteroidImage.getHeight(panel)/2);
-        	//M = (AffineTransform) A.clone();
-        	
-        	//this.transform = (AffineTransform) A.clone();
-        	
-           	this.transform.concatenate(A.getTranslateInstance(x,y)));
-           	//this.transform.preConcatenate(C);
-           	//this.transform.preConcatenate(D);
-           	//this.transform.preConcatenate(D);
-           	
-           	//contentByte.addImage(asteroidImage, M);
-
+        	this.transform.setToTranslation(x,y+=3);
+            this.transform.concatenate(transform2.getRotateInstance(Math.toRadians(angle=angle+1), x/9, y/9));
         }
     }
+    
     
     public class Meteorite {
         Rectangle2D rectangle;
@@ -202,13 +176,10 @@ public class ObstaclesBackground extends JPanel {
 
        	 Graphics2D g2d = (Graphics2D) g;
        	 g2d.drawImage(meteoriteImage,transform, panel);
-       	 
-       	 
        }
 
        public void move() {
-    	 
-       	 this.transform.setToTranslation(x,y+=20);
+       	 this.transform.setToTranslation(x,y+=10);
        }
        
     }

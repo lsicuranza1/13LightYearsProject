@@ -6,14 +6,14 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.ImageIcon;
 
-public abstract class Sprite {
+public abstract class AbstractSprite {
 
 	private double x;
 	private double y;
 	private Rectangle2D rectangle;
     private ImageIcon imgIcon;
 
-    public Sprite(double x, double y, String imageFileName) {
+    public AbstractSprite(double x, double y, String imageFileName) {
         this.x = x;
         this.y = y;
         this.imgIcon = new ImageIcon(imageFileName);

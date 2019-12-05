@@ -19,7 +19,14 @@ import javax.swing.ImageIcon;
  */
 public class NewJFrame extends javax.swing.JFrame {
     
-    Dimension dim;
+	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	double width = dim.getWidth();
+	double height = dim.getHeight();
+	
+	int w= (int)((width*40)/100);
+	int h= (int)((height*90)/100);
+	
+    //Dimension dim;
     public static Clip gameClip;
     private boolean back = false;
     public static boolean demo = false;
@@ -43,13 +50,13 @@ public class NewJFrame extends javax.swing.JFrame {
         this.setIconImage(iconaFrame);
 
         // fisso le dimensioni della finestra  Menù a partire da quelle dinamiche dello schermo del pc
-        dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
-        dim.setSize(1000, 600);  // setto larghezza e altezza, da me scelti, per la finestra Menù
+        //dim = Toolkit.getDefaultToolkit().getScreenSize();  // restituisce la dimensione dello schermo in pixel
+        dim.setSize(h, w);  // setto larghezza e altezza, da me scelti, per la finestra Menù
         this.setPreferredSize(dim.getSize());
         
         
         // ridimensiono lo sfondo in base alle dimensioni della schermata menù
-        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/sfondo_menu.png"), dim.width, dim.height);
+        ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/sfondo_menu.png"), w, h);
         
         // Gif della Terra
         //nt w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1/3;
@@ -68,7 +75,7 @@ public class NewJFrame extends javax.swing.JFrame {
        
         initComponents();
       
-        sfondo.setPreferredSize(dim.getSize());
+        //sfondo.setPreferredSize(dim.getSize());
         sfondo.setIcon(immagineSfondo);
         
         
@@ -97,11 +104,11 @@ public class NewJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("13 Light Years");
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(h, w));
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
-        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
+        jPanel1.setMinimumSize(new java.awt.Dimension(h, w));
         jPanel1.setName(""); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(dim.getSize());

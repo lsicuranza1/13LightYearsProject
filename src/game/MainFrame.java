@@ -9,28 +9,28 @@ import game.patterns.state.Modalita;
 import game.patterns.state.Stato;
 import game.patterns.state.StatoStart;
 
-public class GamePanel {
+public class MainFrame{
 
 	private JFrame frame;
 	private Modalita modalita;
-//	
-//	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//	double width = screenSize.getWidth();
-//	double height = screenSize.getHeight();
-//	
-//	int w= (int)((width*40)/100);
-//	int h= (int)((height*90)/100);
+	
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	double width = screenSize.getWidth();
+	double height = screenSize.getHeight();
+	
+	int w= (int)((width*40)/100);
+	int h= (int)((height*90)/100);
 	
 	//Singleton
-	private static GamePanel istance = null; // riferimento all' istanza
+	private static MainFrame istance = null; // riferimento all' istanza
 	
-//	public GamePanel() {
+//	public MainFrame() {
 //		initialize();
 //	}
 	
-	public static GamePanel getIstance() {
+	public static MainFrame getIstance() {
 		if (istance == null)
-			istance = new GamePanel();
+			istance = new MainFrame();
 		return istance;
 	}
 
@@ -41,13 +41,13 @@ public class GamePanel {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GamePanel window = GamePanel.getIstance();
+					MainFrame window = MainFrame.getIstance();
 					window.setModalita(new Modalita());
 					window.setFrame(new StatoStart());
 					window.getFrame().setVisible(true);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //					frame.setSize(w,h);
-					window.getFrame().setTitle("13 Light Years");
+					window.getFrame().setTitle("Menù Principale");
 					window.getFrame().setVisible(true); 
 				} catch (Exception e) {
 					e.printStackTrace();

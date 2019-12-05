@@ -32,12 +32,6 @@ public class StatoInEsecuzione extends javax.swing.JFrame implements Stato, Acti
 
 	ImageIcon immagineSfondo;
 	
-	private final int ICRAFT_X = 100;
-    private final int ICRAFT_Y = 600;
-    private final int DELAY = 10;
-	private Timer timer;
-    private SpaceShip spaceShip;
-	
     // ridimensiono larghezza e altezza dell'immagine  
     //in base alle dimensioni della finestra menù, che ho deciso io (nuovaW e nuova H)
     private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
@@ -64,94 +58,10 @@ public StatoInEsecuzione() {
         sfondo.setPreferredSize(dim.getSize());
         sfondo.setIcon(immagineSfondo);
 
-//        panel2.setSize(200, 300);
-//        panel2.setVisible(true);
-//        panel2.setBackground(Color.black);
-        spaceShip = new SpaceShip(ICRAFT_X, ICRAFT_Y);
-
-        timer = new Timer(DELAY, this);
-        timer.start();
 
     }
 
-
-
-
-@Override
-public void paintComponent(Graphics g) {
-    super.paintComponents(g);
-
-    doDrawing(g);
-
-    Toolkit.getDefaultToolkit().sync();
-}
-
-private void doDrawing(Graphics g) {
-
-    Graphics2D g2d = (Graphics2D) g;
-    
-    g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
-            spaceShip.getY(), this);
-
-    List<Missile> missiles = spaceShip.getMissiles();
-
-    for (Missile missile : missiles) {
-        
-        g2d.drawImage(missile.getImage(), missile.getX(),
-                missile.getY(), this);
-    }
-}
-
-@Override
-public void actionPerformed(ActionEvent e) {
-
-    updateMissiles();
-    updateSpaceShip();
-
-    repaint();
-}
-
-private void updateMissiles() {
-
-    List<Missile> missiles = spaceShip.getMissiles();
-
-    for (int i = 0; i < missiles.size(); i++) {
-
-        Missile missile = missiles.get(i);
-
-        if (missile.isVisible()) {
-
-            missile.move();
-        } else {
-
-            missiles.remove(i);
-        }
-    }
-}
-
-private void updateSpaceShip() {
-
-    spaceShip.move();
-}
-
-private class TAdapter extends KeyAdapter {
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        spaceShip.keyReleased(e);
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        spaceShip.keyPressed(e);
-    }
-}
-
-
-
-
-    
-    
+ 
 @SuppressWarnings("unchecked")
 // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 private void initComponents() {

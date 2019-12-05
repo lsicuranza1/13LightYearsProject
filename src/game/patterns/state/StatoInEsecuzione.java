@@ -32,24 +32,19 @@ public class StatoInEsecuzione extends javax.swing.JFrame implements Stato {
 	private SpaceShip spaceShip;
 	private JPanel panel = new JPanel();
 	private JButton button = new JButton();
+    private SpaceShip ship;
     
 public StatoInEsecuzione() {
         System.out.println("In esecuzione");
-//        spaceShip = new SpaceShip(100,100);
-//        panel.setSize(200, 200);
-//        panel.setBackground(Color.black);
-//        panel.setVisible(true);
         
-//        mainFrame.getFrame().setLayout(new BorderLayout());
-//        mainFrame.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        panel.setBackground(Color.RED);
-//        mainFrame.getFrame().add(panel, BorderLayout.CENTER);
-//        mainFrame.getFrame().setVisible(true);
+        mainFrame.getFrame().setLayout(new BorderLayout());
+        mainFrame.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//       mainFrame.getFrame().add(panel, BorderLayout.CENTER);
+        mainFrame.getFrame().setVisible(true);
         
-        JFrame frame = new JFrame();
-		frame.add(button);
-		mainFrame.setFrame(frame);
+        ship = new SpaceShip(100, 100);
         
+//        repaint();
         
     }
 

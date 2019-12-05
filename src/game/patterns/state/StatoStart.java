@@ -216,6 +216,13 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     	//gamePanel.updateModalita("game_over");
+    	jButton2.setVisible(false);
+    	jButton3.setVisible(false);
+    	jButton4.setVisible(false);
+    	jButton5.setVisible(false);
+    	sfondo.setVisible(false);
+//		mainFrame.getFrame().removeAll();
+//		mainFrame.getFrame().repaint();
 
     	mainFrame.updateModalita("in_esecuzione");
     	
@@ -256,13 +263,12 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("in_esecuzione")) {
 //			mainFrame.getFrame().setVisible(false);
-//			mainFrame.getFrame().remove
 //			mainFrame.setFrame(new StatoInEsecuzione());		
 //			mainFrame.getFrame().setVisible(true);
-//			mainFrame.getFrame().setSize(1000, 600);
-//			mainFrame.getFrame().setTitle("13 Light Years");
+//	        mainFrame.getFrame().repaint();
+			mainFrame.getFrame().setSize(1000, 600);
+			mainFrame.getFrame().setTitle("Gioco");
 			modalita.setStatoModalita(new StatoInEsecuzione());
-			
 		//TODO togliere;
 			
 		}else if (stato.equals("game_over")) {

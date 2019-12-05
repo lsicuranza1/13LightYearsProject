@@ -30,10 +30,10 @@ import game.SpaceShip;
 public class StatoInEsecuzione extends javax.swing.JFrame implements Stato, ActionListener {
  
 	MainFrame mainFrame = MainFrame.getIstance();
-	private SpaceShip spaceShip;
+	private SpaceShip spaceShip = new SpaceShip(100,100,"/13LightYearsProject/src/resources/images/spaceship.png");
 	private PanelProva panel = new PanelProva();
 	private JButton button = new JButton();
-    private SpaceShip ship;
+    //private SpaceShip ship;
     
 public StatoInEsecuzione() {
         System.out.println("In esecuzione");
@@ -47,6 +47,14 @@ public StatoInEsecuzione() {
 //        ship = new SpaceShip(300, 300);
         panel.repaint();
     }
+
+
+
+
+
+
+
+
 
 
 	

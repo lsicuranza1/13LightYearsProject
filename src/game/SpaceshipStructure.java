@@ -11,6 +11,7 @@ public class SpaceshipStructure extends Sprite{
 	
     private boolean visible;
     private ImageIcon imgIcon;
+
 	
 	public SpaceshipStructure(double x, double y, String string) {
 		super(x, y, null);

@@ -8,7 +8,7 @@ public class Asteroid extends Sprite {
     }
 
     @Override
-    public void move(double x, double y) {
+    public void move() {
     	y += 3;
     }
 }

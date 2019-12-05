@@ -5,6 +5,9 @@
  */
 package game;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
 /**
  *
  * @author lorenzosic
@@ -36,14 +39,17 @@ public class SpaceShip extends SpaceshipStructure {
     public SpaceShip(int x, int y, String path) {
         super(x, y, path);
         
-        initSpaceShip();
-    }
-
-    private void initSpaceShip() {
-
-        missiles = new ArrayList<>();
+        ImageIcon ii = new ImageIcon(path);
+        imgIcon = ii;
         
+//        initSpaceShip();
     }
+
+//    private void initSpaceShip() {
+//
+//        missiles = new ArrayList<>();
+//        
+//    }
 
     public void move() {
     			x += dx;
@@ -170,6 +176,11 @@ public class SpaceShip extends SpaceshipStructure {
             dy = 0;
         }
     }
+	
+
+
+	  
+	
 
 
 }

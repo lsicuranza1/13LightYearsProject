@@ -12,8 +12,8 @@ public abstract class Sprite {
     private double y;
     protected Rectangle2D rectangle;
     private ImageIcon imgIcon;
-    private int width;
-    private int height;
+
+    
 
     public Sprite(double x, double y,  String imageFileName) {
 
@@ -42,21 +42,21 @@ public abstract class Sprite {
         return imgIcon;
     }
     
-	public int getWidth() {
-		return width;
-	}
-
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
+//	public int getWidth() {
+//		return width;
+//	}
+//
+//	public void setWidth(int width) {
+//		this.width = width;
+//	}
+//
+//	public int getHeight() {
+//		return height;
+//	}
+//
+//	public void setHeight(int height) {
+//		this.height = height;
+//	}
     
     public abstract void move();
     

@@ -30,7 +30,7 @@ import game.SpaceShip;
 public class StatoInEsecuzione extends javax.swing.JFrame implements Stato, ActionListener {
  
 	MainFrame mainFrame = MainFrame.getIstance();
-	private SpaceShip spaceShip = new SpaceShip(100,100,"/13LightYearsProject/src/resources/images/spaceship.png");
+	//private SpaceShip spaceShip = new SpaceShip(100,100,"/13LightYearsProject/src/resources/images/spaceship.png");
 	private PanelProva panel = new PanelProva();
 	private JButton button = new JButton();
     //private SpaceShip ship;
@@ -46,22 +46,27 @@ public StatoInEsecuzione() {
         
 //        ship = new SpaceShip(300, 300);
         panel.repaint();
+        
     }
 
-
-
-
-
-
-
-
-
-
-	
 	@Override
-    public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {
 		panel.updateSpaceShip();
-        panel.repaint();
+	    //this.repaint();
+	    System.out.println("ActionPerformed");
+	}
+	
+	private class TAdapter extends KeyAdapter {
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+        	spaceShip.keyReleased(e);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+        	spaceShip.keyPressed(e);
+        }
     }
 	
 	

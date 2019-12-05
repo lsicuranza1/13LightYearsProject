@@ -22,26 +22,22 @@ import javax.swing.ImageIcon;
 
 public class SpaceShip extends SpaceshipStructure {
 
-    private int dx;
+    public int dx;
     private int dy;
-    private double x = getX();
-    private double y = getY();
+
 //    private double width = getWidth();
 //    private double height = getHeight();
-    private ImageIcon imgIcon;
-    public int width = imgIcon.getIconWidth();
-    public int height = imgIcon.getIconHeight();
-    private List<Missile> missiles;
-    public boolean isShooting = false;
-    long startTime = System.currentTimeMillis();
-    long elapsedTime = 0;
+//    private ImageIcon imgIcon;
+//    public int width = imgIcon.getIconWidth();
+//    public int height = imgIcon.getIconHeight();
+//    private List<Missile> missiles;
+    private boolean isShooting = false;
+//    long startTime = System.currentTimeMillis();
+//    long elapsedTime = 0;
 
-    public SpaceShip(int x, int y, String path) {
+    public SpaceShip(int x, int y,String path) {
         super(x, y, path);
-        
-        ImageIcon ii = new ImageIcon(path);
-        imgIcon = ii;
-        
+
 //        initSpaceShip();
     }
 
@@ -52,12 +48,8 @@ public class SpaceShip extends SpaceshipStructure {
 //    }
 
     public void move() {
-    			x += dx;
-    	        y += dy;
-    }
-
-    public List<Missile> getMissiles() {
-        return missiles;
+    	this.setX(this.getX() + dx);
+    	this.setY(this.getY() + dy);
     }
     
     
@@ -66,14 +58,18 @@ public class SpaceShip extends SpaceshipStructure {
         int key = e.getKeyCode();
         //int key = e.getKeyCode();    	
         int shoot = e.getKeyCode();
+        int x = this.getX();
+        int y = this.getY();
+        int width = this.getWidth();
+        int height = this.getHeight();
         
         if (isShooting == false) {
 	        if (shoot == KeyEvent.VK_SPACE) {
-	        	if (getX()<=0-width+10) {
+	        	if (x<=0-width+10) {
 	        		x=400-8;
 	        		dx=-3;
 	        	}
-	        	if (getX()>400-8) {
+	        	if (x>400-8) {
 	        		x=0-width+10;
 	        		dx=3;
 	        	}
@@ -82,7 +78,8 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-        	if (getX()<=0-width+10) {
+        	System.out.println("Left");
+        	if (x<=0-width+10) {
         		x=400-8;
         		dx=-3;
         	}
@@ -92,7 +89,7 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-        	if (getX()>400-8) {
+        	if (x>400-8) {
         		x=0-width+10;
         		dx=3;
         	}
@@ -102,15 +99,15 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-        	if(getY()<=0) {
+        	if(y<=0) {
         		y=0;
         		dy=0;
         	}
-        	if (getX()<=0-width+10) {
+        	if (x<=0-width+10) {
         		x=400-8;
         		dx=-3;
         	}
-        	if (getX()>400-8) {
+        	if (x>400-8) {
         		x=0-width+10;
         		dx=3;
         	}
@@ -120,15 +117,15 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-        	if (getY()>=1000-2*height) {
+        	if (y>=1000-2*height) {
         		y=1000-2*height;
         		dy=0;
         	}
-        	if (getX()<=0-width+10) {
+        	if (x<=0-width+10) {
         		x=400-8;
         		dx=-3;
         	}
-        	if (getX()>400-8) {
+        	if (x>400-8) {
         		x=0-width+10;
         		dx=3;
         	}
@@ -139,6 +136,11 @@ public class SpaceShip extends SpaceshipStructure {
     }
 
     public void fire() {
+    	int x = this.getX();
+        int y = this.getY();
+        int width = this.getWidth();
+        int height = this.getHeight();
+        List<Missile> missiles = this.getMissiles();
     			missiles.add(new Missile(x + width/2 -9, y + height -90,"/13LightYearsProject/src/resources/images/missile.png"));
     	new Thread() {
     		@Override

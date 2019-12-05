@@ -8,13 +8,11 @@ import javax.swing.ImageIcon;
 public class SpaceshipStructure extends Sprite{
 	
 	private List<Missile> missiles;
-	
     private boolean visible;
-    private ImageIcon imgIcon;
 
 	
-	public SpaceshipStructure(double x, double y, String string) {
-		super(x, y, null);
+	public SpaceshipStructure(int x, int y, String string) {
+		super(x, y, string);
 		visible = true;
 		missiles = new ArrayList<Missile>();
 

@@ -4,15 +4,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.List;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 
-public class PanelProva extends JPanel{
-	
-	private SpaceShip spaceShip = new SpaceShip(100,100);
-	
+public class PanelProva extends JPanel implements ActionListener{
+	private String fileName = "../resources/images/spaceship.png";
+	public SpaceShip spaceShip = new SpaceShip(100,100,fileName);
 	
 	
 	@Override
@@ -34,6 +35,13 @@ public class PanelProva extends JPanel{
       
     }
     
+    @Override
+    public void actionPerformed(ActionEvent e) {
+		this.updateSpaceShip();
+        //this.repaint();
+        System.out.println("ActionPerformed");
+    }
+    
 //    private void updateMissiles() {
 //
 //        List<Missile> missiles = spaceShip.getMissiles();
@@ -53,21 +61,8 @@ public class PanelProva extends JPanel{
 //    }
 
     public void updateSpaceShip() {
-
+        System.out.println("update");
     	spaceShip.move();
-    }
-
-    private class TAdapter extends KeyAdapter {
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-        	spaceShip.keyReleased(e);
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-        	spaceShip.keyPressed(e);
-        }
     }
 
 }

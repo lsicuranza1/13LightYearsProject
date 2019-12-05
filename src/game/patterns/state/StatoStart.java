@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import game.MainFrame;
-import game.Settings;
+//import game.Settings;
 
 public class StatoStart extends javax.swing.JFrame implements Stato {
 	
@@ -237,8 +237,8 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        Settings set = new Settings(this, true, false);
-        set.setVisible(true);
+        //Settings set = new Settings(this, true, false);
+        //set.setVisible(true);
      
     }//GEN-LAST:event_jButton4ActionPerformed
 

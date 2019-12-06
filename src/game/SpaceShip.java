@@ -52,7 +52,6 @@ public class SpaceShip extends SpaceshipStructure {
     public void move() {
     	this.setX(this.getX() + dx);
     	this.setY(this.getY() + dy);
-    	//Alessamdro ce la puoi fare
     }
     
     

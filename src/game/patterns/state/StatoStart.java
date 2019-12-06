@@ -269,7 +269,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		
 			
 		}else if (stato.equals("game_over")) {
-			mainFrame.getFrame().setTitle("13 Light Years");
+			mainFrame.getFrame().setTitle("GameOver");
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoGameOver());

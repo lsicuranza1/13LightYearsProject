@@ -65,23 +65,34 @@ public class SpaceShip extends SpaceshipStructure {
         
 //        if (isShooting == false) {
 	        if (key == KeyEvent.VK_SPACE) {
-//	        	if (x<=0-width+10) {
-//	        		x=400-8;
-//	        		dx=-3;
-//	        	}
-//	        	if (x>400-8) {
-//	        		x=0-width+10;
-//	        		dx=3;
-//	        	}
+	        	if (x<=10-width) {
+	        		this.setX(1000-8);
+	        		dx=-3;
+	        	}else if(y>=600-2*height) {
+	        		this.setY(600-2*height);
+	        		dy=0;
+	        	}else if (x>=1000-8) {
+	        		this.setX(10-width);
+	        		dx=3;
+	        	}else if(y<=0) {
+	        		this.setY(0);
+	        		dy=0;
+	        	}
 	            fire();
 	        }
 //        }
 
         if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 
-        	if (x<=0-width+10) {
-        		x=400-8;
+        	if (x<=10-width) {
+        		this.setX(1000-8);
         		dx=-3;
+        	}else if(y>=600-2*height) {
+        		this.setY(600-2*height);
+        		dy=0;
+        	}if(y<0) {
+        		this.setY(0);
+        		dy=0;
         	}
         	else{
         		dx = -3;
@@ -89,9 +100,15 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-        	if (x>400-8) {
-        		x=0-width+10;
+        	if (x>=1000-8) {
+        		this.setX(10-width);
         		dx=3;
+        	}else if(y>=600-2*height) {
+        		this.setY(600-2*height);
+        		dy=0;
+        	}if(y<0) {
+        		this.setY(0);
+        		dy=0;
         	}
         	else{
         		dx = 3;
@@ -100,16 +117,15 @@ public class SpaceShip extends SpaceshipStructure {
 
         if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
         	if(y<=0) {
-        		y=0;
+        		this.setY(0);
         		dy=0;
-        	}
-        	if (x<=0-width+10) {
-        		x=400-8;
-        		dx=-3;
-        	}
-        	if (x>400-8) {
-        		x=0-width+10;
-        		dx=3;
+	        	if (x<=10-width) {
+	        		this.setX(1000-8);
+	        		dx=-3;
+	        	}if (x>=1000-8) {
+	        		this.setX(10-width);
+	        		dx=3;
+	        	}
         	}
         	else{
         		dy = -3;
@@ -117,17 +133,16 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-        	if (y>=1000-2*height) {
-        		y=1000-2*height;
+        	if (y>=600-2*height) {
+        		this.setY(600-2*height);
         		dy=0;
-        	}
-        	if (x<=0-width+10) {
-        		x=400-8;
-        		dx=-3;
-        	}
-        	if (x>400-8) {
-        		x=0-width+10;
-        		dx=3;
+	        	if (x<=10-width) {
+	        		this.setX(1000-8);
+	        		dx=-3;
+	        	}else if (x>=1000-8) {
+	        		this.setX(10-width);
+	        		dx=3;
+	        	}
         	}
         	else{
         		dy = 3;

@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class PanelEsecuzione extends JPanel implements ActionListener{
-	private String fileName;
-	public SpaceShip spaceShip;
+	private String fileName1,fileName2;
+	public SpaceShip spaceShip,enemy;
     private final int DELAY = 20;
     private Timer timer;
 	
@@ -25,8 +25,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 		addKeyListener(new TAdapter());
         setFocusable(false);
         
-        fileName = "../resources/images/spaceship.png";
-        spaceShip = new SpaceShip(100,100,fileName);
+        fileName1 = "../resources/images/spaceship.png";
+        fileName2 = "../resources/images/asteroid-icon.png";
+        
+        spaceShip = new SpaceShip(500,400,fileName1);
+        
+        enemy = new SpaceShip(200,200,fileName2);
         
         timer = new Timer(DELAY, this);
         timer.start();
@@ -48,6 +52,9 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
+        g2d.drawImage(enemy.getImage(), enemy.getX(),
+                enemy.getY(), this);
+        
         
         List<Missile> missiles = spaceShip.getMissiles();
 

@@ -70,8 +70,8 @@ public class SpaceShip extends SpaceshipStructure {
 	        	if (x<=10-width) {
 	        		this.setX(1000-8);
 	        		dx=-3;
-	        	}else if(y>=600-2*height) {
-	        		this.setY(600-2*height);
+	        	}else if(y>=600-(height*7)/5) {
+	        		this.setY(600-(height*7)/5);
 	        		dy=0;
 	        	}else if (x>=1000-8) {
 	        		this.setX(10-width);
@@ -89,8 +89,8 @@ public class SpaceShip extends SpaceshipStructure {
         	if (x<=10-width) {
         		this.setX(1000-8);
         		dx=-3;
-        	}else if(y>=600-2*height) {
-        		this.setY(600-2*height);
+        	}else if(y>=600-(height*7)/5) {
+        		this.setY(600-(height*7)/5);
         		dy=0;
         	}if(y<0) {
         		this.setY(0);
@@ -105,8 +105,8 @@ public class SpaceShip extends SpaceshipStructure {
         	if (x>=1000-8) {
         		this.setX(10-width);
         		dx=3;
-        	}else if(y>=600-2*height) {
-        		this.setY(600-2*height);
+        	}else if(y>=600-(height*7)/5) {
+        		this.setY(600-(height*7)/5);
         		dy=0;
         	}if(y<0) {
         		this.setY(0);
@@ -135,8 +135,8 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-        	if (y>=600-2*height) {
-        		this.setY(600-2*height);
+        	if (y>=600-(height*7)/5) {
+        		this.setY(600-(height*7)/5);
         		dy=0;
 	        	if (x<=10-width) {
 	        		this.setX(1000-8);
@@ -164,7 +164,7 @@ public class SpaceShip extends SpaceshipStructure {
     		public void run() {
         		try {
     	            isShooting = true;
-        			missiles.add(new Missile(x + width/2 -9, y + height -90,"../resources/images/missile.png"));
+        			 //missiles.add(new Missile(x + width/2 -9, y + height -90,"../resources/images/missile.png"));
                     Thread.sleep(500);
                     isShooting = false;
                 } catch (InterruptedException ex) {

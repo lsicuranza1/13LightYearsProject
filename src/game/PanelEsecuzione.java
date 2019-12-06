@@ -32,7 +32,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         fileName = "../resources/images/spaceship.png";
         spaceShip = new SpaceShip(500,400,fileName);
         
-        checkCollisions();
+//        checkCollisions();
         
         enemyName = "../resources/images/firstEnemy.png";
         enemies = new EnemiesSpaceShip(0,0,enemyName);
@@ -135,31 +135,31 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	    }
     }
     
-    public void checkCollisions() {
-
-        Rectangle2D r3 = spaceShip.getBounds();
-
-        Rectangle r2 = enemy.getBounds();
-
-        if (r3.intersects(r2)) {
-                
-            spaceShip.setVisible(false);
-            enemy.setVisible(false);
-            
-        }
-
-        List<Missile> ms = spaceShip.getMissiles();
-
-        for (Missile m : ms) {
-
-            Rectangle2D r1 = m.getBounds();
-
-            if (r1.intersects(r2)) {
-                    
-                m.setVisible(false);
-                enemy.setVisible(false);
-                
-            }
-        }
-    }
+//    public void checkCollisions() {
+//
+//        Rectangle2D r3 = spaceShip.getBounds();
+//
+//        Rectangle2D r2 = enemies.getBounds();
+//
+//        if (r3.intersects(r2)) {
+//                
+//            spaceShip.setVisible(false);
+//            enemies.setVisible(false);
+//            
+//        }
+//
+//        List<Missile> ms = spaceShip.getMissiles();
+//
+//        for (Missile m : ms) {
+//
+//            Rectangle2D r1 = m.getBounds();
+//
+//            if (r1.intersects(r2)) {
+//                    
+//                m.setVisible(false);
+//                enemies.setVisible(false);
+//                
+//            }
+//        }
+//    }
 }

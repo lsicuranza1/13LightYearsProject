@@ -40,7 +40,7 @@ public class Missile extends Sprite {
     	this.setY(this.getY() + 2);
     	
     	if(this.getY() > BOARD_WIDTH) {
-    		visible = false;
+    		this.setVisible(false);
     	}
     }
 }

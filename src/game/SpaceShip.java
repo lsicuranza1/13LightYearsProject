@@ -5,6 +5,9 @@
  */
 package game;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Toolkit;
 /**
  *
  * @author lorenzosic
@@ -15,36 +18,38 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SpaceShip extends Sprite {
+import javax.swing.ImageIcon;
 
-    private int dx;
+public class SpaceShip extends SpaceshipStructure {
+
+    public int dx;
     private int dy;
-    private List<Missile> missiles;
-    public boolean isShooting = false;
-    long startTime = System.currentTimeMillis();
-    long elapsedTime = 0;
 
-    public SpaceShip(int x, int y) {
-        super(x, y);
-        
-        initSpaceShip();
+//    private double width = getWidth();
+//    private double height = getHeight();
+//    private ImageIcon imgIcon;
+//    public int width = imgIcon.getIconWidth();
+//    public int height = imgIcon.getIconHeight();
+//    private List<Missile> missiles;
+    private boolean isShooting = false;
+//    long startTime = System.currentTimeMillis();
+//    long elapsedTime = 0;
+
+    public SpaceShip(int x, int y,String path) {
+        super(x, y, path);
+
+//        initSpaceShip();
     }
 
-    private void initSpaceShip() {
-
-        missiles = new ArrayList<>();
-        
-        loadImage("../resources/images/spaceship.png"); 
-        getImageDimensions();
-    }
-
+//    private void initSpaceShip() {
+//
+//        missiles = new ArrayList<>();
+//        
+//    }
+    @Override
     public void move() {
-    			x += dx;
-    	        y += dy;
-    }
-
-    public List<Missile> getMissiles() {
-        return missiles;
+    	this.setX(this.getX() + dx);
+    	this.setY(this.getY() + dy);
     }
     
     
@@ -52,23 +57,28 @@ public class SpaceShip extends Sprite {
 
         int key = e.getKeyCode();
         //int key = e.getKeyCode();    	
-        int shoot = e.getKeyCode();
+        //int shoot = e.getKeyCode();
+        int x = this.getX();
+        int y = this.getY();
+        int width = this.getWidth();
+        int height = this.getHeight();
         
-        if (isShooting == false) {
-	        if (shoot == KeyEvent.VK_SPACE) {
-	        	if (x<=0-width+10) {
-	        		x=400-8;
-	        		dx=-3;
-	        	}
-	        	if (x>400-8) {
-	        		x=0-width+10;
-	        		dx=3;
-	        	}
+//        if (isShooting == false) {
+	        if (key == KeyEvent.VK_SPACE) {
+//	        	if (x<=0-width+10) {
+//	        		x=400-8;
+//	        		dx=-3;
+//	        	}
+//	        	if (x>400-8) {
+//	        		x=0-width+10;
+//	        		dx=3;
+//	        	}
 	            fire();
 	        }
-        }
+//        }
 
         if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+
         	if (x<=0-width+10) {
         		x=400-8;
         		dx=-3;
@@ -125,21 +135,31 @@ public class SpaceShip extends Sprite {
         }
     }
 
+//    public void fire() {
+//    	int x = this.getX();
+//        int y = this.getY();
+//        int width = this.getWidth();
+//        int height = this.getHeight();
+//        List<Missile> missiles = this.getMissiles();
+//    			missiles.add(new Missile(x + width/2 -9, y + height -90,"/13LightYearsProject/src/resources/images/missile.png"));
+//    	new Thread() {
+//    		@Override
+//    		public void run() {
+//        		try {
+//    	            isShooting = true;
+//        			missiles.add(new Missile(x + width/2 -9, y + height -90,"/13LightYearsProject/src/resources/images/missile.png"));
+//                    Thread.sleep(1000);
+//                    isShooting = false;
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(SpaceShip.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//    		}
+//    	}.start();		
+//    }
     public void fire() {
-    			missiles.add(new Missile(x + width/2 -9, y + height -90));
-    	new Thread() {
-    		@Override
-    		public void run() {
-        		try {
-    	            isShooting = true;
-        			missiles.add(new Missile(x + width/2 -9, y + height -90));
-                    Thread.sleep(1000);
-                    isShooting = false;
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(SpaceShip.class.getName()).log(Level.SEVERE, null, ex);
-                }
-    		}
-    	}.start();		
+    	Missile missile = new Missile(this.getX() + this.getWidth()/2 -10, this.getY() + this.getHeight() -90,"../resources/images/missile.png");
+    	this.getMissiles().add(missile);
+    	
     }
     
 
@@ -163,4 +183,11 @@ public class SpaceShip extends Sprite {
             dy = 0;
         }
     }
+	
+
+
+	  
+	
+
+
 }

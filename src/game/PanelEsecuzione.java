@@ -14,10 +14,12 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class PanelEsecuzione extends JPanel implements ActionListener{
-	private String fileName;
+	private String fileName, enemyName;
 	public SpaceShip spaceShip;
     private final int DELAY = 20;
     private Timer timer;
+    
+    private EnemiesSpaceShip enemies;
 	
 	
 	public PanelEsecuzione() {
@@ -27,6 +29,9 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         fileName = "../resources/images/spaceship.png";
         spaceShip = new SpaceShip(100,100,fileName);
+        
+        enemyName = "../resources/images/firstEnemy.png";
+        enemies = new EnemiesSpaceShip(0,0,enemyName);
         
         timer = new Timer(DELAY, this);
         timer.start();
@@ -46,8 +51,18 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 
         Graphics2D g2d = (Graphics2D) g;
         
+        Graphics2D g_en = (Graphics2D) g;
+        
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
+        
+        g_en.drawImage(enemies.getImage(), enemies.getX(), enemies.getY(), this);//disegna nemico
+        List<Missile> colpo = enemies.getMissiles();
+        for(Missile missile : colpo) {
+        	g_en.drawImage(missile.getImage(), missile.getX(),
+        			missile.getY(), this);
+        }
+        
         
         List<Missile> missiles = spaceShip.getMissiles();
 
@@ -83,12 +98,26 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
                 missiles.remove(i);
             }
         }
+        
+        List<Missile> colpo = enemies.getMissiles();
+        for(int i = 0; i < colpo.size(); i++) {
+        	Missile missile = colpo.get(i);
+        	
+        	if(missile.isVisible())
+        		missile.move_colpo();
+        	else
+        		colpo.remove(i);
+        }
+        
+        
     }
     
     public void updateSpaceShip() {
     	spaceShip.move();
+    	enemies.move(); // movimento nemico
     }
     
+   
     
     public class TAdapter extends KeyAdapter{
 	    @Override

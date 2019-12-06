@@ -38,4 +38,13 @@ public class Missile extends Sprite {
             visible = false;
         }
     }
+    
+    public void move_colpo() {
+    	
+    	this.setY(this.getY() + 2);
+    	
+    	if(this.getY() > BOARD_WIDTH) {
+    		visible = false;
+    	}
+    }
 }

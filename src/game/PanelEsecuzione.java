@@ -18,7 +18,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	public SpaceShip spaceShip;
     private final int DELAY = 20;
     private Timer timer;
-    public ObstaclesBackground obs;
 	
 	
 	public PanelEsecuzione() {
@@ -28,7 +27,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         fileName = "../resources/images/spaceship.png";
         spaceShip = new SpaceShip(100,100,fileName);
-//        obs = new ObstaclesBackground();
         
         timer = new Timer(DELAY, this);
         timer.start();
@@ -50,8 +48,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
-        
-//        g2d.drawImage()
         
         List<Missile> missiles = spaceShip.getMissiles();
 

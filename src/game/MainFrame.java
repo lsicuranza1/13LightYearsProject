@@ -47,7 +47,7 @@ public class MainFrame{
 					window.getFrame().setVisible(true);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //					frame.setSize(w,h);
-					window.getFrame().setTitle("Menù Principale");
+					window.getFrame().setTitle("MenÃ¹ Principale");
 					window.getFrame().setVisible(true); 
 				} catch (Exception e) {
 					e.printStackTrace();

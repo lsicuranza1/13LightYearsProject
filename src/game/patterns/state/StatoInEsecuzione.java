@@ -24,6 +24,7 @@ import javax.swing.Timer;
 
 import game.MainFrame;
 import game.Missile;
+import game.ObstaclesBackground;
 import game.PanelEsecuzione;
 import game.SpaceShip;
 
@@ -33,7 +34,7 @@ public class StatoInEsecuzione extends javax.swing.JFrame implements Stato{
 	MainFrame mainFrame = MainFrame.getIstance();
 	//private SpaceShip spaceShip = new SpaceShip(100,100,"/13LightYearsProject/src/resources/images/spaceship.png");
 	private PanelEsecuzione panel = new PanelEsecuzione();
-
+	private ObstaclesBackground obs = new ObstaclesBackground();
     //private SpaceShip ship;
     
 	public StatoInEsecuzione() {

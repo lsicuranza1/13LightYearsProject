@@ -42,8 +42,9 @@ public class StatoInEsecuzione extends javax.swing.JFrame implements Stato{
         //mainFrame.getFrame().setLayout(new BorderLayout());
         //mainFrame.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.setBackground(Color.BLACK);
-        panel.setSize(1000, 600);
+        panel.setSize(600, 600);
         //mainFrame.getFrame().add(panel, BorderLayout.CENTER);
+        mainFrame.getFrame().setSize(600, 600);
         mainFrame.getFrame().setVisible(true);
         mainFrame.getFrame().add(panel);
         //ship = new SpaceShip(300, 300);

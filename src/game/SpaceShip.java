@@ -15,7 +15,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,31 +22,19 @@ import javax.swing.ImageIcon;
 
 public class SpaceShip extends SpaceshipStructure {
 
-    public int dx;
+    private int dx;
     private int dy;
 
-//    private double width = getWidth();
-//    private double height = getHeight();
-//    private ImageIcon imgIcon;
-//    public int width = imgIcon.getIconWidth();
-//    public int height = imgIcon.getIconHeight();
-//    private List<Missile> missiles;
-    Timer timer;
     private boolean isShooting = false;
-//    long startTime = System.currentTimeMillis();
-//    long elapsedTime = 0;
-
+    
+    
     public SpaceShip(int x, int y,String path) {
-        super(x, y, path);
 
-//        initSpaceShip();
+    	super(x, y, path);
+
     }
 
-//    private void initSpaceShip() {
-//
-//        missiles = new ArrayList<>();
-//        
-//    }
+
     @Override
     public void move() {
     	this.setX(this.getX() + dx);
@@ -58,8 +45,6 @@ public class SpaceShip extends SpaceshipStructure {
     public void keyPressed(KeyEvent e) {
 
         int key = e.getKeyCode();
-        //int key = e.getKeyCode();    	
-        //int shoot = e.getKeyCode();
         int x = this.getX();
         int y = this.getY();
         int width = this.getWidth();
@@ -164,7 +149,6 @@ public class SpaceShip extends SpaceshipStructure {
     		public void run() {
         		try {
     	            isShooting = true;
-        			 //missiles.add(new Missile(x + width/2 -9, y + height -90,"../resources/images/missile.png"));
                     Thread.sleep(500);
                     isShooting = false;
                 } catch (InterruptedException ex) {

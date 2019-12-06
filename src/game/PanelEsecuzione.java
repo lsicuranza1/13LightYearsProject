@@ -2,12 +2,14 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.*;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -26,10 +28,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         setFocusable(false);
         
         fileName = "../resources/images/spaceship.png";
-        spaceShip = new SpaceShip(100,100,fileName);
+        spaceShip = new SpaceShip(500,400,fileName);
+        
+        checkCollisions();
         
         timer = new Timer(DELAY, this);
-        timer.start();
+        timer.start();                  //creates delay fot the repaint() method
 	}
 	
 
@@ -101,5 +105,32 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	        spaceShip.keyPressed(e);
 	    }
     }
+    
+    public void checkCollisions() {
 
+        Rectangle2D r3 = spaceShip.getBounds();
+
+        Rectangle r2 = enemy.getBounds();
+
+        if (r3.intersects(r2)) {
+                
+            spaceShip.setVisible(false);
+            enemy.setVisible(false);
+            
+        }
+
+        List<Missile> ms = spaceShip.getMissiles();
+
+        for (Missile m : ms) {
+
+            Rectangle2D r1 = m.getBounds();
+
+            if (r1.intersects(r2)) {
+                    
+                m.setVisible(false);
+                enemy.setVisible(false);
+                
+            }
+        }
+    }
 }

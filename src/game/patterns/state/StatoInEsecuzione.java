@@ -6,6 +6,7 @@ import game.MainFrame;
 import game.PanelEsecuzione;
 
 
+@SuppressWarnings("serial")
 public class StatoInEsecuzione extends javax.swing.JFrame implements Stato{
  
 	MainFrame mainFrame = MainFrame.getIstance();

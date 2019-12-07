@@ -20,7 +20,7 @@ public abstract class Sprite {
         this.x = x;
         this.y = y;
         this.loadImage(imageFileName);
-        this.rectangle = new Rectangle2D.Double(x, y, this.getWidth(), this.getHeight());
+        this.setRectangle(new Rectangle2D.Double(x, y, this.getWidth(), this.getHeight()));
     }
     
     
@@ -66,5 +66,15 @@ public abstract class Sprite {
 	}
 
     public abstract void move();
+
+
+	public Rectangle2D getRectangle() {
+		return rectangle;
+	}
+
+
+	public void setRectangle(Rectangle2D rectangle) {
+		this.rectangle = rectangle;
+	}
     
 }

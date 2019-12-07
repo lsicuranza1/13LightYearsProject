@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+@SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener{
 	private String fileName;
 	public SpaceShip spaceShip;

@@ -1,7 +1,5 @@
 package game.patterns.state;
 
-import java.awt.Graphics;
-
 public class StatoPausa implements Stato {
  
     @Override

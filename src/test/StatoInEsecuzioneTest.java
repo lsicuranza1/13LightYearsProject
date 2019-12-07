@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import game.MainFrame;
+import game.Score;
 import game.patterns.state.Modalita;
 import game.patterns.state.StatoGameOver;
 import game.patterns.state.StatoInEsecuzione;
@@ -26,6 +27,7 @@ public class StatoInEsecuzioneTest {
 		m = new Modalita();
 		main = MainFrame.getIstance();
 		main.setFrame(new JFrame());
+		main.setScore(new Score());
 	}
 
 	@Test

@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import game.MainFrame;
+import game.Score;
 import game.patterns.state.*;
 
 public class StatoGameOverTest {
@@ -21,6 +22,7 @@ public class StatoGameOverTest {
 		m = new Modalita();
 		main = MainFrame.getIstance();
 		main.setFrame(new JFrame());
+		main.setScore(new Score());
 	}
 
 	@Test

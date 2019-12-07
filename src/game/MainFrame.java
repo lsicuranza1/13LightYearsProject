@@ -24,9 +24,6 @@ public class MainFrame{
 	//Singleton
 	private static MainFrame istance = null; // riferimento all' istanza
 	
-//	public MainFrame() {
-//		initialize();
-//	}
 	
 	public static MainFrame getIstance() {
 		if (istance == null)

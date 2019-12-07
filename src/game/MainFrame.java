@@ -13,6 +13,7 @@ public class MainFrame{
 
 	private JFrame frame;
 	private Modalita modalita;
+	private Score score;
 	
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	double width = screenSize.getWidth();
@@ -41,6 +42,7 @@ public class MainFrame{
 					MainFrame window = MainFrame.getIstance();
 					window.setFrame(new StatoStart());
 					window.setModalita(new Modalita());
+					window.setScore(new Score());
 					window.getFrame().setVisible(true);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //					frame.setSize(w,h);
@@ -76,6 +78,14 @@ public class MainFrame{
 
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+
+	public Score getScore() {
+		return score;
+	}
+
+	public void setScore(Score score) {
+		this.score = score;
 	}
 
 }

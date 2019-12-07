@@ -42,12 +42,12 @@ public class MainFrame{
 			public void run() {
 				try {
 					MainFrame window = MainFrame.getIstance();
-					window.setModalita(new Modalita());
 					window.setFrame(new StatoStart());
+					window.setModalita(new Modalita());
 					window.getFrame().setVisible(true);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //					frame.setSize(w,h);
-					window.getFrame().setTitle("Menù Principale");
+					window.getFrame().setTitle("13 Light Years - Menù Principale");
 					window.getFrame().setVisible(true); 
 				} catch (Exception e) {
 					e.printStackTrace();

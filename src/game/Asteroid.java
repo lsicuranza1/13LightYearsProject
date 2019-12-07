@@ -29,14 +29,6 @@ public class Asteroid extends Sprite {
     @Override
     public void move() {
     	this.transform.setToTranslation(x,y+=3);
-        this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+1), x/9, y/9));
+        this.transform.concatenate(transform2.getRotateInstance(Math.toRadians(angle=angle+1), x/9, y/9));
     }
-
-	public AffineTransform getTransform2() {
-		return transform2;
-	}
-
-	public void setTransform2(AffineTransform transform2) {
-		this.transform2 = transform2;
-	}
 }

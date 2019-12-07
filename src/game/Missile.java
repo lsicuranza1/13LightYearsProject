@@ -1,5 +1,7 @@
 package game;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author lorenzosic

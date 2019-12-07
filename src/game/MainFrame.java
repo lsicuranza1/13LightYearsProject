@@ -42,8 +42,8 @@ public class MainFrame{
 			public void run() {
 				try {
 					MainFrame window = MainFrame.getIstance();
-					window.setModalita(new Modalita());
 					window.setFrame(new StatoStart());
+					window.setModalita(new Modalita());
 					window.getFrame().setVisible(true);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //					frame.setSize(w,h);

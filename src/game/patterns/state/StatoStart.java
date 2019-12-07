@@ -15,6 +15,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
 	MainFrame mainFrame = MainFrame.getIstance();
 
+
 	Dimension dim;
 	public static Clip gameClip;
 	private boolean back = false;
@@ -39,26 +40,9 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	 * Creates new form NewJFrame
 	 */
 	public StatoStart() {
-
-		// logo del gioco
-		Image iconaFrame;
-		iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
-		this.setIconImage(iconaFrame);
-		// fisso le dimensioni della finestra Menù a partire da quelle dinamiche dello
-		// schermo del pc
-		dim = Toolkit.getDefaultToolkit().getScreenSize(); // restituisce la dimensione dello schermo in pixel
-		dim.setSize(1000, 600); // setto larghezza e altezza, da me scelti, per la finestra Menù
-		this.setPreferredSize(dim.getSize());
-
-		// ridimensiono lo sfondo in base alle dimensioni della schermata menù
-		ImageIcon immagineSfondo = ridimensionaImageIcon(
-				getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width, dim.height);
+		
 
 		initComponents();
-
-		sfondo.setPreferredSize(dim.getSize());
-		sfondo.setIcon(immagineSfondo);
-		// jPanel1.setSize(dim.getSize());
 
 	}
 
@@ -79,6 +63,20 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		jButton4 = new javax.swing.JButton();
 		jButton5 = new javax.swing.JButton();
 		sfondo = new javax.swing.JLabel();
+
+		// logo del gioco
+		Image iconaFrame;
+		iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
+		this.setIconImage(iconaFrame);
+		// fisso le dimensioni della finestra Menù a partire da quelle dinamiche dello
+		// schermo del pc
+		dim = Toolkit.getDefaultToolkit().getScreenSize(); // restituisce la dimensione dello schermo in pixel
+		dim.setSize(1000, 600); // setto larghezza e altezza, da me scelti, per la finestra Menù
+		this.setPreferredSize(dim.getSize());
+
+		// ridimensiono lo sfondo in base alle dimensioni della schermata menù
+		ImageIcon immagineSfondo = ridimensionaImageIcon(
+				getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width, dim.height);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years");
@@ -212,6 +210,20 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		jPanel1.getAccessibleContext().setAccessibleDescription("");
 
 		pack();
+
+		if (mainFrame.getFrame() != null) {
+			sfondo.setPreferredSize(dim.getSize());
+			sfondo.setIcon(immagineSfondo);
+
+			jPanel1.add(sfondo);
+			mainFrame.getFrame().setVisible(true);
+			mainFrame.getFrame().add(jPanel1);
+			jPanel1.setFocusable(true);
+			jPanel1.requestFocus();
+		} else {
+			sfondo.setPreferredSize(dim.getSize());
+			sfondo.setIcon(immagineSfondo);
+		}
 	}// </editor-fold>
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed

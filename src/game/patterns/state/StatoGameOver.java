@@ -4,7 +4,6 @@ import game.MainFrame;
 import game.PanelGameOver;
 
 
-@SuppressWarnings("serial")
 public class StatoGameOver extends javax.swing.JFrame implements Stato {
 	
 	MainFrame mainFrame = MainFrame.getIstance();

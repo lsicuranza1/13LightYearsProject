@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +9,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import game.Asteroid;
 
 public class Level {
 	
@@ -52,7 +56,7 @@ public class Level {
                 }
                 countToAddMeteorite++;
                 
-                Iterator<Asteroid> it_asteroids = asteroids.iterator();
+                Iterator it_asteroids = asteroids.iterator();
 
                 while (it_asteroids.hasNext()) {
                     Asteroid asteroid = (Asteroid)it_asteroids.next();
@@ -64,7 +68,7 @@ public class Level {
                 }
                 levelPanel.repaint();
                 
-                Iterator<Meteorite> it_meteorites = meteorites.iterator();
+                Iterator it_meteorites = meteorites.iterator();
                 
                 while (it_meteorites.hasNext()) {
                     Meteorite meteorites = (Meteorite)it_meteorites.next();

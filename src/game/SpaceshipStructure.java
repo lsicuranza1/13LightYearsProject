@@ -3,6 +3,8 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 public abstract class SpaceshipStructure extends Sprite{
 	
 	private List<Missile> missiles;

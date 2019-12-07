@@ -1,14 +1,14 @@
 package test;
 
-import static org.junit.Assert.*;
-
-import javax.swing.JFrame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import game.MainFrame;
-import game.patterns.state.*;
+import game.patterns.state.Modalita;
+import game.patterns.state.StatoStart;
 
 public class ModalitaTest {
 	

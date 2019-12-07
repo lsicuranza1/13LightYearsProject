@@ -30,13 +30,25 @@ public class StatoInEsecuzione extends javax.swing.JFrame implements Stato{
         
     }
 	
-    @Override
+	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		// TODO Auto-generated method stub
-		if (stato.equals("pausa"))
+		if (stato.equals("pausa")) {
+			mainFrame.getFrame().setTitle("Pausa");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoPausa());
-		else if(stato.equals("game_over"))
+		} else if (stato.equals("game_over")) {
+			mainFrame.getFrame().setTitle("GameOver");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoGameOver());
+		} else if (stato.equals("start")) {
+			mainFrame.getFrame().setTitle("Start");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
+			modalita.setStatoModalita(new StatoStart());
+		}
 	}
  
 }

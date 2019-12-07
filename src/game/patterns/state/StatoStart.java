@@ -1,16 +1,16 @@
 package game.patterns.state;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.IOException;
 import java.net.URL;
 
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 import game.MainFrame;
-//import game.Settings;
 import game.Settings;
 
 public class StatoStart extends javax.swing.JFrame implements Stato {
@@ -48,31 +48,14 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         
         // ridimensiono lo sfondo in base alle dimensioni della schermata menù
         ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../../../resources/images/sfondo_menu.png"), dim.width,dim.height);
-        
-        // Gif della Terra
-        //nt w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1/3;
-        //int h = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconHeight() * 1/3;
-        //ImageIcon gif = ridimensionaImageIcon(getClass().getResource("/images/solar_system.gif"), w, h);
-        
-        // Gif del Sistema Solare
-        //w = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconWidth() * 1 / 3;
-        //h = new ImageIcon(getClass().getResource("/images/solar_system.gif")).getIconHeight() * 1 / 3;
-        //ImageIcon gif2 = ridimensionaImageIcon(getClass().getResource("/images/solar_system.gif"), w, h);
-       
-       
-        //int w = new ImageIcon(getClass().getResource("/images/LogoSfondoBianco.png")).getIconWidth() * 1 / 3;
-        //int h = new ImageIcon(getClass().getResource("/images/LogoSfondoBianco.png")).getIconHeight() * 1 / 3;
-        //ImageIcon immagineLogo = ridimensionaImageIcon(getClass().getResource("/images/LogoSfondoBianco.png"), w, h);  
-       
+            
         initComponents();
       
         sfondo.setPreferredSize(dim.getSize());
         sfondo.setIcon(immagineSfondo);
         //jPanel1.setSize(dim.getSize());
         
-        
-    
-        
+     
         
     }
 
@@ -95,19 +78,25 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("13 Light Years");
+        setLocation(new java.awt.Point(180, 50));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(dim.width,dim.height));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
 
         jPanel1.setAlignmentX(0.0F);
-        jPanel1.setMinimumSize(new java.awt.Dimension(dim.width,dim.height));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
         jPanel1.setName(""); // NOI18N
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(dim.getSize());
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jButton2.setFont(new java.awt.Font("Gabriola", 0, 36)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Gabriola", 0, 48)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Play");
+        jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), null));
+        jButton2.setContentAreaFilled(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.setMaximumSize(new java.awt.Dimension(107, 25));
         jButton2.setMinimumSize(new java.awt.Dimension(107, 25));
         jButton2.setPreferredSize(new java.awt.Dimension(107, 25));
@@ -125,8 +114,12 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         gridBagConstraints.insets = new java.awt.Insets(269, 70, 0, 695);
         jPanel1.add(jButton2, gridBagConstraints);
 
-        jButton3.setFont(new java.awt.Font("Gabriola", 0, 36)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Gabriola", 0, 48)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Scoreboard");
+        jButton3.setToolTipText("");
+        jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton3.setContentAreaFilled(false);
         jButton3.setMaximumSize(new java.awt.Dimension(107, 25));
         jButton3.setMinimumSize(new java.awt.Dimension(107, 25));
         jButton3.setPreferredSize(new java.awt.Dimension(107, 25));
@@ -144,8 +137,11 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
         jPanel1.add(jButton3, gridBagConstraints);
 
-        jButton4.setFont(new java.awt.Font("Gabriola", 0, 36)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Gabriola", 0, 48)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Settings");
+        jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton4.setContentAreaFilled(false);
         jButton4.setMaximumSize(new java.awt.Dimension(107, 25));
         jButton4.setMinimumSize(new java.awt.Dimension(107, 25));
         jButton4.setPreferredSize(new java.awt.Dimension(107, 25));
@@ -164,8 +160,12 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
         jPanel1.add(jButton4, gridBagConstraints);
         jButton4.getAccessibleContext().setAccessibleDescription("");
 
-        jButton5.setFont(new java.awt.Font("Gabriola", 0, 36)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Gabriola", 0, 48)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Demo");
+        jButton5.setToolTipText("");
+        jButton5.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jButton5.setContentAreaFilled(false);
         jButton5.setMaximumSize(new java.awt.Dimension(107, 25));
         jButton5.setMinimumSize(new java.awt.Dimension(107, 25));
         jButton5.setPreferredSize(new java.awt.Dimension(107, 25));
@@ -208,10 +208,9 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
         jPanel1.getAccessibleContext().setAccessibleName("");
         jPanel1.getAccessibleContext().setAccessibleDescription("");
-        //jPanel1.setSize(100, 100);
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold> 
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -262,18 +261,23 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("in_esecuzione")) {
+//			mainFrame.getFrame().setVisible(false);
+//			mainFrame.setFrame(new StatoInEsecuzione());		
+//			mainFrame.getFrame().setVisible(true);
+//	        mainFrame.getFrame().repaint();
+//			mainFrame.getFrame().setSize(1000, 600);
 			mainFrame.getFrame().setTitle("Gioco");
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoInEsecuzione());
-		
+		//TODO togliere;
 			
 		}else if (stato.equals("game_over")) {
+			
 			mainFrame.getFrame().setTitle("GameOver");
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoGameOver());
-			
 		}
 		
 	}

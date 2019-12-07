@@ -1,13 +1,12 @@
-package game;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package game;
 
 import java.awt.*;
 import javax.swing.*;
-
 
 /**
  *
@@ -62,7 +61,8 @@ public class Settings extends javax.swing.JDialog {
         setTitle("13 Light Years");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("Gabriola", 0, 24)); // NOI18N
-        setLocation(new java.awt.Point(500, 500));
+        setLocation(new java.awt.Point(737, 331));
+        setModalityType(null);
         setResizable(false);
 
         jLabel3.setFont(new java.awt.Font("Gabriola", 1, 36)); // NOI18N
@@ -157,8 +157,10 @@ public class Settings extends javax.swing.JDialog {
                 .addGap(26, 26, 26))
         );
 
+        getAccessibleContext().setAccessibleParent(null);
+
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold> 
 
     private void effectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_effectsActionPerformed
         // TODO add your handling code here:

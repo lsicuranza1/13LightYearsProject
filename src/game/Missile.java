@@ -29,7 +29,6 @@ public class Missile extends Sprite {
     public void move() {
         
         this.setY(this.getY() - MISSILE_SPEED);
-        //System.out.println(this.getY() - MISSILE_SPEED);
         if (this.getY() > BOARD_WIDTH) {
             this.setVisible(false);
         }

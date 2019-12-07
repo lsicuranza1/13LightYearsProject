@@ -73,6 +73,10 @@ public abstract class Sprite {
 	public Rectangle2D getBounds() {
 		return rectangle;
 	}
+	
+	public void setRectangle() {
+		this.rectangle.setFrame(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+	}
 
     public abstract void move();
     

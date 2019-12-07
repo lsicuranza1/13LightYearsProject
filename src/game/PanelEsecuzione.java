@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class PanelEsecuzione extends JPanel implements ActionListener{
-	private String fileName, enemyName;
-	public SpaceShip spaceShip;
+	private String fileName, enemyName,fileName2;
+	public SpaceShip spaceShip,enemy;
     private final int DELAY = 20;
     private Timer timer;
     
@@ -30,15 +30,19 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         setFocusable(false);
         
         fileName = "../resources/images/spaceship.png";
+        fileName2 = "../resources/images/asteroid-icon.png";
         spaceShip = new SpaceShip(500,400,fileName);
+        enemy = new SpaceShip(400,50,fileName2);
         
-//        checkCollisions();
+        //checkCollisions();
         
         enemyName = "../resources/images/firstEnemy.png";
-        enemies = new EnemiesSpaceShip(0,0,enemyName);
+        //enemies = new EnemiesSpaceShip(0,0,enemyName);
         
         timer = new Timer(DELAY, this);
         timer.start();                  //creates delay fot the repaint() method
+        
+        
 	}
 	
 
@@ -60,12 +64,16 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
         
-        g_en.drawImage(enemies.getImage(), enemies.getX(), enemies.getY(), this);//disegna nemico
-        List<Missile> colpo = enemies.getMissiles();
-        for(Missile missile : colpo) {
-        	g_en.drawImage(missile.getImage(), missile.getX(),
-        			missile.getY(), this);
-        }
+        //g_en.drawImage(enemies.getImage(), enemies.getX(), enemies.getY(), this);//disegna nemico
+        
+        g2d.drawImage(enemy.getImage(), enemy.getX(),
+                enemy.getY(), this);
+        
+//        List<Missile> colpo = enemies.getMissiles();
+//        for(Missile missile : colpo) {
+//        	g_en.drawImage(missile.getImage(), missile.getX(),
+//        			missile.getY(), this);
+//        }
         
         
         List<Missile> missiles = spaceShip.getMissiles();
@@ -82,9 +90,11 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 		this.updateSpaceShip();
 		this.updateMissiles();
+		this.checkCollisions();
         this.repaint();
         //System.out.println("ActionPerformed");
     }
+    
     
     private void updateMissiles() {
 
@@ -97,28 +107,30 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
             if (missile.isVisible()) {
             	
                 missile.move();
+                missile.setRectangle();
             } else {
 
                 missiles.remove(i);
             }
         }
         
-        List<Missile> colpo = enemies.getMissiles();
-        for(int i = 0; i < colpo.size(); i++) {
-        	Missile missile = colpo.get(i);
-        	
-        	if(missile.isVisible())
-        		missile.move_colpo();
-        	else
-        		colpo.remove(i);
-        }
+//        List<Missile> colpo = enemies.getMissiles();
+//        for(int i = 0; i < colpo.size(); i++) {
+//        	Missile missile = colpo.get(i);
+//        	
+//        	if(missile.isVisible())
+//        		missile.move_colpo();
+//        	else
+//        		colpo.remove(i);
+//        }
         
         
     }
     
     public void updateSpaceShip() {
     	spaceShip.move();
-    	enemies.move(); // movimento nemico
+    	spaceShip.setRectangle();
+    	//enemies.move(); // movimento nemico
     }
     
    
@@ -135,31 +147,43 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	    }
     }
     
-//    public void checkCollisions() {
-//
-//        Rectangle2D r3 = spaceShip.getBounds();
-//
-//        Rectangle2D r2 = enemies.getBounds();
-//
-//        if (r3.intersects(r2)) {
-//                
-//            spaceShip.setVisible(false);
-//            enemies.setVisible(false);
-//            
-//        }
-//
-//        List<Missile> ms = spaceShip.getMissiles();
-//
-//        for (Missile m : ms) {
-//
-//            Rectangle2D r1 = m.getBounds();
-//
-//            if (r1.intersects(r2)) {
-//                    
-//                m.setVisible(false);
-//                enemies.setVisible(false);
-//                
-//            }
-//        }
-//    }
+    public void checkCollisions() {
+
+        Rectangle2D r3 = spaceShip.getBounds();
+        
+
+        //Rectangle2D r2 = enemies.getBounds();
+        
+        Rectangle2D r4 = enemy.getBounds();
+
+//        System.out.println(r3.intersects(r4));
+        if (r3.intersects(r4)) {
+                
+            spaceShip.setVisible(false);
+            enemy.setVisible(false);
+        	//System.out.println("Collisione spaceship-asteroide");
+            
+        }
+
+        List<Missile> ms = spaceShip.getMissiles();
+        System.out.println(ms.size());
+        
+
+        for (Missile m : ms) {
+        	
+
+            Rectangle2D r1 = m.getBounds();
+
+            if (r1.intersects(r4)) {
+            	
+
+                    
+                m.setVisible(false);
+                
+                enemy.setVisible(false);
+                System.out.println("Collisione missile-asteroide");
+                
+            }
+        }
+    }
 }

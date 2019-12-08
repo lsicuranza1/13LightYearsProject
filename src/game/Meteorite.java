@@ -16,6 +16,8 @@ public class Meteorite extends Sprite {
 
     public Meteorite(int x, int y, String path) {
     	super(x, y, path);
+    	this.x=x;
+    	this.y=y;
     	this.transform = new AffineTransform();
         rectangle = new Rectangle2D.Double(x, y, super.getImage().getWidth(), super.getImage().getHeight());
     }

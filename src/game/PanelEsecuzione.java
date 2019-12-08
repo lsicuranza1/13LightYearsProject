@@ -52,6 +52,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
         level.paintComponent(g2d);
+       // System.out.println(spaceShip.getX());
         
         List<Missile> missiles = spaceShip.getMissiles();
 

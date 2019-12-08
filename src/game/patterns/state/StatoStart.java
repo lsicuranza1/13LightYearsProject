@@ -51,10 +51,18 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		Image iconaFrame;
 		iconaFrame = new ImageIcon(getClass().getResource("../../../resources/images/logo_game.png")).getImage();
 		this.setIconImage(iconaFrame);
+<<<<<<< HEAD
 
 		Dimension display = Toolkit.getDefaultToolkit().getScreenSize();
 		dim = Toolkit.getDefaultToolkit().getScreenSize();
 		dim.setSize(1000, 600);
+=======
+		// fisso le dimensioni della finestra Menù a partire da quelle dinamiche dello
+		// schermo del pc
+		Dimension dim_menu = Toolkit.getDefaultToolkit().getScreenSize();
+		dim = Toolkit.getDefaultToolkit().getScreenSize(); // restituisce la dimensione dello schermo in pixel
+		dim.setSize(1000, 600); // setto larghezza e altezza, da me scelti, per la finestra Menù
+>>>>>>> I added the obstacles in the executionPanel
 		this.setPreferredSize(dim.getSize());
 
 		ImageIcon immagineSfondo = ridimensionaImageIcon(
@@ -62,9 +70,16 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years");
+<<<<<<< HEAD
 
 		this.setLocation(display.width / 2 - 500, display.height / 2 - 300);
 		setName("");
+=======
+		//setLocation(new java.awt.Point(180, 50));
+
+        this.setLocation(dim_menu.width/2-500, dim_menu.height/2-300);
+		setName(""); // NOI18N
+>>>>>>> I added the obstacles in the executionPanel
 		setPreferredSize(new java.awt.Dimension(1000, 600));
 		setResizable(false);
 

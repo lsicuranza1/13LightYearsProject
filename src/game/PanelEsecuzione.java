@@ -48,6 +48,11 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
+<<<<<<< HEAD
+=======
+        level.paintComponent(g2d);
+       // System.out.println(spaceShip.getX());
+>>>>>>> I added the obstacles in the executionPanel
         
         List<Missile> missiles = spaceShip.getMissiles();
 

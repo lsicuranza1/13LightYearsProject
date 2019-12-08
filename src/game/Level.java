@@ -56,7 +56,7 @@ public class Level {
 
                 while (it_asteroids.hasNext()) {
                     Asteroid asteroid = (Asteroid)it_asteroids.next();
-                    if (asteroid.y >= D_H) {
+                    if (asteroid.getY() >= D_H) {
                         it_asteroids.remove();
                     } else {
                          asteroid.move();
@@ -68,7 +68,7 @@ public class Level {
                 
                 while (it_meteorites.hasNext()) {
                     Meteorite meteorites = (Meteorite)it_meteorites.next();
-                    if (meteorites.y >= D_H) {
+                    if (meteorites.getY() >= D_H) {
                         it_meteorites.remove();
                     } else {
                          meteorites.move();

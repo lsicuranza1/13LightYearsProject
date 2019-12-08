@@ -59,7 +59,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 =======
 		// fisso le dimensioni della finestra Menù a partire da quelle dinamiche dello
 		// schermo del pc
-		Dimension dim_menu = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension display = Toolkit.getDefaultToolkit().getScreenSize();
 		dim = Toolkit.getDefaultToolkit().getScreenSize(); // restituisce la dimensione dello schermo in pixel
 		dim.setSize(1000, 600); // setto larghezza e altezza, da me scelti, per la finestra Menù
 >>>>>>> I added the obstacles in the executionPanel
@@ -77,7 +77,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 =======
 		//setLocation(new java.awt.Point(180, 50));
 
-        this.setLocation(dim_menu.width/2-500, dim_menu.height/2-300);
+        this.setLocation(display.width/2-500, display.height/2-300);
 		setName(""); // NOI18N
 >>>>>>> I added the obstacles in the executionPanel
 		setPreferredSize(new java.awt.Dimension(1000, 600));

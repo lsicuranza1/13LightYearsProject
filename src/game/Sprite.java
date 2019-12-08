@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -14,28 +15,32 @@ public abstract class Sprite {
     private int y;
     private Rectangle2D rectangle;
     private BufferedImage image;
+    private boolean visible = true;
     
 
     public Sprite(int x, int y,  String imageFileName) {
         this.x = x;
         this.y = y;
         this.loadImage(imageFileName);
-        this.setRectangle(new Rectangle2D.Double(x, y, this.getWidth(), this.getHeight()));
+        this.rectangle = new Rectangle(x, y, this.getWidth(), this.getHeight());
     }
     
-    
-    //------Template method---
     private void loadImage(String imageFileName) {
-//        ImageIcon ii = new ImageIcon(imageName);
-//        image =  ii.getImage();
         try {
 			image = ImageIO.read(getClass().getResource(imageFileName));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-
+			System.out.println("Image not loaded");
 		}
 
+    }
+    
+    public boolean isVisible() {
+        return visible;
+    }
+    
+    public void setVisible(boolean visible) {
+    	this.visible = visible;
     }
 
     public int getX() {
@@ -64,17 +69,15 @@ public abstract class Sprite {
 	public int getHeight() {
 	    return this.image.getHeight(null);
 	}
-
-    public abstract void move();
-
-
-	public Rectangle2D getRectangle() {
+	
+	public Rectangle2D getBounds() {
 		return rectangle;
 	}
-
-
-	public void setRectangle(Rectangle2D rectangle) {
-		this.rectangle = rectangle;
+	
+	public void setRectangle() {
+		this.rectangle.setFrame(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
+
+    public abstract void move();
     
 }

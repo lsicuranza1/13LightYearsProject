@@ -16,6 +16,7 @@ import javax.swing.Timer;
 public class PanelEsecuzione extends JPanel implements ActionListener{
 	private String fileName;
 	public SpaceShip spaceShip;
+	private Level level;
     private final int DELAY = 20;
     private Timer timer;
 	
@@ -27,6 +28,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         fileName = "../resources/images/spaceship.png";
         spaceShip = new SpaceShip(100,100,fileName);
+        
+        level = new Level(this);
         
         timer = new Timer(DELAY, this);
         timer.start();
@@ -48,6 +51,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
+        level.paintComponent(g2d);
+       // System.out.println(spaceShip.getX());
         
         List<Missile> missiles = spaceShip.getMissiles();
 

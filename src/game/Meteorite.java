@@ -8,21 +8,19 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 public class Meteorite extends Sprite {
-	Rectangle2D rectangle;
-    JPanel panel;
+
     private AffineTransform transform;
 
 
     public Meteorite(int x, int y, String path) {
     	super(x, y, path);
     	this.transform = new AffineTransform();
-        rectangle = new Rectangle2D.Double(x, y, super.getImage().getWidth(), super.getImage().getHeight());
     }
     
-    public void drawMeteorite(Graphics g) {
-   	 Graphics2D g2d = (Graphics2D) g;
-   	 g2d.drawImage(super.getImage(),transform, panel);
-   }
+//    public void drawMeteorite(Graphics g) {
+//   	 Graphics2D g2d = (Graphics2D) g;
+//   	 g2d.drawImage(super.getImage(),transform, panel);
+//   }
 
    public void move() {
 	   
@@ -33,4 +31,8 @@ public class Meteorite extends Sprite {
    	 this.transform.setToTranslation(x,y);
    	 
    }
+   
+   public AffineTransform getTransform() {
+		return transform;
+	}
 }

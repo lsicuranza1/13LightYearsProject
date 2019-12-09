@@ -38,14 +38,14 @@ public class Level {
         	
             public void actionPerformed(ActionEvent e) {
             	
-                if (countToAddAsteroid >= 10) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+                if (countToAddAsteroid >= 50) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
                     int randX1 = random.nextInt(D_W);
                     asteroids.add(new Asteroid(randX1, y_asteroid, fileName_asteroid));
                     countToAddAsteroid = 0;
                 }
                 countToAddAsteroid++;
                 
-                if (countToAddMeteorite >= 10) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+                if (countToAddMeteorite >= 50) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
                     int randX2 = random.nextInt(D_W);
                     meteorites.add(new Meteorite(randX2, y_meteorite, fileName_meteorite));
                     countToAddMeteorite = 0;
@@ -82,14 +82,14 @@ public class Level {
         timer.start();
     }
     
-    protected void paintComponent(Graphics2D g) {
-        //levelPanel.paintComponent(g);
-        //g.drawImage(fileName_background, 0, 0, this);
-        for (Asteroid asteroid : asteroids) {
-            asteroid.drawAsteroid(g);
-        }
-        for (Meteorite meteorite : meteorites) {
-            meteorite.drawMeteorite(g);
-        }
-    }
+//    protected void paintComponent(Graphics2D g) {
+//        //levelPanel.paintComponent(g);
+//        //g.drawImage(fileName_background, 0, 0, this);
+//        for (Asteroid asteroid : asteroids) {
+//            asteroid.drawAsteroid(g);
+//        }
+//        for (Meteorite meteorite : meteorites) {
+//            meteorite.drawMeteorite(g);
+//        }
+//    }
 }

@@ -74,7 +74,7 @@ public abstract class Sprite {
 		return rectangle;
 	}
 	
-	public void setRectangle() {
+	public void setBounds() {
 		this.rectangle.setFrame(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 

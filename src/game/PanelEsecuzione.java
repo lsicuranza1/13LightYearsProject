@@ -10,14 +10,18 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class PanelEsecuzione extends JPanel implements ActionListener{
-	private String fileName, enemyName,fileName2;
-	public SpaceShip spaceShip,enemy;
+	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite;//, enemyName,fileName2;
+	private SpaceShip spaceShip;
+	private List<Missile> missiles;
+	private List<Asteroid> asteroids;
+    private List<Meteorite> meteorites;
+    private static int countToAddAsteroid = 0;
+    private static int countToAddMeteorite = 0;
     private final int DELAY = 20;
     private Timer timer;
     
@@ -29,14 +33,15 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 		addKeyListener(new TAdapter());
         setFocusable(false);
         
-        fileName = "../resources/images/spaceship.png";
-        fileName2 = "../resources/images/asteroid-icon.png";
-        spaceShip = new SpaceShip(500,400,fileName);
-        enemy = new SpaceShip(400,50,fileName2);
+        this.fileNameSpaceShip = "../resources/images/spaceship.png";
+        this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
+        this.fileNameMeteorite = "../resources/images/fiery-meteorite-icon.png";
+        this.spaceShip = new SpaceShip(500,400,fileNameSpaceShip);
+        this.missiles = this.spaceShip.getMissiles();
+        this.asteroids = new ArrayList<Asteroid>();
+        this.meteorites = new ArrayList<Meteorite>();
         
-        //checkCollisions();
-        
-        enemyName = "../resources/images/firstEnemy.png";
+        //enemyName = "../resources/images/firstEnemy.png";
         //enemies = new EnemiesSpaceShip(0,0,enemyName);
         
         timer = new Timer(DELAY, this);
@@ -59,21 +64,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 
         Graphics2D g2d = (Graphics2D) g;
         
-        Graphics2D g_en = (Graphics2D) g;
-        
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
-        
-        //g_en.drawImage(enemies.getImage(), enemies.getX(), enemies.getY(), this);//disegna nemico
-        
-        g2d.drawImage(enemy.getImage(), enemy.getX(),
-                enemy.getY(), this);
-        
-//        List<Missile> colpo = enemies.getMissiles();
-//        for(Missile missile : colpo) {
-//        	g_en.drawImage(missile.getImage(), missile.getX(),
-//        			missile.getY(), this);
-//        }
         
         
         List<Missile> missiles = spaceShip.getMissiles();
@@ -83,6 +75,24 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
             g2d.drawImage(missile.getImage(), missile.getX(),
                     missile.getY(), this);
         }
+        
+        
+        for (Asteroid asteroid : asteroids) {
+            g2d.drawImage(asteroid.getImage(),asteroid.getTransform(), this);
+        }
+        
+        for (Meteorite meteorite : meteorites) {
+        	g2d.drawImage(meteorite.getImage(), meteorite.getTransform(),this);
+        }
+        
+      //g2d.drawImage(enemies.getImage(), enemies.getX(), enemies.getY(), this);//disegna nemico
+        
+        
+//      List<Missile> colpo = enemies.getMissiles();
+//      for(Missile missile : colpo) {
+//      	g2d.drawImage(missile.getImage(), missile.getX(),
+//      			missile.getY(), this);
+//      }
       
     }
     
@@ -90,6 +100,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 		this.updateSpaceShip();
 		this.updateMissiles();
+		this.updateObstacles();
 		this.checkCollisions();
         this.repaint();
         //System.out.println("ActionPerformed");
@@ -107,7 +118,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
             if (missile.isVisible()) {
             	
                 missile.move();
-                missile.setRectangle();
+                missile.setBounds();
             } else {
 
                 missiles.remove(i);
@@ -129,8 +140,58 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
     
     public void updateSpaceShip() {
     	spaceShip.move();
-    	spaceShip.setRectangle();
+    	spaceShip.setBounds();
     	//enemies.move(); // movimento nemico
+    }
+    
+    
+    public void updateObstacles() {
+    	Random random = new Random();
+        
+        int y_asteroid = -1000;
+        int y_meteorite = -1000;
+        int D_W = 1000;
+        int D_H = 600;
+    	
+    	
+    	if (countToAddAsteroid >= 150) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+            int randX1 = random.nextInt(D_W); //larghezza window
+            asteroids.add(new Asteroid(randX1, y_asteroid, fileNameAsteroid));
+            countToAddAsteroid = 0;
+        }
+        countToAddAsteroid++;
+        
+        if (countToAddMeteorite >= 150) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+            int randX2 = random.nextInt(D_W);
+            meteorites.add(new Meteorite(randX2, y_meteorite, fileNameMeteorite));
+            countToAddMeteorite = 0;
+        }
+        countToAddMeteorite++;
+        
+        Iterator<Asteroid> it_asteroids = asteroids.iterator();
+
+        while (it_asteroids.hasNext()) {
+            Asteroid asteroid = (Asteroid)it_asteroids.next();
+            if (asteroid.getY() >= D_H || !asteroid.isVisible()) {
+                it_asteroids.remove();
+            } else {
+                 asteroid.move();
+                 asteroid.setBounds();
+            }
+        }
+        
+        
+        Iterator<Meteorite> it_meteorites = meteorites.iterator();
+        
+        while (it_meteorites.hasNext()) {
+            Meteorite meteorite = (Meteorite)it_meteorites.next();
+            if (meteorite.getY() >= D_H || !meteorite.isVisible()) {
+                it_meteorites.remove();
+            } else {
+                 meteorite.move();
+                 meteorite.setBounds();
+            }
+        }
     }
     
    
@@ -149,39 +210,43 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
     
     public void checkCollisions() {
 
-        Rectangle2D r3 = spaceShip.getBounds();
+        Rectangle2D spaceShipBounds = spaceShip.getBounds();
+        Rectangle2D asteroidBounds;
+        Rectangle2D mateoriteBounds;
+        Rectangle2D missileBounds;
         
 
         //Rectangle2D r2 = enemies.getBounds();
         
-        Rectangle2D r4 = enemy.getBounds();
-
+//        Rectangle2D r4 = enemy.getBounds();
+//
 //        System.out.println(r3.intersects(r4));
-        if (r3.intersects(r4)) {
-                
-            spaceShip.setVisible(false);
-            enemy.setVisible(false);
-        	//System.out.println("Collisione spaceship-asteroide");
-            
-        }
-
-        List<Missile> ms = spaceShip.getMissiles();
-        System.out.println(ms.size());
-        
-
-        for (Missile m : ms) {
+//        if (r3.intersects(r4)) {
+//                
+//            spaceShip.setVisible(false);
+//            enemy.setVisible(false);
+//        	//System.out.println("Collisione spaceship-asteroide");
+//            
+//        }
+//
+//        System.out.println(ms.size());
+//        
+//
+        for (Missile missile : missiles) {
         	
 
-            Rectangle2D r1 = m.getBounds();
-
-            if (r1.intersects(r4)) {
+            missileBounds = missile.getBounds();
+            for (Asteroid asteroid : asteroids) {
             	
-
-                    
-                m.setVisible(false);
-                
-                enemy.setVisible(false);
-                System.out.println("Collisione missile-asteroide");
+            	asteroidBounds = asteroid.getBounds();
+            
+	            if (missileBounds.intersects(asteroidBounds)) {
+	    
+	                missile.setVisible(false);
+	                
+	                asteroid.setVisible(false);
+	                System.out.println("Collisione missile-asteroide");
+	            }
                 
             }
         }

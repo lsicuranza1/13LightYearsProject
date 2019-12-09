@@ -38,14 +38,14 @@ public class Level {
         	
             public void actionPerformed(ActionEvent e) {
             	
-                if (countToAddAsteroid >= 70) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+                if (countToAddAsteroid >= 10) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
                     int randX1 = random.nextInt(D_W);
                     asteroids.add(new Asteroid(randX1, y_asteroid, fileName_asteroid));
                     countToAddAsteroid = 0;
                 }
                 countToAddAsteroid++;
                 
-                if (countToAddMeteorite >= 100) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+                if (countToAddMeteorite >= 10) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
                     int randX2 = random.nextInt(D_W);
                     meteorites.add(new Meteorite(randX2, y_meteorite, fileName_meteorite));
                     countToAddMeteorite = 0;
@@ -56,7 +56,7 @@ public class Level {
 
                 while (it_asteroids.hasNext()) {
                     Asteroid asteroid = (Asteroid)it_asteroids.next();
-                    if (asteroid.y >= D_H) {
+                    if (asteroid.getY() >= D_H) {
                         it_asteroids.remove();
                     } else {
                          asteroid.move();
@@ -68,7 +68,7 @@ public class Level {
                 
                 while (it_meteorites.hasNext()) {
                     Meteorite meteorites = (Meteorite)it_meteorites.next();
-                    if (meteorites.y >= D_H) {
+                    if (meteorites.getY() >= D_H) {
                         it_meteorites.remove();
                     } else {
                          meteorites.move();

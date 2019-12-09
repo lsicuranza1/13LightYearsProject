@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 public class Meteorite extends Sprite {
 	Rectangle2D rectangle;
     JPanel panel;
-    int x, y;
     private AffineTransform transform;
 
 
@@ -21,12 +20,17 @@ public class Meteorite extends Sprite {
     }
     
     public void drawMeteorite(Graphics g) {
-
    	 Graphics2D g2d = (Graphics2D) g;
    	 g2d.drawImage(super.getImage(),transform, panel);
    }
 
    public void move() {
-   	 this.transform.setToTranslation(x,y+=10);
+	   
+	 int x = this.getX();
+	 int temp_y = this.getY();
+	 this.setY(temp_y+10);
+	 int y = this.getY();
+   	 this.transform.setToTranslation(x,y);
+   	 
    }
 }

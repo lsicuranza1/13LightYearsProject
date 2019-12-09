@@ -55,13 +55,13 @@ public class SpaceShip extends SpaceshipStructure {
 	        if (key == KeyEvent.VK_SPACE) {
 	        	if (x<=10-width) {
 	        		this.setX(1000-8);
-	        		dx=-3;
+	        		dx=-5;
 	        	}else if(y>=600-(height*7)/5) {
 	        		this.setY(600-(height*7)/5);
 	        		dy=0;
 	        	}else if (x>=1000-8) {
 	        		this.setX(10-width);
-	        		dx=3;
+	        		dx=5;
 	        	}else if(y<=0) {
 	        		this.setY(0);
 	        		dy=0;
@@ -74,7 +74,7 @@ public class SpaceShip extends SpaceshipStructure {
 
         	if (x<=10-width) {
         		this.setX(1000-8);
-        		dx=-3;
+        		dx=-5;
         	}else if(y>=600-(height*7)/5) {
         		this.setY(600-(height*7)/5);
         		dy=0;
@@ -83,14 +83,14 @@ public class SpaceShip extends SpaceshipStructure {
         		dy=0;
         	}
         	else{
-        		dx = -3;
+        		dx = -5;
         	}
         }
 
         if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
         	if (x>=1000-8) {
         		this.setX(10-width);
-        		dx=3;
+        		dx=5;
         	}else if(y>=600-(height*7)/5) {
         		this.setY(600-(height*7)/5);
         		dy=0;
@@ -99,7 +99,7 @@ public class SpaceShip extends SpaceshipStructure {
         		dy=0;
         	}
         	else{
-        		dx = 3;
+        		dx = 5;
         	}
         }
 
@@ -109,14 +109,14 @@ public class SpaceShip extends SpaceshipStructure {
         		dy=0;
 	        	if (x<=10-width) {
 	        		this.setX(1000-8);
-	        		dx=-3;
+	        		dx=-5;
 	        	}if (x>=1000-8) {
 	        		this.setX(10-width);
-	        		dx=3;
+	        		dx=5;
 	        	}
         	}
         	else{
-        		dy = -3;
+        		dy = -5;
         	}
         }
 
@@ -126,14 +126,14 @@ public class SpaceShip extends SpaceshipStructure {
         		dy=0;
 	        	if (x<=10-width) {
 	        		this.setX(1000-8);
-	        		dx=-3;
+	        		dx=-5;
 	        	}else if (x>=1000-8) {
 	        		this.setX(10-width);
-	        		dx=3;
+	        		dx=5;
 	        	}
         	}
         	else{
-        		dy = 3;
+        		dy = 5;
         	}
         }
     }

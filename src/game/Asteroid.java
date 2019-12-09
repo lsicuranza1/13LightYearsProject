@@ -7,16 +7,14 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
 public class Asteroid extends Sprite {
-	Rectangle2D rectangle;
     JPanel panel;
-    int angle;
+    private int angle;
     private AffineTransform transform;
     
     public Asteroid(int x, int y, String path) {
     	super(x, y, path);
-		angle = 0;
+		this.angle = 0;
     	this.transform = new AffineTransform();
-        rectangle = new Rectangle2D.Double(x, y, super.getImage().getWidth(), super.getImage().getHeight());
     }
 
     public void drawAsteroid(Graphics g) {
@@ -29,16 +27,25 @@ public class Asteroid extends Sprite {
          
     	 int x = this.getX();
     	 int temp_y = this.getY();
-    	 this.setY(temp_y+6);
+    	 this.setY(temp_y+5);
     	 int y = this.getY();
+    	 this.setAngle(this.getAngle() + 5);
     	
       	 this.transform.setToTranslation(x,y);
-      	 this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+1),super.getWidth()/5,super.getHeight()/5));
+      	 this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.getAngle()),super.getWidth()/2,super.getHeight()/2));
     }
 
 	
 	public AffineTransform getTransform() {
 		return transform;
+	}
+	
+	public int getAngle() {
+		return angle;
+	}
+	
+	public void setAngle(int angle) {
+		this.angle = angle;
 	}
 
 

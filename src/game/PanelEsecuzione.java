@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -18,10 +17,11 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	public SpaceShip spaceShip;
     private final int DELAY = 20;
     private Timer timer;
+
+    private List<EnemiesSpaceShip> enemies;
+    Random random = new Random();
     
-    private EnemiesSpaceShip enemies;
-	
-	
+
 	public PanelEsecuzione() {
 		
 		addKeyListener(new TAdapter());
@@ -30,8 +30,17 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         fileName = "../resources/images/spaceship.png";
         spaceShip = new SpaceShip(100,100,fileName);
         
-        enemyName = "../resources/images/firstEnemy.png";
-        enemies = new EnemiesSpaceShip(0,0,enemyName);
+     
+        enemies = new ArrayList<>();
+        
+        //creiamo 10 nemici. poniamo lo spazio tra le navicelle 
+        for(int i = 0; i<10; i++) {
+        	int randX1 = random.nextInt(700);
+        	EnemiesSpaceShip enemy = new EnemiesSpaceShip(getX()+randX1*i, getY()+randX1, null);
+        	enemies.add(enemy);
+        		
+        	
+        }
         
         timer = new Timer(DELAY, this);
         timer.start();
@@ -56,13 +65,22 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
         
-        g_en.drawImage(enemies.getImage(), enemies.getX(), enemies.getY(), this);//disegna nemico
-        List<Missile> colpo = enemies.getMissiles();
-        for(Missile missile : colpo) {
-        	g_en.drawImage(missile.getImage(), missile.getX(),
-        			missile.getY(), this);
+        
+        for(EnemiesSpaceShip enemy : enemies) {
+        	g_en.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), this);
+        	
+        	
         }
         
+
+        
+//        List<Missile> colpo = ((SpaceshipStructure) enemies).getMissiles();
+//        for(Missile missile : colpo) {
+//        	g_en.drawImage(missile.getImage(), missile.getX(),
+//        			missile.getY(), this);
+//        }
+
+        		
         
         List<Missile> missiles = spaceShip.getMissiles();
 
@@ -79,6 +97,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 		this.updateSpaceShip();
 		this.updateMissiles();
         this.repaint();
+        
+        
         //System.out.println("ActionPerformed");
     }
     
@@ -99,24 +119,32 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
             }
         }
         
-        List<Missile> colpo = enemies.getMissiles();
-        for(int i = 0; i < colpo.size(); i++) {
-        	Missile missile = colpo.get(i);
-        	
-        	if(missile.isVisible())
-        		missile.move_colpo();
-        	else
-        		colpo.remove(i);
-        }
+//        List<Missile> colpo = ((SpaceshipStructure) enemies).getMissiles();
+//        for(int i = 0; i < colpo.size(); i++) {
+//        	Missile missile = colpo.get(i);
+//        	
+//        	if(missile.isVisible())
+//        		missile.move_colpo();
+//        	else
+//        		colpo.remove(i);
+//        }
         
         
     }
     
     public void updateSpaceShip() {
     	spaceShip.move();
-    	enemies.move(); // movimento nemico
+
+    	
+    	Iterator<EnemiesSpaceShip> et = enemies.iterator();
+    	while(et.hasNext()) {
+    		EnemiesSpaceShip enemy = et.next();
+    		int y = enemy.getY();
+    		enemy.move();
+    	}
     }
     
+ 
    
     
     public class TAdapter extends KeyAdapter{

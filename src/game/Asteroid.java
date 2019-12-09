@@ -9,10 +9,8 @@ import javax.swing.JPanel;
 public class Asteroid extends Sprite {
 	Rectangle2D rectangle;
     JPanel panel;
-    int x, y;
     int angle;
     private AffineTransform transform;
-    private AffineTransform transform2;
     
     public Asteroid(int x, int y, String path) {
     	super(x, y, path);
@@ -23,20 +21,25 @@ public class Asteroid extends Sprite {
 
     public void drawAsteroid(Graphics g) {
     	Graphics2D g2d = (Graphics2D) g;
-      	g2d.drawImage(super.getImage(), transform, panel);
+      	g2d.drawImage(super.getImage(),transform, panel);
     }
 
     @Override
     public void move() {
-    	this.transform.setToTranslation(x,y+=3);
-        this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+1), x/9, y/9));
+         
+    	 int x = this.getX();
+    	 int temp_y = this.getY();
+    	 this.setY(temp_y+10);
+    	 int y = this.getY();
+    	
+      	 this.transform.setToTranslation(x,y);
+      	 this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+5),super.getWidth()/2,super.getHeight()/2));
     }
 
-	public AffineTransform getTransform2() {
-		return transform2;
+	
+	public AffineTransform getTransform() {
+		return transform;
 	}
 
-	public void setTransform2(AffineTransform transform2) {
-		this.transform2 = transform2;
-	}
+
 }

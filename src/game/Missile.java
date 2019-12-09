@@ -2,10 +2,7 @@ package game;
 
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author lorenzosic
- */
+
 public class Missile extends Sprite {
 
     private final int BOARD_WIDTH = 1000;

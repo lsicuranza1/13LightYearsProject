@@ -1,33 +1,30 @@
 package game;
 
-import java.util.Random;
 
 public class EnemiesSpaceShip extends SpaceshipStructure {
-
-	private boolean goDown = true;
-	int i = 100;
-	Random rand = new Random();
+	
+	private Bomb bomb;
 	
 	public EnemiesSpaceShip(int x, int y, String path) {
-		super(x, y, "../resources/images/firstEnemy.png");		
+		super(x, y, path);
+		bomb = new Bomb(x, y, path);
 	}
 
 	
 	//movimento del nemico
 	public void move () {
 		
-		setY(getY()+4);
-//		fire();
+		setY(getY()+2);
 
-		
-	
 		if(getY() >= 650) {
-			goDown=true;
-			setY(0);
-			
+			setY(0);			
 		}
-		
 	}
+	
+	public Bomb getBomb() {
+		return bomb;
+	}
+	
 
 	//gestione dello sparo
 	public void fire() {
@@ -35,6 +32,21 @@ public class EnemiesSpaceShip extends SpaceshipStructure {
 				"../resources/images/colpo_enemy.png");
     	this.getMissiles().add(missile);
     	
+	}
+	
+	public class Bomb extends Sprite{
+
+		public Bomb(int x, int y, String imageFileName) {			
+			super(x, y, "../resources/images/colpo_enemy.png");
+			
+		}
+		
+		@Override
+		public void move() {
+			setY(getY()+5);
+			
+		}
+		
 	}
 
 

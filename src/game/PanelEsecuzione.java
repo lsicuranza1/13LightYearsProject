@@ -34,11 +34,10 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         enemies = new ArrayList<>();
         
         //creiamo 10 nemici. poniamo lo spazio tra le navicelle 
-        for(int i = 0; i<10; i++) {
-        	int randX1 = random.nextInt(700);
-        	EnemiesSpaceShip enemy = new EnemiesSpaceShip(getX()+randX1*i, getY()+randX1, null);
+        for(int i = 0; i<15; i++) {
+        	int rand = random.nextInt(1000);
+        	EnemiesSpaceShip enemy = new EnemiesSpaceShip( getX()+70*i, getY()+rand,  "../resources/images/firstEnemy.png");
         	enemies.add(enemy);
-        		
         	
         }
         
@@ -61,6 +60,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         Graphics2D g2d = (Graphics2D) g;
         
         Graphics2D g_en = (Graphics2D) g;
+        Graphics2D g_bom = (Graphics2D) g;
         
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
@@ -69,16 +69,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         for(EnemiesSpaceShip enemy : enemies) {
         	g_en.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), this);
         	
-        	
         }
-        
+        for(EnemiesSpaceShip enemy : enemies) {
+        	EnemiesSpaceShip.Bomb  bomb =  enemy.getBomb();
+        	g_bom.drawImage(bomb.getImage(), bomb.getX(), bomb.getY(), this);
+        }
 
         
-//        List<Missile> colpo = ((SpaceshipStructure) enemies).getMissiles();
-//        for(Missile missile : colpo) {
-//        	g_en.drawImage(missile.getImage(), missile.getX(),
-//        			missile.getY(), this);
-//        }
 
         		
         
@@ -119,17 +116,18 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
             }
         }
         
-//        List<Missile> colpo = ((SpaceshipStructure) enemies).getMissiles();
-//        for(int i = 0; i < colpo.size(); i++) {
-//        	Missile missile = colpo.get(i);
-//        	
-//        	if(missile.isVisible())
-//        		missile.move_colpo();
-//        	else
-//        		colpo.remove(i);
-//        }
+        for(EnemiesSpaceShip enemy : enemies) {
+        	EnemiesSpaceShip.Bomb bomb = enemy.getBomb();
+        	
+        	
+        	if(bomb.getY()>650) {
+        		bomb.setY(enemy.getY()+20);
+        		bomb.setX(enemy.getX()+10);
+        	}
+        	bomb.move();
+        }
         
-        
+
     }
     
     public void updateSpaceShip() {

@@ -1,5 +1,6 @@
 package game.patterns.state;
  
+@SuppressWarnings("serial")
 public class Modalita extends javax.swing.JFrame {
  
     private Stato statoModalita;

@@ -5,20 +5,11 @@
  */
 package game;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
 /**
  *
  * @author lorenzosic
  */
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.ImageIcon;
 
 public class SpaceShip extends SpaceshipStructure {
 
@@ -31,7 +22,7 @@ public class SpaceShip extends SpaceshipStructure {
 //    public int width = imgIcon.getIconWidth();
 //    public int height = imgIcon.getIconHeight();
 //    private List<Missile> missiles;
-    private boolean isShooting = false;
+//    private boolean isShooting = false;
 //    long startTime = System.currentTimeMillis();
 //    long elapsedTime = 0;
 

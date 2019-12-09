@@ -29,11 +29,11 @@ public class Asteroid extends Sprite {
          
     	 int x = this.getX();
     	 int temp_y = this.getY();
-    	 this.setY(temp_y+10);
+    	 this.setY(temp_y+6);
     	 int y = this.getY();
     	
       	 this.transform.setToTranslation(x,y);
-      	 this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+5),super.getWidth()/2,super.getHeight()/2));
+      	 this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+1),super.getWidth()/5,super.getHeight()/5));
     }
 
 	

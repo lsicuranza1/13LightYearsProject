@@ -187,7 +187,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         int D_H = 600;
     	
     	
-    	if (countToAddAsteroid >= 150) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+    	if (countToAddAsteroid >= 50) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
             int randX1 = random.nextInt(D_W); //larghezza window
             asteroids.add(new Asteroid(randX1, y_asteroid, fileNameAsteroid));
             countToAddAsteroid = 0;

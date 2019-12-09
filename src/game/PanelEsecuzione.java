@@ -10,7 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -20,6 +23,9 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
     private List<Meteorite> meteorites;
+    private BufferedImage scrollingBackground;
+    private int yOffset = 0;
+    private int yDelta = 1;
     private static int countToAddAsteroid = 0;
     private static int countToAddMeteorite = 0;
     private final int DELAY = 20;
@@ -41,6 +47,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         this.asteroids = new ArrayList<Asteroid>();
         this.meteorites = new ArrayList<Meteorite>();
         
+        try {
+			this.scrollingBackground=ImageIO.read(getClass().getResource("../resources/images/space.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
         //enemyName = "../resources/images/firstEnemy.png";
         //enemies = new EnemiesSpaceShip(0,0,enemyName);
         
@@ -54,6 +66,26 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	@Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        if (scrollingBackground != null) {
+            Graphics2D g2d = (Graphics2D) g.create();
+            
+            int xPos = (getWidth() - scrollingBackground.getWidth()) / 2;
+            int yPos = yOffset;
+
+            while (yPos > 0) {
+                yPos -= scrollingBackground.getHeight();
+                g2d.drawImage(scrollingBackground, xPos, yPos, this);
+            }
+
+            yPos = yOffset;
+            while (yPos < getHeight()) {
+                g2d.drawImage(scrollingBackground, xPos, yPos, this);
+                yPos += scrollingBackground.getHeight();
+            }
+
+            g2d.dispose();
+        }
 
         doDrawing(g);
 
@@ -102,6 +134,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 		this.updateMissiles();
 		this.updateObstacles();
 		this.checkCollisions();
+		yOffset += yDelta;
         this.repaint();
         //System.out.println("ActionPerformed");
     }

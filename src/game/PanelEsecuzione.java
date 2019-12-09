@@ -212,7 +212,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 
         Rectangle2D spaceShipBounds = spaceShip.getBounds();
         Rectangle2D asteroidBounds;
-        Rectangle2D mateoriteBounds;
+        Rectangle2D meteoriteBounds;
         Rectangle2D missileBounds;
         
 
@@ -230,15 +230,28 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 //        }
 //
 //        System.out.println(ms.size());
-//        
-//
-        for (Missile missile : missiles) {
+        
+        for (Meteorite meteorite : meteorites) {
         	
+        	meteoriteBounds = meteorite.getBounds();
+        	
+        	if(meteoriteBounds.intersects(spaceShipBounds)) {        		
+        		MainFrame.getIstance().updateModalita("game_over");
+        	}
+        	
+        }
 
-            missileBounds = missile.getBounds();
-            for (Asteroid asteroid : asteroids) {
+        for (Asteroid asteroid : asteroids) {
+        	
+        	asteroidBounds = asteroid.getBounds();
+        	
+        	if (spaceShipBounds.intersects(asteroidBounds)) {            	
+        		MainFrame.getIstance().updateModalita("game_over");            	
+            }
+            
+            for (Missile missile : missiles) {
+            	missileBounds = missile.getBounds();
             	
-            	asteroidBounds = asteroid.getBounds();
             
 	            if (missileBounds.intersects(asteroidBounds)) {
 	    
@@ -247,6 +260,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 	                asteroid.setVisible(false);
 	                System.out.println("Collisione missile-asteroide");
 	            }
+	            
+	            
                 
             }
         }

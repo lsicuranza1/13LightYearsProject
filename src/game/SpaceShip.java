@@ -54,12 +54,12 @@ public class SpaceShip extends SpaceshipStructure {
         if (isShooting == false) {
 	        if (key == KeyEvent.VK_SPACE) {
 	        	if (x<=10-width) {
-	        		this.setX(1000-8);
+	        		this.setX(600-8);
 	        		dx=-5;
-	        	}else if(y>=600-(height*7)/5) {
-	        		this.setY(600-(height*7)/5);
+	        	}else if(y>=1000-(height*7)/5) {
+	        		this.setY(1000-(height*7)/5);
 	        		dy=0;
-	        	}else if (x>=1000-8) {
+	        	}else if (x>=600-8) {
 	        		this.setX(10-width);
 	        		dx=5;
 	        	}else if(y<=0) {
@@ -73,10 +73,10 @@ public class SpaceShip extends SpaceshipStructure {
         if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
 
         	if (x<=10-width) {
-        		this.setX(1000-8);
+        		this.setX(600-8);
         		dx=-5;
-        	}else if(y>=600-(height*7)/5) {
-        		this.setY(600-(height*7)/5);
+        	}else if(y>=1000-(height*7)/5) {
+        		this.setY(1000-(height*7)/5);
         		dy=0;
         	}if(y<0) {
         		this.setY(0);
@@ -88,11 +88,11 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-        	if (x>=1000-8) {
+        	if (x>=600-8) {
         		this.setX(10-width);
         		dx=5;
-        	}else if(y>=600-(height*7)/5) {
-        		this.setY(600-(height*7)/5);
+        	}else if(y>=1000-(height*7)/5) {
+        		this.setY(1000-(height*7)/5);
         		dy=0;
         	}if(y<0) {
         		this.setY(0);
@@ -108,9 +108,9 @@ public class SpaceShip extends SpaceshipStructure {
         		this.setY(0);
         		dy=0;
 	        	if (x<=10-width) {
-	        		this.setX(1000-8);
+	        		this.setX(600-8);
 	        		dx=-5;
-	        	}if (x>=1000-8) {
+	        	}if (x>=600-8) {
 	        		this.setX(10-width);
 	        		dx=5;
 	        	}
@@ -121,13 +121,13 @@ public class SpaceShip extends SpaceshipStructure {
         }
 
         if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-        	if (y>=600-(height*7)/5) {
-        		this.setY(600-(height*7)/5);
+        	if (y>=1000-(height*7)/5) {
+        		this.setY(1000-(height*7)/5);
         		dy=0;
 	        	if (x<=10-width) {
-	        		this.setX(1000-8);
+	        		this.setX(600-8);
 	        		dx=-5;
-	        	}else if (x>=1000-8) {
+	        	}else if (x>=600-8) {
 	        		this.setX(10-width);
 	        		dx=5;
 	        	}
@@ -188,10 +188,5 @@ public class SpaceShip extends SpaceshipStructure {
         }
     }
 	
-
-
-	  
-	
-
 
 }

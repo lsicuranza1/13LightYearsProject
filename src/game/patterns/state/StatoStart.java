@@ -250,6 +250,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		if (stato.equals("in_esecuzione")) {
 			mainFrame.getFrame().setTitle("Gioco");
 			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().setSize(600, 1000);
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoInEsecuzione());
 

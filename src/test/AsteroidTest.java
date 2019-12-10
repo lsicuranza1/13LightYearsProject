@@ -26,20 +26,17 @@ public class AsteroidTest {
 	private int x;
 	private int y;
 	private int angle;
-	private MainFrame main;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.x = 0;
-		this.y = 0;
-		this.angle = 0;
 		this.a = new Asteroid(x, y, "../resources/images/asteroid-icon.png");
-		new Modalita();
-		main = MainFrame.getIstance();
-		main.setFrame(new JFrame());
+		this.x = a.getX();
+		this.y = a.getY();
+		this.angle = a.getAngle();
+
 	}
 
 	/**
@@ -49,11 +46,11 @@ public class AsteroidTest {
 	public void testMove() {
 
 		AffineTransform transf = new AffineTransform();
-		transf.setToTranslation(x, y += 3);
-		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle = angle + 1), x / 9, y / 9));
+		
+		transf.setToTranslation(x, y+5);
+		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle+5),a.getWidth() / 2, a.getHeight() / 2));
 		a.move();
-		AffineTransform trasf2 = a.getTransform();
-		assertEquals(transf, trasf2);
+		assertEquals(transf, a.getTransform());
 	}
 
 	/**
@@ -61,35 +58,25 @@ public class AsteroidTest {
 	 */
 	@Test
 	public void testAsteroid() {
-
-	}
-
-	/**
-	 * Test method for {@link game.Asteroid#drawAsteroid(java.awt.Graphics)}.
-	 */
-	@Test
-	public void testDrawAsteroid() {
-		Graphics g = null;
-		Graphics2D g2d = (Graphics2D) g;
-		new JPanel();
-		a.drawAsteroid(g2d);
+// I don' t think we need this
 	}
 
 	/**
 	 * Test method for {@link game.Asteroid#getTransform2()}.
 	 */
 	@Test
-	public void testGetTransform2() {
-		fail("Not yet implemented");
+	public void testGetTransform() {
+		
+		AffineTransform transf = new AffineTransform();
+		transf.setToTranslation(x, y+5);
+		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle+5), a.getWidth() / 2, a.getHeight() / 2));
+		
+		a.move();
+		assertEquals(transf,a.getTransform());
 	}
 
-	/**
-	 * Test method for
-	 * {@link game.Asteroid#setTransform2(java.awt.geom.AffineTransform)}.
-	 */
-	@Test
-	public void testSetTransform2() {
-		fail("Not yet implemented");
-	}
+
+	
+	
 
 }

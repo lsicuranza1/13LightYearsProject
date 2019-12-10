@@ -17,11 +17,6 @@ public class Asteroid extends Sprite {
 		this.transform = new AffineTransform();
 	}
 
-	public void drawAsteroid(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(super.getImage(), transform, panel);
-	}
-
 	@Override
 	public void move() {
 
@@ -33,7 +28,7 @@ public class Asteroid extends Sprite {
 
 		this.transform.setToTranslation(x, y);
 		this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.getAngle()),
-				super.getWidth() / 2, super.getHeight() / 2));
+				this.getWidth() / 2, this.getHeight() / 2));
 	}
 
 	public AffineTransform getTransform() {

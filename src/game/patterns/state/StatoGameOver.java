@@ -15,7 +15,6 @@ public class StatoGameOver implements Stato {
 
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
-		// TODO Auto-generated method stub
 		if (stato.equals("start")) {
 			mainFrame.getFrame().setTitle("Start");
 			mainFrame.getFrame().getContentPane().removeAll();

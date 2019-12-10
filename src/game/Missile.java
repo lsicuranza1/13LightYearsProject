@@ -1,25 +1,14 @@
 package game;
 
-/**
- *
- * @author lorenzosic
- */
 public class Missile extends Sprite {
 
 	private final int BOARD_WIDTH = 1000;
 	private final int MISSILE_SPEED = 5;
-//    private double x = getX();
-//    private double y = getY();
 
 	public Missile(int x, int y, String path) {
 		super(x, y, path);
-//        initMissile();
-	}
 
-//	private void initMissile() {
-//        
-//        //getImageDimensions();
-//    }
+	}
 
 	public void move() {
 

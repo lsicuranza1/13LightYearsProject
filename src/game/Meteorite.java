@@ -11,11 +11,6 @@ public class Meteorite extends Sprite {
 		this.transform = new AffineTransform();
 	}
 
-//    public void drawMeteorite(Graphics g) {
-//   	 Graphics2D g2d = (Graphics2D) g;
-//   	 g2d.drawImage(super.getImage(),transform, panel);
-//   }
-
 	public void move() {
 
 		int x = this.getX();

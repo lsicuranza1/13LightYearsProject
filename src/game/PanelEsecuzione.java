@@ -25,7 +25,7 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener {
 	private MainFrame mainframe = MainFrame.getIstance();
-	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite;// , enemyName,fileName2;
+	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
@@ -39,8 +39,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private Timer timer;
 	private JLabel labelLiveScore;
 
-	// private EnemiesSpaceShip enemies;
-
 	public PanelEsecuzione() {
 
 		this.addKeyListener(new TAdapter());
@@ -49,10 +47,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.labelLiveScore = new JLabel("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
 		this.add(this.labelLiveScore);
 		this.setLayout(null);
-//        labelLiveScore.setHorizontalAlignment(JLabel.LEFT);
-//        labelLiveScore.setVerticalAlignment(JLabel.TOP);
-//        labelLiveScore.setHorizontalTextPosition(JLabel.LEFT);
-//        labelLiveScore.setVerticalTextPosition(JLabel.TOP);
+
 		this.labelLiveScore.setBounds(10, 10, 400, 50);
 		this.labelLiveScore.setForeground(Color.WHITE);
 		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
@@ -71,11 +66,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 
-		// enemyName = "../resources/images/firstEnemy.png";
-		// enemies = new EnemiesSpaceShip(0,0,enemyName);
-
 		this.timer = new Timer(DELAY, this);
-		this.timer.start(); // creates delay fot the repaint() method
+		this.timer.start();
 
 	}
 
@@ -129,15 +121,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			g2d.drawImage(meteorite.getImage(), meteorite.getTransform(), this);
 		}
 
-		// g2d.drawImage(enemies.getImage(), enemies.getX(), enemies.getY(),
-		// this);//disegna nemico
-
-//      List<Missile> colpo = enemies.getMissiles();
-//      for(Missile missile : colpo) {
-//      	g2d.drawImage(missile.getImage(), missile.getX(),
-//      			missile.getY(), this);
-//      }
-
 	}
 
 	@Override
@@ -147,13 +130,11 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.updateObstacles();
 		this.checkCollisions();
 		yOffset += yDelta;
-//		//this.livescore += 0.2;
-//		
-//		int liveScoreInt = (int) this.livescore;
+
 		mainframe.getScore().updateScoreValue(1);
 		this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
 		this.repaint();
-		// System.out.println("ActionPerformed");
+
 	}
 
 	private void updateMissiles() {
@@ -174,22 +155,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 
-//        List<Missile> colpo = enemies.getMissiles();
-//        for(int i = 0; i < colpo.size(); i++) {
-//        	Missile missile = colpo.get(i);
-//        	
-//        	if(missile.isVisible())
-//        		missile.move_colpo();
-//        	else
-//        		colpo.remove(i);
-//        }
-
 	}
 
 	public void updateSpaceShip() {
 		spaceShip.move();
 		spaceShip.setBounds();
-		// enemies.move(); // movimento nemico
+		
 	}
 
 	public void updateObstacles() {
@@ -200,16 +171,15 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		int D_W = 1000;
 		int D_H = 600;
 
-		if (countToAddAsteroid >= 150) { // maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile
-											// per gestione dei livelli)
-			int randX1 = random.nextInt(D_W); // larghezza window
+		// maggiore è il valore minore è la frequenza di uscita degli asteroidi
+		if (countToAddAsteroid >= 150) {
+			int randX1 = random.nextInt(D_W);
 			asteroids.add(new Asteroid(randX1, y_asteroid, fileNameAsteroid));
 			countToAddAsteroid = 0;
 		}
 		countToAddAsteroid++;
 
-		if (countToAddMeteorite >= 150) { // maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile
-											// per gestione dei livelli)
+		if (countToAddMeteorite >= 150) {
 			int randX2 = random.nextInt(D_W);
 			meteorites.add(new Meteorite(randX2, y_meteorite, fileNameMeteorite));
 			countToAddMeteorite = 0;
@@ -259,21 +229,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		Rectangle2D asteroidBounds;
 		Rectangle2D meteoriteBounds;
 		Rectangle2D missileBounds;
-
-		// Rectangle2D r2 = enemies.getBounds();
-
-//        Rectangle2D r4 = enemy.getBounds();
-//
-//        System.out.println(r3.intersects(r4));
-//        if (r3.intersects(r4)) {
-//                
-//            spaceShip.setVisible(false);
-//            enemy.setVisible(false);
-//        	//System.out.println("Collisione spaceship-asteroide");
-//            
-//        }
-//
-//        System.out.println(ms.size());
 
 		for (Meteorite meteorite : meteorites) {
 

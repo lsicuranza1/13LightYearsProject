@@ -1,15 +1,5 @@
-/*
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package game;
 
-/**
- *
- * @author lorenzosic
- */
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.logging.Level;
@@ -148,12 +138,6 @@ public class SpaceShip extends SpaceshipStructure {
 			}
 		}.start();
 	}
-//    public void fire() {
-//    	Missile missile = new Missile(this.getX() + this.getWidth()/2 -10, this.getY() + this.getHeight() -90,"../resources/images/missile.png");
-//    	this.getMissiles().add(missile);
-//    	isShooting = true;
-//    	
-//    }
 
 	public void keyReleased(KeyEvent e) {
 

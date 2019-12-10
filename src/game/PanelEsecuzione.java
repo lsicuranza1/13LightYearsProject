@@ -2,17 +2,17 @@ package game;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.*;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+@SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener{
 	private String fileName;
 	public SpaceShip spaceShip;
@@ -52,6 +52,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
         level.paintComponent(g2d);
+       // System.out.println(spaceShip.getX());
         
         List<Missile> missiles = spaceShip.getMissiles();
 

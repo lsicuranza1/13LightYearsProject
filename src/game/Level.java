@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.JPanel;
 import javax.swing.Timer;
-
-import game.Asteroid;
 
 public class Level {
 	
@@ -42,25 +38,25 @@ public class Level {
         	
             public void actionPerformed(ActionEvent e) {
             	
-                if (countToAddAsteroid >= 70) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+                if (countToAddAsteroid >= 10) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
                     int randX1 = random.nextInt(D_W);
                     asteroids.add(new Asteroid(randX1, y_asteroid, fileName_asteroid));
                     countToAddAsteroid = 0;
                 }
                 countToAddAsteroid++;
                 
-                if (countToAddMeteorite >= 100) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
+                if (countToAddMeteorite >= 10) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)
                     int randX2 = random.nextInt(D_W);
                     meteorites.add(new Meteorite(randX2, y_meteorite, fileName_meteorite));
                     countToAddMeteorite = 0;
                 }
                 countToAddMeteorite++;
                 
-                Iterator it_asteroids = asteroids.iterator();
+                Iterator<Asteroid> it_asteroids = asteroids.iterator();
 
                 while (it_asteroids.hasNext()) {
                     Asteroid asteroid = (Asteroid)it_asteroids.next();
-                    if (asteroid.y >= D_H) {
+                    if (asteroid.getY() >= D_H) {
                         it_asteroids.remove();
                     } else {
                          asteroid.move();
@@ -68,11 +64,11 @@ public class Level {
                 }
                 levelPanel.repaint();
                 
-                Iterator it_meteorites = meteorites.iterator();
+                Iterator<Meteorite> it_meteorites = meteorites.iterator();
                 
                 while (it_meteorites.hasNext()) {
                     Meteorite meteorites = (Meteorite)it_meteorites.next();
-                    if (meteorites.y >= D_H) {
+                    if (meteorites.getY() >= D_H) {
                         it_meteorites.remove();
                     } else {
                          meteorites.move();

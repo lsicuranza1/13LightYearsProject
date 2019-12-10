@@ -3,7 +3,8 @@
  */
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,15 +20,13 @@ import game.Asteroid;
 import game.MainFrame;
 import game.patterns.state.Modalita;
 
-
 public class AsteroidTest {
-	
+
 	private Asteroid a;
 	private int x;
 	private int y;
 	private int angle;
-	private Modalita m;
-	private MainFrame main ;
+	private MainFrame main;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,8 +36,8 @@ public class AsteroidTest {
 		this.x = 0;
 		this.y = 0;
 		this.angle = 0;
-		this.a = new Asteroid(x,y,"../resources/images/asteroid-icon.png");
-		m = new Modalita();
+		this.a = new Asteroid(x, y, "../resources/images/asteroid-icon.png");
+		new Modalita();
 		main = MainFrame.getIstance();
 		main.setFrame(new JFrame());
 	}
@@ -48,13 +47,13 @@ public class AsteroidTest {
 	 */
 	@Test
 	public void testMove() {
-		
+
 		AffineTransform transf = new AffineTransform();
-		transf.setToTranslation(x,y+=3);
-		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle=angle+1), x/9, y/9));
+		transf.setToTranslation(x, y += 3);
+		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle = angle + 1), x / 9, y / 9));
 		a.move();
 		AffineTransform trasf2 = a.getTransform();
-		assertEquals(transf,trasf2);
+		assertEquals(transf, trasf2);
 	}
 
 	/**
@@ -62,7 +61,7 @@ public class AsteroidTest {
 	 */
 	@Test
 	public void testAsteroid() {
-		
+
 	}
 
 	/**
@@ -72,7 +71,7 @@ public class AsteroidTest {
 	public void testDrawAsteroid() {
 		Graphics g = null;
 		Graphics2D g2d = (Graphics2D) g;
-		JPanel panel = new JPanel();
+		new JPanel();
 		a.drawAsteroid(g2d);
 	}
 
@@ -85,7 +84,8 @@ public class AsteroidTest {
 	}
 
 	/**
-	 * Test method for {@link game.Asteroid#setTransform2(java.awt.geom.AffineTransform)}.
+	 * Test method for
+	 * {@link game.Asteroid#setTransform2(java.awt.geom.AffineTransform)}.
 	 */
 	@Test
 	public void testSetTransform2() {

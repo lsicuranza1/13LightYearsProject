@@ -39,7 +39,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
 		addKeyListener(new TAdapter());
         setFocusable(false);
         
-        this.fileNameSpaceShip = "../resources/images/spaceship.png";
+        this.fileNameSpaceShip = "../resources/images/navicella-bellissima.png";
         this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
         this.fileNameMeteorite = "../resources/images/fiery-meteorite-icon.png";
         this.spaceShip = new SpaceShip(500,400,fileNameSpaceShip);

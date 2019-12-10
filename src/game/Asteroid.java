@@ -27,7 +27,7 @@ public class Asteroid extends Sprite {
          
     	 int x = this.getX();
     	 int temp_y = this.getY();
-    	 this.setY(temp_y+6);
+    	 this.setY(temp_y+3);
     	 int y = this.getY();
     	 //this.setAngle(this.getAngle() + 5);
     	

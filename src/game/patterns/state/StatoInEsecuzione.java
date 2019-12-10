@@ -21,7 +21,7 @@ public class StatoInEsecuzione extends javax.swing.JFrame implements Stato{
         //mainFrame.getFrame().setLayout(new BorderLayout());
         //mainFrame.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.setBackground(Color.BLACK);
-        panel.setSize(600, 1000);
+        panel.setSize(1000, 600);
         //mainFrame.getFrame().add(panel, BorderLayout.CENTER);
         mainFrame.getFrame().setVisible(true);
         mainFrame.getFrame().add(panel);
@@ -41,7 +41,6 @@ public class StatoInEsecuzione extends javax.swing.JFrame implements Stato{
 			modalita.setStatoModalita(new StatoPausa());
 		} else if (stato.equals("game_over")) {
 			mainFrame.getFrame().setTitle("GameOver");
-			mainFrame.getFrame().setSize(1000, 600);
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoGameOver());

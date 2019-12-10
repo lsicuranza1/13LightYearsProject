@@ -42,7 +42,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         this.fileNameSpaceShip = "../resources/images/spaceship.png";
         this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
         this.fileNameMeteorite = "../resources/images/fiery-meteorite-icon.png";
-        this.spaceShip = new SpaceShip(250,800,fileNameSpaceShip);
+        this.spaceShip = new SpaceShip(500,400,fileNameSpaceShip);
         this.missiles = this.spaceShip.getMissiles();
         this.asteroids = new ArrayList<Asteroid>();
         this.meteorites = new ArrayList<Meteorite>();
@@ -183,8 +183,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener{
         
         int y_asteroid = -1000;
         int y_meteorite = -1000;
-        int D_W = 600;
-        int D_H = 1000;
+        int D_W = 1000;
+        int D_H = 600;
     	
     	
     	if (countToAddAsteroid >= 150) {   //maggiore è il valore minore è la frequenza di uscita degli asteroidi (utile per gestione dei livelli)

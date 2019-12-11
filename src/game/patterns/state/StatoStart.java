@@ -76,7 +76,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
 		jButton2.setBackground(new java.awt.Color(255, 255, 255));
-		jButton2.setFont(new java.awt.Font("Gabriola", 0, 48));
+		jButton2.setFont(new java.awt.Font("Gabriola", 0, 40));
 		jButton2.setForeground(new java.awt.Color(255, 255, 255));
 		jButton2.setText("Play");
 		jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), null));
@@ -99,7 +99,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		gridBagConstraints.insets = new java.awt.Insets(269, 70, 0, 695);
 		jPanel1.add(jButton2, gridBagConstraints);
 
-		jButton3.setFont(new java.awt.Font("Gabriola", 0, 48));
+		jButton3.setFont(new java.awt.Font("Gabriola", 0, 40));
 		jButton3.setForeground(new java.awt.Color(255, 255, 255));
 		jButton3.setText("Scoreboard");
 		jButton3.setToolTipText("");
@@ -122,7 +122,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
 		jPanel1.add(jButton3, gridBagConstraints);
 
-		jButton4.setFont(new java.awt.Font("Gabriola", 0, 48));
+		jButton4.setFont(new java.awt.Font("Gabriola", 0, 40));
 		jButton4.setForeground(new java.awt.Color(255, 255, 255));
 		jButton4.setText("Settings");
 		jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -145,7 +145,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		jPanel1.add(jButton4, gridBagConstraints);
 		jButton4.getAccessibleContext().setAccessibleDescription("");
 
-		jButton5.setFont(new java.awt.Font("Gabriola", 0, 48));
+		jButton5.setFont(new java.awt.Font("Gabriola", 0, 40));
 		jButton5.setForeground(new java.awt.Color(255, 255, 255));
 		jButton5.setText("Demo");
 		jButton5.setToolTipText("");

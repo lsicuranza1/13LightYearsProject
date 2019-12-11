@@ -52,7 +52,7 @@ public class PanelGameOver extends javax.swing.JFrame implements ActionListener 
 		jPanel1.setPreferredSize(dim.getSize());
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		score.setFont(new java.awt.Font("Inc Free", 1, 30));
+		score.setFont(new java.awt.Font("Inc Free", 1, 25));
 		score.setForeground(Color.red);
 		score.setFocusPainted(false);
 		score.setOpaque(false);
@@ -72,7 +72,7 @@ public class PanelGameOver extends javax.swing.JFrame implements ActionListener 
 		gridBagConstraints.insets = new java.awt.Insets(300, 720, 0, 720);
 		jPanel1.add(score, gridBagConstraints);
 
-		jButton.setFont(new java.awt.Font("Inc Free", 1, 40));
+		jButton.setFont(new java.awt.Font("Inc Free", 1, 35));
 		jButton.setForeground(Color.CYAN);
 		jButton.setFocusPainted(false);
 		jButton.setOpaque(false);

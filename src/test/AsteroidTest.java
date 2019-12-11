@@ -4,21 +4,13 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import game.Asteroid;
-import game.MainFrame;
-import game.patterns.state.Modalita;
 
 public class AsteroidTest {
 

@@ -133,15 +133,15 @@ public class PanelGameOver extends javax.swing.JFrame implements ActionListener 
 						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1020,
+										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1000,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 610,
+										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 600,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 

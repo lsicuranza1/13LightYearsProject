@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import game.MainFrame;
+import game.Score;
 import game.patterns.state.Modalita;
 import game.patterns.state.StatoInEsecuzione;
 import game.patterns.state.StatoPausa;
@@ -25,6 +26,7 @@ public class StatoPausaTest {
 		m = new Modalita();
 		main = MainFrame.getIstance();
 		main.setFrame(new JFrame());
+		main.setScore(new Score());
 	}
 
 	@Test

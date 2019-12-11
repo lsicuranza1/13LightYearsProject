@@ -168,7 +168,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
 		jPanel1.add(jButton5, gridBagConstraints);
 
-		sfondo.setMaximumSize(new java.awt.Dimension(1000, 1000));
+		sfondo.setMaximumSize(new java.awt.Dimension(1000, 600));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -177,15 +177,15 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1020,
+										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 1000,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 610,
+										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, 600,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 

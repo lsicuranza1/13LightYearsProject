@@ -160,7 +160,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	public void updateSpaceShip() {
 		spaceShip.move();
 		spaceShip.setBounds();
-		
+
 	}
 
 	public void updateObstacles() {
@@ -258,7 +258,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 					missile.setVisible(false);
 
 					asteroid.setVisible(false);
-					System.out.println("Collisione missile-asteroide");
 				}
 
 			}

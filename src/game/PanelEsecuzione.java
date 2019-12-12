@@ -235,8 +235,16 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
+				
+				spaceShip.loseLife();
+				
+				if (spaceShip.getLives() == 0) {
+					timer.stop();
+					MainFrame.getIstance().updateModalita("game_over");
+				}
+				else {
+					meteorite.setVisible(false);
+				}
 			}
 
 		}
@@ -246,8 +254,16 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
+				
+				spaceShip.loseLife();
+				
+				if (spaceShip.getLives() == 0) {
+					timer.stop();
+					MainFrame.getIstance().updateModalita("game_over");
+				}
+				else {
+					asteroid.setVisible(false);
+				}
 			}
 
 			for (Missile missile : missiles) {
@@ -256,7 +272,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if (missileBounds.intersects(asteroidBounds)) {
 
 					missile.setVisible(false);
-
 					asteroid.setVisible(false);
 				}
 

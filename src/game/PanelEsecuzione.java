@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -38,6 +39,9 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private final int DELAY = 20;
 	private Timer timer;
 	private JLabel labelLiveScore;
+	private JDialog dialog;
+	
+	private boolean flagPause = false;
 
 	public PanelEsecuzione() {
 
@@ -125,16 +129,40 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.updateSpaceShip();
-		this.updateMissiles();
-		this.updateObstacles();
-		this.checkCollisions();
-		yOffset += yDelta;
+		if (flagPause) {
+			System.out.println("flag pausa ok");
+			DialogStart deDialogPanel = new DialogStart(this);
+			dialog = new JDialog();
+	        dialog.getContentPane().add(deDialogPanel);  // add its JPanel to it
+	        dialog.setUndecorated(true); // give it no borders (if desired)
+	        dialog.pack(); // size it
+	        dialog.setLocationRelativeTo(this); // ** Center it over the JFrame **
+	        dialog.setVisible(true);
+		} else {
+			if(dialog!=null) {
+				dialog.dispose();
+			    dialog.remove( this );
+				dialog=null;
+			}
+			this.updateSpaceShip();
+			this.updateMissiles();
+			this.updateObstacles();
+			this.checkCollisions();
+			yOffset += yDelta;
 
-		mainframe.getScore().updateScoreValue(1);
-		this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
-		this.repaint();
+			mainframe.getScore().updateScoreValue(1);
+			this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
+			this.repaint();
+		}
 
+	}
+
+	public boolean isFlagPause() {
+		return flagPause;
+	}
+
+	public void setFlagPause(boolean flagPause) {
+		this.flagPause = flagPause;
 	}
 
 	private void updateMissiles() {
@@ -219,7 +247,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			spaceShip.keyPressed(e);
+			int key = e.getKeyCode();
+			if(key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_PAUSE) {
+				flagPause=!flagPause;
+			}
+			else
+				spaceShip.keyPressed(e);
 		}
 	}
 
@@ -263,4 +296,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 	}
+
+	
 }

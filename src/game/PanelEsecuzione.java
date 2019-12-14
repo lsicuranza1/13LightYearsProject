@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -127,7 +126,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		for (Meteorite meteorite : meteorites) {
 			g2d.drawImage(meteorite.getImage(), meteorite.getTransform(), this);
 		}
-		
+
 		for (Life life : lives) {
 			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
 		}
@@ -222,26 +221,25 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
+
 	public void initLives(Deque<Life> lives) {
 		Life life;
 		int xCoordLife = 10;
-		
+
 		for (int i = 0; i < 3; i++) {
-			final int shift = 30; //COSTANTE
+			final int shift = 30; // COSTANTE
 			life = new Life(xCoordLife, 60, fileNameLife);
 			lives.add(life);
 			xCoordLife += shift;
 		}
 	}
-	
+
 	public void updateLives() {
 		Life life = lives.getLast();
-			if (life.isVisible() == false) {
-				lives.removeLast();
-			}
+		if (life.isVisible() == false) {
+			lives.removeLast();
 		}
-	
+	}
 
 	public void checkCollisions() {
 
@@ -255,15 +253,14 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-				
+
 				spaceShip.loseLife();
 				lives.getLast().setVisible(false);
-				
+
 				if (spaceShip.getLives() == 0) {
 					timer.stop();
 					MainFrame.getIstance().updateModalita("game_over");
-				}
-				else {
+				} else {
 					meteorite.setVisible(false);
 				}
 			}
@@ -275,15 +272,14 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
-				
+
 				spaceShip.loseLife();
 				lives.getLast().setVisible(false);
-				
+
 				if (spaceShip.getLives() == 0) {
 					timer.stop();
 					MainFrame.getIstance().updateModalita("game_over");
-				}
-				else {
+				} else {
 					asteroid.setVisible(false);
 				}
 			}
@@ -300,8 +296,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
-	
+
 	public class TAdapter extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {

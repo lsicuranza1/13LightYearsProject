@@ -40,7 +40,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private Timer timer;
 	private JLabel labelLiveScore;
 	private JDialog dialog;
-	
+
 	private boolean flagPause = false;
 
 	public PanelEsecuzione() {
@@ -130,19 +130,20 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (flagPause) {
-			System.out.println("flag pausa ok");
-			DialogStart deDialogPanel = new DialogStart(this);
-			dialog = new JDialog();
-	        dialog.getContentPane().add(deDialogPanel);  // add its JPanel to it
-	        dialog.setUndecorated(true); // give it no borders (if desired)
-	        dialog.pack(); // size it
-	        dialog.setLocationRelativeTo(this); // ** Center it over the JFrame **
-	        dialog.setVisible(true);
+			if (dialog == null) {
+				DialogStart deDialogPanel = new DialogStart(this);
+				dialog = new JDialog();
+				dialog.getContentPane().add(deDialogPanel); 
+				dialog.setUndecorated(true); 
+				dialog.pack(); 
+				dialog.setLocationRelativeTo(this);
+				dialog.setVisible(true);
+			}
 		} else {
-			if(dialog!=null) {
+			if (dialog != null) {
 				dialog.dispose();
-			    dialog.remove( this );
-				dialog=null;
+				dialog.setVisible(false);
+				dialog = null;
 			}
 			this.updateSpaceShip();
 			this.updateMissiles();
@@ -248,10 +249,9 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			if(key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_PAUSE) {
-				flagPause=!flagPause;
-			}
-			else
+			if (key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_PAUSE) {
+				flagPause = !flagPause;
+			} else
 				spaceShip.keyPressed(e);
 		}
 	}
@@ -297,5 +297,4 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		}
 	}
 
-	
 }

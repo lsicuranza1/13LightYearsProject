@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 class DialogStart extends JPanel {
 	private MainFrame mainframe = MainFrame.getIstance();
-	private static final Color BG = new Color(123, 63, 0);
+	private static final Color BG = new Color(0, 0, 0, 200);
 	private javax.swing.JButton resume;
 	private javax.swing.JButton restart;
 	private javax.swing.JButton mainMenu;
@@ -23,10 +23,11 @@ class DialogStart extends JPanel {
 		this.jPanel = jPanel;
 		JLabel pausedLabel = new JLabel("PAUSED");
 		pausedLabel.setForeground(Color.ORANGE);
+		
 		JPanel pausedPanel = new JPanel();
 		pausedPanel.setOpaque(false);
 		pausedPanel.add(pausedLabel);
-
+		
 		setBackground(BG);
 		int eb = 15;
 		setBorder(BorderFactory.createEmptyBorder(eb, eb, eb, eb));
@@ -56,10 +57,12 @@ class DialogStart extends JPanel {
 	}
 
 	protected void mainMenuActionPerformed(ActionEvent evt) {
+		jPanel.getDialog().setAlwaysOnTop(false);
 		mainframe.updateModalita("main_menu");
 	}
 
 	protected void restartActionPerformed(ActionEvent evt) {
+		jPanel.getDialog().setAlwaysOnTop(false);
 		mainframe.updateModalita("restart");
 	}
 

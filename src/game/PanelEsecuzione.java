@@ -136,6 +136,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				dialog.getContentPane().add(deDialogPanel); 
 				dialog.setUndecorated(true); 
 				dialog.pack(); 
+				dialog.setAlwaysOnTop(true);
 				dialog.setLocationRelativeTo(this);
 				dialog.setVisible(true);
 			}
@@ -296,5 +297,10 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 	}
+
+	public JDialog getDialog() {
+		return dialog;
+	}
+
 
 }

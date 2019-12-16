@@ -13,7 +13,6 @@ import game.Score;
 import game.patterns.state.Modalita;
 import game.patterns.state.StatoGameOver;
 import game.patterns.state.StatoInEsecuzione;
-import game.patterns.state.StatoPausa;
 import game.patterns.state.StatoStart;
 
 public class StatoInEsecuzioneTest {
@@ -34,17 +33,17 @@ public class StatoInEsecuzioneTest {
 	public void testGestioneStato() {
 		StatoInEsecuzione stato = new StatoInEsecuzione();
 		
-		stato.gestioneStato(m,"pausa");
-		assertEquals("Pausa",main.getFrame().getTitle());
-		assertEquals(0,main.getFrame().getContentPane().getComponentCount());
-		assertTrue(m.getStatoModalita() instanceof StatoPausa);
-		
 		stato.gestioneStato(m,"game_over");
 		assertEquals("GameOver",main.getFrame().getTitle());
 		assertEquals(1,main.getFrame().getContentPane().getComponentCount());
 		assertTrue(m.getStatoModalita() instanceof StatoGameOver);
 		
-		stato.gestioneStato(m,"start");
+		stato.gestioneStato(m,"restart");
+		assertEquals("Start",main.getFrame().getTitle());
+		assertEquals(1,main.getFrame().getContentPane().getComponentCount());
+		assertTrue(m.getStatoModalita() instanceof StatoInEsecuzione);
+		
+		stato.gestioneStato(m,"main_menu");
 		assertEquals("Start",main.getFrame().getTitle());
 		assertEquals(1,main.getFrame().getContentPane().getComponentCount());
 		assertTrue(m.getStatoModalita() instanceof StatoStart);

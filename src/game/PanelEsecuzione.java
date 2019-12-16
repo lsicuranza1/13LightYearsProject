@@ -10,15 +10,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.RectangularShape;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -26,25 +28,23 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener {
 	private MainFrame mainframe = MainFrame.getIstance();
-	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameEnemies, fileNameBomb;
+	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameLife;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
 	private List<Meteorite> meteorites;
-	private List<Bomb> bombeVaganti;
+	private Deque<Life> lives;
 	private BufferedImage scrollingBackground;
 	private int yOffset = 0;
 	private int yDelta = 1;
 	private static int countToAddAsteroid = 0;
 	private static int countToAddMeteorite = 0;
-	private static int countToAddEnemies = 0;
 	private final int DELAY = 20;
 	private Timer timer;
 	private JLabel labelLiveScore;
-	private boolean bombe_flag = false;
-	
-	private List<EnemiesSpaceShip> enemies;
-//	private List<Missile> missile;
+	private JDialog dialog;
+
+	private boolean flagPause = false;
 
 	public PanelEsecuzione() {
 
@@ -62,17 +62,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
 		this.fileNameMeteorite = "../resources/images/meteorite.png";
-		this.fileNameBomb = "../resources/images/missile_enemy.png";
-		this.fileNameEnemies = "../resources/images/firstEnemy.png";
-		
+		this.fileNameLife = "../resources/images/life.png";
 		this.spaceShip = new SpaceShip(500, 400, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
-		//this.bombs = new ArrayList<Bomb>();
-		this.enemies = new ArrayList<EnemiesSpaceShip>();
-		this.bombeVaganti = new ArrayList<Bomb>();
-
+		this.lives = new ArrayDeque<Life>();
+		this.initLives(lives);
 
 		try {
 			this.scrollingBackground = ImageIO.read(getClass().getResource("../resources/images/space.jpg"));
@@ -80,16 +76,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 
-//		  Random random = new Random();
-//		
-//			for(int i = 0; i<15; i++) {
-//	        	int rand = random.nextInt(700);
-//	        	
-//	        	EnemiesSpaceShip enemy = new EnemiesSpaceShip(rand+getX()+50*i, getY()+rand,  fileNameEnemies);
-//	        	enemies.add(enemy);
-//	        	
-//	        } 
-			
 		this.timer = new Timer(DELAY, this);
 		this.timer.start();
 
@@ -144,39 +130,49 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		for (Meteorite meteorite : meteorites) {
 			g2d.drawImage(meteorite.getImage(), meteorite.getTransform(), this);
 		}
-		if(!bombeVaganti.isEmpty()) {
-			for (Bomb bomb : bombeVaganti) {
-				g2d.drawImage(bomb.getImage(), bomb.getX(), bomb.getY(), this);
-			}
-		}
-		
-		for(EnemiesSpaceShip enemy : enemies) {
-        	List<Bomb> lista = enemy.getBombs();
-        	g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), 50, 60, this);
 
-        	for(Bomb bomb : lista) {
-        		g2d.drawImage(bomb.getImage(), bomb.getX(), bomb.getY(), this);
-        	}
-     
-        }
+		for (Life life : lives) {
+			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
+		}
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.updateSpaceShip();
-		this.updateMissiles();
-		this.updateObstacles();
-		this.updateEnemies();
-		this.updateBombs();
-		this.updateBombeVaganti();
-		this.checkCollisions();
-		yOffset += yDelta;
+		if (flagPause) {
+			if (dialog == null) {
+				DialogStart deDialogPanel = new DialogStart(this);
+				dialog = new JDialog();
+				dialog.getContentPane().add(deDialogPanel); 
+				dialog.setUndecorated(true); 
+				dialog.pack(); 
+				dialog.setAlwaysOnTop(true);
+				dialog.setLocationRelativeTo(this);
+				dialog.setVisible(true);
+			}
+		} else {
+			if (dialog != null) {
+				dialog.dispose();
+				dialog.setVisible(false);
+				dialog = null;
+			}
+			this.updateSpaceShip();
+			this.updateMissiles();
+			this.updateObstacles();
+			this.updateLives();
+			this.checkCollisions();
+			yOffset += yDelta;
 
-		mainframe.getScore().updateScoreValue(1);
-		this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
-		this.repaint();
+		}
 
+	}
+
+	public boolean isFlagPause() {
+		return flagPause;
+	}
+
+	public void setFlagPause(boolean flagPause) {
+		this.flagPause = flagPause;
 	}
 
 	private void updateMissiles() {
@@ -196,22 +192,20 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				missiles.remove(i);
 			}
 		}
-		
-	
 
 	}
 
 	public void updateSpaceShip() {
 		spaceShip.move();
 		spaceShip.setBounds();
-		
+
 	}
 
 	public void updateObstacles() {
 		Random random = new Random();
 
-		int y_asteroid = -500;
-		int y_meteorite = -500;
+		int y_asteroid = -1000;
+		int y_meteorite = -1000;
 		int D_W = 1000;
 		int D_H = 600;
 
@@ -252,86 +246,25 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				meteorite.move();
 				meteorite.setBounds();
 			}
-		}	
-		
-	}
-	
-	public void updateEnemies() {
-		int D_W = 1000;
-		int D_H = 600;
-		Random random = new Random();
-		
-		if (countToAddEnemies >= 150) {
-			int randX2 = random.nextInt(D_W);
-			enemies.add(new EnemiesSpaceShip(randX2, -20, fileNameEnemies));
-			enemies.get(enemies.size()-1).fire();
-			countToAddEnemies = 0;
 		}
-		countToAddEnemies++;
-		
-		Iterator<EnemiesSpaceShip> et = enemies.iterator();
-		
-    	while(et.hasNext()) {
-    		EnemiesSpaceShip enemy = (EnemiesSpaceShip)et.next();
-    		if (enemy.getY() >= D_H || !enemy.isVisible()) {
-    			bombeVaganti = enemy.getBombs();;
-				et.remove();
-			} else {
-				enemy.move();
-				enemy.setBounds();
-			}
-    		
-    	}
 	}
-	
-	private void updateBombs() {
-		
-		for(int i=0; i< enemies.size();i++) {
-			List<Bomb> bomb = enemies.get(i).getBombs();
-			for(int j=0;j< bomb.size();j++) {
-				Bomb bomba = bomb.get(j);			
-				if(bomba.isVisible()) {
-					bomba.move();
-					bomba.setBounds();
-		        	if(bomba.getY()>650) {		        		
-		        		bomba.setY(enemies.get(i).getY()+50);
-		        		bomba.setX(enemies.get(i).getX()+15);
-	        	}
-				}else {
-					bomb.remove(j);
-				}
-			}
-		}
-	
 
-	}
-	
-	public void updateBombeVaganti() {
-		if(!bombeVaganti.isEmpty()) {
-		for(int i=0; i<bombeVaganti.size();i++) {
-			Bomb bomba = bombeVaganti.get(i);
-			if(bomba.isVisible()) {
-				bomba.move();
-				bomba.setBounds();
-				if(bomba.getY()>650) {
-					bombeVaganti.remove(i);
-				}
-			}
+	public void initLives(Deque<Life> lives) {
+		Life life;
+		int xCoordLife = 10;
+
+		for (int i = 0; i < 3; i++) {
+			final int shift = 30; // COSTANTE
+			life = new Life(xCoordLife, 60, fileNameLife);
+			lives.add(life);
+			xCoordLife += shift;
 		}
 	}
-	}
-	
-	
 
-	public class TAdapter extends KeyAdapter {
-		@Override
-		public void keyReleased(KeyEvent e) {
-			spaceShip.keyReleased(e);
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-			spaceShip.keyPressed(e);
+	public void updateLives() {
+		Life life = lives.getLast();
+		if (life.isVisible() == false) {
+			lives.removeLast();
 		}
 	}
 
@@ -341,17 +274,22 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		Rectangle2D asteroidBounds;
 		Rectangle2D meteoriteBounds;
 		Rectangle2D missileBounds;
-		Rectangle2D enemyBounds;
-		Rectangle2D bombBounds;
-		Rectangle2D bombeVagantiBounds;
 
 		for (Meteorite meteorite : meteorites) {
 
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
+
+				spaceShip.loseLife();
+				lives.getLast().setVisible(false);
+
+				if (spaceShip.getLives() == 0) {
+					timer.stop();
+					MainFrame.getIstance().updateModalita("game_over");
+				} else {
+					meteorite.setVisible(false);
+				}
 			}
 
 		}
@@ -361,8 +299,16 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
+
+				spaceShip.loseLife();
+				lives.getLast().setVisible(false);
+
+				if (spaceShip.getLives() == 0) {
+					timer.stop();
+					MainFrame.getIstance().updateModalita("game_over");
+				} else {
+					asteroid.setVisible(false);
+				}
 			}
 
 			for (Missile missile : missiles) {
@@ -371,51 +317,31 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if (missileBounds.intersects(asteroidBounds)) {
 
 					missile.setVisible(false);
-
 					asteroid.setVisible(false);
 				}
 
 			}
 		}
-		
-		for(EnemiesSpaceShip enemy : enemies) {
-			
-			enemyBounds = enemy.getBounds();
-			//System.out.println(bombBounds);
-			for(Missile missile : missiles) {
-				missileBounds = missile.getBounds();
-				if(missileBounds.intersects(enemyBounds)) {
-				missile.setVisible(false);
-				enemy.setVisible(false);
-				
-				}
-			}
-			
-			if(enemyBounds.intersects(spaceShipBounds)) {
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
-			}
-			
-			for(Bomb bomb : enemy.getBombs()) {
-				bombBounds = bomb.getBounds();
-				if(bombBounds.intersects(spaceShipBounds)) {
-					bomb.setVisible(false);
-					timer.stop();
-					MainFrame.getIstance().updateModalita("game_over");
-				}
-			}
-			
-		}
-		if(!bombeVaganti.isEmpty()) {
-		for(Bomb bomb : bombeVaganti){
-			bombeVagantiBounds = bomb.getBounds();
-			if(bombeVagantiBounds.intersects(spaceShipBounds)) {
-				bomb.setVisible(false);
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
-			}
-		}
-		}
-		
 	}
+
+	public class TAdapter extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			spaceShip.keyReleased(e);
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			if (key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_PAUSE) {
+				flagPause = !flagPause;
+			} else
+				spaceShip.keyPressed(e);
+		}
+	}
+	public JDialog getDialog() {
+		return dialog;
+	}
+
+
 }

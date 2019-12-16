@@ -1,13 +1,27 @@
 package game;
 
-public class Meteorite extends Sprite {
-	
-    public Meteorite(double x, double y, String imageFileName) {
-    	super(x, y, imageFileName);
-    }
+import java.awt.geom.AffineTransform;
 
-    @Override
-    public void move(double x, double y) {
-    	y += 10;
-    }
+public class Meteorite extends Sprite {
+
+	private AffineTransform transform;
+
+	public Meteorite(int x, int y, String path) {
+		super(x, y, path);
+		this.transform = new AffineTransform();
+	}
+
+	public void move() {
+
+		int x = this.getX();
+		int temp_y = this.getY();
+		this.setY(temp_y + 10);
+		int y = this.getY();
+		this.transform.setToTranslation(x, y);
+
+	}
+
+	public AffineTransform getTransform() {
+		return transform;
+	}
 }

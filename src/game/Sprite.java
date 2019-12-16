@@ -1,37 +1,81 @@
 package game;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 public abstract class Sprite {
 
-	private double x;
-	private double y;
+	private int x;
+	private int y;
 	private Rectangle2D rectangle;
-    private ImageIcon imgIcon;
+	private BufferedImage image;
+	private boolean visible = true;
 
-    public Sprite(double x, double y, String imageFileName) {
-        this.x = x;
-        this.y = y;
-        this.imgIcon = new ImageIcon(imageFileName);
-        this.rectangle = new Rectangle2D.Double(x, y, imgIcon.getIconWidth(), imgIcon.getIconHeight());
-    }
-   
-    public ImageIcon getImageIcon() {
-        return imgIcon;
-    }
+	public Sprite(int x, int y, String imageFileName) {
+		this.x = x;
+		this.y = y;
+		this.loadImage(imageFileName);
+		this.rectangle = new Rectangle(x, y, this.getWidth(), this.getHeight());
+	}
 
-    public double getX() {
-        return x;
-    }
+	private void loadImage(String imageFileName) {
+		try {
+			image = ImageIO.read(getClass().getResource(imageFileName));
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Image not loaded");
+		}
 
-    public double getY() {
-        return y;
-    }
-    
-    public abstract void move(double x, double y);
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public int getWidth() {
+		return this.image.getWidth(null);
+	}
+
+	public int getHeight() {
+		return this.image.getHeight(null);
+	}
+
+	public Rectangle2D getBounds() {
+		return rectangle;
+	}
+
+	public void setBounds() {
+		this.rectangle.setFrame(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+	}
+
+	public abstract void move();
 
 }

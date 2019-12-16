@@ -1,32 +1,29 @@
 package game;
 
-/**
- *
- * @author lorenzosic
- */
 public class Missile extends Sprite {
 
-    private final int BOARD_WIDTH = 1000;
-    private final int MISSILE_SPEED = 2;
+	private final int BOARD_WIDTH = 1000;
+	private final int MISSILE_SPEED = 5;
 
-    public Missile(int x, int y) {
-        super(x, y);
-        
-        initMissile();
-    }
-    
-    private void initMissile() {
-        
-        loadImage("src/resources/missile.png");  
-        getImageDimensions();
-    }
+	public Missile(int x, int y, String path) {
+		super(x, y, path);
 
-    public void move() {
-        
-        y -= MISSILE_SPEED;
-        
-        if (y > BOARD_WIDTH) {
-            visible = false;
-        }
-    }
+	}
+
+	public void move() {
+
+		this.setY(this.getY() - MISSILE_SPEED);
+		if (this.getY() > BOARD_WIDTH) {
+			this.setVisible(false);
+		}
+	}
+
+	public void move_colpo() {
+
+		this.setY(this.getY() + 2);
+
+		if (this.getY() > BOARD_WIDTH) {
+			this.setVisible(false);
+		}
+	}
 }

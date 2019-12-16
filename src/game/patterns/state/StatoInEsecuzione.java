@@ -1,77 +1,43 @@
 package game.patterns.state;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.net.URL;
-import java.util.List;
-
-import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import game.MainFrame;
-import game.Missile;
-import game.SpaceShip;
+import game.PanelEsecuzione;
 
+public class StatoInEsecuzione implements Stato {
 
-public class StatoInEsecuzione extends javax.swing.JFrame implements Stato {
- 
 	MainFrame mainFrame = MainFrame.getIstance();
-	private SpaceShip spaceShip;
-	private JPanel panel = new JPanel();
-	private JButton button = new JButton();
-    private SpaceShip ship;
-    
-public StatoInEsecuzione() {
-        System.out.println("In esecuzione");
-        
-        mainFrame.getFrame().setLayout(new BorderLayout());
-        mainFrame.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//       mainFrame.getFrame().add(panel, BorderLayout.CENTER);
-        mainFrame.getFrame().setVisible(true);
-        
-        ship = new SpaceShip(100, 100);
-        
-//        repaint();
-        
-    }
+	private PanelEsecuzione panel = new PanelEsecuzione();
 
-private void doDrawing(Graphics g) {
+	public StatoInEsecuzione() {
+		panel.setBackground(Color.BLACK);
+		panel.setSize(1000, 600);
+		mainFrame.getFrame().setVisible(true);
+		mainFrame.getFrame().add(panel);
+		panel.setFocusable(true);
+		panel.requestFocus();
 
-    Graphics2D g2d = (Graphics2D) g;
-    
-    g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
-            spaceShip.getY(), this);
-
-    List<Missile> missiles = spaceShip.getMissiles();
-
-    for (Missile missile : missiles) {
-        
-        g2d.drawImage(missile.getImage(), missile.getX(),
-                missile.getY(), this);
-    }
-}
-
-
-    @Override
-	public void gestioneStato(Modalita modalita, String stato) {
-		// TODO Auto-generated method stub
-		if (stato.equals("pausa"))
-			modalita.setStatoModalita(new StatoPausa());
-		else if(stato.equals("game_over"))
-			modalita.setStatoModalita(new StatoGameOver());
 	}
- 
+
+	@Override
+	public void gestioneStato(Modalita modalita, String stato) {
+		if (stato.equals("game_over")) {
+			mainFrame.getFrame().setTitle("GameOver");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
+			modalita.setStatoModalita(new StatoGameOver());
+		} else if (stato.equals("main_menu")) {
+			mainFrame.getFrame().setTitle("Start");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
+			modalita.setStatoModalita(new StatoStart());
+		}else if (stato.equals("restart")) {
+			mainFrame.getFrame().setTitle("Start");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
+			modalita.setStatoModalita(new StatoInEsecuzione());
+		}
+	}
+
 }

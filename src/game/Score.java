@@ -4,7 +4,7 @@ public class Score {
 	private int scoreValue;
 
 	public Score() {
-		scoreValue = 0;
+		scoreValue = 120;
 	}
 	public int getScoreValue() {
 		return scoreValue;
@@ -12,10 +12,6 @@ public class Score {
 
 	public void setScoreValue(int scoreValue) {
 		this.scoreValue = scoreValue;
-	}
-	
-	public void updateScoreValue(int increment) {
-		this.scoreValue += increment;
 	}
 	
 	

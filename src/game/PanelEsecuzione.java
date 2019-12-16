@@ -12,12 +12,15 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -25,11 +28,12 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener {
 	private MainFrame mainframe = MainFrame.getIstance();
-	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite;
+	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameLife;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
 	private List<Meteorite> meteorites;
+	private Deque<Life> lives;
 	private BufferedImage scrollingBackground;
 	private int yOffset = 0;
 	private int yDelta = 1;
@@ -38,6 +42,9 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private final int DELAY = 20;
 	private Timer timer;
 	private JLabel labelLiveScore;
+	private JDialog dialog;
+
+	private boolean flagPause = false;
 
 	public PanelEsecuzione() {
 
@@ -55,10 +62,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
 		this.fileNameMeteorite = "../resources/images/meteorite.png";
+		this.fileNameLife = "../resources/images/life.png";
 		this.spaceShip = new SpaceShip(500, 400, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
+		this.lives = new ArrayDeque<Life>();
+		this.initLives(lives);
 
 		try {
 			this.scrollingBackground = ImageIO.read(getClass().getResource("../resources/images/space.jpg"));
@@ -121,20 +131,51 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			g2d.drawImage(meteorite.getImage(), meteorite.getTransform(), this);
 		}
 
+		for (Life life : lives) {
+			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
+		}
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.updateSpaceShip();
-		this.updateMissiles();
-		this.updateObstacles();
-		this.checkCollisions();
-		yOffset += yDelta;
+		if (flagPause) {
+			if (dialog == null) {
+				DialogStart deDialogPanel = new DialogStart(this);
+				dialog = new JDialog();
+				dialog.getContentPane().add(deDialogPanel); 
+				dialog.setUndecorated(true); 
+				dialog.pack(); 
+				dialog.setAlwaysOnTop(true);
+				dialog.setLocationRelativeTo(this);
+				dialog.setVisible(true);
+			}
+		} else {
+			if (dialog != null) {
+				dialog.dispose();
+				dialog.setVisible(false);
+				dialog = null;
+			}
+			this.updateSpaceShip();
+			this.updateMissiles();
+			this.updateObstacles();
+			this.updateLives();
+			this.checkCollisions();
+			yOffset += yDelta;
 
-		mainframe.getScore().updateScoreValue(1);
-		this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
-		this.repaint();
+			mainframe.getScore().updateScoreValue(1);
+			this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
+			this.repaint();
+		}
 
+	}
+
+	public boolean isFlagPause() {
+		return flagPause;
+	}
+
+	public void setFlagPause(boolean flagPause) {
+		this.flagPause = flagPause;
 	}
 
 	private void updateMissiles() {
@@ -160,7 +201,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	public void updateSpaceShip() {
 		spaceShip.move();
 		spaceShip.setBounds();
-		
+
 	}
 
 	public void updateObstacles() {
@@ -171,7 +212,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		int D_W = 1000;
 		int D_H = 600;
 
-		// maggiore è il valore minore è la frequenza di uscita degli asteroidi
+		// maggiore ï¿½ il valore minore ï¿½ la frequenza di uscita degli asteroidi
 		if (countToAddAsteroid >= 150) {
 			int randX1 = random.nextInt(D_W);
 			asteroids.add(new Asteroid(randX1, y_asteroid, fileNameAsteroid));
@@ -211,15 +252,22 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		}
 	}
 
-	public class TAdapter extends KeyAdapter {
-		@Override
-		public void keyReleased(KeyEvent e) {
-			spaceShip.keyReleased(e);
-		}
+	public void initLives(Deque<Life> lives) {
+		Life life;
+		int xCoordLife = 10;
 
-		@Override
-		public void keyPressed(KeyEvent e) {
-			spaceShip.keyPressed(e);
+		for (int i = 0; i < 3; i++) {
+			final int shift = 30; // COSTANTE
+			life = new Life(xCoordLife, 60, fileNameLife);
+			lives.add(life);
+			xCoordLife += shift;
+		}
+	}
+
+	public void updateLives() {
+		Life life = lives.getLast();
+		if (life.isVisible() == false) {
+			lives.removeLast();
 		}
 	}
 
@@ -235,8 +283,16 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
+
+				spaceShip.loseLife();
+				lives.getLast().setVisible(false);
+
+				if (spaceShip.getLives() == 0) {
+					timer.stop();
+					MainFrame.getIstance().updateModalita("game_over");
+				} else {
+					meteorite.setVisible(false);
+				}
 			}
 
 		}
@@ -246,8 +302,16 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
-				timer.stop();
-				MainFrame.getIstance().updateModalita("game_over");
+
+				spaceShip.loseLife();
+				lives.getLast().setVisible(false);
+
+				if (spaceShip.getLives() == 0) {
+					timer.stop();
+					MainFrame.getIstance().updateModalita("game_over");
+				} else {
+					asteroid.setVisible(false);
+				}
 			}
 
 			for (Missile missile : missiles) {
@@ -256,12 +320,31 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if (missileBounds.intersects(asteroidBounds)) {
 
 					missile.setVisible(false);
-
 					asteroid.setVisible(false);
-					System.out.println("Collisione missile-asteroide");
 				}
 
 			}
 		}
 	}
+
+	public class TAdapter extends KeyAdapter {
+		@Override
+		public void keyReleased(KeyEvent e) {
+			spaceShip.keyReleased(e);
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			if (key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_PAUSE) {
+				flagPause = !flagPause;
+			} else
+				spaceShip.keyPressed(e);
+		}
+	}
+	public JDialog getDialog() {
+		return dialog;
+	}
+
+
 }

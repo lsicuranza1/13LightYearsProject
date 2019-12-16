@@ -9,7 +9,7 @@ public class SpaceShip extends SpaceshipStructure {
 
 	private int dx;
 	private int dy;
-
+	private int lives = 3; //COSTANTE
 	private boolean isShooting = false;
 
 	public SpaceShip(int x, int y, String path) {
@@ -18,12 +18,28 @@ public class SpaceShip extends SpaceshipStructure {
 
 	}
 
+	
+	
+	public int getLives() {
+		return lives;
+	}
+
+
+
+	public void loseLife() {
+		if (this.getLives() > 0) {
+			this.lives -= 1;
+		}
+	}
+
+
+
 	@Override
 	public void move() {
 		this.setX(this.getX() + dx);
 		this.setY(this.getY() + dy);
 	}
-
+	
 	public void keyPressed(KeyEvent e) {
 
 		int key = e.getKeyCode();

@@ -22,21 +22,21 @@ public class StatoInEsecuzione implements Stato {
 
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("pausa")) {
-			mainFrame.getFrame().setTitle("Pausa");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
-			modalita.setStatoModalita(new StatoPausa());
-		} else if (stato.equals("game_over")) {
+		if (stato.equals("game_over")) {
 			mainFrame.getFrame().setTitle("GameOver");
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoGameOver());
-		} else if (stato.equals("start")) {
+		} else if (stato.equals("main_menu")) {
 			mainFrame.getFrame().setTitle("Start");
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoStart());
+		}else if (stato.equals("restart")) {
+			mainFrame.getFrame().setTitle("Start");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
+			modalita.setStatoModalita(new StatoInEsecuzione());
 		}
 	}
 

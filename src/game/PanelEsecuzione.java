@@ -163,9 +163,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			this.checkCollisions();
 			yOffset += yDelta;
 
-			mainframe.getScore().updateScoreValue(1);
-			this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
-			this.repaint();
 		}
 
 	}

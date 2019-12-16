@@ -36,5 +36,12 @@ public class ScoreTest {
 		s.updateScoreValue(90);
 		assertEquals(100,s.getScoreValue());
 	}
+	
+	@Test
+	public void testdecrementScoreValue() {
+		s.setScoreValue(10);
+		s.decrementScoreValue(5);
+		assertEquals(5,s.getScoreValue());
+	}
 
 }

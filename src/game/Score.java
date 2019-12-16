@@ -18,5 +18,8 @@ public class Score {
 		this.scoreValue += increment;
 	}
 	
+	public void decrementScoreValue(int decrement) {
+		this.scoreValue -= decrement;
+	}
 	
 }

@@ -8,7 +8,7 @@ public class Meteorite extends Sprite {
 
 	public Meteorite(int x, int y, String path) {
 		super(x, y, path);
-		this.transform = new AffineTransform();
+		this.transform = new AffineTransform(); //scegliere se metterlo anche nelle altre classi per la traslazione
 	}
 
 	public void move() {

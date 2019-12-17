@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 
 import game.patterns.state.Modalita;
 import game.patterns.state.Stato;
-import game.patterns.state.StatoStart;
 
 public class MainFrame {
 
@@ -19,9 +18,6 @@ public class MainFrame {
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	double width = screenSize.getWidth();
 	double height = screenSize.getHeight();
-
-	int w = (int) ((width * 40) / 100);
-	int h = (int) ((height * 90) / 100);
 
 	// Singleton
 	private static MainFrame istance = null;
@@ -40,12 +36,12 @@ public class MainFrame {
 			public void run() {
 				try {
 					MainFrame window = MainFrame.getIstance();
-					window.setFrame(new StatoStart());
+					//window.setFrame(new StatoStart());
 					window.setModalita(new Modalita());
 					window.setScore(new Score());
-					window.getFrame().setVisible(true);
-					window.getFrame().setTitle("13 Light Years - Menù Principale");
-					window.getFrame().setVisible(true);
+//					window.getFrame().setVisible(true);
+//					window.getFrame().setTitle("13 Light Years - Menù Principale");
+//					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

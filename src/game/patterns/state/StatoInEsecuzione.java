@@ -2,21 +2,30 @@ package game.patterns.state;
 
 import java.awt.Color;
 
+import game.ExecutionFrame;
 import game.MainFrame;
+import game.MenuFrame;
 import game.PanelEsecuzione;
 
 public class StatoInEsecuzione implements Stato {
 
-	MainFrame mainFrame = MainFrame.getIstance();
-	private PanelEsecuzione panel = new PanelEsecuzione();
+	private MainFrame mainFrame;
+	private ExecutionFrame exeFrame;
 
 	public StatoInEsecuzione() {
-		panel.setBackground(Color.BLACK);
-		panel.setSize(1000, 600);
+		mainFrame = MainFrame.getIstance();
+		this.exeFrame = new ExecutionFrame();
+		mainFrame.setFrame(exeFrame);
 		mainFrame.getFrame().setVisible(true);
-		mainFrame.getFrame().add(panel);
-		panel.setFocusable(true);
-		panel.requestFocus();
+		
+	
+//		this.panel = new PanelEsecuzione();
+//		panel.setBackground(Color.BLACK);
+//		panel.setSize(1000, 600);
+//		mainFrame.getFrame().setVisible(true);
+//		mainFrame.getFrame().add(panel);
+//		panel.setFocusable(true);
+//		panel.requestFocus();
 
 	}
 
@@ -28,14 +37,12 @@ public class StatoInEsecuzione implements Stato {
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoPausa());
 		} else if (stato.equals("game_over")) {
-			mainFrame.getFrame().setTitle("GameOver");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoGameOver());
 		} else if (stato.equals("start")) {
-			mainFrame.getFrame().setTitle("Start");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoStart());
 		}
 	}

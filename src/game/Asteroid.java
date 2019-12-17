@@ -12,7 +12,7 @@ public class Asteroid extends Sprite {
 	public Asteroid(int x, int y, String path) {
 		super(x, y, path);
 		this.angle = 0;
-		this.transform = new AffineTransform();
+		this.transform = new AffineTransform(); //capire se metterla nelle clasi degli altri oggetti
 	}
 
 	@Override

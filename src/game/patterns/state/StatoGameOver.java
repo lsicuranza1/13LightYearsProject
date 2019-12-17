@@ -1,15 +1,20 @@
 package game.patterns.state;
 
 import game.MainFrame;
-import game.PanelGameOver;
+import game.GameOverFrame;
 
 public class StatoGameOver implements Stato {
 
-	MainFrame mainFrame = MainFrame.getIstance();
+	private MainFrame mainFrame = MainFrame.getIstance();
+	private GameOverFrame gameOverFrame;
+	
 
 	public StatoGameOver() {
 
-		new PanelGameOver();
+		mainFrame = MainFrame.getIstance();
+		this.gameOverFrame = new GameOverFrame();
+		mainFrame.setFrame(gameOverFrame);
+		mainFrame.getFrame().setVisible(true);
 
 	}
 

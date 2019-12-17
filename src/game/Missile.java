@@ -2,8 +2,8 @@ package game;
 
 public class Missile extends Sprite {
 
-	private final int BOARD_WIDTH = 1000;
-	private final int MISSILE_SPEED = 5;
+	private final int BOARD_WIDTH = 1000; //COSTANTE
+	private final int MISSILE_SPEED = 5; //COSTANTE
 
 	public Missile(int x, int y, String path) {
 		super(x, y, path);
@@ -18,6 +18,7 @@ public class Missile extends Sprite {
 		}
 	}
 
+	//capire a che serve 
 	public void move_colpo() {
 
 		this.setY(this.getY() + 2);

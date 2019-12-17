@@ -25,7 +25,7 @@ public abstract class Sprite {
 	private void loadImage(String imageFileName) {
 		try {
 			image = ImageIO.read(getClass().getResource(imageFileName));
-		} catch (IOException e) {
+		} catch (IOException e) { //gestire l'eccezione nel contesto in cui viene istanziato l'oggetto
 			e.printStackTrace();
 			System.out.println("Image not loaded");
 		}

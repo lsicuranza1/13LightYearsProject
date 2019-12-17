@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class SpaceshipStructure extends Sprite {
 
-	private List<Missile> missiles;
+	private List<Missile> missiles; //capire se metterla solo nella classe SpaceShip
 
 	public SpaceshipStructure(int x, int y, String fileName) {
 		super(x, y, fileName);

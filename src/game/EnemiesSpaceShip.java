@@ -11,88 +11,60 @@ public class EnemiesSpaceShip extends EnemySpaceshipStructure {
 //	private Bomb bomb;
 
 	Random random = new Random();
-	private boolean isShooting = false;
-	private int newX_1 = random.nextInt(1000);
+	private int count = 0; // count the position to reached before exit	(2)
+	
+	private int enemyDelay = 0;  // delay to let enemy move again
+	private int newX_1 = random.nextInt(950);
 	private int newY_1 = random.nextInt(200);
 	
-	private int newX_2 = random.nextInt(1000);
-	private int newY_2 = random.nextInt(200);
-	
-	private List<Integer> listaX = new ArrayList<>();
-	private List<Integer> listaY = new ArrayList<>();
-	
-	
-		
 	
 	public EnemiesSpaceShip(int x, int y, String path) {
 		super(x, y, path);
-		this.listaY = this.createRandomListY();
-		this.listaX = this.createRandomListX();
-
-		
-		
-		
 	}
 
-	public List<Integer> createRandomListX() {
-		List<Integer> listaX = new ArrayList<>();
-		for(int i = 0 ; i< 4 ; i++) {
-			listaX.add(random.nextInt(1000));
-		}
-		return listaX;
-	}
-	
-	public List<Integer> createRandomListY() {
-		List<Integer> listaY = new ArrayList<>();
-		for(int i = 0 ; i< 4 ; i++) {
-			listaY.add(random.nextInt(200));
-		}
-		return listaY;
-	}
-	
-	
+
 	public void move() {
 	
+		
 		if(this.getX()>newX_1) {
-			this.setX(this.getX()-5);
+			if(this.count==2)
+				this.setX(this.getX());
+			else
+				this.setX(this.getX()-5);	
 		}
 		
 		if(this.getX()<newX_1) {
-			this.setX(this.getX()+5);
+			if(this.count==2) 
+				this.setX(this.getX());
+			else	
+				this.setX(this.getX()+5);
 		}
 		
-		if(this.getY()<newY_1) {
-			this.setY(this.getY()+5);
+		if(this.getY()<=newY_1) {
+			if(this.count==2) 
+				this.setY(this.getY()+5);
+			else	
+				this.setY(this.getY()+5);
 		}
 		
-		if(this.getY()>newY_1) {
-			this.setY(this.getY()-5);
+		if(this.getY()>=newY_1) {
+			if(this.count==2) 
+				this.setY(this.getY()+5);
+			else	
+				this.setY(this.getY()-5);
 		}
-		
-		new Thread() {
-			@Override
-			public void run() {
-				try {
-						Thread.sleep(3000);
-						newX_1 = newX_2;
-						newY_1 = newY_2;
 
-				} catch (InterruptedException ex) {
-					Logger.getLogger(SpaceShip.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			}
-		}.start();
+		this.enemyDelay++;
 		
+		if(this.enemyDelay==150 && this.count <2) {
+				newX_1 = random.nextInt(950);
+				newY_1 = random.nextInt(200);
+				this.count++;
+				this.enemyDelay=0;
+			
+		}
 		
-		
-		
-		
-	
 
-//			this.setY(this.getY()+2);
-//				if(this.getY() >= 650) {
-//					this.setY(0);			
-//				}
 
 	}
 	

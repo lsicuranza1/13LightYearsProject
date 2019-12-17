@@ -9,7 +9,7 @@ public class Bomb extends Sprite{
 
 	@Override
 	public void move() {
-		this.setY(getY()+5);
+		this.setY(getY()+7);
 	}
 	
 }

@@ -1,166 +1,128 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package game;
 
-/**
- *
- * @author lorenzosic
- */
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SpaceShip extends AbstractSprite {
 
-    private int dx;
-    private int dy;
-    private List<Missile> missiles;
-    public boolean isShooting = false;
-    long startTime = System.currentTimeMillis();
-    long elapsedTime = 0;
+public class SpaceShip extends SpaceshipStructure {
 
-    public SpaceShip(int x, int y) {
-        super(x, y);
-        
-        initSpaceShip();
-    }
+	private int SPACESHIP_SPEED = 8;
+	private int shoot_counter = 25;          //shooting delay =~ 500 milliseconds 
+	
+	private boolean left = false;
+	private boolean right = false;
+	private boolean up = false;
+	private boolean down = false;
+	private boolean isShooting = false;
+	
 
-    private void initSpaceShip() {
+	public SpaceShip(int x, int y, String path) {
 
-        missiles = new ArrayList<>();
-        
-        loadImage("../resources/images/spaceship.png"); 
-        getImageDimensions();
-    }
+		super(x, y, path);
 
-    public void move() {
-    			x += dx;
-    	        y += dy;
-    }
+	}
 
-    public List<Missile> getMissiles() {
-        return missiles;
-    }
-    
-    
-    public void keyPressed(KeyEvent e) {
+	@Override
+	public void move() {
+		
+		this.shoot_counter++;
+		
+		if (isShooting == true) {
+			fire();
+		}
+		
+		if (left == true) {
+			this.setX(this.getX() - SPACESHIP_SPEED);
+			
+			if (this.getX() <= 10 - this.getWidth()) {
+				this.setX(1000 - 8);
+			}
+		}
+		
+		if (right == true) {
+			this.setX(this.getX() + SPACESHIP_SPEED);	
+			if (this.getX() >= 1000 - 8) {
+				this.setX(10 - this.getWidth());
+			}
+		}
+		
+		if (up == true) {
+			this.setY(this.getY() - SPACESHIP_SPEED);
+			if (this.getY() <= 0) {
+				this.setY(0);
+			}
+		}
+		
+		if (down == true) {
+			this.setY(this.getY() + SPACESHIP_SPEED);
+			if (this.getY() >= 600 - (this.getHeight() * 7) / 5) {
+				this.setY(600 - (this.getHeight() * 7) / 5);
+			}
+		}
+		
+	}
+	
 
-        int key = e.getKeyCode();
-        //int key = e.getKeyCode();    	
-        int shoot = e.getKeyCode();
-        
-        if (isShooting == false) {
-	        if (shoot == KeyEvent.VK_SPACE) {
-	        	if (x<=0-width+10) {
-	        		x=400-8;
-	        		dx=-3;
-	        	}
-	        	if (x>400-8) {
-	        		x=0-width+10;
-	        		dx=3;
-	        	}
-	            fire();
-	        }
-        }
+	public void keyPressed(KeyEvent e) {
 
-        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-        	if (x<=0-width+10) {
-        		x=400-8;
-        		dx=-3;
-        	}
-        	else{
-        		dx = -3;
-        	}
-        }
+		int key = e.getKeyCode();
+		
+		if (key == KeyEvent.VK_SPACE) {
+			isShooting = true;
+		}
 
-        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-        	if (x>400-8) {
-        		x=0-width+10;
-        		dx=3;
-        	}
-        	else{
-        		dx = 3;
-        	}
-        }
+		if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+			left = true;
+		}
 
-        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-        	if(y<=0) {
-        		y=0;
-        		dy=0;
-        	}
-        	if (x<=0-width+10) {
-        		x=400-8;
-        		dx=-3;
-        	}
-        	if (x>400-8) {
-        		x=0-width+10;
-        		dx=3;
-        	}
-        	else{
-        		dy = -3;
-        	}
-        }
+		if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+			right = true;
+		}
 
-        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-        	if (y>=1000-2*height) {
-        		y=1000-2*height;
-        		dy=0;
-        	}
-        	if (x<=0-width+10) {
-        		x=400-8;
-        		dx=-3;
-        	}
-        	if (x>400-8) {
-        		x=0-width+10;
-        		dx=3;
-        	}
-        	else{
-        		dy = 3;
-        	}
-        }
-    }
+		if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+			up = true;
+		}
 
-    public void fire() {
-    			missiles.add(new Missile(x + width/2 -9, y + height -90));
-    	new Thread() {
-    		@Override
-    		public void run() {
-        		try {
-    	            isShooting = true;
-        			missiles.add(new Missile(x + width/2 -9, y + height -90));
-                    Thread.sleep(1000);
-                    isShooting = false;
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(SpaceShip.class.getName()).log(Level.SEVERE, null, ex);
-                }
-    		}
-    	}.start();		
-    }
-    
+		if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+			down = true;
+		}
+	}
+
+	public void fire() {
+		List<Missile> missiles = this.getMissiles();
+		
+		if (this.shoot_counter >= 25) {
+			missiles.add(new Missile(this.getX() + this.getWidth() / 2 - 9, this.getY() + this.getHeight() - 90, "../resources/images/missile.png"));
+			this.shoot_counter = 0;
+		}
+		
+	}
 
 	public void keyReleased(KeyEvent e) {
 
-        int key = e.getKeyCode();
+		int key = e.getKeyCode();
+		
+		if (key == KeyEvent.VK_SPACE) {
+			isShooting = false;
+		}
 
-        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-            dx = 0;
-        }
+		if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {			
+			left = false;
+		}
 
-        if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-            dx = 0;
-        }
+		if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+			right = false;
+		}
 
-        if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-            dy = 0;
-        }
+		if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+			up = false;
+		}
 
-        if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-            dy = 0;
-        }
-    }
+		if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+			down = false;
+		}
+	}
+
 }

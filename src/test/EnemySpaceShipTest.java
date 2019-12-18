@@ -2,10 +2,14 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import game.Bomb;
 import game.EnemySpaceShip;
+import game.Missile;
 
 public class EnemySpaceShipTest {
 	private EnemySpaceShip e; 
@@ -78,6 +82,16 @@ public class EnemySpaceShipTest {
 
 	@Test
 	public void testFire() {
+		
+		List<Bomb> bomb = e.getBombs();
+		
+		int length = bomb.size();
+		
+		e.fire();
+		
+		bomb = e.getBombs();
+	    int length2 = bomb.size();
+		assertEquals(length+1, length2);
 		
 		
 	}

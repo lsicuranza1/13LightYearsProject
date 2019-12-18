@@ -43,7 +43,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private JLabel labelLiveScore;
 	private boolean bombe_flag = false;
 	
-	private List<EnemiesSpaceShip> enemies;
+	private List<EnemySpaceShip> enemies;
 //	private List<Missile> missile;
 
 	public PanelEsecuzione() {
@@ -70,7 +70,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
 		//this.bombs = new ArrayList<Bomb>();
-		this.enemies = new ArrayList<EnemiesSpaceShip>();
+		this.enemies = new ArrayList<EnemySpaceShip>();
 		this.bombeVaganti = new ArrayList<Bomb>();
 
 
@@ -150,7 +150,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 		
-		for(EnemiesSpaceShip enemy : enemies) {
+		for(EnemySpaceShip enemy : enemies) {
         	List<Bomb> lista = enemy.getBombs();
         	g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), 50, 60, this);
 
@@ -263,16 +263,16 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		
 		if (countToAddEnemies >= 150) {
 			int randX2 = random.nextInt(D_W);
-			enemies.add(new EnemiesSpaceShip(randX2, -20, fileNameEnemies));
+			enemies.add(new EnemySpaceShip(randX2, -20, fileNameEnemies));
 			enemies.get(enemies.size()-1).fire();
 			countToAddEnemies = 0;
 		}
 		countToAddEnemies++;
 		
-		Iterator<EnemiesSpaceShip> et = enemies.iterator();
+		Iterator<EnemySpaceShip> et = enemies.iterator();
 		
     	while(et.hasNext()) {
-    		EnemiesSpaceShip enemy = (EnemiesSpaceShip)et.next();
+    		EnemySpaceShip enemy = (EnemySpaceShip)et.next();
     		if (enemy.getY() >= D_H || !enemy.isVisible()) {
     			bombeVaganti = enemy.getBombs();;
 				et.remove();
@@ -378,7 +378,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 		
-		for(EnemiesSpaceShip enemy : enemies) {
+		for(EnemySpaceShip enemy : enemies) {
 			
 			enemyBounds = enemy.getBounds();
 			//System.out.println(bombBounds);

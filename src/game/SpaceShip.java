@@ -29,34 +29,34 @@ public class SpaceShip extends SpaceshipStructure {
 		
 		this.shoot_counter++;
 		
-		if (isShooting == true) {
+		if (this.isShooting()) {
 			fire();
 		}
 		
-		if (left == true) {
-			this.setX(this.getX() - SPACESHIP_SPEED);
+		if (this.isLeft()) {
+			this.setX(this.getX() - this.SPACESHIP_SPEED);
 			
 			if (this.getX() <= 10 - this.getWidth()) {
 				this.setX(1000 - 8);
 			}
 		}
 		
-		if (right == true) {
-			this.setX(this.getX() + SPACESHIP_SPEED);	
+		if (this.isRight()) {
+			this.setX(this.getX() + this.SPACESHIP_SPEED);	
 			if (this.getX() >= 1000 - 8) {
 				this.setX(10 - this.getWidth());
 			}
 		}
 		
-		if (up == true) {
-			this.setY(this.getY() - SPACESHIP_SPEED);
+		if (this.isUp()) {
+			this.setY(this.getY() - this.SPACESHIP_SPEED);
 			if (this.getY() <= 0) {
 				this.setY(0);
 			}
 		}
 		
-		if (down == true) {
-			this.setY(this.getY() + SPACESHIP_SPEED);
+		if (this.isDown()) {
+			this.setY(this.getY() + this.SPACESHIP_SPEED);
 			if (this.getY() >= 600 - (this.getHeight() * 7) / 5) {
 				this.setY(600 - (this.getHeight() * 7) / 5);
 			}
@@ -64,32 +64,6 @@ public class SpaceShip extends SpaceshipStructure {
 		
 	}
 	
-
-	public void keyPressed(KeyEvent e) {
-
-		int key = e.getKeyCode();
-		
-		if (key == KeyEvent.VK_SPACE) {
-			isShooting = true;
-		}
-
-		if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-			left = true;
-		}
-
-		if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-			right = true;
-		}
-
-		if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-			up = true;
-		}
-
-		if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-			down = true;
-		}
-	}
-
 	public void fire() {
 		List<Missile> missiles = this.getMissiles();
 		
@@ -99,29 +73,95 @@ public class SpaceShip extends SpaceshipStructure {
 		}
 		
 	}
+	
+
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
+	public boolean isShooting() {
+		return isShooting;
+	}
+
+	public void setShooting(boolean isShooting) {
+		this.isShooting = isShooting;
+	}
+
+	public void keyPressed(KeyEvent e) {
+
+		int key = e.getKeyCode();
+		
+		if (key == KeyEvent.VK_SPACE) {
+			this.setShooting(true);
+		}
+
+		if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+			this.setLeft(true);
+		}
+
+		if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
+			this.setRight(true);
+		}
+
+		if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
+			this.setUp(true);
+		}
+
+		if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
+			this.setDown(true);
+		}
+	}
 
 	public void keyReleased(KeyEvent e) {
 
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_SPACE) {
-			isShooting = false;
+			this.setShooting(false);
 		}
 
 		if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {			
-			left = false;
+			this.setLeft(false);
 		}
 
 		if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-			right = false;
+			this.setRight(false);
 		}
 
 		if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-			up = false;
+			this.setUp(false);
 		}
 
 		if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-			down = false;
+			this.setDown(false);
 		}
 	}
 

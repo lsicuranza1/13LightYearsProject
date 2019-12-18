@@ -27,8 +27,16 @@ public class PanelGameOver extends javax.swing.JFrame implements ActionListener 
 
 	private void initComponents() {
 
+<<<<<<< Updated upstream:src/game/PanelGameOver.java
 		dim = Toolkit.getDefaultToolkit().getScreenSize();
 		dim.setSize(1000, 600);
+=======
+		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
+		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
+		dim = new Dimension(widthMenu, heightMenu);
+>>>>>>> Stashed changes:src/game/GameOverFrame.java
 		this.setPreferredSize(dim.getSize());
 		ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/gameover2.png"),
 				dim.width, dim.height);
@@ -63,63 +71,7 @@ public class PanelGameOver extends javax.swing.JFrame implements ActionListener 
 		score.setMaximumSize(new java.awt.Dimension(250, 200));
 		score.setMinimumSize(new java.awt.Dimension(250, 200));
 
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 148;
-		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(300, 720, 0, 720);
-		jPanel1.add(score, gridBagConstraints);
-
-		jButton.setFont(new java.awt.Font("Inc Free", 1, 35));
-		jButton.setForeground(Color.CYAN);
-		jButton.setFocusPainted(false);
-		jButton.setOpaque(false);
-		jButton.setContentAreaFilled(false);
-		jButton.setBorderPainted(false);
-		jButton.setVerticalAlignment(1);
-		jButton.setOpaque(false);
-		jButton.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonActionPerformed(evt);
-			}
-		});
-
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 148;
-		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(200, 800, 0, 800);
-		jPanel1.add(jButton, gridBagConstraints);
-
-		jButton1.setFont(new java.awt.Font("Inc Free", 1, 24));
-		jButton1.setForeground(Color.orange);
-		jButton1.setFocusPainted(false);
-		jButton1.setOpaque(false);
-		jButton1.setContentAreaFilled(false);
-		jButton1.setBorderPainted(false);
-		jButton1.setVerticalAlignment(1);
-		jButton1.setOpaque(false);
-		jButton1.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton1.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton1.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt);
-			}
-		});
-		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.gridx = 0;
-		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 148;
-		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(250, 800, 0, 800);
-		jPanel1.add(jButton1, gridBagConstraints);
+		
 
 		sfondo.setMaximumSize(new java.awt.Dimension(1000, 1000));
 

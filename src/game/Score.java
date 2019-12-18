@@ -20,8 +20,5 @@ public class Score {
 		}
 	}
 	
-	public void decrementScoreValue(int decrement) {
-		this.scoreValue -= decrement;
-	}
 	
 }

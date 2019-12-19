@@ -187,7 +187,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			this.updateEnemies();
 			this.updateLives();
 			this.checkCollisions();
-			yOffset += yDelta;
+			this.yOffset += this.yDelta;
 
 			mainframe.getScore().updateScoreValue(1);
 			this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));

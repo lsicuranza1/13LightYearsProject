@@ -238,7 +238,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		int D_W = 1000; //COSTANTE
 		int D_H = 600; //COSTANTE
 
-		// maggiore è il valore minore è la frequenza di uscita degli asteroidi
+		// maggiore ï¿½ il valore minore ï¿½ la frequenza di uscita degli asteroidi
 		if (countToAddAsteroid >= 150) {
 			int randX1 = random.nextInt(D_W);
 			asteroids.add(new Asteroid(randX1, y_asteroid, fileNameAsteroid));
@@ -382,7 +382,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-
+				meteorite.removeBounds();
 				spaceShip.loseLife();
 				lives.getLast().setVisible(false);
 
@@ -401,7 +401,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
-
+				asteroid.removeBounds();
 				spaceShip.loseLife();
 				lives.getLast().setVisible(false);
 
@@ -417,7 +417,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				missileBounds = missile.getBounds();
 
 				if (missileBounds.intersects(asteroidBounds)) {
-
 					missile.setVisible(false);
 					asteroid.setVisible(false);
 				}
@@ -438,6 +437,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				
 
 				if(enemyBounds.intersects(spaceShipBounds)) {
+					enemy.removeBounds();
 					
 					spaceShip.loseLife();
 					lives.getLast().setVisible(false);
@@ -453,7 +453,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				for(Bomb bomb : enemy.getBombs()) {
 					bombBounds = bomb.getBounds();
 					if(bombBounds.intersects(spaceShipBounds)) {
-						
+						bomb.removeBounds();
 						spaceShip.loseLife();
 						lives.getLast().setVisible(false);
 						
@@ -472,6 +472,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				for(Bomb bomb : bombeVaganti){
 					bombeVagantiBounds = bomb.getBounds();
 					if(bombeVagantiBounds.intersects(spaceShipBounds)) {
+						bomb.removeBounds();
 						spaceShip.loseLife();
 						lives.getLast().setVisible(false);
 						if (spaceShip.getLives() == 0) {

@@ -312,10 +312,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 					MainFrame.getIstance().updateModalita("game_over");
 				} else {
 					meteorite.setVisible(false);
-					mainframe.getScore().decrementScoreValue(250);
+					if (mainframe.getScore().getScoreValue() == 0){}
+					else {
+						mainframe.getScore().decrementScoreValue(250);
 					scoreUpdate = "-250";
 					this.labelScoreUpdate.setVisible(true);
 					count = 0;
+					}
 				}
 			}
 
@@ -335,10 +338,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 					MainFrame.getIstance().updateModalita("game_over");
 				} else {
 					asteroid.setVisible(false);
-					mainframe.getScore().decrementScoreValue(250);
+					if (mainframe.getScore().getScoreValue() == 0) {}
+					else {
+						mainframe.getScore().decrementScoreValue(250);
 					scoreUpdate = "-250";
 					this.labelScoreUpdate.setVisible(true);
 					count = 0;
+					}
 				}
 			}
 

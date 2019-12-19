@@ -75,7 +75,6 @@ public class EnemySpaceShip extends SpaceshipStructure {
 		if(this.shoot_counter>=70) {
 			bomb.add(new Bomb(this.getX() + this.getWidth()/2-5,this.getY() + this.getHeight()-9,"../resources/images/missile_enemy.png"));
 			this.shoot_counter = 0;
-			System.out.println("Bomb sparata");
 		}
 		
 		this.shoot_counter++;

@@ -44,9 +44,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private final int DELAY = 20;
 	private Timer timer;
 	private JLabel labelLiveScore;
+	private JLabel labelScoreUpdate;
 	private JDialog dialog;
 	private List<EnemySpaceShip> enemies;
 	private boolean flagPause = false;
+	private String scoreUpdate = "";
+	private int count = 0; //serve per conteggiare il tempo in cui la label del bonus rimane sullo schermo
 
 	public PanelEsecuzione() {
 
@@ -54,12 +57,21 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.setFocusable(false);
 		mainframe.getScore().setScoreValue(0);
 		this.labelLiveScore = new JLabel("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
+		this.labelScoreUpdate = new JLabel("");
 		this.add(this.labelLiveScore);
+		this.add(this.labelScoreUpdate);
+		this.labelScoreUpdate.setVisible(false);
+		
 		this.setLayout(null);
 
 		this.labelLiveScore.setBounds(10, 10, 400, 50);
 		this.labelLiveScore.setForeground(Color.WHITE);
 		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
+		
+		this.labelScoreUpdate.setBounds(200, 10, 400, 50);
+		this.labelScoreUpdate.setForeground(Color.RED);
+		this.labelScoreUpdate.setFont(new Font("Serif", Font.BOLD, 22));
+		
 
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
@@ -67,6 +79,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.fileNameLife = "../resources/images/life.png";
 		this.fileNameBomb = "../resources/images/missile_enemy.png";
 		this.fileNameEnemies = "../resources/images/firstEnemy.png";
+		
 		this.spaceShip = new SpaceShip(500, 400, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
@@ -179,6 +192,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				dialog = null;
 			}
 			
+			if (count < 100) {
+				count++;
+			}
+			else {
+				this.labelScoreUpdate.setVisible(false);
+			}
+			
 			this.updateSpaceShip();
 			this.updateMissiles();
 			this.updateObstacles();
@@ -191,6 +211,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 			mainframe.getScore().updateScoreValue(1);
 			this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
+			this.labelScoreUpdate.setText(this.scoreUpdate);
 			this.repaint();
 		}
 
@@ -417,8 +438,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				missileBounds = missile.getBounds();
 
 				if (missileBounds.intersects(asteroidBounds)) {
+					missile.removeBounds();
 					missile.setVisible(false);
 					asteroid.setVisible(false);
+					mainframe.getScore().updateScoreValue(100);
+					this.scoreUpdate = "+100";
+					this.labelScoreUpdate.setVisible(true);
+					this.count = 0;
 				}
 
 			}
@@ -430,8 +456,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				for(Missile missile : missiles) {
 					missileBounds = missile.getBounds();
 					if(missileBounds.intersects(enemyBounds)) {
+						missile.removeBounds();
 						missile.setVisible(false);
 						enemy.setVisible(false);
+						mainframe.getScore().updateScoreValue(500);
+						this.scoreUpdate = "+500";
+						this.labelScoreUpdate.setVisible(true);
+						this.count = 0;
 					}
 				}
 				

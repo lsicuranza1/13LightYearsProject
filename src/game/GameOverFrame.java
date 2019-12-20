@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -28,12 +29,14 @@ public class GameOverFrame extends javax.swing.JFrame{
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		int widthMenu = (int) ((dimDisplay.getWidth() * 30) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
-		int heightMenu = (int) ((dimDisplay.getHeight() * 30) / 100);
+		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
+		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
 		dim = new Dimension(widthMenu, heightMenu);
 		this.setPreferredSize(dim.getSize());
 		ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/gameover2.png"),
 				(int) dim.getWidth(), (int) dim.getHeight());
+		
+		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2, (int) dimDisplay.getHeight() / 2 - heightMenu / 2);
 
 		java.awt.GridBagConstraints gridBagConstraints;
 
@@ -45,6 +48,7 @@ public class GameOverFrame extends javax.swing.JFrame{
 		score = new javax.swing.JButton("Great, your score is : " + mainFrame.getScore().getScoreValue());
 
 		setName("");
+		
 
 		jPanel1.setAlignmentX(0.0F);
 		jPanel1.setMinimumSize(dim.getSize());
@@ -52,6 +56,7 @@ public class GameOverFrame extends javax.swing.JFrame{
 		jPanel1.setOpaque(false);
 		jPanel1.setPreferredSize(dim.getSize());
 		jPanel1.setLayout(new java.awt.GridBagLayout());
+
 
 		score.setFont(new java.awt.Font("Inc Free", 1, 25));
 		score.setForeground(Color.red);
@@ -147,11 +152,8 @@ public class GameOverFrame extends javax.swing.JFrame{
 
 		pack();
 
-		sfondo.setPreferredSize(dim.getSize());
 		sfondo.setIcon(immagineSfondo);
-		jPanel1.add(sfondo);
 		this.setVisible(true);
-		this.add(jPanel1);
 		jPanel1.setFocusable(true);
 		jPanel1.requestFocus();
 

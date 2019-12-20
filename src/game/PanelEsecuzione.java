@@ -226,7 +226,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		Life life;
 		int xCoordLife = 10;
 
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 1; i++) {
 			final int shift = 30; // COSTANTE
 			life = new Life(xCoordLife, 60, fileNameLife);
 			lives.add(life);

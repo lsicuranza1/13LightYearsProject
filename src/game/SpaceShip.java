@@ -9,7 +9,7 @@ public class SpaceShip extends SpaceshipStructure {
 
 	private int dx;
 	private int dy;
-	private int lives = 3; //COSTANTE
+	private int lives = 1; //COSTANTE
 	private boolean isShooting = false;
 
 	public SpaceShip(int x, int y, String path) {

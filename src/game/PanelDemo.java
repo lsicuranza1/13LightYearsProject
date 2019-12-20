@@ -43,6 +43,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private JLabel labelMoveSpaceShip;
 	private boolean flagEnemies = false;
 	private int count = 0;
+	private boolean flagObstacles = false;
 
 	public PanelDemo() {
 
@@ -50,8 +51,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.setFocusable(false);
 
 		this.setLayout(null);
-
-		
 
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
@@ -63,7 +62,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
-		
+
 		this.enemies = new ArrayList<EnemySpaceShip>();
 		this.bombeVaganti = new ArrayList<Bomb>();
 
@@ -74,11 +73,11 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 		this.labelMoveSpaceShip = new JLabel("Press an arrow to move the spaceship");
 		this.add(this.labelMoveSpaceShip);
-		
+
 		this.labelMoveSpaceShip.setBounds(270, 50, 600, 400);
 		this.labelMoveSpaceShip.setForeground(Color.WHITE);
 		this.labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 30));
-		
+
 		this.timer = new Timer(DELAY, this);
 		this.timer.start();
 
@@ -134,7 +133,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 			g2d.drawImage(meteorite.getImage(), meteorite.getTransform(), this);
 		}
 
-
 		if (!bombeVaganti.isEmpty()) {
 			for (Bomb bomb : bombeVaganti) {
 				g2d.drawImage(bomb.getImage(), bomb.getX(), bomb.getY(), this);
@@ -153,25 +151,76 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		if(isMoveSpaceShip()) {
+//			
+//		}
+//		else if(isFlagEnemies()) {
+//			if(count>50) {
+//				setFlagEnemies(false);
+//				this.labelMoveSpaceShip.setVisible(false);
+//				this.updateEnemy();
+//				count=0;
+//			}
+//			else;
+//				count++;
+//				this.updateSpaceShip();
+//				this.repaint();
+//		}
+//		else {
+//			
+//			this.updateMissiles();
+////			this.updateObstacles();
+////			this.updateBombs();
+////			this.updateBombeVaganti();
+////			this.updateEnemies();
+//			this.moveEnemy();
+//			this.checkCollisions();
+//			this.yOffset += this.yDelta;
+//			this.updateSpaceShip();
+//			this.repaint();
+//			
+//		}
+//	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(isMoveSpaceShip()) {
-			
-		}
-		else if(isFlagEnemies()) {
-			if(count>50) {
-				setFlagEnemies(false);
+		if (isMoveSpaceShip()) {
+
+		} else if (isFlagObstacles()) {
+			if (count > 300) {
+				count = 0;
+				this.labelMoveSpaceShip.setText("Be careful to enemies");
+				this.labelMoveSpaceShip.setVisible(true);
+				this.deleteObstacles();
+				setFlagObstacles(false);
+				setFlagEnemies(true);
+			} else if (count > 50) {
 				this.labelMoveSpaceShip.setVisible(false);
-				this.updateEnemy();
-				count=0;
-			}
-			else;
+				this.updateObstacles();
+				this.updateSpaceShip();
+				this.repaint();
+				count++;
+			} else {
 				count++;
 				this.updateSpaceShip();
 				this.repaint();
-		}
-		else {
-			
+			}
+		} else if (isFlagEnemies()) {
+			if (count > 50) {
+				setFlagEnemies(false);
+				this.labelMoveSpaceShip.setVisible(false);
+				this.updateEnemy();
+				count = 0;
+			}
+			count++;
+			this.deleteObstacles();
+			this.updateSpaceShip();
+			this.repaint();
+
+		} else {
+
 			this.updateMissiles();
 //			this.updateObstacles();
 //			this.updateBombs();
@@ -182,11 +231,25 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.yOffset += this.yDelta;
 			this.updateSpaceShip();
 			this.repaint();
-			
+
 		}
 	}
 
+	private void deleteObstacles() {
 
+		for (Meteorite meteorite : meteorites) {
+
+			meteorite.setVisible(false);
+
+		}
+
+		for (Asteroid asteroid : asteroids) {
+
+			asteroid.setVisible(false);
+
+		}
+
+	}
 
 	private void updateMissiles() {
 
@@ -274,7 +337,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 //			countToAddEnemies = 0;
 //		}
 //		countToAddEnemies++;
-		
+
 		Iterator<EnemySpaceShip> et = enemies.iterator();
 
 //		while (et.hasNext()) {
@@ -300,7 +363,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			}
 		}
 	}
-	
+
 	public void moveEnemy() {
 		Iterator<EnemySpaceShip> et = enemies.iterator();
 
@@ -478,7 +541,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 //				}
 //			}
 //		}
-		
+
 		for (EnemySpaceShip enemy : enemies) {
 
 			enemyBounds = enemy.getBounds();
@@ -510,6 +573,14 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.flagEnemies = flagEnemies;
 	}
 
+	public boolean isFlagObstacles() {
+		return flagObstacles;
+	}
+
+	public void setFlagObstacles(boolean flagObstacles) {
+		this.flagObstacles = flagObstacles;
+	}
+
 	public class TAdapter extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
@@ -519,18 +590,18 @@ public class PanelDemo extends JPanel implements ActionListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
-			if (isMoveSpaceShip() && (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_DOWN || key == KeyEvent.VK_UP)) {
-				labelMoveSpaceShip.setText("Be careful to enemies");
+			if (isMoveSpaceShip() && (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_DOWN
+					|| key == KeyEvent.VK_UP)) {
+				labelMoveSpaceShip.setText("Avoid meteorites and asteroids");
 				labelMoveSpaceShip.setBounds(330, 50, 600, 400);
 				labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 40));
-				setFlagEnemies(true);
+				setFlagObstacles(true);
+				setFlagEnemies(false);
 				setMoveSpaceShip(false);
 			} else
 				spaceShip.keyPressed(e);
-			
+
 		}
 	}
-
-	
 
 }

@@ -26,8 +26,7 @@ public class Asteroid extends Sprite {
 
 		this.transform.setToTranslation(x, y);
 		this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.getAngle()),
-				this.getWidth() / 4, this.getHeight() / 4));
-		this.transform.scale(0.5, 0.5);
+				this.getWidth() / 2, this.getHeight() / 2));
 	}
 
 	public AffineTransform getTransform() {

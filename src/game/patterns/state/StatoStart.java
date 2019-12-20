@@ -223,7 +223,7 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 	}
 
 	private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-
+		mainFrame.updateModalita("demo");
 	}
 
 	@Override
@@ -233,7 +233,12 @@ public class StatoStart extends javax.swing.JFrame implements Stato {
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoInEsecuzione());
-
+		}
+		else if(stato.equals("demo")) {
+			mainFrame.getFrame().setTitle("Demo");
+			mainFrame.getFrame().getContentPane().removeAll();
+			mainFrame.getFrame().repaint();
+			modalita.setStatoModalita(new StatoDemo());
 		}
 	}
 

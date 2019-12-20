@@ -69,6 +69,10 @@ public class EnemySpaceShip extends SpaceshipStructure {
 
 	}
 	
+	public void move1() {
+		this.setY(this.getY()+1);
+	}
+	
 
 	public void fire() {
 		List<Bomb> bomb = this.getBombs();

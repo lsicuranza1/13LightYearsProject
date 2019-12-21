@@ -17,6 +17,10 @@ public class ScoreTest {
 		s = new Score();
 	}
 
+	@Test
+	public void testScore() {
+		fail("Not yet implemented");
+	}
 
 	@Test
 	public void testGetScoreValue() {

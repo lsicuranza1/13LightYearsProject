@@ -11,13 +11,11 @@ public class Score {
 	}
 
 	public void setScoreValue(int scoreValue) {
-		this.scoreValue = 0;
+		this.scoreValue = scoreValue;
 	}
 	
 	public void updateScoreValue(int increment) {
-		if (this.scoreValue >= 0) {
-			this.scoreValue += increment;
-		}
+		this.scoreValue += increment;
 	}
 	
 	

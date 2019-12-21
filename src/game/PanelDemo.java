@@ -24,7 +24,7 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class PanelDemo extends JPanel implements ActionListener {
-	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameBomb, fileNameEnemies;
+	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameEnemies;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
@@ -35,7 +35,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private int yDelta = 1; // variabile per lo scrollingBackground
 	private static int countToAddAsteroid = 0;
 	private static int countToAddMeteorite = 0;
-	private static int countToAddEnemies = 0;
 	private final int DELAY = 20;
 	private Timer timer;
 	private List<EnemySpaceShip> enemies;
@@ -45,6 +44,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private int count = 0;
 	private boolean flagObstacles = false;
 	private boolean flagSpace = false;
+	private int countAhia = 0;
 
 	public PanelDemo() {
 
@@ -56,7 +56,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
 		this.fileNameMeteorite = "../resources/images/meteorite.png";
-		this.fileNameBomb = "../resources/images/missile_enemy.png";
 		this.fileNameEnemies = "../resources/images/firstEnemy.png";
 
 		this.spaceShip = new SpaceShip(500, 400, fileNameSpaceShip);
@@ -152,59 +151,40 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		if(isMoveSpaceShip()) {
-//			
-//		}
-//		else if(isFlagEnemies()) {
-//			if(count>50) {
-//				setFlagEnemies(false);
-//				this.labelMoveSpaceShip.setVisible(false);
-//				this.updateEnemy();
-//				count=0;
-//			}
-//			else;
-//				count++;
-//				this.updateSpaceShip();
-//				this.repaint();
-//		}
-//		else {
-//			
-//			this.updateMissiles();
-////			this.updateObstacles();
-////			this.updateBombs();
-////			this.updateBombeVaganti();
-////			this.updateEnemies();
-//			this.moveEnemy();
-//			this.checkCollisions();
-//			this.yOffset += this.yDelta;
-//			this.updateSpaceShip();
-//			this.repaint();
-//			
-//		}
-//	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (isMoveSpaceShip()) {
 
 		} else if (isFlagObstacles()) {
-			if (count > 300) {
+			if (count > 800) {
 				count = 0;
 				this.labelMoveSpaceShip.setText("Be careful to enemies");
+				this.labelMoveSpaceShip.setForeground(Color.WHITE);
 				this.labelMoveSpaceShip.setVisible(true);
 				this.deleteObstacles();
 				setFlagObstacles(false);
 				setFlagEnemies(true);
+			} else if (count > 51) {
+				if (this.labelMoveSpaceShip.isVisible() && countAhia < 20) {
+					countAhia++;
+				} else {
+					this.labelMoveSpaceShip.setVisible(false);
+				}
+				this.updateObstacles();
+				this.updateSpaceShip();
+				this.checkCollisions();
+				this.repaint();
+				count++;
 			} else if (count > 50) {
 				this.labelMoveSpaceShip.setVisible(false);
 				this.updateObstacles();
 				this.updateSpaceShip();
+				this.checkCollisions();
 				this.repaint();
 				count++;
 			} else {
 				count++;
+				this.checkCollisions();
 				this.updateSpaceShip();
 				this.repaint();
 			}
@@ -220,7 +200,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.updateSpaceShip();
 			this.repaint();
 
-		} else if(isFlagSpace()){
+		} else if (isFlagSpace()) {
 			this.labelMoveSpaceShip.setText("Press space to kill the enemies");
 			this.labelMoveSpaceShip.setVisible(true);
 			this.updateMissiles();
@@ -229,19 +209,17 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.yOffset += this.yDelta;
 			this.updateSpaceShip();
 			this.repaint();
-		}
-		else {
-			if(count<50) {
+		} else {
+			if (count < 50) {
 				this.labelMoveSpaceShip.setText("In the space is not so easy");
 				this.labelMoveSpaceShip.setVisible(true);
 				count++;
 			}
-			if(count<100) {
+			else if (count < 100) {
 				this.labelMoveSpaceShip.setText("Good Game");
 				this.labelMoveSpaceShip.setForeground(Color.RED);
 				count++;
-			}
-			else {
+			} else {
 				MainFrame.getIstance().updateModalita("play");
 			}
 			this.updateMissiles();
@@ -333,33 +311,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	public void updateEnemy() {
-//		int D_W = 1000;
-//		int D_H = 600;
-//		Random random = new Random();
 		enemies.add(new EnemySpaceShip(500, 100, fileNameEnemies));
-//		if (countToAddEnemies >= 150) {
-//			int randX2 = random.nextInt(D_W);
-//			enemies.add(new EnemySpaceShip(500, -20, fileNameEnemies));
-//			enemies.get(enemies.size() - 1).fire();
-//			countToAddEnemies = 0;
-//		}
-//		countToAddEnemies++;
-
 		Iterator<EnemySpaceShip> et = enemies.iterator();
-
-//		while (et.hasNext()) {
-//			EnemySpaceShip enemy = (EnemySpaceShip) et.next();
-//			if (enemy.getY() >= D_H || !enemy.isVisible()) {
-//				bombeVaganti = enemy.getBombs();
-//				;
-//				et.remove();
-//			} else {
-//				enemy.fire();
-//				enemy.move();
-//				enemy.setBounds();
-//			}
-//
-//		}
 		while (et.hasNext()) {
 			EnemySpaceShip enemy = (EnemySpaceShip) et.next();
 			if (!enemy.isVisible()) {
@@ -373,94 +326,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	public void moveEnemy() {
 		Iterator<EnemySpaceShip> et = enemies.iterator();
-
-//		while (et.hasNext()) {
-//			EnemySpaceShip enemy = (EnemySpaceShip) et.next();
-//			if (enemy.getY() >= D_H || !enemy.isVisible()) {
-//				bombeVaganti = enemy.getBombs();
-//				;
-//				et.remove();
-//			} else {
-//				enemy.fire();
-//				enemy.move();
-//				enemy.setBounds();
-//			}
-//
-//		}
 		while (et.hasNext()) {
 			EnemySpaceShip enemy = (EnemySpaceShip) et.next();
 			if (!enemy.isVisible()) {
 				et.remove();
-			}
-		}
-	}
-
-	public void updateEnemies() {
-		int D_W = 1000;
-		int D_H = 600;
-		Random random = new Random();
-
-		if (countToAddEnemies >= 150) {
-			int randX2 = random.nextInt(D_W);
-			enemies.add(new EnemySpaceShip(randX2, -20, fileNameEnemies));
-			enemies.get(enemies.size() - 1).fire();
-			countToAddEnemies = 0;
-		}
-		countToAddEnemies++;
-
-		Iterator<EnemySpaceShip> et = enemies.iterator();
-
-		while (et.hasNext()) {
-			EnemySpaceShip enemy = (EnemySpaceShip) et.next();
-			if (enemy.getY() >= D_H || !enemy.isVisible()) {
-				bombeVaganti = enemy.getBombs();
-				;
-				et.remove();
-			} else {
-				enemy.fire();
-				enemy.move();
-				enemy.setBounds();
-			}
-
-		}
-	}
-
-	private void updateBombs() {
-
-		for (int i = 0; i < enemies.size(); i++) {
-			List<Bomb> bombs = enemies.get(i).getBombs();
-
-			for (int j = 0; j < bombs.size(); j++) {
-				Bomb bomba = bombs.get(j);
-				if (bomba.isVisible()) {
-					bomba.move();
-					bomba.setBounds();
-					if (bomba.getY() > 650) {
-//		        		bomba.setY(enemies.get(i).getY()+50);
-//		        		bomba.setX(enemies.get(i).getX()+15);
-						bomba.setVisible(false);
-					}
-				} else {
-					bombs.remove(bomba);
-				}
-			}
-		}
-
-	}
-
-	public void updateBombeVaganti() {
-		if (!bombeVaganti.isEmpty()) {
-			for (int i = 0; i < bombeVaganti.size(); i++) {
-				Bomb bomba = bombeVaganti.get(i);
-				if (bomba.isVisible()) {
-					bomba.move();
-					bomba.setBounds();
-					if (bomba.getY() > 650) {
-						bomba.setVisible(false);
-					}
-				} else {
-					bombeVaganti.remove(bomba);
-				}
 			}
 		}
 	}
@@ -472,82 +341,38 @@ public class PanelDemo extends JPanel implements ActionListener {
 		Rectangle2D meteoriteBounds;
 		Rectangle2D missileBounds;
 		Rectangle2D enemyBounds;
-		Rectangle2D bombBounds;
-		Rectangle2D bombeVagantiBounds;
 
-//		for (Meteorite meteorite : meteorites) {
-//
-//			meteoriteBounds = meteorite.getBounds();
-//
-//			if (meteoriteBounds.intersects(spaceShipBounds)) {
-//				meteorite.removeBounds();
-//				meteorite.setVisible(false);
-//				
-//			}
-//
-//		}
+		for (Meteorite meteorite : meteorites) {
 
-//		for (Asteroid asteroid : asteroids) {
-//
-//			asteroidBounds = asteroid.getBounds();
-//
-//			if (spaceShipBounds.intersects(asteroidBounds)) {
-//				asteroid.removeBounds();
-//				asteroid.setVisible(false);
-//				
-//			}
-//
-//			for (Missile missile : missiles) {
-//				missileBounds = missile.getBounds();
-//
-//				if (missileBounds.intersects(asteroidBounds)) {
-//					missile.removeBounds();
-//					missile.setVisible(false);
-//					asteroid.setVisible(false);
-//				}
-//
-//			}
-//
-//			for (EnemySpaceShip enemy : enemies) {
-//
-//				enemyBounds = enemy.getBounds();
-//
-//				for (Missile missile : missiles) {
-//					missileBounds = missile.getBounds();
-//					if (missileBounds.intersects(enemyBounds)) {
-//						missile.removeBounds();
-//						missile.setVisible(false);
-//						enemy.setVisible(false);
-//					}
-//				}
-//
-//				if (enemyBounds.intersects(spaceShipBounds)) {
-//					enemy.removeBounds();
-//					enemy.setVisible(false);
-//					
-//				}
-//
-//				for (Bomb bomb : enemy.getBombs()) {
-//					bombBounds = bomb.getBounds();
-//					if (bombBounds.intersects(spaceShipBounds)) {
-//						bomb.removeBounds();
-//						bomb.setVisible(false);
-//						
-//					}
-//				}
-//
-//			}
-//
-//			if (!bombeVaganti.isEmpty()) {
-//				for (Bomb bomb : bombeVaganti) {
-//					bombeVagantiBounds = bomb.getBounds();
-//					if (bombeVagantiBounds.intersects(spaceShipBounds)) {
-//						bomb.removeBounds();
-//						bomb.setVisible(false);
-//					}
-//				}
-//			}
-//		}
+			meteoriteBounds = meteorite.getBounds();
+
+			if (meteoriteBounds.intersects(spaceShipBounds)) {
+				meteorite.removeBounds();
+				countAhia = 0;
+				this.labelMoveSpaceShip.setForeground(Color.RED);
+				this.labelMoveSpaceShip.setText("AHIA");
+				this.labelMoveSpaceShip.setVisible(true);
+				meteorite.setVisible(false);
+
+			}
+
+		}
+
+		for (Asteroid asteroid : asteroids) {
+
+			asteroidBounds = asteroid.getBounds();
+
+			if (spaceShipBounds.intersects(asteroidBounds)) {
+				this.labelMoveSpaceShip.setForeground(Color.RED);
+				this.labelMoveSpaceShip.setText("AHIA");
+				countAhia = 0;
+				this.labelMoveSpaceShip.setVisible(true);
+				asteroid.removeBounds();
+				asteroid.setVisible(false);
+
+			}
+
+		}
 
 		for (EnemySpaceShip enemy : enemies) {
 
@@ -614,7 +439,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				setFlagObstacles(true);
 				setFlagEnemies(false);
 				setMoveSpaceShip(false);
-			} else if(isFlagSpace() || !(key == KeyEvent.VK_SPACE))
+			} else if (isFlagSpace() || !(key == KeyEvent.VK_SPACE))
 				spaceShip.keyPressed(e);
 
 		}

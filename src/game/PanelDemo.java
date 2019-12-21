@@ -44,6 +44,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private boolean flagEnemies = false;
 	private int count = 0;
 	private boolean flagObstacles = false;
+	private boolean flagSpace = false;
 
 	public PanelDemo() {
 
@@ -210,45 +211,51 @@ public class PanelDemo extends JPanel implements ActionListener {
 		} else if (isFlagEnemies()) {
 			if (count > 50) {
 				setFlagEnemies(false);
+				setFlagSpace(true);
 				this.labelMoveSpaceShip.setVisible(false);
 				this.updateEnemy();
 				count = 0;
 			}
 			count++;
-			this.deleteObstacles();
 			this.updateSpaceShip();
 			this.repaint();
 
-		} else {
-
+		} else if(isFlagSpace()){
+			this.labelMoveSpaceShip.setText("Press space to kill the enemies");
+			this.labelMoveSpaceShip.setVisible(true);
 			this.updateMissiles();
-//			this.updateObstacles();
-//			this.updateBombs();
-//			this.updateBombeVaganti();
-//			this.updateEnemies();
 			this.moveEnemy();
 			this.checkCollisions();
 			this.yOffset += this.yDelta;
 			this.updateSpaceShip();
 			this.repaint();
-
+		}
+		else {
+			if(count<50) {
+				this.labelMoveSpaceShip.setText("In the space is not so easy");
+				this.labelMoveSpaceShip.setVisible(true);
+				count++;
+			}
+			if(count<100) {
+				this.labelMoveSpaceShip.setText("Good Game");
+				this.labelMoveSpaceShip.setForeground(Color.RED);
+				count++;
+			}
+			else {
+				MainFrame.getIstance().updateModalita("play");
+			}
+			this.updateMissiles();
+			this.moveEnemy();
+			this.checkCollisions();
+			this.yOffset += this.yDelta;
+			this.updateSpaceShip();
+			this.repaint();
 		}
 	}
 
 	private void deleteObstacles() {
-
-		for (Meteorite meteorite : meteorites) {
-
-			meteorite.setVisible(false);
-
-		}
-
-		for (Asteroid asteroid : asteroids) {
-
-			asteroid.setVisible(false);
-
-		}
-
+		meteorites.removeAll(meteorites);
+		asteroids.removeAll(asteroids);
 	}
 
 	private void updateMissiles() {
@@ -552,6 +559,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 					missile.removeBounds();
 					missile.setVisible(false);
 					enemy.setVisible(false);
+					setFlagSpace(false);
 				}
 			}
 		}
@@ -581,6 +589,14 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.flagObstacles = flagObstacles;
 	}
 
+	public boolean isFlagSpace() {
+		return flagSpace;
+	}
+
+	public void setFlagSpace(boolean flagSpace) {
+		this.flagSpace = flagSpace;
+	}
+
 	public class TAdapter extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
@@ -598,7 +614,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				setFlagObstacles(true);
 				setFlagEnemies(false);
 				setMoveSpaceShip(false);
-			} else
+			} else if(isFlagSpace() || !(key == KeyEvent.VK_SPACE))
 				spaceShip.keyPressed(e);
 
 		}

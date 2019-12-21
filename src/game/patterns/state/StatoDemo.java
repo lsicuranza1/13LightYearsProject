@@ -22,18 +22,8 @@ public class StatoDemo implements Stato {
 
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("game_over")) {
-			mainFrame.getFrame().setTitle("GameOver");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
-			modalita.setStatoModalita(new StatoGameOver());
-		} else if (stato.equals("main_menu")) {
-			mainFrame.getFrame().setTitle("Start");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
-			modalita.setStatoModalita(new StatoStart());
-		}else if (stato.equals("restart")) {
-			mainFrame.getFrame().setTitle("Start");
+		if (stato.equals("play")) {
+			mainFrame.getFrame().setTitle("Game");
 			mainFrame.getFrame().getContentPane().removeAll();
 			mainFrame.getFrame().repaint();
 			modalita.setStatoModalita(new StatoInEsecuzione());

@@ -21,14 +21,12 @@ public class StatoGameOver implements Stato {
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
 		if (stato.equals("start")) {
-			mainFrame.getFrame().setTitle("Start");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoStart());
 		} else if (stato.equals("in_esecuzione")) {
-			mainFrame.getFrame().setTitle("Gioco");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoInEsecuzione());
 		}
 	}

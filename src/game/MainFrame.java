@@ -15,10 +15,6 @@ public class MainFrame {
 	private Modalita modalita;
 	private Score score;
 
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	double width = screenSize.getWidth();
-	double height = screenSize.getHeight();
-
 	// Singleton
 	private static MainFrame istance = null;
 
@@ -35,13 +31,9 @@ public class MainFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame window = MainFrame.getIstance();
-					//window.setFrame(new StatoStart());
-					window.setModalita(new Modalita());
-					window.setScore(new Score());
-//					window.getFrame().setVisible(true);
-//					window.getFrame().setTitle("13 Light Years - Menù Principale");
-//					window.getFrame().setVisible(true);
+					MainFrame mainFrame = MainFrame.getIstance();
+					mainFrame.setModalita(new Modalita());
+					mainFrame.setScore(new Score());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

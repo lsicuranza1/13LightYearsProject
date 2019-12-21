@@ -14,9 +14,9 @@ import javax.swing.ImageIcon;
 public class GameOverFrame extends javax.swing.JFrame{
 	private Dimension dim;
 	private MainFrame mainFrame = MainFrame.getIstance();
-	private javax.swing.JButton jButton;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JButton jButton1;
+	private javax.swing.JPanel panelGameOver;
+	private javax.swing.JButton playAgainButton;
+	private javax.swing.JButton mainMenuButton;
 	private javax.swing.JLabel sfondo;
 	private javax.swing.JButton score;
 
@@ -37,25 +37,27 @@ public class GameOverFrame extends javax.swing.JFrame{
 				(int) dim.getWidth(), (int) dim.getHeight());
 		
 		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2, (int) dimDisplay.getHeight() / 2 - heightMenu / 2);
-
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setTitle("13 Light Years - Menu' Principale");
+		
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		jPanel1 = new javax.swing.JPanel();
-
-		jButton = new javax.swing.JButton("Play Again");
-		jButton1 = new javax.swing.JButton("Main Menu");
+		panelGameOver = new javax.swing.JPanel();
+		playAgainButton = new javax.swing.JButton("Play Again");
+		mainMenuButton = new javax.swing.JButton("Main Menu");
 		sfondo = new javax.swing.JLabel();
 		score = new javax.swing.JButton("Great, your score is : " + mainFrame.getScore().getScoreValue());
+		sfondo.setIcon(immagineSfondo);
 
 		setName("");
 		
 
-		jPanel1.setAlignmentX(0.0F);
-		jPanel1.setMinimumSize(dim.getSize());
-		jPanel1.setName("");
-		jPanel1.setOpaque(false);
-		jPanel1.setPreferredSize(dim.getSize());
-		jPanel1.setLayout(new java.awt.GridBagLayout());
+		panelGameOver.setAlignmentX(0.0F);
+		panelGameOver.setMinimumSize(dim.getSize());
+		panelGameOver.setName("");
+		panelGameOver.setOpaque(false);
+		panelGameOver.setPreferredSize(dim.getSize());
+		panelGameOver.setLayout(new java.awt.GridBagLayout());
 
 
 		score.setFont(new java.awt.Font("Inc Free", 1, 25));
@@ -76,21 +78,21 @@ public class GameOverFrame extends javax.swing.JFrame{
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(300, 720, 0, 720);
-		jPanel1.add(score, gridBagConstraints);
+		panelGameOver.add(score, gridBagConstraints);
 
-		jButton.setFont(new java.awt.Font("Inc Free", 1, 35));
-		jButton.setForeground(Color.CYAN);
-		jButton.setFocusPainted(false);
-		jButton.setOpaque(false);
-		jButton.setContentAreaFilled(false);
-		jButton.setBorderPainted(false);
-		jButton.setVerticalAlignment(1);
-		jButton.setOpaque(false);
-		jButton.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton.addActionListener(new java.awt.event.ActionListener() {
+		playAgainButton.setFont(new java.awt.Font("Inc Free", 1, 35));
+		playAgainButton.setForeground(Color.CYAN);
+		playAgainButton.setFocusPainted(false);
+		playAgainButton.setOpaque(false);
+		playAgainButton.setContentAreaFilled(false);
+		playAgainButton.setBorderPainted(false);
+		playAgainButton.setVerticalAlignment(1);
+		playAgainButton.setOpaque(false);
+		playAgainButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		playAgainButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		playAgainButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButtonActionPerformed(evt);
+				playAgainButtonActionPerformed(evt);
 			}
 		});
 
@@ -101,21 +103,21 @@ public class GameOverFrame extends javax.swing.JFrame{
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(200, 800, 0, 800);
-		jPanel1.add(jButton, gridBagConstraints);
+		panelGameOver.add(playAgainButton, gridBagConstraints);
 
-		jButton1.setFont(new java.awt.Font("Inc Free", 1, 24));
-		jButton1.setForeground(Color.orange);
-		jButton1.setFocusPainted(false);
-		jButton1.setOpaque(false);
-		jButton1.setContentAreaFilled(false);
-		jButton1.setBorderPainted(false);
-		jButton1.setVerticalAlignment(1);
-		jButton1.setOpaque(false);
-		jButton1.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton1.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton1.addActionListener(new java.awt.event.ActionListener() {
+		mainMenuButton.setFont(new java.awt.Font("Inc Free", 1, 24));
+		mainMenuButton.setForeground(Color.orange);
+		mainMenuButton.setFocusPainted(false);
+		mainMenuButton.setOpaque(false);
+		mainMenuButton.setContentAreaFilled(false);
+		mainMenuButton.setBorderPainted(false);
+		mainMenuButton.setVerticalAlignment(1);
+		mainMenuButton.setOpaque(false);
+		mainMenuButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		mainMenuButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton1ActionPerformed(evt);
+				mainMenuButtonActionPerformed(evt);
 			}
 		});
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -125,17 +127,17 @@ public class GameOverFrame extends javax.swing.JFrame{
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(250, 800, 0, 800);
-		jPanel1.add(jButton1, gridBagConstraints);
+		panelGameOver.add(mainMenuButton, gridBagConstraints);
 
 
-		jPanel1.getAccessibleContext().setAccessibleName("");
-		jPanel1.getAccessibleContext().setAccessibleDescription("");
+		panelGameOver.getAccessibleContext().setAccessibleName("");
+		panelGameOver.getAccessibleContext().setAccessibleDescription("");
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+						.addComponent(panelGameOver, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
 										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getWidth(),
@@ -143,7 +145,7 @@ public class GameOverFrame extends javax.swing.JFrame{
 										.addGap(0, 0, Short.MAX_VALUE))));
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+						.addComponent(panelGameOver, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
 										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getHeight(),
@@ -152,19 +154,18 @@ public class GameOverFrame extends javax.swing.JFrame{
 
 		pack();
 
-		sfondo.setIcon(immagineSfondo);
-		this.setVisible(true);
-		jPanel1.setFocusable(true);
-		jPanel1.requestFocus();
+		
+		panelGameOver.setFocusable(true);
+		panelGameOver.requestFocus();
 
 	}
 
-	protected void jButton1ActionPerformed(ActionEvent evt) {
+	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
 
 		mainFrame.updateModalita("start");
 	}
 
-	private void jButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 		mainFrame.updateModalita("in_esecuzione");
 	}

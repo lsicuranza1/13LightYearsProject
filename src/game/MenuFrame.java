@@ -16,10 +16,10 @@ public class MenuFrame extends JFrame {
 	private Dimension dim;
 //	public static Clip gameClip;
 //	public static boolean demo = false;
-	private javax.swing.JButton jButton2;
-	private javax.swing.JButton jButton3;
-	private javax.swing.JButton jButton4;
-	private javax.swing.JButton jButton5;
+	private javax.swing.JButton playButton;
+	private javax.swing.JButton scoreBoardButton;
+	private javax.swing.JButton settingsButton;
+	private javax.swing.JButton demoButton;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JLabel sfondo;
 
@@ -37,10 +37,10 @@ public class MenuFrame extends JFrame {
 		java.awt.GridBagConstraints gridBagConstraints;
 
 		jPanel1 = new javax.swing.JPanel();
-		jButton2 = new javax.swing.JButton();
-		jButton3 = new javax.swing.JButton();
-		jButton4 = new javax.swing.JButton();
-		jButton5 = new javax.swing.JButton();
+		playButton = new javax.swing.JButton();
+		scoreBoardButton = new javax.swing.JButton();
+		settingsButton = new javax.swing.JButton();
+		demoButton = new javax.swing.JButton();
 		sfondo = new javax.swing.JLabel();
 
 		Image iconaFrame;
@@ -56,6 +56,8 @@ public class MenuFrame extends JFrame {
 
 		ImageIcon immagineSfondo = ridimensionaImageIcon(
 				getClass().getResource("../resources/images/sfondo_menu.png"), widthMenu, heightMenu);
+		
+		sfondo.setIcon(immagineSfondo);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years - Menu' Principale");
@@ -72,19 +74,19 @@ public class MenuFrame extends JFrame {
 		jPanel1.setPreferredSize(dim.getSize());
 		jPanel1.setLayout(new java.awt.GridBagLayout());
 
-		jButton2.setBackground(new java.awt.Color(255, 255, 255));
-		jButton2.setFont(new java.awt.Font("Gabriola", 0, 40));
-		jButton2.setForeground(new java.awt.Color(255, 255, 255));
-		jButton2.setText("Play");
-		jButton2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), null));
-		jButton2.setContentAreaFilled(false);
-		jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-		jButton2.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton2.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton2.setPreferredSize(new java.awt.Dimension(107, 25));
-		jButton2.addActionListener(new java.awt.event.ActionListener() {
+		playButton.setBackground(new java.awt.Color(255, 255, 255));
+		playButton.setFont(new java.awt.Font("Gabriola", 0, 40));
+		playButton.setForeground(new java.awt.Color(255, 255, 255));
+		playButton.setText("Play");
+		playButton.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), null));
+		playButton.setContentAreaFilled(false);
+		playButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		playButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		playButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		playButton.setPreferredSize(new java.awt.Dimension(107, 25));
+		playButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton2ActionPerformed(evt);
+				playButtonActionPerformed(evt);
 			}
 		});
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -94,20 +96,20 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(269, 70, 0, 695);
-		jPanel1.add(jButton2, gridBagConstraints);
+		jPanel1.add(playButton, gridBagConstraints);
 
-		jButton3.setFont(new java.awt.Font("Gabriola", 0, 40));
-		jButton3.setForeground(new java.awt.Color(255, 255, 255));
-		jButton3.setText("Scoreboard");
-		jButton3.setToolTipText("");
-		jButton3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		jButton3.setContentAreaFilled(false);
-		jButton3.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton3.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton3.setPreferredSize(new java.awt.Dimension(107, 25));
-		jButton3.addActionListener(new java.awt.event.ActionListener() {
+		scoreBoardButton.setFont(new java.awt.Font("Gabriola", 0, 40));
+		scoreBoardButton.setForeground(new java.awt.Color(255, 255, 255));
+		scoreBoardButton.setText("Scoreboard");
+		scoreBoardButton.setToolTipText("");
+		scoreBoardButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+		scoreBoardButton.setContentAreaFilled(false);
+		scoreBoardButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		scoreBoardButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		scoreBoardButton.setPreferredSize(new java.awt.Dimension(107, 25));
+		scoreBoardButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton3ActionPerformed(evt);
+				scoreBoardButtonActionPerformed(evt);
 			}
 		});
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -117,19 +119,19 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
-		jPanel1.add(jButton3, gridBagConstraints);
+		jPanel1.add(scoreBoardButton, gridBagConstraints);
 
-		jButton4.setFont(new java.awt.Font("Gabriola", 0, 40));
-		jButton4.setForeground(new java.awt.Color(255, 255, 255));
-		jButton4.setText("Settings");
-		jButton4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		jButton4.setContentAreaFilled(false);
-		jButton4.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton4.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton4.setPreferredSize(new java.awt.Dimension(107, 25));
-		jButton4.addActionListener(new java.awt.event.ActionListener() {
+		settingsButton.setFont(new java.awt.Font("Gabriola", 0, 40));
+		settingsButton.setForeground(new java.awt.Color(255, 255, 255));
+		settingsButton.setText("Settings");
+		settingsButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+		settingsButton.setContentAreaFilled(false);
+		settingsButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		settingsButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		settingsButton.setPreferredSize(new java.awt.Dimension(107, 25));
+		settingsButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton4ActionPerformed(evt);
+				settingsButtonActionPerformed(evt);
 			}
 		});
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -139,21 +141,21 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 65, 695);
-		jPanel1.add(jButton4, gridBagConstraints);
-		jButton4.getAccessibleContext().setAccessibleDescription("");
+		jPanel1.add(settingsButton, gridBagConstraints);
+		settingsButton.getAccessibleContext().setAccessibleDescription("");
 
-		jButton5.setFont(new java.awt.Font("Gabriola", 0, 40));
-		jButton5.setForeground(new java.awt.Color(255, 255, 255));
-		jButton5.setText("Demo");
-		jButton5.setToolTipText("");
-		jButton5.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-		jButton5.setContentAreaFilled(false);
-		jButton5.setMaximumSize(new java.awt.Dimension(107, 25));
-		jButton5.setMinimumSize(new java.awt.Dimension(107, 25));
-		jButton5.setPreferredSize(new java.awt.Dimension(107, 25));
-		jButton5.addActionListener(new java.awt.event.ActionListener() {
+		demoButton.setFont(new java.awt.Font("Gabriola", 0, 40));
+		demoButton.setForeground(new java.awt.Color(255, 255, 255));
+		demoButton.setText("Demo");
+		demoButton.setToolTipText("");
+		demoButton.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+		demoButton.setContentAreaFilled(false);
+		demoButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		demoButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		demoButton.setPreferredSize(new java.awt.Dimension(107, 25));
+		demoButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				jButton5ActionPerformed(evt);
+				demoButtonActionPerformed(evt);
 			}
 		});
 		gridBagConstraints = new java.awt.GridBagConstraints();
@@ -163,7 +165,7 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
-		jPanel1.add(jButton5, gridBagConstraints);
+		jPanel1.add(demoButton, gridBagConstraints);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -188,38 +190,27 @@ public class MenuFrame extends JFrame {
 		jPanel1.getAccessibleContext().setAccessibleDescription("");
 
 		pack();
-		
-		if (mainFrame.getFrame() != null) {
-			sfondo.setPreferredSize(dim.getSize());
-			sfondo.setIcon(immagineSfondo);
 
-			jPanel1.add(sfondo);
-			mainFrame.getFrame().setVisible(true);
-			mainFrame.getFrame().add(jPanel1);
-			jPanel1.setFocusable(true);
-			jPanel1.requestFocus();
-		} else {
-			sfondo.setPreferredSize(new Dimension(30, 40));
-			sfondo.setIcon(immagineSfondo);
-		}
+		jPanel1.setFocusable(true);
+		jPanel1.requestFocus();
 	}
 
-	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		mainFrame.updateModalita("in_esecuzione");
 
 	}
 
-	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-		
-	}
+	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-	private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+	}
+	
+	private void scoreBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {
+
+	}
+	
+	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		Settings set = new Settings(this, true, false);
 		set.setVisible(true);
-	}
-
-	private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-
 	}
 
 }

@@ -20,9 +20,10 @@ public class ExecutionFrame extends JFrame {
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		int widthMenu = (int) ((dimDisplay.getWidth() * 50) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
-		int heightMenu = (int) ((dimDisplay.getHeight() * 90) / 100);
+		int heightMenu = (int) ((dimDisplay.getHeight() * 85) / 100);
 		dim = new Dimension(widthMenu, heightMenu);
 		
+		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		this.setTitle("Game");
 		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2, (int) dimDisplay.getHeight() / 2 - heightMenu / 2);
 		this.setResizable(false);

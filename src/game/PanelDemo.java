@@ -29,7 +29,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
 	private List<Meteorite> meteorites;
-	private List<Bomb> bombeVaganti;
 	private BufferedImage scrollingBackground;
 	private int yOffset = 0; // variabile per lo scrollingBackground
 	private int yDelta = 1; // variabile per lo scrollingBackground
@@ -64,7 +63,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.meteorites = new ArrayList<Meteorite>();
 
 		this.enemies = new ArrayList<EnemySpaceShip>();
-		this.bombeVaganti = new ArrayList<Bomb>();
 
 		try {
 			this.scrollingBackground = ImageIO.read(getClass().getResource("../resources/images/space.jpg"));
@@ -133,11 +131,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 			g2d.drawImage(meteorite.getImage(), meteorite.getTransform(), this);
 		}
 
-		if (!bombeVaganti.isEmpty()) {
-			for (Bomb bomb : bombeVaganti) {
-				g2d.drawImage(bomb.getImage(), bomb.getX(), bomb.getY(), this);
-			}
-		}
 
 		for (EnemySpaceShip enemy : enemies) {
 			List<Bomb> lista = enemy.getBombs();

@@ -29,7 +29,6 @@ public class Asteroid extends Sprite implements SpriteInterface {
 				this.getWidth() / 2, this.getHeight() / 2));
 	}
 
-	@Override
 	public AffineTransform getTransform() {
 		return transform;
 	}

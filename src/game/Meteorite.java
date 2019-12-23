@@ -22,7 +22,6 @@ public class Meteorite extends Sprite implements SpriteInterface {
 
 	}
 
-	@Override
 	public AffineTransform getTransform() {
 		return transform;
 	}

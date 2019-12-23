@@ -12,6 +12,7 @@ import game.MainFrame;
 import game.Score;
 import game.patterns.state.Modalita;
 import game.patterns.state.Stato;
+import game.patterns.state.StatoDemo;
 import game.patterns.state.StatoInEsecuzione;
 import game.patterns.state.StatoStart;
 
@@ -36,6 +37,11 @@ public class StatoStartTest {
 		assertEquals("Gioco", main.getFrame().getTitle());
 		assertEquals(1, main.getFrame().getContentPane().getComponentCount());
 		assertTrue(m.getStatoModalita() instanceof StatoInEsecuzione);
+		
+		stato.gestioneStato(m, "demo");
+		assertEquals("Demo", main.getFrame().getTitle());
+		assertEquals(1, main.getFrame().getContentPane().getComponentCount());
+		assertTrue(m.getStatoModalita() instanceof StatoDemo);
 	}
 
 }

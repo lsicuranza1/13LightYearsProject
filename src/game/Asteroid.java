@@ -4,7 +4,7 @@ import java.awt.geom.AffineTransform;
 
 import javax.swing.JPanel;
 
-public class Asteroid extends Sprite {
+public class Asteroid extends Sprite implements ObstacleInterface {
 	JPanel panel;
 	private int angle;
 	private AffineTransform transform;
@@ -29,6 +29,7 @@ public class Asteroid extends Sprite {
 				this.getWidth() / 2, this.getHeight() / 2));
 	}
 
+	@Override
 	public AffineTransform getTransform() {
 		return transform;
 	}

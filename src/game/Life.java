@@ -7,7 +7,6 @@ public class Life extends Sprite {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void move() {
 		
 	}

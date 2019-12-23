@@ -2,7 +2,7 @@ package game;
 
 import java.awt.geom.AffineTransform;
 
-public class Meteorite extends Sprite {
+public class Meteorite extends Sprite implements ObstacleInterface {
 
 	private AffineTransform transform;
 
@@ -11,6 +11,7 @@ public class Meteorite extends Sprite {
 		this.transform = new AffineTransform(); //scegliere se metterlo anche nelle altre classi per la traslazione
 	}
 
+	@Override
 	public void move() {
 
 		int x = this.getX();
@@ -21,6 +22,7 @@ public class Meteorite extends Sprite {
 
 	}
 
+	@Override
 	public AffineTransform getTransform() {
 		return transform;
 	}

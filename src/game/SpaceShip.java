@@ -45,8 +45,6 @@ public class SpaceShip extends SpaceshipStructure {
 	}
 
 
-
-	@Override
 	public void move() {
 		
 		this.shoot_counter++;

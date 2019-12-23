@@ -30,7 +30,7 @@ import game.patterns.factoryMethod.SpriteFactory;
 @SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener {
 	private MainFrame mainframe = MainFrame.getIstance();
-	private String fileNameBomb;
+	private String fileNameSpaceShip, fileNameLife, fileNameEnemy, fileNameBomb;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
@@ -74,9 +74,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.labelScoreUpdate.setForeground(Color.RED);
 		this.labelScoreUpdate.setFont(new Font("Serif", Font.BOLD, 22));
 		
+		this.fileNameSpaceShip = "../resources/images/spaceship.png";
+		this.fileNameEnemy = "../resources/images/firstEnemy.png";
+		this.fileNameLife = "../resources/images/life.png";
 		this.fileNameBomb = "../resources/images/missile_enemy.png";
 		
-		this.spaceShip = (SpaceShip) new SpriteFactory().getSprite("spaceship", 0);  //FACTORY METHOD TO CREATE SPACESHIP
+		this.spaceShip = new SpaceShip(500, 400, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
@@ -251,13 +254,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		// maggiore � il valore minore � la frequenza di uscita degli asteroidi
 		if (countToAddAsteroid >= 150) {
-			asteroids.add((Asteroid) new SpriteFactory().getSprite("asteroid", 0));  //FACTORY METHOD TO CREATE ASTEROIDS
+			asteroids.add((Asteroid) new SpriteFactory().getSprite("asteroid"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToAddAsteroid = 0;
 		}
 		countToAddAsteroid++;
 
 		if (countToAddMeteorite >= 150) {
-			meteorites.add((Meteorite) new SpriteFactory().getSprite("meteorite", 0));  //FACTORY METHOD TO CREATE METEORITES
+			meteorites.add((Meteorite) new SpriteFactory().getSprite("meteorite"));  //FACTORY METHOD TO CREATE METEORITES
 			countToAddMeteorite = 0;
 		}
 		countToAddMeteorite++;
@@ -293,7 +296,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		for (int i = 0; i < 3; i++) {
 			final int shift = 30; // COSTANTE
-			life = (Life) new SpriteFactory().getSprite("life", xCoordLife);  //FACTORY METHOD TO CREATE LIVES
+			life = new Life(xCoordLife, 60, fileNameLife);
 			lives.add(life);
 			xCoordLife += shift;
 		}
@@ -308,8 +311,14 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	
 	public void updateEnemies() {
 		
+		int D_W = 1000; //COSTANTE
+		int D_H = 600; // COSTANTE
+		Random random = new Random();
+		int randX1;
+		
 		if (countToAddEnemies >= 150) {
-			enemies.add((EnemySpaceShip) new SpriteFactory().getSprite("enemy", 0));  //FACTORY METHOD TO CREATE ENEMIES
+			randX1 = random.nextInt(D_W);
+			enemies.add(new EnemySpaceShip(randX1, -20, fileNameEnemy));
 			enemies.get(enemies.size()-1).fire();
 			countToAddEnemies = 0;
 		}
@@ -319,7 +328,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		
     	while(et.hasNext()) {
     		EnemySpaceShip enemy = (EnemySpaceShip)et.next();
-    		if (enemy.getY() >= 600 || !enemy.isVisible()) {
+    		if (enemy.getY() >= D_H || !enemy.isVisible()) {
     			bombeVaganti = enemy.getBombs();;
 				et.remove();
 			} else {

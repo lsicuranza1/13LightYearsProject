@@ -24,7 +24,6 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	}
 
 
-	@Override
 	public void move() {
 	
 		

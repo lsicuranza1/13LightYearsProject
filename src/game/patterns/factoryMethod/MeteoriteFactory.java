@@ -15,9 +15,6 @@ public class MeteoriteFactory extends SpriteFactory {
 	
 	public MeteoriteFactory() {
 		super();
-		this.randX1 = randX1;
-		this.y_meteorite = -500;
-		this.fileNameMeteorite = fileNameMeteorite;
 	}
 	
 	public static Sprite getSprite() {

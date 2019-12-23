@@ -8,7 +8,7 @@ public class SpriteFactory {
 		
 	}
 	
-	public Object getSprite(String objectType, int xCoordLife) {
+	public Object getSprite(String objectType) {
 		
 		Object object = null;
 		
@@ -16,12 +16,6 @@ public class SpriteFactory {
 			object = AsteroidFactory.getSprite();
 		else if(objectType.equals("meteorite"))
 			object = MeteoriteFactory.getSprite();
-		else if(objectType.contentEquals("enemy"))
-			object = EnemyFactory.getSprite();
-		else if(objectType.contentEquals("life"))
-			object = LifeFactory.getSprite(xCoordLife);
-		else if(objectType.contentEquals("spaceship"))
-			object = SpaceShipFactory.getSprite();
 		
 		return object;
 	}

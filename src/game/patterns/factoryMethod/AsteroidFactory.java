@@ -15,9 +15,6 @@ public class AsteroidFactory extends SpriteFactory {
 	
 	public AsteroidFactory() {
 		super();
-		this.randX1 = randX1;
-		this.y_asteroid = -500;
-		this.fileNameAsteroid = fileNameAsteroid;
 	}
 	
 	public static Sprite getSprite() {

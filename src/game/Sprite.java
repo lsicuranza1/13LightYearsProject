@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public abstract class Sprite {
+public class Sprite {
 
 	private int x;
 	private int y;
@@ -79,7 +79,5 @@ public abstract class Sprite {
 	public void removeBounds() {
 		this.rectangle.setFrame(0, 0, 0, 0);
 	}
-
-	protected abstract void move();
 
 }

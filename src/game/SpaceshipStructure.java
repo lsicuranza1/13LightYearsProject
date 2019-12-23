@@ -16,6 +16,6 @@ public abstract class SpaceshipStructure extends Sprite {
 //		return missiles;
 //	}
 
-	public abstract void fire();
+	protected abstract void fire();
 
 }

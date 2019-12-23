@@ -10,6 +10,7 @@ public class Missile extends Sprite {
 
 	}
 
+	@Override
 	public void move() {
 
 		this.setY(this.getY() - MISSILE_SPEED);

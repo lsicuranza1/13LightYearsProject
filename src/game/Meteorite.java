@@ -11,6 +11,7 @@ public class Meteorite extends Sprite {
 		this.transform = new AffineTransform();
 	}
 
+	@Override
 	public void move() {
 
 		int x = this.getX();

@@ -112,6 +112,7 @@ public class SpaceShip extends SpaceshipStructure {
 		}
 	}
 
+	@Override
 	public void fire() {
 		List<Missile> missiles = this.getMissiles();
 		

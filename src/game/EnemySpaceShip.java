@@ -24,6 +24,7 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	}
 
 
+	@Override
 	public void move() {
 	
 		
@@ -74,6 +75,7 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	}
 	
 
+	@Override
 	public void fire() {
 		List<Bomb> bomb = this.getBombs();
 		if(this.shoot_counter>=70) {

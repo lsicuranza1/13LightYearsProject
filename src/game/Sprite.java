@@ -80,6 +80,6 @@ public abstract class Sprite {
 		this.rectangle.setFrame(0, 0, 0, 0);
 	}
 
-	public abstract void move();
+	protected abstract void move();
 
 }

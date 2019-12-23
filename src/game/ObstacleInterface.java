@@ -2,8 +2,9 @@ package game;
 
 import java.awt.geom.AffineTransform;
 
-public interface SpriteInterface {
+public interface ObstacleInterface {
 	
 	public void move();
+	public AffineTransform getTransform();
 	
 }

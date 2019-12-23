@@ -1,7 +1,5 @@
 package game.patterns.factoryMethod;
 
-import game.Sprite;
-
 public class ObstacleFactory {
 	
 	public ObstacleFactory() {

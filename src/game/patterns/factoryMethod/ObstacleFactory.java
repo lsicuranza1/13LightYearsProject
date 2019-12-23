@@ -2,20 +2,20 @@ package game.patterns.factoryMethod;
 
 import game.Sprite;
 
-public class SpriteFactory {
+public class ObstacleFactory {
 	
-	public SpriteFactory() {
+	public ObstacleFactory() {
 		
 	}
 	
-	public Object getSprite(String objectType) {
+	public Object getObstacle(String objectType) {
 		
 		Object object = null;
 		
 		if(objectType.equals("asteroid"))
-			object = AsteroidFactory.getSprite();
+			object = AsteroidFactory.getObstacle();
 		else if(objectType.equals("meteorite"))
-			object = MeteoriteFactory.getSprite();
+			object = MeteoriteFactory.getObstacle();
 		
 		return object;
 	}

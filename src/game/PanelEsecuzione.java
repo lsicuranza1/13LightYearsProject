@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import game.patterns.factoryMethod.SpriteFactory;
+import game.patterns.factoryMethod.ObstacleFactory;
 
 @SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener {
@@ -254,13 +254,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		// maggiore � il valore minore � la frequenza di uscita degli asteroidi
 		if (countToAddAsteroid >= 150) {
-			asteroids.add((Asteroid) new SpriteFactory().getSprite("asteroid"));  //FACTORY METHOD TO CREATE ASTEROIDS
+			asteroids.add((Asteroid) new ObstacleFactory().getObstacle("asteroid"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToAddAsteroid = 0;
 		}
 		countToAddAsteroid++;
 
 		if (countToAddMeteorite >= 150) {
-			meteorites.add((Meteorite) new SpriteFactory().getSprite("meteorite"));  //FACTORY METHOD TO CREATE METEORITES
+			meteorites.add((Meteorite) new ObstacleFactory().getObstacle("meteorite"));  //FACTORY METHOD TO CREATE METEORITES
 			countToAddMeteorite = 0;
 		}
 		countToAddMeteorite++;

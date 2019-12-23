@@ -5,7 +5,7 @@ import java.util.Random;
 import game.Asteroid;
 import game.Sprite;
 
-public class AsteroidFactory extends SpriteFactory {
+public class AsteroidFactory extends ObstacleFactory {
 	
 	static int D_W = 1000; //COSTANTE
 	static Random random = new Random();
@@ -17,7 +17,7 @@ public class AsteroidFactory extends SpriteFactory {
 		super();
 	}
 	
-	public static Sprite getSprite() {
+	public static Sprite getObstacle() {
 		randX1 = random.nextInt(D_W);
 		return new Asteroid(randX1, y_asteroid, fileNameAsteroid);
 	}

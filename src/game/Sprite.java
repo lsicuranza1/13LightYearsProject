@@ -75,5 +75,9 @@ public class Sprite {
 	public void setBounds() {
 		this.rectangle.setFrame(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
+	
+	public void removeBounds() {
+		this.rectangle.setFrame(0, 0, 0, 0);
+	}
 
 }

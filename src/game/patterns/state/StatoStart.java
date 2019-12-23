@@ -5,10 +5,10 @@ import game.MenuFrame;
 import game.Score;
 
 public class StatoStart implements Stato {
-	
+
 	private MainFrame mainFrame;
 	private MenuFrame menu;
-	
+
 	public StatoStart() {
 		mainFrame = MainFrame.getIstance();
 		this.menu = new MenuFrame();
@@ -24,6 +24,10 @@ public class StatoStart implements Stato {
 			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoInEsecuzione());
 
+		} else if (stato.equals("demo")) {
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().dispose();
+			modalita.setStatoModalita(new StatoDemo());
 		}
 	}
 

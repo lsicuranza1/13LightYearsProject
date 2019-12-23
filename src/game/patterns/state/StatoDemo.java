@@ -1,31 +1,26 @@
 package game.patterns.state;
 
-import java.awt.Color;
-
+import game.DemoFrame;
 import game.MainFrame;
-import game.PanelDemo;
 
 public class StatoDemo implements Stato {
 
-	MainFrame mainFrame = MainFrame.getIstance();
-	private PanelDemo panel = new PanelDemo();
+	private MainFrame mainFrame = MainFrame.getIstance();
+	private DemoFrame demoFrame;
 
 	public StatoDemo() {
-		panel.setBackground(Color.BLACK);
-		panel.setSize(1000, 600);
+		mainFrame = MainFrame.getIstance();
+		this.demoFrame = new DemoFrame();
+		mainFrame.setFrame(demoFrame);
 		mainFrame.getFrame().setVisible(true);
-		mainFrame.getFrame().add(panel);
-		panel.setFocusable(true);
-		panel.requestFocus();
 
 	}
 
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("play")) {
-			mainFrame.getFrame().setTitle("Game");
-			mainFrame.getFrame().getContentPane().removeAll();
-			mainFrame.getFrame().repaint();
+		if (stato.equals("in_esecuzione")) {
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoInEsecuzione());
 		}
 	}

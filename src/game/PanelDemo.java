@@ -213,7 +213,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelMoveSpaceShip.setForeground(Color.RED);
 				count++;
 			} else {
-				MainFrame.getIstance().updateModalita("play");
+				MainFrame.getIstance().updateModalita("in_esecuzione");
 			}
 			this.updateMissiles();
 			this.moveEnemy();

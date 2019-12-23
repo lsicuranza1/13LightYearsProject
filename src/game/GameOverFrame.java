@@ -2,7 +2,6 @@ package game;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
-public class GameOverFrame extends javax.swing.JFrame{
+public class GameOverFrame extends javax.swing.JFrame {
 	private Dimension dim;
 	private MainFrame mainFrame = MainFrame.getIstance();
 	private javax.swing.JPanel panelGameOver;
@@ -28,18 +27,20 @@ public class GameOverFrame extends javax.swing.JFrame{
 	private void initComponents() {
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
+
+		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); // i numeri moltiplicati devono essere uguali sia
+																	// per la width che per la height
 		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
 		dim = new Dimension(widthMenu, heightMenu);
 		this.setPreferredSize(dim.getSize());
 		ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/gameover2.png"),
 				(int) dim.getWidth(), (int) dim.getHeight());
-		
-		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2, (int) dimDisplay.getHeight() / 2 - heightMenu / 2);
+
+		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2,
+				(int) dimDisplay.getHeight() / 2 - heightMenu / 2);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years - Menu' Principale");
-		
+
 		java.awt.GridBagConstraints gridBagConstraints;
 
 		panelGameOver = new javax.swing.JPanel();
@@ -50,7 +51,6 @@ public class GameOverFrame extends javax.swing.JFrame{
 		sfondo.setIcon(immagineSfondo);
 
 		setName("");
-		
 
 		panelGameOver.setAlignmentX(0.0F);
 		panelGameOver.setMinimumSize(dim.getSize());
@@ -58,7 +58,6 @@ public class GameOverFrame extends javax.swing.JFrame{
 		panelGameOver.setOpaque(false);
 		panelGameOver.setPreferredSize(dim.getSize());
 		panelGameOver.setLayout(new java.awt.GridBagLayout());
-
 
 		score.setFont(new java.awt.Font("Inc Free", 1, 25));
 		score.setForeground(Color.red);
@@ -129,7 +128,6 @@ public class GameOverFrame extends javax.swing.JFrame{
 		gridBagConstraints.insets = new java.awt.Insets(250, 800, 0, 800);
 		panelGameOver.add(mainMenuButton, gridBagConstraints);
 
-
 		panelGameOver.getAccessibleContext().setAccessibleName("");
 		panelGameOver.getAccessibleContext().setAccessibleDescription("");
 
@@ -140,21 +138,20 @@ public class GameOverFrame extends javax.swing.JFrame{
 						.addComponent(panelGameOver, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getWidth(),
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE,
+												(int) dim.getWidth(), javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addComponent(panelGameOver, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getHeight(),
-												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE,
+												(int) dim.getHeight(), javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 
 		pack();
 
-		
 		panelGameOver.setFocusable(true);
 		panelGameOver.requestFocus();
 
@@ -169,7 +166,6 @@ public class GameOverFrame extends javax.swing.JFrame{
 
 		mainFrame.updateModalita("in_esecuzione");
 	}
-
 
 	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
 		ImageIcon image = new ImageIcon(url);

@@ -1,11 +1,7 @@
 package game.patterns.state;
 
-import java.awt.Color;
-
 import game.ExecutionFrame;
 import game.MainFrame;
-import game.MenuFrame;
-import game.PanelEsecuzione;
 
 public class StatoInEsecuzione implements Stato {
 

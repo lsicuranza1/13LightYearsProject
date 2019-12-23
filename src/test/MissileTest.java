@@ -47,16 +47,16 @@ public class MissileTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	public void testMove_colpo() {
-		
-		m.setY(this.board_width-2);
-		m.move_colpo();
-		assertEquals(true,m.isVisible());
-		
-		m.setY(this.board_width-1);
-		m.move_colpo();
-		assertEquals(false,m.isVisible());
-	}
+//	@Test
+//	public void testMove_colpo() {
+//		
+//		m.setY(this.board_width-2);
+//		m.move_colpo();
+//		assertEquals(true,m.isVisible());
+//		
+//		m.setY(this.board_width-1);
+//		m.move_colpo();
+//		assertEquals(false,m.isVisible());
+//	}
 
 }

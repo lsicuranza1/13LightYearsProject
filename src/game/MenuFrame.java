@@ -14,8 +14,8 @@ public class MenuFrame extends JFrame {
 	private MainFrame mainFrame = MainFrame.getIstance();
 
 	private Dimension dim;
-//	public static Clip gameClip;
-//	public static boolean demo = false;
+	public static Clip gameClip;
+	public static boolean demo = false;
 	private javax.swing.JButton playButton;
 	private javax.swing.JButton scoreBoardButton;
 	private javax.swing.JButton settingsButton;
@@ -201,7 +201,7 @@ public class MenuFrame extends JFrame {
 	}
 
 	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
+		mainFrame.updateModalita("demo");
 	}
 	
 	private void scoreBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {

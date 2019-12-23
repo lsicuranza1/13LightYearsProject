@@ -18,5 +18,4 @@ public class Score {
 		this.scoreValue += increment;
 	}
 	
-	
 }

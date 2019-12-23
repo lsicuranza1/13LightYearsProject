@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-class DialogPause extends JPanel {
+class PanelPause extends JPanel {
 	private MainFrame mainframe = MainFrame.getIstance();
 	private static final Color BG = new Color(0, 0, 0, 200);
 	private javax.swing.JButton resume;
@@ -19,7 +19,7 @@ class DialogPause extends JPanel {
 	private PanelEsecuzione panelEsecuzione;
 
 	// dependency inception
-	public DialogPause(PanelEsecuzione panelEsecuzione) {
+	public PanelPause(PanelEsecuzione panelEsecuzione) {
 		this.panelEsecuzione = panelEsecuzione;
 		JLabel pausedLabel = new JLabel("PAUSED");
 		pausedLabel.setForeground(Color.ORANGE);

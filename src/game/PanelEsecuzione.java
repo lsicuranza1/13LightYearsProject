@@ -175,7 +175,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (flagPause) {
 			if (dialog == null) {
-				DialogPause deDialogPanel = new DialogPause(this);
+				PanelPause deDialogPanel = new PanelPause(this);
 				dialog = new JDialog();
 				dialog.getContentPane().add(deDialogPanel); 
 				dialog.setUndecorated(true); 

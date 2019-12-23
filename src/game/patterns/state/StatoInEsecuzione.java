@@ -29,7 +29,12 @@ public class StatoInEsecuzione implements Stato {
 			mainFrame.getFrame().setVisible(false);
 			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoStart());
+		} else if (stato.equals("in_esecuzione")) {
+			mainFrame.getFrame().setVisible(false);
+			mainFrame.getFrame().dispose();
+			modalita.setStatoModalita(new StatoInEsecuzione());
 		}
+
 	}
 
 }

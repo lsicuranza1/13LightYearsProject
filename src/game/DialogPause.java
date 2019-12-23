@@ -58,12 +58,12 @@ class DialogPause extends JPanel {
 
 	protected void mainMenuActionPerformed(ActionEvent evt) {
 		panelEsecuzione.getDialog().setAlwaysOnTop(false);
-		mainframe.updateModalita("main_menu");
+		mainframe.updateModalita("start");
 	}
 
 	protected void restartActionPerformed(ActionEvent evt) {
 		panelEsecuzione.getDialog().setAlwaysOnTop(false);
-		mainframe.updateModalita("restart");
+		mainframe.updateModalita("in_esecuzione");
 	}
 
 	protected void resumeActionPerformed(ActionEvent evt) {

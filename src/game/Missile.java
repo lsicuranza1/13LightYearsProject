@@ -2,7 +2,7 @@ package game;
 
 public class Missile extends Sprite {
 
-	private final int BOARD_WIDTH = 1000; //COSTANTE
+	private final int BOARD_WIDTH = 600; //COSTANTE
 	private final int MISSILE_SPEED = 15; //COSTANTE
 
 	public Missile(int x, int y, String path) {

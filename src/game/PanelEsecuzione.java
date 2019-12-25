@@ -79,7 +79,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.fileNameLife = "../resources/images/life.png";
 		this.fileNameBomb = "../resources/images/missile_enemy.png";
 		
-		this.spaceShip = new SpaceShip(500, 400, fileNameSpaceShip);
+		this.spaceShip = new SpaceShip(300, 600, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
@@ -269,7 +269,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		while (it_asteroids.hasNext()) {
 			Asteroid asteroid = (Asteroid) it_asteroids.next();
-			if (asteroid.getY() >= 600 || !asteroid.isVisible()) {
+			if (asteroid.getY() >= 1000 || !asteroid.isVisible()) {
 				it_asteroids.remove();
 			} else {
 				asteroid.move();
@@ -281,7 +281,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		while (it_meteorites.hasNext()) {
 			Meteorite meteorite = (Meteorite) it_meteorites.next();
-			if (meteorite.getY() >= 600 || !meteorite.isVisible()) {
+			if (meteorite.getY() >= 1000 || !meteorite.isVisible()) {
 				it_meteorites.remove();
 			} else {
 				meteorite.move();
@@ -311,8 +311,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	
 	public void updateEnemies() {
 		
-		int D_W = 1000; //COSTANTE
-		int D_H = 600; // COSTANTE
+		int D_W = 600; //COSTANTE
+		int D_H = 1000; // COSTANTE
 		Random random = new Random();
 		int randX1;
 		
@@ -350,7 +350,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if(bomba.isVisible()) {
 					bomba.move();
 					bomba.setBounds();
-		        	if(bomba.getY()>650){		        		
+		        	if(bomba.getY()>1050){		        		
 //		        		bomba.setY(enemies.get(i).getY()+50);
 //		        		bomba.setX(enemies.get(i).getX()+15);
 		        		bomba.setVisible(false);
@@ -371,7 +371,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if(bomba.isVisible()) {
 					bomba.move();
 					bomba.setBounds();
-					if(bomba.getY()>650) {
+					if(bomba.getY()>1050) {
 						bomba.setVisible(false);
 					}
 				}else {

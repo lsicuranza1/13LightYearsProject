@@ -57,13 +57,13 @@ public class SpaceShip extends SpaceshipStructure {
 			this.setX(this.getX() - SPACESHIP_SPEED);
 			
 			if (this.getX() <= 10 - this.getWidth()) {
-				this.setX(1000 - 8);
+				this.setX(600 - 8);
 			}
 		}
 		
 		if (right == true) {
 			this.setX(this.getX() + SPACESHIP_SPEED);	
-			if (this.getX() >= 1000 - 8) {
+			if (this.getX() >= 600 - 8) {
 				this.setX(10 - this.getWidth());
 			}
 		}
@@ -77,8 +77,8 @@ public class SpaceShip extends SpaceshipStructure {
 		
 		if (down == true) {
 			this.setY(this.getY() + SPACESHIP_SPEED);
-			if (this.getY() >= 600 - (this.getHeight() * 7) / 5) {
-				this.setY(600 - (this.getHeight() * 7) / 5);
+			if (this.getY() >= 1000 - (this.getHeight() * 7) / 5) {
+				this.setY(1000 - (this.getHeight() * 7) / 5);
 			}
 		}
 		

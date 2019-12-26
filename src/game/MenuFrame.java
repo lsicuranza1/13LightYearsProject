@@ -49,15 +49,8 @@ public class MenuFrame extends JFrame {
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		
-		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); 
+		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
 		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
-		int witdhButton = (int)( heightMenu * 39/100);
-		int heigthButton = (int)( heightMenu * 9/100);
-		int firstTopButtonDistance = (int)( heightMenu * 43/100);
-		int TopButtonDistance = (int)( heightMenu * 3/100);
-		int rightButtonDistance = (int)( heightMenu * 100/100);
-		int leftButtonDistance = (int)( heightMenu * 0/100);
-		System.out.println(rightButtonDistance);
 		dim = new Dimension(widthMenu, heightMenu);
 		this.setPreferredSize(dim.getSize());
 
@@ -88,9 +81,9 @@ public class MenuFrame extends JFrame {
 		playButton.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(255, 255, 255), null));
 		playButton.setContentAreaFilled(false);
 		playButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-		playButton.setMaximumSize(new java.awt.Dimension(witdhButton,heigthButton));
-		playButton.setMinimumSize(new java.awt.Dimension(witdhButton, heigthButton));
-		playButton.setPreferredSize(new java.awt.Dimension(witdhButton, heigthButton));
+		playButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		playButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		playButton.setPreferredSize(new java.awt.Dimension(107, 25));
 		playButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				playButtonActionPerformed(evt);
@@ -99,10 +92,10 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
-		gridBagConstraints.ipadx = 0;
-		gridBagConstraints.ipady = 0;
+		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(firstTopButtonDistance, leftButtonDistance, 0, rightButtonDistance);
+		gridBagConstraints.insets = new java.awt.Insets(269, 70, 0, 695);
 		jPanel1.add(playButton, gridBagConstraints);
 
 		scoreBoardButton.setFont(new java.awt.Font("Gabriola", 0, 40));
@@ -111,9 +104,9 @@ public class MenuFrame extends JFrame {
 		scoreBoardButton.setToolTipText("");
 		scoreBoardButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 		scoreBoardButton.setContentAreaFilled(false);
-		scoreBoardButton.setMaximumSize(new java.awt.Dimension(witdhButton,heigthButton));
-		scoreBoardButton.setMinimumSize(new java.awt.Dimension(witdhButton,heigthButton));
-		scoreBoardButton.setPreferredSize(new java.awt.Dimension(witdhButton,heigthButton));
+		scoreBoardButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		scoreBoardButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		scoreBoardButton.setPreferredSize(new java.awt.Dimension(107, 25));
 		scoreBoardButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				scoreBoardButtonActionPerformed(evt);
@@ -122,10 +115,10 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 0;
-		gridBagConstraints.ipady = 0;
+		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(TopButtonDistance, leftButtonDistance, 0, rightButtonDistance);
+		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
 		jPanel1.add(scoreBoardButton, gridBagConstraints);
 
 		settingsButton.setFont(new java.awt.Font("Gabriola", 0, 40));
@@ -133,9 +126,9 @@ public class MenuFrame extends JFrame {
 		settingsButton.setText("Settings");
 		settingsButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 		settingsButton.setContentAreaFilled(false);
-		settingsButton.setMaximumSize(new java.awt.Dimension(witdhButton,heigthButton));
-		settingsButton.setMinimumSize(new java.awt.Dimension(witdhButton,heigthButton));
-		settingsButton.setPreferredSize(new java.awt.Dimension(witdhButton,heigthButton));
+		settingsButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		settingsButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		settingsButton.setPreferredSize(new java.awt.Dimension(107, 25));
 		settingsButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				settingsButtonActionPerformed(evt);
@@ -144,10 +137,10 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 3;
-		gridBagConstraints.ipadx = 0;
-		gridBagConstraints.ipady = 0;
+		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(TopButtonDistance, leftButtonDistance, 65, rightButtonDistance);
+		gridBagConstraints.insets = new java.awt.Insets(18, 70, 65, 695);
 		jPanel1.add(settingsButton, gridBagConstraints);
 		settingsButton.getAccessibleContext().setAccessibleDescription("");
 
@@ -157,9 +150,9 @@ public class MenuFrame extends JFrame {
 		demoButton.setToolTipText("");
 		demoButton.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 		demoButton.setContentAreaFilled(false);
-		demoButton.setMaximumSize(new java.awt.Dimension(witdhButton,heigthButton));
-		demoButton.setMinimumSize(new java.awt.Dimension(witdhButton,heigthButton));
-		demoButton.setPreferredSize(new java.awt.Dimension(witdhButton,heigthButton));
+		demoButton.setMaximumSize(new java.awt.Dimension(107, 25));
+		demoButton.setMinimumSize(new java.awt.Dimension(107, 25));
+		demoButton.setPreferredSize(new java.awt.Dimension(107, 25));
 		demoButton.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				demoButtonActionPerformed(evt);
@@ -168,10 +161,10 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
-		gridBagConstraints.ipadx = 0;
-		gridBagConstraints.ipady = 0;
+		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(TopButtonDistance, leftButtonDistance, 0, rightButtonDistance);
+		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
 		jPanel1.add(demoButton, gridBagConstraints);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

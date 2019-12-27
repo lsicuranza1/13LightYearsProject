@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import game.patterns.factoryMethod.ObstacleFactory;
+import game.patterns.factoryMethodBonus.BonusFactory;
 
 @SuppressWarnings("serial")
 public class PanelEsecuzione extends JPanel implements ActionListener {
@@ -36,10 +37,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private List<Asteroid> asteroids;
 	private List<Meteorite> meteorites;
 	private List<Bomb> bombeVaganti;
+	private List<LifeBonus> lifeBonus;
 	private Deque<Life> lives;
 	private BufferedImage scrollingBackground;
 	private int yOffset = 0; //variabile per lo scrollingBackground
 	private int yDelta = 1;  //variabile per lo scrollingBackground
+	private static int countToLifeBonus = 0;
 	private static int countToAddAsteroid = 0;
 	private static int countToAddMeteorite = 0;
 	private static int countToAddEnemies = 0;
@@ -80,6 +83,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.fileNameBomb = "../resources/images/missile_enemy.png";
 		
 		this.spaceShip = new SpaceShip(450,450, fileNameSpaceShip);
+		this.lifeBonus = new ArrayList<LifeBonus>();
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
@@ -135,6 +139,11 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		g2d.drawImage(spaceShip.getImage(), spaceShip.getX(), spaceShip.getY(), this);
 
 		List<Missile> missiles = spaceShip.getMissiles();
+		
+		for (LifeBonus life: this.lifeBonus) {
+
+			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
+		}
 
 		for (Missile missile : missiles) {
 
@@ -204,6 +213,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			this.updateBombs();
 			this.updateBombeVaganti();
 			this.updateEnemies();
+			this.updateBonus();
 			this.updateLives();
 			this.checkCollisions();
 			this.yOffset += this.yDelta;
@@ -289,6 +299,30 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 	}
+	
+	
+	public void updateBonus() {
+
+		if (countToLifeBonus >= 300) {
+			lifeBonus.add((LifeBonus) new BonusFactory().getBonus("life"));  //FACTORY METHOD TO CREATE ASTEROIDS
+			countToLifeBonus = 0;
+		}
+		countToLifeBonus++;
+
+		Iterator<LifeBonus> it_lifeBonus = lifeBonus.iterator();
+
+		while (it_lifeBonus.hasNext()) {
+			LifeBonus life = (LifeBonus) it_lifeBonus.next();
+			if (life.getY() >= 1000 || !life.isVisible()) {
+				it_lifeBonus.remove();
+			} else {
+				life.move();
+				life.setBounds();
+			}
+		}
+
+	}
+	
 
 	public void initLives(Deque<Life> lives) {
 		Life life;
@@ -390,6 +424,26 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		Rectangle2D enemyBounds;
 		Rectangle2D bombBounds;
 		Rectangle2D bombeVagantiBounds;
+		
+		
+		for (LifeBonus life : this.lifeBonus) {
+
+			meteoriteBounds = life.getBounds();
+
+			if (meteoriteBounds.intersects(spaceShipBounds)) {
+				life.removeBounds();
+				spaceShip.loseLife();
+				lives.getLast().setVisible(false);
+
+				if (spaceShip.getLives() == 0) {
+					timer.stop();
+					MainFrame.getIstance().updateModalita("game_over");
+				} else {
+					life.setVisible(false);
+				}
+			}
+
+		}
 
 		for (Meteorite meteorite : meteorites) {
 

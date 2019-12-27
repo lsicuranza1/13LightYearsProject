@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 public class MenuFrame extends JFrame {
 	private MainFrame mainFrame = MainFrame.getIstance();
 
-	private Dimension dim;
+	private Dimension dim = new Dimension(1000,600);
 	public static Clip gameClip;
 	public static boolean demo = false;
 	private javax.swing.JButton playButton;
@@ -46,23 +46,18 @@ public class MenuFrame extends JFrame {
 		Image iconaFrame;
 		iconaFrame = new ImageIcon(getClass().getResource("../resources/images/logo_game.png")).getImage();
 		this.setIconImage(iconaFrame);
-
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
-		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
-		dim = new Dimension(widthMenu, heightMenu);
 		this.setPreferredSize(dim.getSize());
 
 		ImageIcon immagineSfondo = ridimensionaImageIcon(
-				getClass().getResource("../resources/images/sfondo_menu.png"), widthMenu, heightMenu);
+				getClass().getResource("../resources/images/sfondo_menu.png"), (int)dim.getWidth(),(int) dim.getHeight());
 		
 		sfondo.setIcon(immagineSfondo);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years - Menu' Principale");
 
-		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2, (int) dimDisplay.getHeight() / 2 - heightMenu / 2);
+		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) (dim.getWidth() / 2), (int) dimDisplay.getHeight() / 2 - (int) (dim.getHeight()/ 2));
 		setName("");
 		//setPreferredSize(new java.awt.Dimension(1000, 600));
 		setResizable(false);

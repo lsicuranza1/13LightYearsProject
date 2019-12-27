@@ -27,17 +27,13 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private void initComponents() {
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
-
-		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); // i numeri moltiplicati devono essere uguali sia
-																	// per la width che per la height
-		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
-		dim = new Dimension(widthMenu, heightMenu);
+		this.dim = new Dimension(1000,600);
 		this.setPreferredSize(dim.getSize());
 		ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/gameover2.png"),
 				(int) dim.getWidth(), (int) dim.getHeight());
 
-		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2,
-				(int) dimDisplay.getHeight() / 2 - heightMenu / 2);
+		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) dim.getWidth() / 2,
+				(int) dimDisplay.getHeight() / 2 - (int) dim.getHeight() / 2);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years - Menu' Principale");
 

@@ -79,7 +79,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.fileNameLife = "../resources/images/life.png";
 		this.fileNameBomb = "../resources/images/missile_enemy.png";
 		
-		this.spaceShip = new SpaceShip(300, 600, fileNameSpaceShip);
+		this.spaceShip = new SpaceShip(450,450, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();

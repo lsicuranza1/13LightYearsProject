@@ -24,24 +24,18 @@ public class SpaceShip extends SpaceshipStructure {
 		this.missiles = new ArrayList<Missile>();
 
 	}
-
-	
 	
 	public int getLives() {
 		return lives;
 	}
 	
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+	
 	
 	public List<Missile> getMissiles() {
 		return missiles;
-	}
-
-
-
-	public void loseLife() {
-		if (this.getLives() > 0) {
-			this.lives -= 1;
-		}
 	}
 
 

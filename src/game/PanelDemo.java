@@ -37,10 +37,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private BufferedImage scrollingBackground;
 	private int yOffset = 0; // variabile per lo scrollingBackground
 	private int yDelta = 1; // variabile per lo scrollingBackground
-	private static int countToAddAsteroid = 0;
-	private static int countToAddMeteorite = 0;
-	private static int countToScoreBonus = 0;
-	private static int countToLifeBonus = 0;
+	private static int countToAddAsteroid = 120;
+	private static int countToAddMeteorite = 100;
+	private static int countToScoreBonus = 250;
+	private static int countToLifeBonus = 280;
 	private Deque<Life> lives;
 	private final int DELAY = 20;
 	private Timer timer;
@@ -230,20 +230,14 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private void stepBonus() {
 		if (count > 800) {
 			count = 0;
-			this.labelText.setText("They aren't only bad things. Take the bonus");
+			this.labelText.setText("Be careful to enemies");
 			this.labelText.setForeground(Color.WHITE);
 			this.labelText.setVisible(true);
-			this.deleteObstacles();
-			setFlagObstacles(false);
-			setFlagBonus(true);
+			setFlagEnemies(true);
+			setFlagBonus(false);
 		} else if (count > 51) {
-			if (this.labelText.isVisible() && countAhia < 20) {
-				countAhia++;
-			} else {
-				this.labelText.setVisible(false);
-			}
 			this.updateLives();
-			this.updateObstacles();
+			this.updateBonus();
 			this.updateSpaceShip();
 			this.checkCollisions();
 			this.repaint();
@@ -251,7 +245,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		} else if (count > 50) {
 			this.labelText.setVisible(false);
 			this.updateLives();
-			this.updateObstacles();
+			this.updateBonus();
 			this.updateSpaceShip();
 			this.checkCollisions();
 			this.repaint();
@@ -259,8 +253,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 		} else {
 			count++;
 			this.updateLives();
+			this.updateBonus();
 			this.checkCollisions();
 			this.updateSpaceShip();
+			this.deleteObstacles();
 			this.repaint();
 		}
 	}
@@ -341,6 +337,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			count = 0;
 		}
 		count++;
+		this.deleteBonus();
 		this.updateLives();
 		this.deleteObstacles();
 		this.updateSpaceShip();
@@ -359,7 +356,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private void stepObstacles() {
 		if (count > 800) {
 			count = 0;
-			this.labelText.setText("Be careful to enemies");
+			this.labelText.setText("They aren't only bad things. Take the bonus");
 			this.labelText.setForeground(Color.WHITE);
 			this.labelText.setVisible(true);
 			this.deleteObstacles();
@@ -397,6 +394,11 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private void deleteObstacles() {
 		meteorites.removeAll(meteorites);
 		asteroids.removeAll(asteroids);
+	}
+	
+	private void deleteBonus() {
+		lifeBonus.removeAll(lifeBonus);
+		scoreBonus.removeAll(scoreBonus);
 	}
 
 	private void updateMissiles() {
@@ -519,8 +521,12 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelText.setVisible(true);
 				lives.getLast().setVisible(false);
 				if (lives.size() == 1) {
-					flagObstacles = false;
-					flagEnemies = true;
+					setFlagObstacles(false);
+					setFlagBonus(true);
+					count=0;
+					this.labelText.setText("They aren't only bad things. Take the bonus");
+					this.labelText.setForeground(Color.WHITE);
+					this.labelText.setVisible(true);
 				}
 
 				meteorite.setVisible(false);
@@ -533,12 +539,17 @@ public class PanelDemo extends JPanel implements ActionListener {
 			bonusBounds = life.getBounds();
 
 			if (bonusBounds.intersects(spaceShipBounds)) {
+				this.labelText.setText("This bonus gives an additional life");
+				this.labelText.setVisible(true);
+				this.labelText.setForeground(Color.green);
 				life.removeBounds();
 				int actual_lives = this.spaceShip.getLives();
-				System.out.println(actual_lives);
 				if(actual_lives < 6) {
 				spaceShip.setLives(actual_lives+1);
-				int x_shift = lives.getLast().getX();
+				int x_shift = 0;
+				if(lives.size()>0) {
+					x_shift = lives.getLast().getX();
+				}
 				lives.add(new Life(x_shift+30,60,fileNameLife));
 				lives.getLast().setVisible(true);
 				}
@@ -553,6 +564,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 			scoreBounds = score.getBounds();
 
 			if (scoreBounds.intersects(spaceShipBounds)) {
+				this.labelText.setText("This bonus gives an incremental score");
+				this.labelText.setVisible(true);
+				this.labelText.setForeground(Color.green);
 				score.removeBounds();
 				score.setVisible(false);
 			}
@@ -572,8 +586,13 @@ public class PanelDemo extends JPanel implements ActionListener {
 				lives.getLast().setVisible(false);
 
 				if (lives.size() == 1) {
-					flagObstacles = false;
-					flagEnemies = true;
+					setFlagObstacles(false);
+					setFlagBonus(true);
+					count = 0;
+					this.labelText.setText("They aren't only bad things. Take the bonus");
+					this.labelText.setForeground(Color.WHITE);
+					this.labelText.setVisible(true);
+					
 				}
 
 				asteroid.setVisible(false);
@@ -643,6 +662,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			scoreBonus.add((ScoreBonus) new BonusFactory().getBonus("score"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToScoreBonus = 0;
 		}
+		countToScoreBonus++;
 
 		Iterator<ScoreBonus> it_scoreBonus = scoreBonus.iterator();
 

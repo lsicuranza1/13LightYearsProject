@@ -98,7 +98,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		//TO DO da cancellare
 		this.labelMoveSpaceShip = new JLabel("Press an arrow to move the spaceship");
 		this.add(this.labelMoveSpaceShip);
-
+		this.labelMoveSpaceShip.setVisible(false);
 		this.labelMoveSpaceShip.setBounds(140, 70, 600, 400);
 		this.labelMoveSpaceShip.setForeground(Color.WHITE);
 		this.labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 30));
@@ -191,9 +191,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (isScore) {
-
+			this.stepScore();
 		} else if (isLife) {
-
+			this.stepLife();
 		} else if (isMoveSpaceShip()) {
 			this.stepSpaceship();
 		} else if (isFlagObstacles()) {
@@ -205,6 +205,37 @@ public class PanelDemo extends JPanel implements ActionListener {
 		} else {
 			this.stepFinal();
 		}
+	}
+
+	private void stepLife() {
+		if (count > 200) {
+			isLife = false;
+			count=0;
+			this.textArea.setVisible(false);
+			moveSpaceShip=true;
+			this.repaint();
+		}
+		count++;
+
+	}
+
+	private void stepScore() {
+		if (count > 200) { //change to 500, troppo poco tempo
+			isScore = false;
+			count=0;
+			this.textArea.setVisible(false);
+			isLife=true;
+			this.textArea = new JTextArea(
+					"These are the lives. \nIf you get hit by an obstacle or an enemy \nbullet you will lose one.\r\n" + 
+					"If you reach zero you will be \nforced to start again.");
+			this.add(this.textArea);
+			this.textArea.setBounds(200, 150, 300, 120);
+			this.textArea.setBackground(Color.green);
+			this.textArea.setFont(new Font("Serif", Font.BOLD, 16));
+			this.repaint();
+		}
+		count++;
+
 	}
 
 	private void stepFinal() {
@@ -257,7 +288,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	private void stepSpaceship() {
 		if (moveSpaceShip) {
-
+			this.labelMoveSpaceShip.setVisible(true);
 		}
 	}
 

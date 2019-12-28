@@ -78,7 +78,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
 		
 		this.labelScoreUpdate.setBounds(200, 10, 400, 50);
-		this.labelScoreUpdate.setForeground(Color.RED);
+		this.labelScoreUpdate.setForeground(Color.GREEN);
 		this.labelScoreUpdate.setFont(new Font("Serif", Font.BOLD, 22));
 		
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
@@ -234,7 +234,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			if(countTimeScoreBonus==1000) {
 			this.activeBonusScore = false;
 			this.countTimeScoreBonus = 0;	
-			this.labelScoreUpdate.setForeground(Color.red);
+			this.labelScoreUpdate.setForeground(Color.green);
 			}
 			}
 

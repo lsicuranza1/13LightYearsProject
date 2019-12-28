@@ -241,6 +241,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private void stepFinal() {
 		if (count < 50) {
 			this.labelMoveSpaceShip.setText("In the space is not so easy");
+			this.labelMoveSpaceShip.setForeground(Color.WHITE); 
 			this.labelMoveSpaceShip.setVisible(true);
 			count++;
 		} else if (count < 100) {
@@ -262,6 +263,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	private void stepKillEnemies() {
 		this.labelMoveSpaceShip.setText("Press space to kill the enemies");
+		this.labelMoveSpaceShip.setForeground(Color.WHITE);
 		this.labelMoveSpaceShip.setVisible(true);
 		this.updateMissiles();
 		this.moveEnemy();
@@ -281,6 +283,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			count = 0;
 		}
 		count++;
+		this.deleteObstacles();
 		this.updateSpaceShip();
 		this.repaint();
 
@@ -452,11 +455,11 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelMoveSpaceShip.setText("AHIA, you lost a life");
 				this.labelMoveSpaceShip.setVisible(true);
 
-				if (lives.size() == 0) {
-					// passaggio alla fase successiva
+				if (lives.size() == 1) {
+					flagObstacles=false;
+					flagEnemies=true;
 				} else {
 					lives.getLast().setVisible(false);
-
 				}
 				meteorite.setVisible(false);
 			}
@@ -474,8 +477,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelMoveSpaceShip.setText("AHIA, you lost a life");
 				this.labelMoveSpaceShip.setVisible(true);
 
-				if (lives.size() == 0) {
-					// passggio alla fase successiva
+				if (lives.size() == 1) {
+					flagObstacles=false;
+					flagEnemies=true;
 				} else {
 					lives.getLast().setVisible(false);
 

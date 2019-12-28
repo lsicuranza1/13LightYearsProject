@@ -52,6 +52,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private int countAhia = 0;
 	private JLabel labelLiveScore;
 	private JTextArea textArea;
+	private boolean flagBonus=false;
 
 	public PanelDemo() {
 
@@ -196,6 +197,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.stepLife();
 		} else if (isMoveSpaceShip()) {
 			this.stepSpaceship();
+		} else if (isFlagBonus()) {
+			this.stepBonus();
 		} else if (isFlagObstacles()) {
 			this.stepObstacles();
 		} else if (isFlagEnemies()) {
@@ -205,6 +208,11 @@ public class PanelDemo extends JPanel implements ActionListener {
 		} else {
 			this.stepFinal();
 		}
+	}
+
+	private void stepBonus() {
+		
+
 	}
 
 	private void stepLife() {
@@ -556,6 +564,14 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	public void setFlagSpace(boolean flagSpace) {
 		this.flagSpace = flagSpace;
+	}
+
+	public boolean isFlagBonus() {
+		return flagBonus;
+	}
+
+	public void setFlagBonus(boolean flagBonus) {
+		this.flagBonus = flagBonus;
 	}
 
 	public class TAdapter extends KeyAdapter {

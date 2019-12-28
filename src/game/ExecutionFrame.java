@@ -17,7 +17,7 @@ public class ExecutionFrame extends JFrame {
 	
 	private void initComponents() {
 		this.panel = new PanelEsecuzione();
-		this.dim = new Dimension(800,900);
+		this.dim = new Dimension(1000,600);
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

@@ -2,11 +2,11 @@ package game;
 
 import java.awt.geom.AffineTransform;
 
-public class LifeBonus extends Sprite implements BonusInterface{
+public class ScoreBonus extends Sprite implements BonusInterface{
 	
 	private AffineTransform transform;
 
-	public LifeBonus(int x, int y, String imageFileName) {
+	public ScoreBonus(int x, int y, String imageFileName) {
 		super(x, y, imageFileName);
 		this.transform = new AffineTransform();
 	}
@@ -32,5 +32,6 @@ public class LifeBonus extends Sprite implements BonusInterface{
 	public void setTransform(AffineTransform transform) {
 		this.transform = transform;
 	}
- 
+
+
 }

@@ -12,6 +12,8 @@ public Object getBonus(String objectType) {
 	
 	if(objectType.equals("life"))
 		object = LifeBonusFactory.getLifeBonus();
+	else if(objectType.equals("score"))
+		object = ScoreBonusFactory.getScoreBonus();
 	
 	return object;
 }

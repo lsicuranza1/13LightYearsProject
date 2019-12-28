@@ -12,7 +12,9 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +26,7 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class PanelDemo extends JPanel implements ActionListener {
-	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameEnemies;
+	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameEnemies, fileNameLife;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
@@ -34,6 +36,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private int yDelta = 1; // variabile per lo scrollingBackground
 	private static int countToAddAsteroid = 0;
 	private static int countToAddMeteorite = 0;
+	private Deque<Life> lives;
 	private final int DELAY = 20;
 	private Timer timer;
 	private List<EnemySpaceShip> enemies;
@@ -44,6 +47,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private boolean flagObstacles = false;
 	private boolean flagSpace = false;
 	private int countAhia = 0;
+	private JLabel labelLiveScore;
 
 	public PanelDemo() {
 
@@ -51,16 +55,27 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.setFocusable(false);
 
 		this.setLayout(null);
+		
+		this.labelLiveScore = new JLabel("Live Score: " + Integer.toString(5231));
+		this.add(this.labelLiveScore);
 
+		this.labelLiveScore.setBounds(10, 10, 400, 50);
+		this.labelLiveScore.setForeground(Color.WHITE);
+		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
+		
+		this.fileNameLife = "../resources/images/life.png";
+		
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
 		this.fileNameMeteorite = "../resources/images/meteorite.png";
 		this.fileNameEnemies = "../resources/images/firstEnemy.png";
 
-		this.spaceShip = new SpaceShip(500, 400, fileNameSpaceShip);
+		this.spaceShip = new SpaceShip(350, 500, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
 		this.meteorites = new ArrayList<Meteorite>();
+		this.lives = new ArrayDeque<Life>();
+		this.initLives(lives);
 
 		this.enemies = new ArrayList<EnemySpaceShip>();
 
@@ -72,7 +87,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.labelMoveSpaceShip = new JLabel("Press an arrow to move the spaceship");
 		this.add(this.labelMoveSpaceShip);
 
-		this.labelMoveSpaceShip.setBounds(270, 50, 600, 400);
+		this.labelMoveSpaceShip.setBounds(140, 70, 600, 400);
 		this.labelMoveSpaceShip.setForeground(Color.WHITE);
 		this.labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 30));
 
@@ -141,9 +156,18 @@ public class PanelDemo extends JPanel implements ActionListener {
 			}
 
 		}
+		
+		for (Life life : lives) {
+			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
+		}
 
 	}
-
+	
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		
+//	}
+ 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (isMoveSpaceShip()) {
@@ -163,6 +187,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				} else {
 					this.labelMoveSpaceShip.setVisible(false);
 				}
+				this.updateLives();
 				this.updateObstacles();
 				this.updateSpaceShip();
 				this.checkCollisions();
@@ -170,6 +195,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				count++;
 			} else if (count > 50) {
 				this.labelMoveSpaceShip.setVisible(false);
+				this.updateLives();
 				this.updateObstacles();
 				this.updateSpaceShip();
 				this.checkCollisions();
@@ -177,6 +203,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				count++;
 			} else {
 				count++;
+				this.updateLives();
 				this.checkCollisions();
 				this.updateSpaceShip();
 				this.repaint();
@@ -344,9 +371,16 @@ public class PanelDemo extends JPanel implements ActionListener {
 				meteorite.removeBounds();
 				countAhia = 0;
 				this.labelMoveSpaceShip.setForeground(Color.RED);
-				this.labelMoveSpaceShip.setText("AHIA");
+				this.labelMoveSpaceShip.setText("AHIA, you lost a life");
 				this.labelMoveSpaceShip.setVisible(true);
-				meteorite.setVisible(false);
+				
+				
+				if (lives.size()==0) {
+					//passaggio alla fase successiva
+				} else {
+					lives.getLast().setVisible(false);
+					meteorite.setVisible(false);
+				}
 
 			}
 
@@ -358,11 +392,18 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
 				this.labelMoveSpaceShip.setForeground(Color.RED);
-				this.labelMoveSpaceShip.setText("AHIA");
 				countAhia = 0;
-				this.labelMoveSpaceShip.setVisible(true);
 				asteroid.removeBounds();
-				asteroid.setVisible(false);
+				this.labelMoveSpaceShip.setText("AHIA, you lost a life");
+				this.labelMoveSpaceShip.setVisible(true);
+				
+				
+				if (lives.size()==0) {
+					//passggio alla fase successiva
+				} else {
+					lives.getLast().setVisible(false);
+					asteroid.setVisible(false);
+				}
 
 			}
 
@@ -380,6 +421,27 @@ public class PanelDemo extends JPanel implements ActionListener {
 					enemy.setVisible(false);
 					setFlagSpace(false);
 				}
+			}
+		}
+	}
+	
+	public void initLives(Deque<Life> lives) {
+		Life life;
+		int xCoordLife = 10;
+
+		for (int i = 0; i < 3; i++) {
+			final int shift = 30; // COSTANTE
+			life = new Life(xCoordLife, 60, fileNameLife);
+			lives.add(life);
+			xCoordLife += shift;
+		}
+	}
+	
+	public void updateLives() {
+		if (lives.size() > 0) {
+			Life life = lives.getLast();
+			if (life.isVisible() == false) {
+				lives.removeLast();
 			}
 		}
 	}
@@ -428,8 +490,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 			if (isMoveSpaceShip() && (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_DOWN
 					|| key == KeyEvent.VK_UP)) {
 				labelMoveSpaceShip.setText("Avoid meteorites and asteroids");
-				labelMoveSpaceShip.setBounds(330, 50, 600, 400);
-				labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 40));
+				labelMoveSpaceShip.setBounds(140, 70, 600, 400);
+				labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 30));
 				setFlagObstacles(true);
 				setFlagEnemies(false);
 				setMoveSpaceShip(false);

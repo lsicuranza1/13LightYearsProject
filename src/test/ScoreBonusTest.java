@@ -1,13 +1,12 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.awt.geom.AffineTransform;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import game.LifeBonus;
 import game.ScoreBonus;
 
 public class ScoreBonusTest {

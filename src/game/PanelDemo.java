@@ -25,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
+import game.patterns.factoryMethodBonus.BonusFactory;
+
 @SuppressWarnings("serial")
 public class PanelDemo extends JPanel implements ActionListener {
 	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameEnemies, fileNameLife, fileRedArrow;
@@ -37,14 +39,18 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private int yDelta = 1; // variabile per lo scrollingBackground
 	private static int countToAddAsteroid = 0;
 	private static int countToAddMeteorite = 0;
+	private static int countToScoreBonus = 0;
+	private static int countToLifeBonus = 0;
 	private Deque<Life> lives;
 	private final int DELAY = 20;
 	private Timer timer;
 	private List<EnemySpaceShip> enemies;
+	private List<ScoreBonus> scoreBonus;
+	private List<LifeBonus> lifeBonus;
 	private boolean moveSpaceShip = false;
-	private boolean isScore = true;
-	private boolean isLife = false;
-	private JLabel labelMoveSpaceShip;
+	private boolean flagScore = true;
+	private boolean flagLife = false;
+	private JLabel labelText;
 	private boolean flagEnemies = false;
 	private int count = 0;
 	private boolean flagObstacles = false;
@@ -52,7 +58,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private int countAhia = 0;
 	private JLabel labelLiveScore;
 	private JTextArea textArea;
-	private boolean flagBonus=false;
+	private boolean flagBonus = false;
 
 	public PanelDemo() {
 
@@ -85,6 +91,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.spaceShip = new SpaceShip(350, 500, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
 		this.asteroids = new ArrayList<Asteroid>();
+		this.scoreBonus = new ArrayList<ScoreBonus>();
+		this.lifeBonus = new ArrayList<LifeBonus>();
 		this.meteorites = new ArrayList<Meteorite>();
 		this.lives = new ArrayDeque<Life>();
 		this.initLives(lives);
@@ -97,12 +105,12 @@ public class PanelDemo extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 		// TO DO da cancellare
-		this.labelMoveSpaceShip = new JLabel("Press an arrow to move the spaceship");
-		this.add(this.labelMoveSpaceShip);
-		this.labelMoveSpaceShip.setVisible(false);
-		this.labelMoveSpaceShip.setBounds(140, 70, 600, 400);
-		this.labelMoveSpaceShip.setForeground(Color.WHITE);
-		this.labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 30));
+		this.labelText = new JLabel("Press ESC to skip this part");
+		this.add(this.labelText);
+		this.labelText.setVisible(true);
+		this.labelText.setBounds(140, 100, 600, 400);
+		this.labelText.setForeground(Color.WHITE);
+		this.labelText.setFont(new Font("Serif", Font.BOLD, 30));
 
 		this.timer = new Timer(DELAY, this);
 		this.timer.start();
@@ -136,7 +144,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 		try {
 			doDrawing(g);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -173,13 +180,23 @@ public class PanelDemo extends JPanel implements ActionListener {
 			}
 
 		}
+		
+		for (LifeBonus life: this.lifeBonus) {
+
+			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
+		}
+		
+		for (ScoreBonus score: this.scoreBonus) {
+
+			g2d.drawImage(score.getImage(), score.getX(), score.getY(), this);
+		}
 
 		for (Life life : lives) {
 			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
 		}
-		if (isScore)
+		if (flagScore)
 			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 200, 5, this);
-		if (isLife)
+		if (flagLife)
 			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 150, 30, this);
 
 	}
@@ -191,16 +208,16 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (isScore) {
+		if (flagScore) {
 			this.stepScore();
-		} else if (isLife) {
+		} else if (flagLife) {
 			this.stepLife();
 		} else if (isMoveSpaceShip()) {
 			this.stepSpaceship();
-		} else if (isFlagBonus()) {
-			this.stepBonus();
 		} else if (isFlagObstacles()) {
 			this.stepObstacles();
+		} else if (isFlagBonus()) {
+			this.stepBonus();
 		} else if (isFlagEnemies()) {
 			this.stepEnemies();
 		} else if (isFlagSpace()) {
@@ -211,13 +228,46 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepBonus() {
-		
-
+		if (count > 800) {
+			count = 0;
+			this.labelText.setText("They aren't only bad things. Take the bonus");
+			this.labelText.setForeground(Color.WHITE);
+			this.labelText.setVisible(true);
+			this.deleteObstacles();
+			setFlagObstacles(false);
+			setFlagBonus(true);
+		} else if (count > 51) {
+			if (this.labelText.isVisible() && countAhia < 20) {
+				countAhia++;
+			} else {
+				this.labelText.setVisible(false);
+			}
+			this.updateLives();
+			this.updateObstacles();
+			this.updateSpaceShip();
+			this.checkCollisions();
+			this.repaint();
+			count++;
+		} else if (count > 50) {
+			this.labelText.setVisible(false);
+			this.updateLives();
+			this.updateObstacles();
+			this.updateSpaceShip();
+			this.checkCollisions();
+			this.repaint();
+			count++;
+		} else {
+			count++;
+			this.updateLives();
+			this.checkCollisions();
+			this.updateSpaceShip();
+			this.repaint();
+		}
 	}
 
 	private void stepLife() {
 		if (count > 200) {
-			isLife = false;
+			flagLife = false;
 			count = 0;
 			this.textArea.setVisible(false);
 			moveSpaceShip = true;
@@ -229,10 +279,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	private void stepScore() {
 		if (count > 200) { // change to 500, troppo poco tempo
-			isScore = false;
+			flagScore = false;
 			count = 0;
 			this.textArea.setVisible(false);
-			isLife = true;
+			flagLife = true;
 			this.textArea = new JTextArea(
 					"These are the lives. \nIf you get hit by an obstacle or an enemy \nbullet you will lose one.\r\n"
 							+ "If you reach zero you will be \nforced to start again.");
@@ -248,13 +298,13 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	private void stepFinal() {
 		if (count < 50) {
-			this.labelMoveSpaceShip.setText("In the space is not so easy");
-			this.labelMoveSpaceShip.setForeground(Color.WHITE);
-			this.labelMoveSpaceShip.setVisible(true);
+			this.labelText.setText("In the space is not so easy");
+			this.labelText.setForeground(Color.WHITE);
+			this.labelText.setVisible(true);
 			count++;
 		} else if (count < 100) {
-			this.labelMoveSpaceShip.setText("Good Game");
-			this.labelMoveSpaceShip.setForeground(Color.RED);
+			this.labelText.setText("Good Game");
+			this.labelText.setForeground(Color.RED);
 			count++;
 		} else {
 			timer.stop();
@@ -270,9 +320,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepKillEnemies() {
-		this.labelMoveSpaceShip.setText("Press space to kill the enemies");
-		this.labelMoveSpaceShip.setForeground(Color.WHITE);
-		this.labelMoveSpaceShip.setVisible(true);
+		this.labelText.setText("Press space to kill the enemies");
+		this.labelText.setForeground(Color.WHITE);
+		this.labelText.setVisible(true);
 		this.updateMissiles();
 		this.moveEnemy();
 		this.checkCollisions();
@@ -286,7 +336,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		if (count > 50) {
 			setFlagEnemies(false);
 			setFlagSpace(true);
-			this.labelMoveSpaceShip.setVisible(false);
+			this.labelText.setVisible(false);
 			this.updateEnemy();
 			count = 0;
 		}
@@ -300,24 +350,26 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	private void stepSpaceship() {
 		if (moveSpaceShip) {
-			this.labelMoveSpaceShip.setVisible(true);
+			this.textArea.setVisible(false);
+			this.labelText.setText("Press an arrow to move the spaceship");
+			this.repaint();
 		}
 	}
 
 	private void stepObstacles() {
 		if (count > 800) {
 			count = 0;
-			this.labelMoveSpaceShip.setText("Be careful to enemies");
-			this.labelMoveSpaceShip.setForeground(Color.WHITE);
-			this.labelMoveSpaceShip.setVisible(true);
+			this.labelText.setText("Be careful to enemies");
+			this.labelText.setForeground(Color.WHITE);
+			this.labelText.setVisible(true);
 			this.deleteObstacles();
 			setFlagObstacles(false);
-			setFlagEnemies(true);
+			setFlagBonus(true);
 		} else if (count > 51) {
-			if (this.labelMoveSpaceShip.isVisible() && countAhia < 20) {
+			if (this.labelText.isVisible() && countAhia < 20) {
 				countAhia++;
 			} else {
-				this.labelMoveSpaceShip.setVisible(false);
+				this.labelText.setVisible(false);
 			}
 			this.updateLives();
 			this.updateObstacles();
@@ -326,7 +378,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.repaint();
 			count++;
 		} else if (count > 50) {
-			this.labelMoveSpaceShip.setVisible(false);
+			this.labelText.setVisible(false);
 			this.updateLives();
 			this.updateObstacles();
 			this.updateSpaceShip();
@@ -452,6 +504,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 		Rectangle2D meteoriteBounds;
 		Rectangle2D missileBounds;
 		Rectangle2D enemyBounds;
+		Rectangle2D scoreBounds;
+		Rectangle2D bonusBounds;
 
 		for (Meteorite meteorite : meteorites) {
 
@@ -460,17 +514,47 @@ public class PanelDemo extends JPanel implements ActionListener {
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
 				meteorite.removeBounds();
 				countAhia = 0;
-				this.labelMoveSpaceShip.setForeground(Color.RED);
-				this.labelMoveSpaceShip.setText("AHIA, you lost a life");
-				this.labelMoveSpaceShip.setVisible(true);
+				this.labelText.setForeground(Color.RED);
+				this.labelText.setText("AHIA, you lost a life");
+				this.labelText.setVisible(true);
 				lives.getLast().setVisible(false);
 				if (lives.size() == 1) {
 					flagObstacles = false;
 					flagEnemies = true;
 				}
-				
 
 				meteorite.setVisible(false);
+			}
+
+		}
+		
+		for (LifeBonus life : this.lifeBonus) {
+
+			bonusBounds = life.getBounds();
+
+			if (bonusBounds.intersects(spaceShipBounds)) {
+				life.removeBounds();
+				int actual_lives = this.spaceShip.getLives();
+				System.out.println(actual_lives);
+				if(actual_lives < 6) {
+				spaceShip.setLives(actual_lives+1);
+				int x_shift = lives.getLast().getX();
+				lives.add(new Life(x_shift+30,60,fileNameLife));
+				lives.getLast().setVisible(true);
+				}
+				life.removeBounds();
+				life.setVisible(false);
+			}
+
+		}
+		
+		for (ScoreBonus score : this.scoreBonus) {
+
+			scoreBounds = score.getBounds();
+
+			if (scoreBounds.intersects(spaceShipBounds)) {
+				score.removeBounds();
+				score.setVisible(false);
 			}
 
 		}
@@ -480,11 +564,11 @@ public class PanelDemo extends JPanel implements ActionListener {
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
-				this.labelMoveSpaceShip.setForeground(Color.RED);
+				this.labelText.setForeground(Color.RED);
 				countAhia = 0;
 				asteroid.removeBounds();
-				this.labelMoveSpaceShip.setText("AHIA, you lost a life");
-				this.labelMoveSpaceShip.setVisible(true);
+				this.labelText.setText("AHIA, you lost a life");
+				this.labelText.setVisible(true);
 				lives.getLast().setVisible(false);
 
 				if (lives.size() == 1) {
@@ -532,6 +616,46 @@ public class PanelDemo extends JPanel implements ActionListener {
 				lives.removeLast();
 			}
 		}
+	}
+	
+	public void updateBonus() {
+
+		if (countToLifeBonus >= 300) {
+			lifeBonus.add((LifeBonus) new BonusFactory().getBonus("life"));  //FACTORY METHOD TO CREATE ASTEROIDS
+			countToLifeBonus = 0;
+		}
+		countToLifeBonus++;
+
+		Iterator<LifeBonus> it_lifeBonus = lifeBonus.iterator();
+
+		while (it_lifeBonus.hasNext()) {
+			LifeBonus life = (LifeBonus) it_lifeBonus.next();
+			if (life.getY() >= 1000 || !life.isVisible()) {
+				it_lifeBonus.remove();
+			} else {
+				life.move();
+				life.setBounds();
+			}
+		}
+		
+		
+		if (countToScoreBonus >= 300) {
+			scoreBonus.add((ScoreBonus) new BonusFactory().getBonus("score"));  //FACTORY METHOD TO CREATE ASTEROIDS
+			countToScoreBonus = 0;
+		}
+
+		Iterator<ScoreBonus> it_scoreBonus = scoreBonus.iterator();
+
+		while (it_scoreBonus.hasNext()) {
+			ScoreBonus score = (ScoreBonus) it_scoreBonus.next();
+			if (score.getY() >= 1000 || !score.isVisible()) {
+				it_scoreBonus.remove();
+			} else {
+				score.move();
+				score.setBounds();
+			}
+		}
+
 	}
 
 	public boolean isMoveSpaceShip() {
@@ -585,14 +709,19 @@ public class PanelDemo extends JPanel implements ActionListener {
 			int key = e.getKeyCode();
 			if (isMoveSpaceShip() && (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_DOWN
 					|| key == KeyEvent.VK_UP)) {
-				labelMoveSpaceShip.setText("Avoid meteorites and asteroids");
-				labelMoveSpaceShip.setBounds(140, 70, 600, 400);
-				labelMoveSpaceShip.setFont(new Font("Serif", Font.BOLD, 30));
+				labelText.setText("Avoid meteorites and asteroids");
+				labelText.setBounds(140, 70, 600, 400);
+				labelText.setFont(new Font("Serif", Font.BOLD, 30));
 				setFlagObstacles(true);
 				setFlagEnemies(false);
 				setMoveSpaceShip(false);
-			} else if (isFlagSpace() || !(key == KeyEvent.VK_SPACE))
+			} else if ((flagScore || flagLife) && key == KeyEvent.VK_ESCAPE) {
+				flagScore = false;
+				flagLife = false;
+				moveSpaceShip = true;
+			} else if (isFlagSpace() || !(key == KeyEvent.VK_SPACE)) {
 				spaceShip.keyPressed(e);
+			}
 
 		}
 	}

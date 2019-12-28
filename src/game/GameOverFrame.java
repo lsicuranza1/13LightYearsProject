@@ -5,9 +5,14 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
+
+import gestioneClassifica.Giocatore;
+import gestioneClassifica.GiocatoreNonClassificatoException;
+import gestioneClassifica.GiocatorePresenteException;
 
 @SuppressWarnings("serial")
 public class GameOverFrame extends javax.swing.JFrame {
@@ -16,8 +21,10 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private javax.swing.JPanel panelGameOver;
 	private javax.swing.JButton playAgainButton;
 	private javax.swing.JButton mainMenuButton;
-	private javax.swing.JLabel sfondo;
+	private javax.swing.JLabel sfondo, enemy, asteroid;
 	private javax.swing.JButton score;
+	private javax.swing.JTextField name;
+	private javax.swing.JButton add;
 
 	public GameOverFrame() {
 
@@ -39,7 +46,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2,
 				(int) dimDisplay.getHeight() / 2 - heightMenu / 2);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("13 Light Years - Menu' Principale");
+		setTitle("Game Over");
+		this.setResizable(false);
 
 		java.awt.GridBagConstraints gridBagConstraints;
 
@@ -48,6 +56,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		mainMenuButton = new javax.swing.JButton("Main Menu");
 		sfondo = new javax.swing.JLabel();
 		score = new javax.swing.JButton("Great, your score is : " + mainFrame.getScore().getScoreValue());
+		enemy = new javax.swing.JLabel("Enemies destroyed: " + PanelEsecuzione.getEnemiesDestoyed());
+		asteroid = new javax.swing.JLabel("Asteroids destroyed:  "+ PanelEsecuzione.getAsteroidsDestoyed());
 		sfondo.setIcon(immagineSfondo);
 
 		setName("");
@@ -67,8 +77,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		score.setBorderPainted(false);
 		score.setVerticalAlignment(1);
 		score.setOpaque(false);
-		score.setMaximumSize(new java.awt.Dimension(250, 200));
-		score.setMinimumSize(new java.awt.Dimension(250, 200));
+		score.setMaximumSize(new java.awt.Dimension(250, 20));
+		score.setMinimumSize(new java.awt.Dimension(250, 20));
 
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -82,11 +92,11 @@ public class GameOverFrame extends javax.swing.JFrame {
 		playAgainButton.setFont(new java.awt.Font("Inc Free", 1, 35));
 		playAgainButton.setForeground(Color.CYAN);
 		playAgainButton.setFocusPainted(false);
-		playAgainButton.setOpaque(false);
+		//playAgainButton.setOpaque(false);
 		playAgainButton.setContentAreaFilled(false);
 		playAgainButton.setBorderPainted(false);
 		playAgainButton.setVerticalAlignment(1);
-		playAgainButton.setOpaque(false);
+		//playAgainButton.setOpaque(false);
 		playAgainButton.setMaximumSize(new java.awt.Dimension(107, 25));
 		playAgainButton.setMinimumSize(new java.awt.Dimension(107, 25));
 		playAgainButton.addActionListener(new java.awt.event.ActionListener() {
@@ -101,17 +111,17 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.ipadx = 148;
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(200, 800, 0, 800);
+		gridBagConstraints.insets = new java.awt.Insets(100, 800, 0, 800);
 		panelGameOver.add(playAgainButton, gridBagConstraints);
 
 		mainMenuButton.setFont(new java.awt.Font("Inc Free", 1, 24));
 		mainMenuButton.setForeground(Color.orange);
 		mainMenuButton.setFocusPainted(false);
-		mainMenuButton.setOpaque(false);
+		//mainMenuButton.setOpaque(false);
 		mainMenuButton.setContentAreaFilled(false);
 		mainMenuButton.setBorderPainted(false);
 		mainMenuButton.setVerticalAlignment(1);
-		mainMenuButton.setOpaque(false);
+		//mainMenuButton.setOpaque(false);
 		mainMenuButton.setMaximumSize(new java.awt.Dimension(107, 25));
 		mainMenuButton.setMinimumSize(new java.awt.Dimension(107, 25));
 		mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -125,8 +135,86 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.ipadx = 148;
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(250, 800, 0, 800);
+		gridBagConstraints.insets = new java.awt.Insets(150, 800, 0, 800);
 		panelGameOver.add(mainMenuButton, gridBagConstraints);
+		
+		enemy.setFont(new java.awt.Font("Inc Free", 1, 24));
+		enemy.setForeground(Color.orange);
+		enemy.setVerticalAlignment(1);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipady = 32;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		gridBagConstraints.insets = new java.awt.Insets(210, 800, 0, 800);
+		panelGameOver.add(enemy, gridBagConstraints);
+		
+		asteroid.setFont(new java.awt.Font("Inc Free", 1, 24));
+		asteroid.setForeground(Color.orange);
+		asteroid.setVerticalAlignment(1);
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipady = 32;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		gridBagConstraints.insets = new java.awt.Insets(235, 800, 0, 800);
+		panelGameOver.add(asteroid, gridBagConstraints);
+		
+		
+		
+		name = new JTextField("           Inserire nome",40);
+		name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clear(evt);
+            }
+        });
+		name.requestFocusInWindow();
+		name.setEditable(true);
+		name.setFocusable(true);
+		name.setEnabled(true);
+		//name.requestFocus();
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.ipadx = 170;
+		gridBagConstraints.ipady = 32;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		gridBagConstraints.insets = new java.awt.Insets(350, 820, 0, 800);
+		panelGameOver.add(name,gridBagConstraints);
+		
+		add = new JButton("Add to the scoreboard");
+		add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+					try {
+						addPlayer(evt);
+					} catch (GiocatorePresenteException ex) {
+				    	ex.printStackTrace();
+		            	//System.out.println("Eccezione");
+				        JOptionPane.showMessageDialog(panelGameOver,"Spiacenti... non hai superato il tuo record!","Risultato",JOptionPane.INFORMATION_MESSAGE);
+				    } catch (GiocatoreNonClassificatoException ex) {
+				        JOptionPane.showMessageDialog(panelGameOver, "Spiacenti... non ti sei classificato","Risultato",JOptionPane.INFORMATION_MESSAGE);
+				    }
+					
+					add.setVisible(false);
+					name.setVisible(false);
+            }
+
+        });
+		add.setMaximumSize(new java.awt.Dimension(50, 25));
+		add.setMinimumSize(new java.awt.Dimension(50, 25));
+		add.setSize(50, 25);
+		
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.ipadx = 170;
+		gridBagConstraints.ipady = 32;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		gridBagConstraints.insets = new java.awt.Insets(410, 800, 0, 800);
+		panelGameOver.add(add,gridBagConstraints);
+
 
 		panelGameOver.getAccessibleContext().setAccessibleName("");
 		panelGameOver.getAccessibleContext().setAccessibleDescription("");
@@ -151,11 +239,27 @@ public class GameOverFrame extends javax.swing.JFrame {
 										.addGap(0, 0, Short.MAX_VALUE))));
 
 		pack();
-
+		
 		panelGameOver.setFocusable(true);
 		panelGameOver.requestFocus();
 
 	}
+
+	private void addPlayer(java.awt.event.ActionEvent evt) throws GiocatorePresenteException, GiocatoreNonClassificatoException{
+		String nomeGiocatore = this.name.getText();
+		 if(nomeGiocatore.equals("           Inserire nome") || nomeGiocatore.equals("")) {
+			 nomeGiocatore="Anonimo";
+		 }
+		 name.setText("Inserire nome");
+		 Giocatore g = new Giocatore(nomeGiocatore);
+		 g.setPunteggio(mainFrame.getScore().getScoreValue());
+		 MainFrame.getC().aggiungiGiocatore(g);
+		 MainFrame.getC().salvaSuFileBinario();
+			 
+		 int position = MainFrame.getC().getClassifica().indexOf(g);
+		 JOptionPane.showMessageDialog(this,"Congratulazioni "+g.getTagGiocatore()+" sei entrato in classifica al "+(position+1)+" posto","Risultato",JOptionPane.INFORMATION_MESSAGE);
+    } 
+		 
 
 	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
 
@@ -165,7 +269,15 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 		mainFrame.updateModalita("in_esecuzione");
+		PanelEsecuzione.setAsteroidsDestoyed(0);
+		PanelEsecuzione.setEnemiesDestoyed(0);
 	}
+	
+	private void clear(java.awt.event.MouseEvent evt) {                                         
+        this.name.setText("");
+    }
+	
+	
 
 	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
 		ImageIcon image = new ImageIcon(url);

@@ -9,20 +9,24 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import gestioneClassifica.Classifica;
+
 @SuppressWarnings("serial")
 public class MenuFrame extends JFrame {
 	private MainFrame mainFrame = MainFrame.getIstance();
-
+	private static final long serialVersionUID = 6529685098267757690L;
 	private Dimension dim;
 	public static Clip gameClip;
 	public static boolean demo = false;
+	public static boolean flagScoreboard = false;
+	public static boolean flagSettings = false;
 	private javax.swing.JButton playButton;
 	private javax.swing.JButton scoreBoardButton;
 	private javax.swing.JButton settingsButton;
 	private javax.swing.JButton demoButton;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JLabel sfondo;
-
+	private Classifica c=mainFrame.getC();
 	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
 		ImageIcon image = new ImageIcon(url);
 		Image immagineScalata = image.getImage().getScaledInstance(nuovaW, nuovaH, Image.SCALE_DEFAULT);
@@ -30,6 +34,8 @@ public class MenuFrame extends JFrame {
 	}
 
 	public MenuFrame() {
+//		c = new Classifica();
+//		c.leggiDaFileBinario();
 		initComponents();
 	}
 
@@ -197,6 +203,8 @@ public class MenuFrame extends JFrame {
 
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		mainFrame.updateModalita("in_esecuzione");
+		PanelEsecuzione.setAsteroidsDestoyed(0);
+		PanelEsecuzione.setEnemiesDestoyed(0);
 
 	}
 
@@ -205,12 +213,22 @@ public class MenuFrame extends JFrame {
 	}
 	
 	private void scoreBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
+		if(flagScoreboard == false) {
+			FrameScoreboard frameBoard = new FrameScoreboard(this.c);
+			frameBoard.setVisible(true);
+			flagScoreboard = true;
+		}	
 	}
 	
 	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		Settings set = new Settings(this, true, false);
-		set.setVisible(true);
-	}
+		if(flagSettings==false) {
+			Settings set = new Settings(this, true, false);
+			set.setVisible(true);
+			flagSettings = true;
+		}
+		}
+		
+	
+	
 
 }

@@ -6,12 +6,14 @@ import javax.swing.JFrame;
 
 import game.patterns.state.Modalita;
 import game.patterns.state.Stato;
+import gestioneClassifica.Classifica;
 
 public class MainFrame {
 
 	private JFrame frame;
 	private Modalita modalita;
 	private Score score;
+	private static Classifica c;
 
 	// Singleton
 	private static MainFrame istance = null;
@@ -26,6 +28,8 @@ public class MainFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		c = new Classifica();
+		c.leggiDaFileBinario();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -71,5 +75,15 @@ public class MainFrame {
 	public void setScore(Score score) {
 		this.score = score;
 	}
+
+	public static Classifica getC() {
+		return c;
+	}
+
+	public static void setC(Classifica c) {
+		MainFrame.c = c;
+	}
+	
+	
 
 }

@@ -52,6 +52,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private boolean flagPause = false;
 	private String scoreUpdate = "";
 	private int count = 0; //serve per conteggiare il tempo in cui la label del bonus rimane sullo schermo
+	private static int asteroidsDestoyed = 0;
+	private static int enemiesDestoyed = 0;
 
 	public PanelEsecuzione() {
 
@@ -431,6 +433,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				missileBounds = missile.getBounds();
 
 				if (missileBounds.intersects(asteroidBounds)) {
+					PanelEsecuzione.setAsteroidsDestoyed(PanelEsecuzione.getAsteroidsDestoyed()+1);
 					missile.removeBounds();
 					missile.setVisible(false);
 					asteroid.setVisible(false);
@@ -449,6 +452,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				for(Missile missile : missiles) {
 					missileBounds = missile.getBounds();
 					if(missileBounds.intersects(enemyBounds)) {
+						PanelEsecuzione.setEnemiesDestoyed(PanelEsecuzione.getEnemiesDestoyed()+1);;
 						missile.removeBounds();
 						missile.setVisible(false);
 						enemy.setVisible(false);
@@ -528,6 +532,22 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	}
 	public JDialog getDialog() {
 		return dialog;
+	}
+
+	public static int getEnemiesDestoyed() {
+		return enemiesDestoyed;
+	}
+
+	public static void setEnemiesDestoyed(int enemiesDestoyed) {
+		PanelEsecuzione.enemiesDestoyed = enemiesDestoyed;
+	}
+
+	public static int getAsteroidsDestoyed() {
+		return asteroidsDestoyed;
+	}
+
+	public static void setAsteroidsDestoyed(int asteroidsDestoyed) {
+		PanelEsecuzione.asteroidsDestoyed = asteroidsDestoyed;
 	}
 
 

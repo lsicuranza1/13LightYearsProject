@@ -5,6 +5,9 @@
  */
 package game;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 @SuppressWarnings("serial")
 public class Settings extends javax.swing.JDialog {
 
@@ -71,6 +74,16 @@ public class Settings extends javax.swing.JDialog {
 		jLabel4.setMinimumSize(new java.awt.Dimension(379, 120));
 		jLabel4.setName("");
 		jLabel4.setPreferredSize(new java.awt.Dimension(379, 120));
+		
+		this.addWindowListener(new WindowAdapter()
+	    {
+	        @Override
+	        public void windowClosing(WindowEvent e)
+	        {
+	            MenuFrame.flagSettings = false;
+	            e.getWindow().dispose();
+	        }
+	    });
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -120,6 +133,8 @@ public class Settings extends javax.swing.JDialog {
 
 		pack();
 	}
+	
+	
 
 	private void effectsActionPerformed(java.awt.event.ActionEvent evt) {
 

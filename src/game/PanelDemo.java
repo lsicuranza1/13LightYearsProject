@@ -332,7 +332,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	public void updateEnemy() {
-		enemies.add(new EnemySpaceShip(500, 100, fileNameEnemies));
+		enemies.add(new EnemySpaceShip(350, 100, fileNameEnemies));
 		Iterator<EnemySpaceShip> et = enemies.iterator();
 		while (et.hasNext()) {
 			EnemySpaceShip enemy = (EnemySpaceShip) et.next();
@@ -379,9 +379,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 					//passaggio alla fase successiva
 				} else {
 					lives.getLast().setVisible(false);
-					meteorite.setVisible(false);
+					
 				}
-
+				meteorite.setVisible(false);
 			}
 
 		}
@@ -402,9 +402,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 					//passggio alla fase successiva
 				} else {
 					lives.getLast().setVisible(false);
-					asteroid.setVisible(false);
+					
 				}
-
+				asteroid.setVisible(false);
 			}
 
 		}

@@ -474,7 +474,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			if (bonusBounds.intersects(spaceShipBounds)) {
 				life.removeBounds();
 				int actual_lives = this.spaceShip.getLives();
-				System.out.println(actual_lives);
 				if(actual_lives < 6) {
 				spaceShip.setLives(actual_lives+1);
 				int x_shift = lives.getLast().getX();

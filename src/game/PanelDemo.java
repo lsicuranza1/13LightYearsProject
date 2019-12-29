@@ -38,8 +38,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private int yOffset = 0; // variabile per lo scrollingBackground
 	private int yDelta = 1; // variabile per lo scrollingBackground
 	private static int countToAddAsteroid = 120;
-	private static int countToAddMeteorite = 100;
-	private static int countToScoreBonus = 250;
+	private static int countToAddMeteorite = 50;
+	private static int countToScoreBonus = 200;
 	private static int countToLifeBonus = 280;
 	private Deque<Life> lives;
 	private final int DELAY = 20;
@@ -59,6 +59,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private JLabel labelLiveScore;
 	private JTextArea textArea;
 	private boolean flagBonus = false;
+	private boolean flagBonusTrue = false;
+	private boolean flagScoreBonus=false;
+	private boolean flagLifeBonus=false;
 
 	public PanelDemo() {
 
@@ -201,11 +204,6 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		
-//	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (flagScore) {
@@ -218,7 +216,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.stepObstacles();
 		} else if (isFlagBonus()) {
 			this.stepBonus();
-		} else if (isFlagEnemies()) {
+		} else if (isFlagBonusTrue()) {
+			this.stepBonusTrue();
+		}
+		else if (isFlagEnemies()) {
 			this.stepEnemies();
 		} else if (isFlagSpace()) {
 			this.stepKillEnemies();
@@ -227,8 +228,26 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	private void stepBonusTrue() {
+		if(count>100) {
+			this.labelText.setText("Be careful to enemies");
+			this.labelText.setForeground(Color.WHITE);
+			this.labelText.setVisible(true);
+			setFlagEnemies(true);
+			setFlagBonusTrue(false);
+		}
+		count++;
+	}
+
 	private void stepBonus() {
-		if (count > 800) {
+		if(flagLifeBonus && flagScoreBonus) {
+			setFlagBonus(false);
+			setFlagBonusTrue(true);
+			count=0;
+			deleteBonus();
+			this.repaint();
+		}
+		else if (count > 800 ) {
 			count = 0;
 			this.labelText.setText("Be careful to enemies");
 			this.labelText.setForeground(Color.WHITE);
@@ -262,7 +281,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepLife() {
-		if (count > 200) {
+		if (count > 500) {
 			flagLife = false;
 			count = 0;
 			this.textArea.setVisible(false);
@@ -274,7 +293,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepScore() {
-		if (count > 200) { // change to 500, troppo poco tempo
+		if (count > 500) { // change to 500, troppo poco tempo
 			flagScore = false;
 			count = 0;
 			this.textArea.setVisible(false);
@@ -555,6 +574,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				}
 				life.removeBounds();
 				life.setVisible(false);
+				flagLifeBonus=true;
 			}
 
 		}
@@ -569,6 +589,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelText.setForeground(Color.green);
 				score.removeBounds();
 				score.setVisible(false);
+				flagScoreBonus=true;
 			}
 
 		}
@@ -639,7 +660,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	
 	public void updateBonus() {
 
-		if (countToLifeBonus >= 300) {
+		if (countToLifeBonus >= 300 && !flagLifeBonus) {
 			lifeBonus.add((LifeBonus) new BonusFactory().getBonus("life"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToLifeBonus = 0;
 		}
@@ -658,7 +679,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 		
 		
-		if (countToScoreBonus >= 300) {
+		if (countToScoreBonus >= 300 && !flagScoreBonus) {
 			scoreBonus.add((ScoreBonus) new BonusFactory().getBonus("score"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToScoreBonus = 0;
 		}
@@ -716,6 +737,14 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	public void setFlagBonus(boolean flagBonus) {
 		this.flagBonus = flagBonus;
+	}
+
+	public boolean isFlagBonusTrue() {
+		return flagBonusTrue;
+	}
+
+	public void setFlagBonusTrue(boolean flagBonusTrue) {
+		this.flagBonusTrue = flagBonusTrue;
 	}
 
 	public class TAdapter extends KeyAdapter {

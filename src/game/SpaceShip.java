@@ -4,10 +4,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.sampled.Clip;
-import game.Utilities;
-import game.Sound;
-
 
 public class SpaceShip extends SpaceshipStructure {
 
@@ -27,7 +23,6 @@ public class SpaceShip extends SpaceshipStructure {
 		super(x, y, path);
 		this.missiles = new ArrayList<Missile>();
 
-
 	}
 	
 	public int getLives() {
@@ -40,10 +35,7 @@ public class SpaceShip extends SpaceshipStructure {
 	
 	
 	public List<Missile> getMissiles() {
-		
 		return missiles;
-		
-		
 	}
 
 
@@ -115,17 +107,13 @@ public class SpaceShip extends SpaceshipStructure {
 	@Override
 	public void fire() {
 		List<Missile> missiles = this.getMissiles();
-
+		
 		if (this.shoot_counter >= 25) {
 			missiles.add(new Missile(this.getX() + this.getWidth() / 2 - 9, this.getY() + this.getHeight() - 90, "../resources/images/missile.png"));
 			this.shoot_counter = 0;
 		}
 		
-		
-		
-		
 	}
-	
 
 	public void keyReleased(KeyEvent e) {
 

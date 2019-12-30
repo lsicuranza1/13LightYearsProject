@@ -1,26 +1,18 @@
 package game.patterns.state;
 
-import javax.sound.sampled.Clip;
-
 import game.ExecutionFrame;
-import game.GameOverFrame;
 import game.MainFrame;
-import game.Sound;
-import game.Utilities;
 
 public class StatoInEsecuzione implements Stato {
 
 	private MainFrame mainFrame;
 	private ExecutionFrame exeFrame;
 
-
 	public StatoInEsecuzione() {
 		mainFrame = MainFrame.getIstance();
 		this.exeFrame = new ExecutionFrame();
 		mainFrame.setFrame(exeFrame);
 		mainFrame.getFrame().setVisible(true);
-		
-		
 	}
 
 	@Override

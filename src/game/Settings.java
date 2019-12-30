@@ -4,14 +4,12 @@
  * and open the template in the editor.
  */
 package game;
-import game.MenuFrame;;
 
 @SuppressWarnings("serial")
 public class Settings extends javax.swing.JDialog {
 
 	public static boolean soundEffects = true;
 	public static boolean soundMusic = true;
-	public static boolean padArrows = false;
 	public boolean inGame;
 
 	private javax.swing.JButton effects;
@@ -25,7 +23,7 @@ public class Settings extends javax.swing.JDialog {
 		super(parent, modal);
 		this.inGame = inGame;
 		initComponents();
-		
+
 	}
 
 	private void initComponents() {
@@ -128,9 +126,6 @@ public class Settings extends javax.swing.JDialog {
 	}
 
 	private void musicActionPerformed(java.awt.event.ActionEvent evt) {
-		MenuFrame a=new MenuFrame();
-		a.gameClip.stop();
-	
 
 	}
 

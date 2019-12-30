@@ -1,17 +1,4 @@
 package game;
-import game.Sound;
-import game.Settings;
-import game.Utilities;
-
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.net.URL;
-
-import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
-
-import game.MainFrame;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -27,9 +14,7 @@ public class MenuFrame extends JFrame {
 	private MainFrame mainFrame = MainFrame.getIstance();
 
 	private Dimension dim = new Dimension(1000,600);
-	public static Sound gameMusic;
 	public static Clip gameClip;
-	//public static Clip gameClip2;
 	public static boolean demo = false;
 	private javax.swing.JButton playButton;
 	private javax.swing.JButton scoreBoardButton;
@@ -37,9 +22,6 @@ public class MenuFrame extends JFrame {
 	private javax.swing.JButton demoButton;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JLabel sfondo;
-	
-    
-
 
 	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
 		ImageIcon image = new ImageIcon(url);
@@ -49,12 +31,6 @@ public class MenuFrame extends JFrame {
 
 	public MenuFrame() {
 		initComponents();
-		
-		if (gameMusic == null) {
-            this.gameClip = Utilities.LoadSound(getClass().getResource("../resources/sound/menu_song.wav"));
-            this.gameMusic = new Sound(gameClip);
-            this.gameMusic.loopSound();
-        }
 	}
 
 	private void initComponents() {
@@ -215,9 +191,8 @@ public class MenuFrame extends JFrame {
 	}
 
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		MenuFrame.gameMusic.stopSound();
 		mainFrame.updateModalita("in_esecuzione");
-		
+
 	}
 
 	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {

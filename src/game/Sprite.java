@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 
 public class Sprite {
 
@@ -14,12 +15,16 @@ public class Sprite {
 	private Rectangle2D rectangle;
 	private BufferedImage image;
 	private boolean visible = true;
+	
+	public static Sound enemyExplosionSound;
+    public static Clip enemyExplosionClip;
 
 	public Sprite(int x, int y, String imageFileName) {
 		this.x = x;
 		this.y = y;
 		this.loadImage(imageFileName);
 		this.rectangle = new Rectangle(x, y, this.getWidth(), this.getHeight());
+
 	}
 
 	private void loadImage(String imageFileName) {
@@ -76,8 +81,20 @@ public class Sprite {
 		this.rectangle.setFrame(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 	
-	public void removeBounds() {
+	public void removeBoundsObstacles() {
 		this.rectangle.setFrame(0, 0, 0, 0);
+		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("../resources/sound/enemyExplosion2.wav"));
+		enemyExplosionSound = new Sound(enemyExplosionClip);
+		enemyExplosionSound.playSound();
 	}
+	
+	public void removeBoundsEnemies() {
+		this.rectangle.setFrame(0, 0, 0, 0);
+		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("../resources/sound/enemyExplosion.wav"));
+		enemyExplosionSound = new Sound(enemyExplosionClip);
+		enemyExplosionSound.playSound();
+	}
+	
+	
 
 }

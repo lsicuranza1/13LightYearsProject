@@ -95,6 +95,13 @@ public class Sprite {
 		enemyExplosionSound.playSound();
 	}
 	
+	public void removeBoundsBonus() {
+		this.rectangle.setFrame(0, 0, 0, 0);
+		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("../resources/sound/enemyExplosion.wav"));
+		enemyExplosionSound = new Sound(enemyExplosionClip);
+		enemyExplosionSound.playSound();
+	}
+	
 	
 
 }

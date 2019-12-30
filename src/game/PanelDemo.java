@@ -341,7 +341,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-				meteorite.removeBounds();
+				meteorite.removeBoundsEnemies();
 				countAhia = 0;
 				this.labelMoveSpaceShip.setForeground(Color.RED);
 				this.labelMoveSpaceShip.setText("AHIA");
@@ -361,7 +361,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelMoveSpaceShip.setText("AHIA");
 				countAhia = 0;
 				this.labelMoveSpaceShip.setVisible(true);
-				asteroid.removeBounds();
+				asteroid.removeBoundsEnemies();
 				asteroid.setVisible(false);
 
 			}
@@ -375,7 +375,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			for (Missile missile : missiles) {
 				missileBounds = missile.getBounds();
 				if (missileBounds.intersects(enemyBounds)) {
-					missile.removeBounds();
+					missile.removeBoundsObstacles();
 					missile.setVisible(false);
 					enemy.setVisible(false);
 					setFlagSpace(false);

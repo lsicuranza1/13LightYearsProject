@@ -3,21 +3,34 @@ package game;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
+
+import game.patterns.state.StatoInEsecuzione;
 
 @SuppressWarnings("serial")
 public class ExecutionFrame extends JFrame {
 	
 	private PanelEsecuzione panel;
 	private Dimension dim;
+	public static Sound soundInGame;
+    public static Clip clipInGame;
+    public static Sound gameMusic;
 	
 	public ExecutionFrame() {
 		initComponents();
+		
+		if (gameMusic == null) {
+			clipInGame = Utilities.LoadSound(getClass().getResource("../resources/sound/ingame.wav"));
+			soundInGame = new Sound(clipInGame);
+			soundInGame.playSound();		
+    }
+	
 	}
 	
 	private void initComponents() {
 		this.panel = new PanelEsecuzione();
-		this.dim = new Dimension(1000,600);
+		this.dim = new Dimension(800,800);
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);

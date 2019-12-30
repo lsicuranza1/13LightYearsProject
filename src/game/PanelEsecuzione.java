@@ -396,7 +396,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-				meteorite.removeBounds();
+				meteorite.removeBoundsEnemies();
 				spaceShip.loseLife();
 				lives.getLast().setVisible(false);
 
@@ -415,7 +415,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
-				asteroid.removeBounds();
+				asteroid.removeBoundsEnemies();
 				spaceShip.loseLife();
 				lives.getLast().setVisible(false);
 
@@ -431,7 +431,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				missileBounds = missile.getBounds();
 
 				if (missileBounds.intersects(asteroidBounds)) {
-					missile.removeBounds();
+					missile.removeBoundsObstacles();
 					missile.setVisible(false);
 					asteroid.setVisible(false);
 					mainframe.getScore().updateScoreValue(100);
@@ -449,7 +449,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				for(Missile missile : missiles) {
 					missileBounds = missile.getBounds();
 					if(missileBounds.intersects(enemyBounds)) {
-						missile.removeBounds();
+						missile.removeBoundsEnemies();
 						missile.setVisible(false);
 						enemy.setVisible(false);
 						mainframe.getScore().updateScoreValue(500);
@@ -461,7 +461,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				
 
 				if(enemyBounds.intersects(spaceShipBounds)) {
-					enemy.removeBounds();
+					enemy.removeBoundsEnemies();
 					
 					spaceShip.loseLife();
 					lives.getLast().setVisible(false);
@@ -477,7 +477,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				for(Bomb bomb : enemy.getBombs()) {
 					bombBounds = bomb.getBounds();
 					if(bombBounds.intersects(spaceShipBounds)) {
-						bomb.removeBounds();
+						bomb.removeBoundsEnemies();
 						spaceShip.loseLife();
 						lives.getLast().setVisible(false);
 						
@@ -496,7 +496,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				for(Bomb bomb : bombeVaganti){
 					bombeVagantiBounds = bomb.getBounds();
 					if(bombeVagantiBounds.intersects(spaceShipBounds)) {
-						bomb.removeBounds();
+						bomb.removeBoundsEnemies();
 						spaceShip.loseLife();
 						lives.getLast().setVisible(false);
 						if (spaceShip.getLives() == 0) {

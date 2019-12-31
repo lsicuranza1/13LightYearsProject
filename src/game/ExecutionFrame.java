@@ -12,20 +12,16 @@ public class ExecutionFrame extends JFrame {
 	private Dimension dim;
 	public static Sound soundInGame;
     public static Clip clipInGame;
-   
-   
+    public static Sound gameMusic;
+    
 	public ExecutionFrame() {
 		initComponents();
 		
-		if (Settings.soundMusic == true) {
+		if (gameMusic == null) {
 			clipInGame = Utilities.LoadSound(getClass().getResource("../resources/sound/ingame.wav"));
 			soundInGame = new Sound(clipInGame);
 			soundInGame.playSound();
-
 	}
-		//else;
-		
-			
 	}
 	
 	private void initComponents() {

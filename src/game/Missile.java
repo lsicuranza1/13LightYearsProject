@@ -14,13 +14,9 @@ public class Missile extends Sprite {
 	public Missile(int x, int y, String path) {
 		super(x, y, path);
 		
-		if(Settings.soundEffects == true) {
-			shipShootClip = Utilities.LoadSound(getClass().getResource("../resources/sound/shipShoot2.wav"));
-			shipShootSound = new Sound(shipShootClip);
-			shipShootSound.playSound();
-		}
-		
-		else;
+		shipShootClip = Utilities.LoadSound(getClass().getResource("../resources/sound/shipShoot2.wav"));
+		shipShootSound = new Sound(shipShootClip);
+		shipShootSound.playSound();
 
 
 	}

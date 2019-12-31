@@ -28,14 +28,11 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 		initComponents();
 		
-		if (Settings.soundMusic == true){
-		
 		ExecutionFrame.soundInGame.stopSound();
 		
 		GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("../resources/sound/endGame.wav"));
 		GameOverFrame.soundEndGame = new Sound(clipEndGame);
 		GameOverFrame.soundEndGame.playSound();
-		}
 	}
 
 	private void initComponents() {
@@ -169,12 +166,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
 
-		if(Settings.soundMusic == true) {
-			GameOverFrame.soundEndGame.stopSound();
-			//MenuFrame.gameMusic.playSound();
-		}
-		else;
-		
+		GameOverFrame.soundEndGame.stopSound();
+		MenuFrame.gameMusic.playSound();
 		
 		mainFrame.updateModalita("start");
 	}

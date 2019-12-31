@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import game.patterns.state.Modalita;
 import game.patterns.state.Stato;
 import gestioneClassifica.Classifica;
-
+ 
 public class MainFrame {
 
 	private JFrame frame;

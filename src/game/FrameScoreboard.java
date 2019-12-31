@@ -7,23 +7,26 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import gestioneClassifica.*;
 
 public class FrameScoreboard extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTable table;
-	private JTextField name;
 	private JButton reset;
-	private JButton add;
 	private Dimension dim;
 	private final Classifica c;
 	/**
@@ -41,8 +44,8 @@ public class FrameScoreboard extends JFrame {
         for(Giocatore g: c){
             this.table.setValueAt(g.getTagGiocatore(),i,1);
             this.table.setValueAt(g.getPunteggio(),i,2);
-            this.table.setValueAt(g.getData(), i, 3);
-            i++;
+            this.table.setValueAt(DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.ITALY).format(g.getData()), i, 3);
+            i++; 
         }
     }
 	
@@ -58,6 +61,7 @@ public class FrameScoreboard extends JFrame {
         }
     }  
 	
+	@SuppressWarnings("serial")
 	public void initComponents() {
 		setSize(new Dimension(500, 700));
 		setTitle("Scoreboard");
@@ -81,21 +85,21 @@ public class FrameScoreboard extends JFrame {
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"1", null, null, null},
-				{"2", null, null, null},
-				{"3", null, null, null},
-				{"4", null, null, null},
-				{"5", null, null, null},
-				{"6", null, null, null},
-				{"7", null, null, null},
-				{"8", null, null, null},
-				{"9", null, null, null},
-				{"10", null, null, null},
+				{"   1", null, null, null},
+				{"   2", null, null, null},
+				{"   3", null, null, null},
+				{"   4", null, null, null},
+				{"   5", null, null, null},
+				{"   6", null, null, null},
+				{"   7", null, null, null},
+				{"   8", null, null, null},
+				{"   9", null, null, null},
+				{"  10", null, null, null},
 			},
 			new String[] {
 				"Rank", "Player", "Score", "Date"
 			}
-		) {//gesire focus sulle caselle della tabella, formattazione data, goicatore già presente
+		) {
 			boolean[] columnEditables = new boolean[] {
 				false, false, false, false
 			};
@@ -108,6 +112,7 @@ public class FrameScoreboard extends JFrame {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(3).setResizable(false);
+		table.setRowSelectionAllowed(false);
 		table.setRowHeight(40);
 		scrollPane.setSize(400, 500);
 		table.setSize(400, 500);

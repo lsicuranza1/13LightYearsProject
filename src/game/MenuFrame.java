@@ -11,10 +11,10 @@ import javax.swing.JFrame;
 
 import gestioneClassifica.Classifica;
 
-@SuppressWarnings("serial")
 public class MenuFrame extends JFrame {
+	
 	private MainFrame mainFrame = MainFrame.getIstance();
-	private static final long serialVersionUID = 6529685098267757690L;
+	private static final long serialVersionUID = 1L;
 	private Dimension dim;
 	public static Clip gameClip;
 	public static boolean demo = false;
@@ -26,7 +26,7 @@ public class MenuFrame extends JFrame {
 	private javax.swing.JButton demoButton;
 	private javax.swing.JPanel jPanel1;
 	private javax.swing.JLabel sfondo;
-	private Classifica c=mainFrame.getC();
+	private Classifica c=MainFrame.getC();
 	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
 		ImageIcon image = new ImageIcon(url);
 		Image immagineScalata = image.getImage().getScaledInstance(nuovaW, nuovaH, Image.SCALE_DEFAULT);

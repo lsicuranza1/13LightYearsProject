@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.net.URL;
 
 import javax.swing.*;
@@ -35,16 +34,17 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 
-		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); // i numeri moltiplicati devono essere uguali sia
+		//int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); // i numeri moltiplicati devono essere uguali sia
 																	// per la width che per la height
-		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
-		dim = new Dimension(widthMenu, heightMenu);
+		//int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
+		//dim = new Dimension(widthMenu, heightMenu);
+		this.dim = new Dimension(1000,600);
 		this.setPreferredSize(dim.getSize());
 		ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/gameover2.png"),
 				(int) dim.getWidth(), (int) dim.getHeight());
 
-		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2,
-				(int) dimDisplay.getHeight() / 2 - heightMenu / 2);
+		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) dim.getWidth()  / 2,
+				(int) dimDisplay.getHeight() / 2 - (int) dim.getHeight() / 2);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Game Over");
 		this.setResizable(false);
@@ -159,7 +159,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.ipadx = 148;
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(235, 800, 0, 800);
+		gridBagConstraints.insets = new java.awt.Insets(245, 800, 0, 800);
 		panelGameOver.add(asteroid, gridBagConstraints);
 		
 		
@@ -192,9 +192,9 @@ public class GameOverFrame extends javax.swing.JFrame {
 					} catch (GiocatorePresenteException ex) {
 				    	ex.printStackTrace();
 		            	//System.out.println("Eccezione");
-				        JOptionPane.showMessageDialog(panelGameOver,"Spiacenti... non hai superato il tuo record!","Risultato",JOptionPane.INFORMATION_MESSAGE);
+				        JOptionPane.showMessageDialog(panelGameOver,"Spiacenti... non hai superato il tuo record!","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
 				    } catch (GiocatoreNonClassificatoException ex) {
-				        JOptionPane.showMessageDialog(panelGameOver, "Spiacenti... non ti sei classificato","Risultato",JOptionPane.INFORMATION_MESSAGE);
+				        JOptionPane.showMessageDialog(panelGameOver, "Spiacenti... non ti sei classificato","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
 				    }
 					
 					add.setVisible(false);
@@ -257,7 +257,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		 MainFrame.getC().salvaSuFileBinario();
 			 
 		 int position = MainFrame.getC().getClassifica().indexOf(g);
-		 JOptionPane.showMessageDialog(this,"Congratulazioni "+g.getTagGiocatore()+" sei entrato in classifica al "+(position+1)+" posto","Risultato",JOptionPane.INFORMATION_MESSAGE);
+		 JOptionPane.showMessageDialog(this,"Congratulazioni "+g.getTagGiocatore()+" sei entrato in classifica al "+(position+1)+" posto","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
     } 
 		 
 

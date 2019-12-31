@@ -40,11 +40,12 @@ public class MenuFrame extends JFrame {
 		initComponents();
 
 		
-		if (gameMusic == null) {
+		if (Settings.soundMusic == true) {
 			this.gameClip = Utilities.LoadSound(getClass().getResource("../resources/sound/menu_song.wav"));
             this.gameMusic = new Sound(gameClip);
             this.gameMusic.loopSound();
         }
+		else;
 	}
 
 

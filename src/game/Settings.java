@@ -4,12 +4,19 @@
  * and open the template in the editor.
  */
 package game;
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import game.MainFrame;
 
 @SuppressWarnings("serial")
 public class Settings extends javax.swing.JDialog {
 
 	public static boolean soundEffects = true;
 	public static boolean soundMusic = true;
+	public int keyMode;
 	public boolean inGame;
 
 	private javax.swing.JButton effects;
@@ -17,13 +24,24 @@ public class Settings extends javax.swing.JDialog {
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JLabel jLabel4;
-	private javax.swing.JButton music;
+	private javax.swing.JButton music;	
+	private JRadioButton wasd;
+	private JRadioButton arrows;
+	
+	/**
+	 * @wbp.nonvisual location=72,299
+	 */
+	
 
 	public Settings(java.awt.Frame parent, boolean modal, boolean inGame) {
 		super(parent, modal);
 		this.inGame = inGame;
 		initComponents();
-
+		keyMode = 0;
+		ButtonGroup bg = new ButtonGroup();
+        bg.add(this.wasd);
+        bg.add(this.arrows);
+       
 	}
 
 	private void initComponents() {
@@ -34,6 +52,8 @@ public class Settings extends javax.swing.JDialog {
 		jLabel1 = new javax.swing.JLabel();
 		music = new javax.swing.JButton();
 		jLabel4 = new javax.swing.JLabel();
+        wasd = new javax.swing.JRadioButton();        
+        arrows = new javax.swing.JRadioButton();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		setTitle("13 Light Years");
@@ -49,72 +69,96 @@ public class Settings extends javax.swing.JDialog {
 		jLabel2.setFont(new java.awt.Font("Gabriola", 0, 24));
 		jLabel2.setText("Sound effects");
 
-		effects.setText("ON");
-		effects.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				effectsActionPerformed(evt);
-			}
-		});
 
 		jLabel1.setFont(new java.awt.Font("Gabriola", 0, 24));
 		jLabel1.setText("Music");
 
-		music.setText("ON");
-		music.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				musicActionPerformed(evt);
-			}
-		});
+		
+		wasd.setSelected(true);
+		wasd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wasdActionPerformed(evt);
+            }
+        });
+		
+		arrows.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                arrowsActionPerformed(evt);
+            }
+        });
+		
+		 effects.setText("ON");
+	        effects.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                effectsActionPerformed(evt);
+	            }
+	        });
+	        
+	    music.setText("ON");
+	        music.addActionListener(new java.awt.event.ActionListener() {
+	            public void actionPerformed(java.awt.event.ActionEvent evt) {
+	                musicActionPerformed(evt);
+	            }
+	        });    
+	        
+	        
 
 		jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("../resources/images/awsd.png")));
 		jLabel4.setMaximumSize(new java.awt.Dimension(379, 120));
 		jLabel4.setMinimumSize(new java.awt.Dimension(379, 120));
 		jLabel4.setName("");
 		jLabel4.setPreferredSize(new java.awt.Dimension(379, 120));
+		
+		
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout
-				.createSequentialGroup().addGap(25, 25, 25)
-				.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-						.addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 390,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
+		layout.setHorizontalGroup(
+			layout.createParallelGroup(Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap(168, Short.MAX_VALUE)
+					.addComponent(jLabel3)
+					.addGap(165))
+				.addGroup(layout.createSequentialGroup()
+					.addGap(25)
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
 						.addGroup(layout.createSequentialGroup()
-								.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(music, javax.swing.GroupLayout.PREFERRED_SIZE, 65,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGap(83, 83, 83).addComponent(jLabel2)
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(effects, javax.swing.GroupLayout.PREFERRED_SIZE, 65,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addGap(8, 8, 8)))
-				.addContainerGap(22, Short.MAX_VALUE))
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup()
-								.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(jLabel3).addGap(165, 165, 165)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addContainerGap()
-						.addComponent(jLabel3).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addGroup(layout.createSequentialGroup()
-										.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-												.addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(effects, javax.swing.GroupLayout.PREFERRED_SIZE, 33,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(music, javax.swing.GroupLayout.PREFERRED_SIZE, 33,
-														javax.swing.GroupLayout.PREFERRED_SIZE)
-												.addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33,
-														javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-						.addGap(26, 26, 26)));
+							.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(music, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+							.addGap(83)
+							.addComponent(jLabel2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(effects, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+							.addGap(8)))
+					.addContainerGap(22, Short.MAX_VALUE))
+				.addGroup(layout.createSequentialGroup()
+					.addGap(96)
+					.addComponent(wasd)
+					.addPreferredGap(ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+					.addComponent(arrows)
+					.addGap(101))
+		);
+		layout.setVerticalGroup(
+			layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(layout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(jLabel3)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(effects, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(music, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(wasd)
+						.addComponent(arrows))
+					.addContainerGap())
+		);
+		getContentPane().setLayout(layout);
 
 		getAccessibleContext().setAccessibleParent(null);
 
@@ -122,11 +166,56 @@ public class Settings extends javax.swing.JDialog {
 	}
 
 	private void effectsActionPerformed(java.awt.event.ActionEvent evt) {
-
+		 
+		String text = this.effects.getText();
+		 
+	        if (text.compareTo("ON") == 0) {
+	            soundEffects = false;
+	            this.effects.setText("OFF");
+	            
+	            
+	            
+	        } else {
+	        	soundEffects = true;
+	            this.effects.setText("ON");
+	            
+	            
+	        }
 	}
 
 	private void musicActionPerformed(java.awt.event.ActionEvent evt) {
-
+		String text = this.music.getText();
+		 
+        if (text.compareTo("ON") == 0) {
+        	soundMusic = false;
+            MenuFrame.gameMusic.stopSound();
+           
+           
+            this.music.setText("OFF");
+        } else {
+        	soundMusic = true;
+        	MenuFrame.gameMusic.playSound();
+        	
+        	
+            this.music.setText("ON");
+        }
 	}
+	
+	private void wasdActionPerformed(java.awt.event.ActionEvent evt) {
+           keyMode = 1;
+           PanelEsecuzione p = new PanelEsecuzione();
+           //p.setKeyMode(keyMode);
+           
+    }
+	
+	private void arrowsActionPerformed(java.awt.event.ActionEvent evt) {
+	       keyMode = 0;
+	       PanelEsecuzione p = new PanelEsecuzione();
+           //p.setKeyMode(keyMode);
+	      
+	}
+	
+	
 
+	
 }

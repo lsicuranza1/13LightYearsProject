@@ -1,11 +1,14 @@
 package game;
-
+import javax.sound.sampled.Clip;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.net.URL;
+import game.Utilities;
+import game.Sound;
+import game.ExecutionFrame;
 
 import javax.swing.ImageIcon;
 
@@ -18,10 +21,18 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private javax.swing.JButton mainMenuButton;
 	private javax.swing.JLabel sfondo;
 	private javax.swing.JButton score;
+	public static Sound soundEndGame;
+    public static Clip clipEndGame;
 
 	public GameOverFrame() {
 
 		initComponents();
+		
+		ExecutionFrame.soundInGame.stopSound();
+		
+		GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("../resources/sound/endGame.wav"));
+		GameOverFrame.soundEndGame = new Sound(clipEndGame);
+		GameOverFrame.soundEndGame.playSound();
 	}
 
 	private void initComponents() {
@@ -35,7 +46,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) dim.getWidth() / 2,
 				(int) dimDisplay.getHeight() / 2 - (int) dim.getHeight() / 2);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("13 Light Years - Menu' Principale");
+		setTitle("13 Light Years - Menù Principale");
 
 		java.awt.GridBagConstraints gridBagConstraints;
 
@@ -155,12 +166,16 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
 
+		GameOverFrame.soundEndGame.stopSound();
+		MenuFrame.gameMusic.playSound();
+		
 		mainFrame.updateModalita("start");
 	}
 
 	private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 		mainFrame.updateModalita("in_esecuzione");
+		GameOverFrame.soundEndGame.stopSound();
 	}
 
 	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {

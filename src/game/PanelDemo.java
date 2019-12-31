@@ -225,6 +225,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.stepKillEnemies();
 		} else {
 			this.stepFinal();
+			
 		}
 	}
 
@@ -323,6 +324,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			count++;
 		} else {
 			timer.stop();
+			DemoFrame.soundInGame.stopSound();
 			MainFrame.getIstance().updateModalita("in_esecuzione");
 		}
 		this.updateMissiles();
@@ -533,7 +535,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			meteoriteBounds = meteorite.getBounds();
 
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
-				meteorite.removeBounds();
+				meteorite.removeBoundsEnemies();
 				countAhia = 0;
 				this.labelText.setForeground(Color.RED);
 				this.labelText.setText("AHIA, you lost a life");
@@ -561,7 +563,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelText.setText("This bonus gives an additional life");
 				this.labelText.setVisible(true);
 				this.labelText.setForeground(Color.green);
-				life.removeBounds();
+				life.removeBoundsObstacles();
 				int actual_lives = this.spaceShip.getLives();
 				if(actual_lives < 6) {
 				spaceShip.setLives(actual_lives+1);
@@ -572,7 +574,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				lives.add(new Life(x_shift+30,60,fileNameLife));
 				lives.getLast().setVisible(true);
 				}
-				life.removeBounds();
+				life.removeBoundsObstacles();
 				life.setVisible(false);
 				flagLifeBonus=true;
 			}
@@ -587,7 +589,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				this.labelText.setText("This bonus gives an incremental score");
 				this.labelText.setVisible(true);
 				this.labelText.setForeground(Color.green);
-				score.removeBounds();
+				score.removeBoundsBonus();
 				score.setVisible(false);
 				flagScoreBonus=true;
 			}
@@ -601,7 +603,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			if (spaceShipBounds.intersects(asteroidBounds)) {
 				this.labelText.setForeground(Color.RED);
 				countAhia = 0;
-				asteroid.removeBounds();
+				asteroid.removeBoundsEnemies();
 				this.labelText.setText("AHIA, you lost a life");
 				this.labelText.setVisible(true);
 				lives.getLast().setVisible(false);
@@ -628,7 +630,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			for (Missile missile : missiles) {
 				missileBounds = missile.getBounds();
 				if (missileBounds.intersects(enemyBounds)) {
-					missile.removeBounds();
+					missile.removeBoundsEnemies();
 					missile.setVisible(false);
 					enemy.setVisible(false);
 					setFlagSpace(false);

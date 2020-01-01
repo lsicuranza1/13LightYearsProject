@@ -16,8 +16,9 @@ public class Settings extends javax.swing.JDialog {
 
 	public static boolean soundEffects = true;
 	public static boolean soundMusic = true;
-	public int keyMode;
+	public static int mod;
 	public boolean inGame;
+	
 
 	private javax.swing.JButton effects;
 	private javax.swing.JLabel jLabel1;
@@ -28,6 +29,8 @@ public class Settings extends javax.swing.JDialog {
 	private JRadioButton wasd;
 	private JRadioButton arrows;
 	
+	
+	
 	/**
 	 * @wbp.nonvisual location=72,299
 	 */
@@ -37,11 +40,21 @@ public class Settings extends javax.swing.JDialog {
 		super(parent, modal);
 		this.inGame = inGame;
 		initComponents();
-		keyMode = 0;
 		ButtonGroup bg = new ButtonGroup();
         bg.add(this.wasd);
         bg.add(this.arrows);
        
+        if(soundEffects == false)
+        	effects.setText("OFF");
+        
+        if(soundMusic == false)
+        	music.setText("OFF");
+        
+        if(mod == 1) 
+        	wasd.setSelected(true);        	
+        else        	
+        	arrows.setSelected(true);
+        
 	}
 
 	private void initComponents() {
@@ -74,7 +87,7 @@ public class Settings extends javax.swing.JDialog {
 		jLabel1.setText("Music");
 
 		
-		wasd.setSelected(true);
+		
 		wasd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 wasdActionPerformed(evt);
@@ -169,14 +182,13 @@ public class Settings extends javax.swing.JDialog {
 		 
 		String text = this.effects.getText();
 		 
-	        if (text.compareTo("ON") == 0) {
-	            soundEffects = false;
+	        if (text.compareTo("ON") == 0) {	        	
+	        		soundEffects = false;
 	            this.effects.setText("OFF");
-	            
-	            
-	            
+	            	            
 	        } else {
 	        	soundEffects = true;
+	        	
 	            this.effects.setText("ON");
 	            
 	            
@@ -189,33 +201,24 @@ public class Settings extends javax.swing.JDialog {
         if (text.compareTo("ON") == 0) {
         	soundMusic = false;
             MenuFrame.gameMusic.stopSound();
-           
-           
+                       
             this.music.setText("OFF");
         } else {
         	soundMusic = true;
-        	MenuFrame.gameMusic.playSound();
-        	
-        	
+        	//MenuFrame.gameMusic.playSound();
+        	MenuFrame.gameMusic.loopSound();
             this.music.setText("ON");
         }
 	}
 	
 	private void wasdActionPerformed(java.awt.event.ActionEvent evt) {
-           keyMode = 1;
-           PanelEsecuzione p = new PanelEsecuzione();
-           //p.setKeyMode(keyMode);
-           
+           mod = 1;  
     }
 	
 	private void arrowsActionPerformed(java.awt.event.ActionEvent evt) {
-	       keyMode = 0;
-	       PanelEsecuzione p = new PanelEsecuzione();
-           //p.setKeyMode(keyMode);
+	       mod = 0;
 	      
 	}
 	
-	
-
 	
 }

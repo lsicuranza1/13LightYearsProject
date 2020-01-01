@@ -34,7 +34,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		
 		GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("../resources/sound/endGame.wav"));
 		GameOverFrame.soundEndGame = new Sound(clipEndGame);
-		GameOverFrame.soundEndGame.playSound();
+		//GameOverFrame.soundEndGame.playSound();
+		GameOverFrame.soundEndGame.loopSound();
 		}
 	}
 
@@ -173,7 +174,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 			GameOverFrame.soundEndGame.stopSound();
 			//MenuFrame.gameMusic.playSound();
 		}
-		else;
+		
 		
 		
 		mainFrame.updateModalita("start");

@@ -16,7 +16,7 @@ public class SpaceShip extends SpaceshipStructure {
 	private boolean down = false;
 	private int lives = 3; //COSTANTE
 	private boolean isShooting = false;
-	
+	private int keyMode = Settings.mod;
 
 	public SpaceShip(int x, int y, String path) {
 
@@ -81,26 +81,48 @@ public class SpaceShip extends SpaceshipStructure {
 
 	public void keyPressed(KeyEvent e) {
 
-		int key = e.getKeyCode();
+int key = e.getKeyCode();
+		
 		
 		if (key == KeyEvent.VK_SPACE) {
-			isShooting = true;
-		}
+				isShooting = true;
+			}
+		if (keyMode == 0) {
+			
+			
+			if (key == KeyEvent.VK_LEFT ) {
+				left = true;
+			}
 
-		if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
-			left = true;
-		}
+			if (key == KeyEvent.VK_RIGHT ) {
+				right = true;
+			}
 
-		if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-			right = true;
-		}
+			if (key == KeyEvent.VK_UP ) {
+				up = true;
+			}
 
-		if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-			up = true;
-		}
+			if (key == KeyEvent.VK_DOWN ) {
+				down = true;
+			}
+		}else if(keyMode == 1) {
+			
+						
+			if ( key == KeyEvent.VK_A) {
+				left = true;
+			}
 
-		if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-			down = true;
+			if ( key == KeyEvent.VK_D) {
+				right = true;
+			}
+
+			if ( key == KeyEvent.VK_W) {
+				up = true;
+			}
+
+			if ( key == KeyEvent.VK_S) {
+				down = true;
+			}
 		}
 	}
 
@@ -117,26 +139,48 @@ public class SpaceShip extends SpaceshipStructure {
 
 	public void keyReleased(KeyEvent e) {
 
-		int key = e.getKeyCode();
+int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_SPACE) {
-			isShooting = false;
-		}
+				isShooting = false;
+			}
 
-		if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {			
-			left = false;
-		}
+		if (keyMode == 0) {
+			
+			
+			if (key == KeyEvent.VK_LEFT ) {
+				left = false;
+			}
 
-		if (key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D) {
-			right = false;
-		}
+			if (key == KeyEvent.VK_RIGHT ) {
+				right = false;
+			}
 
-		if (key == KeyEvent.VK_UP || key == KeyEvent.VK_W) {
-			up = false;
-		}
+			if (key == KeyEvent.VK_UP ) {
+				up = false;
+			}
 
-		if (key == KeyEvent.VK_DOWN || key == KeyEvent.VK_S) {
-			down = false;
+			if (key == KeyEvent.VK_DOWN ) {
+				down = false;
+			}
+		}else if(keyMode == 1) {
+			
+			
+			if ( key == KeyEvent.VK_A) {
+				left = false;
+			}
+
+			if ( key == KeyEvent.VK_D) {
+				right = false;
+			}
+
+			if ( key == KeyEvent.VK_W) {
+				up = false;
+			}
+
+			if ( key == KeyEvent.VK_S) {
+				down = false;
+			}
 		}
 	}
 

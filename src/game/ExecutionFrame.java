@@ -20,10 +20,10 @@ public class ExecutionFrame extends JFrame {
 		if (Settings.soundMusic == true) {
 			clipInGame = Utilities.LoadSound(getClass().getResource("../resources/sound/ingame.wav"));
 			soundInGame = new Sound(clipInGame);
-			soundInGame.playSound();
-
+			//soundInGame.playSound();
+			soundInGame.loopSound();
 	}
-		//else;
+		
 		
 			
 	}

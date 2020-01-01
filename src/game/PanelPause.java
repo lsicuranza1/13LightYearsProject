@@ -57,11 +57,15 @@ class PanelPause extends JPanel {
 	}
 
 	protected void mainMenuActionPerformed(ActionEvent evt) {
+		if(Settings.soundMusic==true)
+			ExecutionFrame.soundInGame.stopSound();
 		panelEsecuzione.getDialog().setAlwaysOnTop(false);
 		mainframe.updateModalita("start");
 	}
 
 	protected void restartActionPerformed(ActionEvent evt) {
+		if(Settings.soundMusic==true)
+			ExecutionFrame.soundInGame.stopSound();
 		panelEsecuzione.getDialog().setAlwaysOnTop(false);
 		mainframe.updateModalita("in_esecuzione");
 	}

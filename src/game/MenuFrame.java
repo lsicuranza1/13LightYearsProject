@@ -45,7 +45,7 @@ public class MenuFrame extends JFrame {
             this.gameMusic = new Sound(gameClip);
             this.gameMusic.loopSound();
         }
-		else;
+		
 	}
 
 

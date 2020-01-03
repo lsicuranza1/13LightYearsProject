@@ -128,9 +128,9 @@ public class GameOverFrame extends javax.swing.JFrame {
 		mainMenuButton.setVerticalAlignment(1);
 		mainMenuButton.setMaximumSize(new java.awt.Dimension(107, 25));
 		mainMenuButton.setMinimumSize(new java.awt.Dimension(107, 25));
-		mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
-				mainMenuButtonActionPerformed(evt);
+		mainMenuButton.addActionListener(new java.awt.event.ActionListener() {				
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				mainMenuButtonActionPerformed(evt);
 			}
 		});
 		gridBagConstraints = new java.awt.GridBagConstraints();

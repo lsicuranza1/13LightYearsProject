@@ -222,4 +222,4 @@ public class Settings extends javax.swing.JDialog {
 	}
 	
 }
-}
+

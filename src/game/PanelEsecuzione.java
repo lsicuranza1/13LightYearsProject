@@ -663,4 +663,14 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		PanelEsecuzione.asteroidsDestoyed = asteroidsDestoyed;
 	}
 
+	public static int getEnemiesDestoyed() {
+		return enemiesDestoyed;
+	}
+
+	public static void setEnemiesDestoyed(int enemiesDestoyed) {
+		PanelEsecuzione.enemiesDestoyed = enemiesDestoyed;
+	}
+	
+	
+
 }

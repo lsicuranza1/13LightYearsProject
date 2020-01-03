@@ -4,14 +4,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import game.Utilities;
+import javax.sound.sampled.Clip;
 import java.awt.event.ActionEvent;
 import java.net.URL;
-
+import game.Sound;
+import game.ExecutionFrame;
 import javax.swing.*;
-
 import gestioneClassifica.Giocatore;
 import gestioneClassifica.GiocatoreNonClassificatoException;
-
 @SuppressWarnings("serial")
 public class GameOverFrame extends javax.swing.JFrame {
 	private Dimension dim; 
@@ -23,10 +24,22 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private javax.swing.JButton score;
 	private javax.swing.JTextField name;
 	private javax.swing.JButton add;
+	public static Sound soundEndGame;
+    public static Clip clipEndGame;
  
 	public GameOverFrame() {
 
 		initComponents();
+		
+		if (Settings.soundMusic == true){
+		
+		ExecutionFrame.soundInGame.stopSound();
+		
+		GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("../resources/sound/endGame.wav"));
+		GameOverFrame.soundEndGame = new Sound(clipEndGame);
+		//GameOverFrame.soundEndGame.playSound();
+		GameOverFrame.soundEndGame.loopSound();
+		}
 	}
 
 	private void initComponents() {
@@ -116,13 +129,13 @@ public class GameOverFrame extends javax.swing.JFrame {
 		mainMenuButton.setMaximumSize(new java.awt.Dimension(107, 25));
 		mainMenuButton.setMinimumSize(new java.awt.Dimension(107, 25));
 		mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				mainMenuButtonActionPerformed(evt);
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
 			}
 		});
 		gridBagConstraints = new java.awt.GridBagConstraints();
-		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
+		gridBagConstraints.gridx = 0;
 		gridBagConstraints.ipadx = 148;
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -245,13 +258,18 @@ public class GameOverFrame extends javax.swing.JFrame {
 		 
 
 	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
-
+		if(Settings.soundMusic == true) {
+			GameOverFrame.soundEndGame.stopSound();
+			//MenuFrame.gameMusic.playSound();
+		}
+		
 		mainFrame.updateModalita("start");
 	}
 
 	private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 		mainFrame.updateModalita("in_esecuzione");
+		GameOverFrame.soundEndGame.stopSound();
 		PanelEsecuzione.setAsteroidsDestoyed(0);
 		PanelEsecuzione.setEnemiesDestoyed(0);
 	}
@@ -260,8 +278,6 @@ public class GameOverFrame extends javax.swing.JFrame {
         this.name.setText("");
     }
 	
-	
-
 	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
 		ImageIcon image = new ImageIcon(url);
 		Image immagineScalata = image.getImage().getScaledInstance(nuovaW, nuovaH, Image.SCALE_DEFAULT);

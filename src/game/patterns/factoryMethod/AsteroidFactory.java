@@ -7,7 +7,7 @@ import game.Sprite;
 
 public class AsteroidFactory extends ObstacleFactory {
 	
-	static int D_W = 1000; //COSTANTE
+	static int D_W = 600; //COSTANTE
 	static Random random = new Random();
 	static int randX1;
 	static int y_asteroid = -500;

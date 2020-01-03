@@ -13,8 +13,8 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	private int count = 0; // count the position to reached before exit	(2)
 	
 	private int enemyDelay = 0;  // delay to let enemy move again
-	private int newX_1 = random.nextInt(950);
-	private int newY_1 = random.nextInt(200);
+	private int newX_1 = random.nextInt(550);
+	private int newY_1 = random.nextInt(300);
 	private int shoot_counter = 70;
 	
 	
@@ -58,8 +58,8 @@ public class EnemySpaceShip extends SpaceshipStructure {
 		this.enemyDelay++;
 		
 		if(this.enemyDelay==150 && this.count <2) {
-				newX_1 = random.nextInt(950);
-				newY_1 = random.nextInt(200);
+				newX_1 = random.nextInt(550);
+				newY_1 = random.nextInt(300);
 				this.count++;
 				this.enemyDelay=0;
 			

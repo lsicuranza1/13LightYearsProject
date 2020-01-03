@@ -1,4 +1,7 @@
 package game;
+import game.Sound;
+import game.Settings;
+import game.Utilities;
 
 import java.awt.Dimension;
 import java.awt.Image;
@@ -8,14 +11,15 @@ import java.net.URL;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
+import game.MainFrame;
 import gestioneClassifica.Classifica;
 
 public class MenuFrame extends JFrame {
 	
 	private MainFrame mainFrame = MainFrame.getIstance();
 	private static final long serialVersionUID = 1L;
-	private Dimension dim;
+	private Dimension dim = new Dimension(1000,600);
+	public static Sound gameMusic;
 	public static Clip gameClip;
 	public static boolean demo = false;
 	public static boolean flagScoreboard = false;
@@ -34,9 +38,14 @@ public class MenuFrame extends JFrame {
 	}
 
 	public MenuFrame() {
-//		c = new Classifica();
-//		c.leggiDaFileBinario();
 		initComponents();
+		
+		if (Settings.soundMusic == true) {
+			this.gameClip = Utilities.LoadSound(getClass().getResource("../resources/sound/menu_song.wav"));
+            this.gameMusic = new Sound(gameClip);
+            this.gameMusic.loopSound();
+        }
+		
 	}
 
 	private void initComponents() {
@@ -54,10 +63,6 @@ public class MenuFrame extends JFrame {
 		this.setIconImage(iconaFrame);
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
-		int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
-		dim = new Dimension(widthMenu, heightMenu);
 		this.setPreferredSize(dim.getSize());
 
 		ImageIcon immagineSfondo = ridimensionaImageIcon(
@@ -202,13 +207,14 @@ public class MenuFrame extends JFrame {
 	}
 
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		MenuFrame.gameMusic.stopSound();
 		mainFrame.updateModalita("in_esecuzione");
 		PanelEsecuzione.setAsteroidsDestoyed(0);
 		PanelEsecuzione.setEnemiesDestoyed(0);
-
 	}
 
 	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		MenuFrame.gameMusic.stopSound();
 		mainFrame.updateModalita("demo");
 	}
 	
@@ -228,7 +234,4 @@ public class MenuFrame extends JFrame {
 		}
 		}
 		
-	
-	
-
 }

@@ -84,6 +84,4 @@ public class MainFrame {
 		MainFrame.c = c;
 	}
 	
-	
-
 }

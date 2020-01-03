@@ -28,7 +28,7 @@ public class FrameScoreboard extends JFrame {
 	private JTable table;
 	private JButton reset;
 	private Dimension dim;
-	private final Classifica c;
+	private final Classifica c; 
 	/**
 	 * Create the panel.
 	 */
@@ -45,6 +45,7 @@ public class FrameScoreboard extends JFrame {
             this.table.setValueAt(g.getTagGiocatore(),i,1);
             this.table.setValueAt(g.getPunteggio(),i,2);
             this.table.setValueAt(DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.ITALY).format(g.getData()), i, 3);
+            this.table.setValueAt(g.getVisibleData(), i, 3);
             i++; 
         }
     }
@@ -57,7 +58,7 @@ public class FrameScoreboard extends JFrame {
             this.table.setValueAt(null,i,1);
             this.table.setValueAt(null, i, 2);
             this.table.setValueAt(null, i, 3);
-            i++;
+            i++; 
         }
     }  
 	

@@ -7,20 +7,18 @@ import java.util.*;
 public class Classifica implements Serializable,Iterable<Giocatore>{
     private List<Giocatore> classifica;
     private final int maxSize;
-    private final String nomeFile;
 
     public Classifica() { 
         this.classifica=new ArrayList<>();
         this.maxSize=10;
-        this.nomeFile="classifica.dat";
     }
     
     //giocatorePresenteException non funziona al momento
-    public void aggiungiGiocatore(Giocatore g) throws GiocatorePresenteException, GiocatoreNonClassificatoException{
+    public void aggiungiGiocatore(Giocatore g) throws GiocatoreNonClassificatoException{
         ComparatorGiocatore cg=new ComparatorGiocatore();
-        for(Giocatore gtemp: this)
-            if(gtemp.equals(g))
-                throw new GiocatorePresenteException(g);
+//        for(Giocatore gtemp: this)
+//            if(gtemp.equals(g))
+//                throw new GiocatorePresenteException(g);
         if(classifica.size()<this.maxSize){
             classifica.add(g);
             classifica.sort(cg);
@@ -29,36 +27,40 @@ public class Classifica implements Serializable,Iterable<Giocatore>{
         if(classifica.get(maxSize-1).getPunteggio()<g.getPunteggio()){
                 classifica.remove(maxSize-1);
                 classifica.add(g);
-                classifica.sort(cg); 
+                classifica.sort(cg);  
                 return;
         }
-        salvaSuFileBinario();
+        salvaSuFileBinario("classifica.dat");
         throw new GiocatoreNonClassificatoException(g);
 
     }
 
     public void resetClassifica(){
         classifica.clear();
-        salvaSuFileBinario();
+        salvaSuFileBinario("classifica.dat");
     }
 
-    public void salvaSuFileBinario(){
+    public void salvaSuFileBinario(String nomeFile){
         
         try(ObjectOutputStream s=new ObjectOutputStream(new FileOutputStream(nomeFile) )) {
-            s.writeObject(this);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }   
+            if(nomeFile=="classifica.dat") {
+            	 s.writeObject(this);
+            }else {
+            	throw new IOException();
+            }
+        } catch (IOException e) {
+        	System.out.println("Error in the file I/O");
+		} 
     }
 
-    public void leggiDaFileBinario(){
+    public void leggiDaFileBinario(String nomeFile){
         try(ObjectInputStream s= new ObjectInputStream(new FileInputStream(nomeFile))){
-            Classifica c = (Classifica) s.readObject();
-            this.classifica=c.getClassifica();
-        } catch (FileNotFoundException ex) {
-        	System.out.println("File not found!");           
+        	if(nomeFile=="classifica.dat") {
+        		Classifica c = (Classifica) s.readObject();
+                this.classifica=c.getClassifica(); 
+        	}
         } catch (IOException | ClassNotFoundException ex) {
-           System.out.println("The file is empty!");
+           System.out.println("Error in the file I/O");
         }
 	
     }
@@ -70,5 +72,5 @@ public class Classifica implements Serializable,Iterable<Giocatore>{
 
     public List<Giocatore> getClassifica(){
         return this.classifica;
-    }   
+    }  
 }

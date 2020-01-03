@@ -11,11 +11,10 @@ import javax.swing.*;
 
 import gestioneClassifica.Giocatore;
 import gestioneClassifica.GiocatoreNonClassificatoException;
-import gestioneClassifica.GiocatorePresenteException;
 
 @SuppressWarnings("serial")
 public class GameOverFrame extends javax.swing.JFrame {
-	private Dimension dim;
+	private Dimension dim; 
 	private MainFrame mainFrame = MainFrame.getIstance();
 	private javax.swing.JPanel panelGameOver;
 	private javax.swing.JButton playAgainButton;
@@ -24,7 +23,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private javax.swing.JButton score;
 	private javax.swing.JTextField name;
 	private javax.swing.JButton add;
-
+ 
 	public GameOverFrame() {
 
 		initComponents();
@@ -34,10 +33,6 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 
-		//int widthMenu = (int) ((dimDisplay.getWidth() * 60) / 100); // i numeri moltiplicati devono essere uguali sia
-																	// per la width che per la height
-		//int heightMenu = (int) ((dimDisplay.getHeight() * 60) / 100);
-		//dim = new Dimension(widthMenu, heightMenu);
 		this.dim = new Dimension(1000,600);
 		this.setPreferredSize(dim.getSize());
 		ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/gameover2.png"),
@@ -92,11 +87,9 @@ public class GameOverFrame extends javax.swing.JFrame {
 		playAgainButton.setFont(new java.awt.Font("Inc Free", 1, 35));
 		playAgainButton.setForeground(Color.CYAN);
 		playAgainButton.setFocusPainted(false);
-		//playAgainButton.setOpaque(false);
 		playAgainButton.setContentAreaFilled(false);
 		playAgainButton.setBorderPainted(false);
 		playAgainButton.setVerticalAlignment(1);
-		//playAgainButton.setOpaque(false);
 		playAgainButton.setMaximumSize(new java.awt.Dimension(107, 25));
 		playAgainButton.setMinimumSize(new java.awt.Dimension(107, 25));
 		playAgainButton.addActionListener(new java.awt.event.ActionListener() {
@@ -117,11 +110,9 @@ public class GameOverFrame extends javax.swing.JFrame {
 		mainMenuButton.setFont(new java.awt.Font("Inc Free", 1, 24));
 		mainMenuButton.setForeground(Color.orange);
 		mainMenuButton.setFocusPainted(false);
-		//mainMenuButton.setOpaque(false);
 		mainMenuButton.setContentAreaFilled(false);
 		mainMenuButton.setBorderPainted(false);
 		mainMenuButton.setVerticalAlignment(1);
-		//mainMenuButton.setOpaque(false);
 		mainMenuButton.setMaximumSize(new java.awt.Dimension(107, 25));
 		mainMenuButton.setMinimumSize(new java.awt.Dimension(107, 25));
 		mainMenuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -162,8 +153,6 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.insets = new java.awt.Insets(245, 800, 0, 800);
 		panelGameOver.add(asteroid, gridBagConstraints);
 		
-		
-		
 		name = new JTextField("           Inserire nome",40);
 		name.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -174,7 +163,6 @@ public class GameOverFrame extends javax.swing.JFrame {
 		name.setEditable(true);
 		name.setFocusable(true);
 		name.setEnabled(true);
-		//name.requestFocus();
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -189,14 +177,9 @@ public class GameOverFrame extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt){
 					try {
 						addPlayer(evt);
-					} catch (GiocatorePresenteException ex) {
-				    	ex.printStackTrace();
-		            	//System.out.println("Eccezione");
-				        JOptionPane.showMessageDialog(panelGameOver,"Spiacenti... non hai superato il tuo record!","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
 				    } catch (GiocatoreNonClassificatoException ex) {
 				        JOptionPane.showMessageDialog(panelGameOver, "Spiacenti... non ti sei classificato","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
-				    }
-					
+				    }					
 					add.setVisible(false);
 					name.setVisible(false);
             }
@@ -245,7 +228,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 	}
 
-	private void addPlayer(java.awt.event.ActionEvent evt) throws GiocatorePresenteException, GiocatoreNonClassificatoException{
+	private void addPlayer(java.awt.event.ActionEvent evt) throws GiocatoreNonClassificatoException{
 		String nomeGiocatore = this.name.getText();
 		 if(nomeGiocatore.equals("           Inserire nome") || nomeGiocatore.equals("")) {
 			 nomeGiocatore="Anonimo";
@@ -254,7 +237,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		 Giocatore g = new Giocatore(nomeGiocatore);
 		 g.setPunteggio(mainFrame.getScore().getScoreValue());
 		 MainFrame.getC().aggiungiGiocatore(g);
-		 MainFrame.getC().salvaSuFileBinario();
+		 MainFrame.getC().salvaSuFileBinario("classifica.dat");
 			 
 		 int position = MainFrame.getC().getClassifica().indexOf(g);
 		 JOptionPane.showMessageDialog(this,"Congratulazioni "+g.getTagGiocatore()+" sei entrato in classifica al "+(position+1)+" posto","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));

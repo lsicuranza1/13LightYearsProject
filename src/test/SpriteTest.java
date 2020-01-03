@@ -25,7 +25,7 @@ public class SpriteTest {
 		spaceship = new SpaceShip(10,10,"../resources/images/spaceship.png");
 		
 	}
-
+ 
 	/**
 	 * Test method for {@link game.Sprite#Sprite(int, int, java.lang.String)}.
 	 */

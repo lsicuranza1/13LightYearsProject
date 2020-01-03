@@ -29,7 +29,7 @@ public class MainFrame {
 	 */
 	public static void main(String[] args) {
 		c = new Classifica();
-		c.leggiDaFileBinario();
+		c.leggiDaFileBinario("classifica.dat");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

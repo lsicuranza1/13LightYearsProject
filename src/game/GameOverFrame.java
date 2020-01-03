@@ -91,7 +91,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(300, 720, 0, 720);
@@ -114,7 +114,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(100, 800, 0, 800);
@@ -136,7 +136,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridy = 2;
 		gridBagConstraints.gridx = 0;
-		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(150, 800, 0, 800);

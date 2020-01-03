@@ -66,14 +66,14 @@ public class MenuFrame extends JFrame {
 		this.setPreferredSize(dim.getSize());
 
 		ImageIcon immagineSfondo = ridimensionaImageIcon(
-				getClass().getResource("../resources/images/sfondo_menu.png"), widthMenu, heightMenu);
+				getClass().getResource("../resources/images/sfondo_menu.png"),(int)dim.getWidth(),(int) dim.getHeight());
 		
 		sfondo.setIcon(immagineSfondo);
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years - Menu' Principale");
 
-		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2, (int) dimDisplay.getHeight() / 2 - heightMenu / 2);
+		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) (dim.getWidth() / 2), (int) dimDisplay.getHeight() / 2 - (int) (dim.getHeight()/ 2));
 		setName("");
 		//setPreferredSize(new java.awt.Dimension(1000, 600));
 		setResizable(false);

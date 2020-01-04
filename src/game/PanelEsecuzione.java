@@ -302,7 +302,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		while (it_asteroids.hasNext()) {
 			Asteroid asteroid = (Asteroid) it_asteroids.next();
-			if (asteroid.getY() >= 1000 || !asteroid.isVisible()) {
+			if (asteroid.getY() >= 800 || !asteroid.isVisible()) {
 				it_asteroids.remove();
 			} else {
 				asteroid.move();
@@ -314,7 +314,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		while (it_meteorites.hasNext()) {
 			Meteorite meteorite = (Meteorite) it_meteorites.next();
-			if (meteorite.getY() >= 1000 || !meteorite.isVisible()) {
+			if (meteorite.getY() >= 800 || !meteorite.isVisible()) {
 				it_meteorites.remove();
 			} else {
 				meteorite.move();
@@ -336,7 +336,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		while (it_lifeBonus.hasNext()) {
 			LifeBonus life = (LifeBonus) it_lifeBonus.next();
-			if (life.getY() >= 1000 || !life.isVisible()) {
+			if (life.getY() >= 800 || !life.isVisible()) {
 				it_lifeBonus.remove();
 			} else {
 				life.move();
@@ -354,7 +354,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		while (it_scoreBonus.hasNext()) {
 			ScoreBonus score = (ScoreBonus) it_scoreBonus.next();
-			if (score.getY() >= 1000 || !score.isVisible()) {
+			if (score.getY() >= 800 || !score.isVisible()) {
 				it_scoreBonus.remove();
 			} else {
 				score.move();
@@ -386,8 +386,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	
 	public void updateEnemies() {
 		
-		int D_W = 600; //COSTANTE
-		int D_H = 1000; // COSTANTE
+		int D_W = 800; //COSTANTE
+		int D_H = 800; // COSTANTE
 		Random random = new Random();
 		int randX1;
 		
@@ -425,7 +425,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if(bomba.isVisible()) {
 					bomba.move();
 					bomba.setBounds();
-		        	if(bomba.getY()>1050){		        		
+		        	if(bomba.getY()>850){		        		
 //		        		bomba.setY(enemies.get(i).getY()+50);
 //		        		bomba.setX(enemies.get(i).getX()+15);
 		        		bomba.setVisible(false);
@@ -446,7 +446,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if(bomba.isVisible()) {
 					bomba.move();
 					bomba.setBounds();
-					if(bomba.getY()>1050) {
+					if(bomba.getY()>850) {
 						bomba.setVisible(false);
 					}
 				}else {

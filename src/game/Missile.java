@@ -5,7 +5,7 @@ import game.Sound;
 
 public class Missile extends Sprite {
 
-	private final int BOARD_WIDTH = 600; //COSTANTE
+	private final int BOARD_WIDTH = 800; //COSTANTE
 	private final int MISSILE_SPEED = 15; //COSTANTE
 	
 	public static Sound shipShootSound;

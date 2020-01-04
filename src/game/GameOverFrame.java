@@ -20,7 +20,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private javax.swing.JPanel panelGameOver;
 	private javax.swing.JButton playAgainButton;
 	private javax.swing.JButton mainMenuButton;
-	private javax.swing.JLabel sfondo, enemy, asteroid;
+	private javax.swing.JButton enemy,asteroid;
+	private javax.swing.JLabel sfondo;
 	private javax.swing.JButton score;
 	private javax.swing.JTextField name;
 	private javax.swing.JButton add;
@@ -64,8 +65,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		mainMenuButton = new javax.swing.JButton("Main Menu");
 		sfondo = new javax.swing.JLabel();
 		score = new javax.swing.JButton("Great, your score is : " + mainFrame.getScore().getScoreValue());
-		enemy = new javax.swing.JLabel("Enemies destroyed: " + PanelEsecuzione.getEnemiesDestoyed());
-		asteroid = new javax.swing.JLabel("Asteroids destroyed:  "+ PanelEsecuzione.getAsteroidsDestoyed());
+		enemy = new javax.swing.JButton("Enemies destroyed: " + PanelEsecuzione.getEnemiesDestoyed());
+		asteroid = new javax.swing.JButton("Asteroids destroyed:  "+ PanelEsecuzione.getAsteroidsDestoyed());
 		sfondo.setIcon(immagineSfondo);
 
 		setName("");
@@ -93,8 +94,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.gridy = 2;
 		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(300, 720, 0, 720);
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+		gridBagConstraints.insets = new java.awt.Insets(140, 720, 0, 720);
 		panelGameOver.add(score, gridBagConstraints);
 
 		playAgainButton.setFont(new java.awt.Font("Inc Free", 1, 35));
@@ -116,8 +117,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.gridy = 2;
 		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(100, 800, 0, 800);
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+		gridBagConstraints.insets = new java.awt.Insets(-140, 800, 0, 800);
 		panelGameOver.add(playAgainButton, gridBagConstraints);
 
 		mainMenuButton.setFont(new java.awt.Font("Inc Free", 1, 24));
@@ -138,32 +139,42 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(150, 800, 0, 800);
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+		gridBagConstraints.insets = new java.awt.Insets(-50, 800, 0, 800);
 		panelGameOver.add(mainMenuButton, gridBagConstraints);
 		
 		enemy.setFont(new java.awt.Font("Inc Free", 1, 24));
 		enemy.setForeground(Color.orange);
 		enemy.setVerticalAlignment(1);
+		enemy.setFocusPainted(false);
+		enemy.setContentAreaFilled(false);
+		enemy.setBorderPainted(false);
+		enemy.setMaximumSize(new java.awt.Dimension(127, 25));
+		enemy.setMinimumSize(new java.awt.Dimension(127, 25));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(210, 800, 0, 800);
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+		gridBagConstraints.insets = new java.awt.Insets(70, 800, 0, 800);
 		panelGameOver.add(enemy, gridBagConstraints);
 		
 		asteroid.setFont(new java.awt.Font("Inc Free", 1, 24));
 		asteroid.setForeground(Color.orange);
 		asteroid.setVerticalAlignment(1);
+		asteroid.setFocusPainted(false);
+		asteroid.setContentAreaFilled(false);
+		asteroid.setBorderPainted(false);
+		asteroid.setMaximumSize(new java.awt.Dimension(127, 25));
+		asteroid.setMinimumSize(new java.awt.Dimension(127, 25));
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
-		gridBagConstraints.ipadx = 148;
+		gridBagConstraints.ipadx = 348;
 		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(245, 800, 0, 800);
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+		gridBagConstraints.insets = new java.awt.Insets(20, 800, 0, 800);
 		panelGameOver.add(asteroid, gridBagConstraints);
 		
 		name = new JTextField("           Inserire nome",40);
@@ -181,8 +192,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.gridy = 2;
 		gridBagConstraints.ipadx = 170;
 		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-		gridBagConstraints.insets = new java.awt.Insets(350, 820, 0, 800);
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
+		gridBagConstraints.insets = new java.awt.Insets(270, 800, 0, 800);
 		panelGameOver.add(name,gridBagConstraints);
 		
 		add = new JButton("Add to the scoreboard");
@@ -207,7 +218,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.gridy = 2;
 		gridBagConstraints.ipadx = 170;
 		gridBagConstraints.ipady = 32;
-		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
 		gridBagConstraints.insets = new java.awt.Insets(410, 800, 0, 800);
 		panelGameOver.add(add,gridBagConstraints);
 

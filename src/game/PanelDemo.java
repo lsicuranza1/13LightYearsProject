@@ -325,7 +325,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 			count++;
 		} else {
 			timer.stop();
-			DemoFrame.soundInGame.stopSound();
+			if(Settings.soundMusic == true) {
+				DemoFrame.soundInGame.stopSound();	
+				}			
 			MainFrame.getIstance().updateModalita("in_esecuzione");
 		}
 		this.updateMissiles();

@@ -18,10 +18,11 @@ public class DemoFrame extends JFrame {
 	public DemoFrame() {
 		initComponents();
 		
-		if (gameMusic == null) {
+		if ( Settings.soundMusic == true) {
 			clipInGame = Utilities.LoadSound(getClass().getResource("../resources/sound/ingame.wav"));
 			soundInGame = new Sound(clipInGame);
-			soundInGame.playSound();
+			//soundInGame.playSound();
+			soundInGame.loopSound();
 		}
 	}
 	

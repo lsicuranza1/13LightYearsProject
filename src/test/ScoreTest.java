@@ -9,12 +9,12 @@ import game.Score;
 
 public class ScoreTest {
 	
-	private Score score;
+	private Score s;
 
 	@Before
 	public void setUp() throws Exception {
 		
-		this.score = new Score();
+		s = new Score();
 	}
 
 	@Test
@@ -24,21 +24,21 @@ public class ScoreTest {
 
 	@Test
 	public void testGetScoreValue() {
-		
-		assertEquals(0,this.score.getScoreValue());
+		s.setScoreValue(30);
+		assertEquals(30,s.getScoreValue());
 	}
 
 	@Test
 	public void testSetScoreValue() {
-		this.score.setScoreValue(50);
-		assertEquals(50,this.score.getScoreValue());
+		s.setScoreValue(50);
+		assertEquals(50,s.getScoreValue());
 	}
 
 	@Test
 	public void testUpdateScoreValue() {
-		this.score.setScoreValue(10);
-		this.score.updateScoreValue(90);
-		assertEquals(100,this.score.getScoreValue());
+		s.setScoreValue(10);
+		s.updateScoreValue(90);
+		assertEquals(100,s.getScoreValue());
 	}
 
 }

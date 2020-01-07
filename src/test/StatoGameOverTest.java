@@ -30,7 +30,7 @@ public class StatoGameOverTest {
 		StatoGameOver stato = new StatoGameOver();
 		
 		stato.gestioneStato(m,"start");
-		assertEquals("13 Light Years - Menu' Principale",main.getFrame().getTitle());
+		assertEquals("Start",main.getFrame().getTitle());
 		assertEquals(1,main.getFrame().getContentPane().getComponentCount());
 		assertTrue(m.getStatoModalita() instanceof StatoStart);
 		

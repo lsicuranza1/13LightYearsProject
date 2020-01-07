@@ -9,31 +9,36 @@ import game.Missile;
 
 public class MissileTest {
 	
-	private Missile missile;
+	private Missile m;
+	private int x;
+	private int y;
+	private int board_width;
 	private int missile_speed;
-	private int board_heigth;
 
 	@Before
 	public void setUp() throws Exception {
 		
-		this.board_heigth = 800;
-		this.missile_speed = 15;
-		this.missile = new Missile(0,this.board_heigth,"../resources/images/missile.png");
+		this.x=0;
+		this.y=0;
+		this.board_width = 1000;
+		this.missile_speed = 5;
+		this.m = new Missile(x,y,"../resources/images/missile.png");
 		
 	}
 
 	@Test
 	public void testMove() {
 		
-		int temp_y= this.missile.getY();
-		missile.move();
-		assertEquals(temp_y-this.missile_speed,this.missile.getY());
-		assertEquals(true,this.missile.isVisible());
+		int temp_y= m.getY();
+		m.move();
+		assertEquals(temp_y-this.missile_speed,m.getY());
+		assertEquals(true,m.isVisible());
 		
-		missile.setY(0);
-	    missile.move();
-	    assertEquals(0-this.missile_speed,this.missile.getY());
-	    assertEquals(false,this.missile.isVisible());
+		m.setY(this.board_width+1+this.missile_speed);
+	    temp_y= m.getY();
+	    m.move();
+	    assertEquals(temp_y-this.missile_speed,m.getY());
+	    assertEquals(false,m.isVisible());
 		
 	}
 
@@ -41,4 +46,17 @@ public class MissileTest {
 	public void testMissile() {
 		fail("Not yet implemented");
 	}
+
+//	@Test
+//	public void testMove_colpo() {
+//		
+//		m.setY(this.board_width-2);
+//		m.move_colpo();
+//		assertEquals(true,m.isVisible());
+//		
+//		m.setY(this.board_width-1);
+//		m.move_colpo();
+//		assertEquals(false,m.isVisible());
+//	}
+
 }

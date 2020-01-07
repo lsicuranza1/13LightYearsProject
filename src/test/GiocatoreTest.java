@@ -30,12 +30,6 @@ public class GiocatoreTest {
 	}
 	
 	@Test
-	public void testSetTagGiocatore() {
-		g.setTagGiocatore("Player_1");
-		assertEquals("Player_1",g.getTagGiocatore());
-	}
-	
-	@Test
 	public void testSetPunteggio() {
 		g.setPunteggio(20);
 		assertEquals(20,g.getPunteggio());
@@ -73,23 +67,23 @@ public class GiocatoreTest {
 	@Test
 	public void testEquals() {
 		
-		//Same tag players
+		//Tag giocatori uguali 
 		Giocatore tmp_player = new Giocatore("Player");
 		assertEquals(true,g.equals(tmp_player));
 		
-		//Different tag players
+		//Tag giocatori diversi
 		Giocatore tmp_player_1 = new Giocatore("Giocatore");
 		assertEquals(false,g.equals(tmp_player_1));
 		
-		//Same score
+		//Punteggi uguali
 		tmp_player.setPunteggio(0);
 		assertEquals(true,g.equals(tmp_player));
 		
-		//Different score
+		//Punteggi diversi
 		tmp_player.setPunteggio(20);
 		assertEquals(false,g.equals(tmp_player));
 		
-		//Different classes
+		//Classi differenti
 		String str = new String("Test");
 		assertEquals(false,g.equals(str));
 		
@@ -97,7 +91,7 @@ public class GiocatoreTest {
 		Object obj =null;
 		assertEquals(false,g.equals(obj));
 		
-		//Null player tag
+		//Tag giocatori nulli
 		Giocatore player1 = new Giocatore(null);
 		Giocatore player2 = new Giocatore("Player");
 		assertEquals(false,player1.equals(player2));

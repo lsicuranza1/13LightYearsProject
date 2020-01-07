@@ -21,23 +21,15 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 		this.setY(temp_y + 5);
 		int y = this.getY();
 		this.setAngle(this.getAngle() + 5);
-		
-		AffineTransform transform = new AffineTransform(); 
-		transform.setToTranslation(x, y);
-		transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.getAngle()),
+
+		this.transform.setToTranslation(x, y);
+		this.transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.getAngle()),
 				this.getWidth() / 2, this.getHeight() / 2));
-		
-		this.setTransform(transform);
 	}
 
 	@Override
 	public AffineTransform getTransform() {
 		return this.transform;
-	}
-	
-	@Override
-	public void setTransform(AffineTransform transform) {
-		this.transform = transform;
 	}
 
 	public int getAngle() {

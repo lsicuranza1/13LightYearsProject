@@ -18,12 +18,19 @@ public class Meteorite extends Sprite implements ObstacleInterface {
 		int temp_y = this.getY();
 		this.setY(temp_y + 10);
 		int y = this.getY();
-		this.transform.setToTranslation(x, y);
-
+		
+		AffineTransform transform = new AffineTransform();
+		transform.setToTranslation(x,y);
+		this.setTransform(transform);
 	}
 
 	@Override
 	public AffineTransform getTransform() {
 		return transform;
+	}
+	
+	@Override
+	public void setTransform(AffineTransform transform) {
+		this.transform = transform;
 	}
 }

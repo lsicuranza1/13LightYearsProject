@@ -11,16 +11,12 @@ import game.Meteorite;
 
 public class MeteoriteTest {
 	
-	private Meteorite m;
-	private int x;
-	private int y;
+	private Meteorite meteorite;
 
 	@Before
 	public void setUp() throws Exception {
 		
-		m = new Meteorite(0,0, "../resources/images/meteorite.png");
-		this.x = m.getX();
-		this.y = m.getY();
+		this.meteorite = new Meteorite(0,0, "../resources/images/meteorite.png");
 	}
 
 	@Test
@@ -28,9 +24,10 @@ public class MeteoriteTest {
         
 		AffineTransform transf = new AffineTransform();
 		
-		transf.setToTranslation(x, y+10);
-		m.move();
-		assertEquals(transf, m.getTransform());
+		transf.setToTranslation(this.meteorite.getX(), this.meteorite.getY()+10);
+		this.meteorite.move();
+		assertEquals(transf, this.meteorite.getTransform());
+		
 	}
 
 	@Test
@@ -41,10 +38,19 @@ public class MeteoriteTest {
 	@Test
 	public void testGetTransform() {
         AffineTransform transf = new AffineTransform();
-	    transf.setToTranslation(x, y+10);
+	    transf.setToTranslation(this.meteorite.getX(), this.meteorite.getY()+10);
 	    
-	    m.move();
-	    assertEquals(transf,m.getTransform());
+	    this.meteorite.move();
+	    assertEquals(transf,this.meteorite.getTransform());
+	}
+	
+	@Test
+	public void testSetTransform() {
+        AffineTransform transf = new AffineTransform();
+	    transf.setToTranslation(this.meteorite.getX(), this.meteorite.getY()+10);
+	    
+	    this.meteorite.setTransform(transf);
+	    assertEquals(transf,this.meteorite.getTransform());
 	}
 
 }

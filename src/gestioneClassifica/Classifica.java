@@ -60,6 +60,7 @@ public class Classifica implements Serializable,Iterable<Giocatore>{
                 this.classifica=c.getClassifica(); 
         	}
         } catch (IOException | ClassNotFoundException ex) {
+        	ex.printStackTrace();
            System.out.println("Error in the file I/O");
         }
 	

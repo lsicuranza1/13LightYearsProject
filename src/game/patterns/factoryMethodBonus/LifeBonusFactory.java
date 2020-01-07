@@ -6,10 +6,10 @@ import game.LifeBonus;
 public class LifeBonusFactory {
 	
 
-	static int D_W = 600;
+	static int D_W = 700;
 	static Random random = new Random();
 	static int randX1;
-	static int y_bonus = -500;
+	static int y_bonus = -50;
 	static String fileNameLifeBonus = "../resources/images/life.png";
 
 	public static Object getLifeBonus() {

@@ -6,10 +6,10 @@ import game.ScoreBonus;
 public class ScoreBonusFactory {
 	
 
-	static int D_W = 600;
+	static int D_W = 700;
 	static Random random = new Random();
 	static int randX1;
-	static int y_bonus = -300;
+	static int y_bonus = -50;
 	static String fileNameLifeBonus = "../resources/images/x2-icon.png";
 
 	public static Object getScoreBonus() {

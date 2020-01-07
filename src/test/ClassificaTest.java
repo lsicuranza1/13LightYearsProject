@@ -15,42 +15,63 @@ import gestioneClassifica.GiocatoreNonClassificatoException;
 
 public class ClassificaTest {
 
-	private Classifica c;
+	private Classifica classifica;
 	
 	@Before
 	public void setUp() throws Exception{
-		this.c = new Classifica();
+		this.classifica = new Classifica();
 	}
 	
 	@Test
-	public void testGetClassifica() {
-		assertEquals(c.getClassifica(),new ArrayList<>());
+	public void testGetClassifica() throws GiocatoreNonClassificatoException {
+		//If the scoreboard is empty
+		assertEquals(classifica.getClassifica(),new ArrayList<>());
+		
+		//If the scoreboard is not empty
+
+		Giocatore p1 = new Giocatore("Player1");
+		ArrayList<Giocatore> list = new ArrayList<Giocatore>();
+		list.add(p1);
+		
+		this.classifica.aggiungiGiocatore(p1);
+		assertEquals(list,this.classifica.getClassifica());
+		
 	}
 	
 	@Test
-	public void testIterator() {
-		assertEquals(false,c.iterator().hasNext());
+	public void testIterator() throws GiocatoreNonClassificatoException{
+		
+		//If the scoreboard is empty
+		
+		this.classifica.resetClassifica();
+		assertEquals(false,classifica.iterator().hasNext());
+		
+		//If the scoreboard is not empty
+
+		Giocatore p1 = new Giocatore("Player1");
+		this.classifica.aggiungiGiocatore(p1);
+			
+		assertEquals(true,this.classifica.iterator().hasNext());
 	}
 
 	@Test
 	public void testAggiungiGiocatore() throws GiocatoreNonClassificatoException {
-		//Giocatore non presente
+		//New player
 		Giocatore p1 = new Giocatore("Player1");
-		Giocatore p2 = new Giocatore("Player1");	
-		c.aggiungiGiocatore(p1);
+		classifica.aggiungiGiocatore(p1);
 		
-		//Classifica piena	
+		//Scoreboard full	
 		for(int i=0;i<11;i++) {
 			Giocatore p = new Giocatore("Player"+i);
 			p.setPunteggio(10*i);
-			c.aggiungiGiocatore(p);
+			classifica.aggiungiGiocatore(p);
 		}
 		
 		Giocatore p20 = new Giocatore("Player non classificato");
 		p20.setPunteggio(0);
 		
 		try{
-			c.aggiungiGiocatore(p20);
+			classifica.aggiungiGiocatore(p20);
 		}catch(GiocatoreNonClassificatoException ex) {
 			 assertEquals(p20, ex.getG());
 		}
@@ -58,28 +79,41 @@ public class ClassificaTest {
 	}
 	
 	@Test
-	public void testSerialization() throws IOException, ClassNotFoundException {
+	public void testSalvaSuFileBinario() throws IOException, ClassNotFoundException, GiocatoreNonClassificatoException {
+		this.classifica.resetClassifica();
+		
+		Classifica classifica_tmp = new Classifica();
+		Giocatore p1 = new Giocatore("Player1");
+		classifica_tmp.aggiungiGiocatore(p1);
+		this.classifica.aggiungiGiocatore(p1);
+
+		this.classifica.salvaSuFileBinario("classifica.dat");
+		this.classifica.leggiDaFileBinario("classifica.dat");
+		
+		assertEquals(this.classifica.getClassifica(),classifica_tmp.getClassifica());
+		
 		//File corretto
-		c.salvaSuFileBinario("classifica.dat");
+		classifica.salvaSuFileBinario("classifica.dat");
 		
 		//File errato
-		c.salvaSuFileBinario("nome_errato.txt");
+		classifica.salvaSuFileBinario("nome_errato.txt");
 	}
 	
 	@Test
 	public void testSerializati() throws IOException, ClassNotFoundException,FileNotFoundException {
 		
-		c.leggiDaFileBinario("classifica.dat");
+		classifica.leggiDaFileBinario("classifica.dat");
 		
-		c.leggiDaFileBinario("nome_errato_1.txt");
+		classifica.leggiDaFileBinario("nome_errato_1.txt");
 		
 	}
 	
 	
 	 @Test
 	 public void testResetClassifica() {
-		 c.resetClassifica();
-		 assertEquals(0,c.getClassifica().size());
+		 
+		 classifica.resetClassifica();
+		 assertEquals(0,classifica.getClassifica().size());
 	 }
 }
 

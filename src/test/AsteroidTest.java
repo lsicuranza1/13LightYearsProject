@@ -14,20 +14,15 @@ import game.Asteroid;
 
 public class AsteroidTest {
 
-	private Asteroid a;
-	private int x;
-	private int y;
-	private int angle;
+	private Asteroid asteroid;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.a = new Asteroid(x, y, "../resources/images/asteroid-icon.png");
-		this.x = a.getX();
-		this.y = a.getY();
-		this.angle = a.getAngle();
+		
+		this.asteroid = new Asteroid(0, 0, "../resources/images/asteroid-icon.png");
 
 	}
 
@@ -39,10 +34,11 @@ public class AsteroidTest {
 
 		AffineTransform transf = new AffineTransform();
 		
-		transf.setToTranslation(x, y+5);
-		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle+5),a.getWidth() / 2, a.getHeight() / 2));
-		a.move();
-		assertEquals(transf, a.getTransform());
+		transf.setToTranslation(this.asteroid.getX(),this.asteroid.getY()+5);
+		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.asteroid.getAngle()+5),this.asteroid.getWidth() / 2, this.asteroid.getHeight() / 2));
+		
+		this.asteroid.move();
+		assertEquals(transf, this.asteroid.getTransform());
 	}
 
 	/**
@@ -60,15 +56,24 @@ public class AsteroidTest {
 	public void testGetTransform() {
 		
 		AffineTransform transf = new AffineTransform();
-		transf.setToTranslation(x, y+5);
-		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(angle+5), a.getWidth() / 2, a.getHeight() / 2));
+		transf.setToTranslation(this.asteroid.getX(),this.asteroid.getY()+5);
+		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.asteroid.getAngle()+5), this.asteroid.getWidth() / 2, this.asteroid.getHeight() / 2));
 		
-		a.move();
-		assertEquals(transf,a.getTransform());
+		this.asteroid.move();
+		assertEquals(transf,this.asteroid.getTransform());
+	}
+	
+	@Test
+	public void testSetTransform() {
+		
+		AffineTransform transf = new AffineTransform();
+		transf.setToTranslation(this.asteroid.getX()+10, this.asteroid.getY()+50);
+		transf.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.asteroid.getAngle()+5), this.asteroid.getWidth() / 2, this.asteroid.getHeight() / 2));
+		
+		this.asteroid.setTransform(transf);
+		assertEquals(transf,this.asteroid.getTransform());
 	}
 
 
-	
-	
 
 }

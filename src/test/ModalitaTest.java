@@ -8,28 +8,30 @@ import org.junit.Test;
 
 import game.MainFrame;
 import game.patterns.state.Modalita;
+import game.patterns.state.StatoPausa;
 import game.patterns.state.StatoStart;
 
 public class ModalitaTest {
 	
-	private Modalita m;
+	private Modalita modalità;
+	
 	@Before
 	public void setUp() throws Exception {
-		m = new Modalita();
+		this.modalità = new Modalita();
 		MainFrame.getIstance();
 		
 	}
 
 	@Test
 	public void testGetStatoModalita() {
-		assertTrue(m.getStatoModalita() instanceof StatoStart);
+		assertTrue(this.modalità.getStatoModalita() instanceof StatoStart);
 	}
 
 	@Test
 	public void testSetStatoModalita() {
-		StatoStart s = new StatoStart();
-		m.setStatoModalita(s);
-		assertEquals(s,m.getStatoModalita());
+		StatoPausa s = new StatoPausa();
+		this.modalità.setStatoModalita(s);
+		assertEquals(s,this.modalità.getStatoModalita());
 	}
 
 }

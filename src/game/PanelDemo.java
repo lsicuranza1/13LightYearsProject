@@ -236,6 +236,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.labelText.setVisible(true);
 			setFlagEnemies(true);
 			setFlagBonusTrue(false);
+			count = 0;
 		}
 		count++;
 	}
@@ -294,7 +295,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepScore() {
-		if (count > 500) { // change to 500, troppo poco tempo
+		if (count > 500) { 
 			flagScore = false;
 			count = 0;
 			this.textArea.setVisible(false);
@@ -313,12 +314,12 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepFinal() {
-		if (count < 50) {
+		if (count < 70) {
 			this.labelText.setText("In the space is not so easy");
 			this.labelText.setForeground(Color.WHITE);
 			this.labelText.setVisible(true);
 			count++;
-		} else if (count < 100) {
+		} else if (count < 120) {
 			this.labelText.setText("Good Game");
 			this.labelText.setForeground(Color.RED);
 			count++;
@@ -377,14 +378,14 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private void stepObstacles() {
 		if (count > 800) {
 			count = 0;
-			this.labelText.setText("They aren't only bad things. Take the bonus");
+			this.labelText.setText("There aren't only bad things. Take a bonus");
 			this.labelText.setForeground(Color.WHITE);
 			this.labelText.setVisible(true);
 			this.deleteObstacles();
 			setFlagObstacles(false);
 			setFlagBonus(true);
-		} else if (count > 51) {
-			if (this.labelText.isVisible() && countAhia < 20) {
+		} else if (count > 100) {
+			if (this.labelText.isVisible() && countAhia < 50) {
 				countAhia++;
 			} else {
 				this.labelText.setVisible(false);
@@ -395,7 +396,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.checkCollisions();
 			this.repaint();
 			count++;
-		} else if (count > 50) {
+		} else if (count > 100) {
 			this.labelText.setVisible(false);
 			this.updateLives();
 			this.updateObstacles();
@@ -453,10 +454,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 		int y_asteroid = -500;
 		int y_meteorite = -500;
-		int D_W = 1000; // COSTANTE
-		int D_H = 600; // COSTANTE
+		int D_W = 800; // COSTANTE
+		int D_H = 800; // COSTANTE
 
-		// maggiore ï¿½ il valore minore ï¿½ la frequenza di uscita degli asteroidi
+		// maggiore è il valore minore è la frequenza di uscita degli asteroidi
 		if (countToAddAsteroid >= 150) {
 			int randX1 = random.nextInt(D_W);
 			asteroids.add(new Asteroid(randX1, y_asteroid, fileNameAsteroid));
@@ -545,7 +546,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 					setFlagObstacles(false);
 					setFlagBonus(true);
 					count=0;
-					this.labelText.setText("They aren't only bad things. Take the bonus");
+					this.labelText.setText("There aren't only bad things. Take a bonus");
 					this.labelText.setForeground(Color.WHITE);
 					this.labelText.setVisible(true);
 				}
@@ -612,7 +613,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 					setFlagObstacles(false);
 					setFlagBonus(true);
 					count = 0;
-					this.labelText.setText("They aren't only bad things. Take the bonus");
+					this.labelText.setText("There aren't only bad things. Take a bonus");
 					this.labelText.setForeground(Color.WHITE);
 					this.labelText.setVisible(true);
 					
@@ -761,6 +762,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			if (isMoveSpaceShip() && (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_DOWN
 					|| key == KeyEvent.VK_UP)) {
 				labelText.setText("Avoid meteorites and asteroids");
+				count = 0;
 				labelText.setBounds(140, 70, 600, 400);
 				labelText.setFont(new Font("Serif", Font.BOLD, 30));
 				setFlagObstacles(true);

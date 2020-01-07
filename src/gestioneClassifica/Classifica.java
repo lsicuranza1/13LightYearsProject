@@ -14,7 +14,7 @@ public class Classifica implements Serializable,Iterable<Giocatore>{
     }
     
     //giocatorePresenteException non funziona al momento
-    public void aggiungiGiocatore(Giocatore g) throws GiocatoreNonClassificatoException{
+    public void aggiungiGiocatore(Giocatore g) throws GiocatoreNonClassificatoException, IOException{
         ComparatorGiocatore cg=new ComparatorGiocatore();
 //        for(Giocatore gtemp: this)
 //            if(gtemp.equals(g))
@@ -35,36 +35,30 @@ public class Classifica implements Serializable,Iterable<Giocatore>{
 
     }
 
-    public void resetClassifica(){
+    public void resetClassifica() throws IOException{
         classifica.clear();
         salvaSuFileBinario("classifica.dat");
     }
 
-    public void salvaSuFileBinario(String nomeFile){
-        
-        try(ObjectOutputStream s=new ObjectOutputStream(new FileOutputStream(nomeFile) )) {
-            if(nomeFile=="classifica.dat") {
-            	 s.writeObject(this);
-            }else {
-            	throw new IOException();
-            }
-        } catch (IOException e) {
-        	System.out.println("Error in the file I/O");
-		} 
+    public void salvaSuFileBinario(String nomeFile) throws IOException{   
+		if(nomeFile=="classifica.dat") {
+			ObjectOutputStream s=new ObjectOutputStream(new FileOutputStream(nomeFile));
+			s.writeObject(this);
+        }else {
+            throw new IOException();
+        }
     }
 
-    public void leggiDaFileBinario(String nomeFile){
-        try(ObjectInputStream s= new ObjectInputStream(new FileInputStream(nomeFile))){
-        	if(nomeFile=="classifica.dat") {
-        		Classifica c = (Classifica) s.readObject();
-                this.classifica=c.getClassifica(); 
-        	}
-        } catch (IOException | ClassNotFoundException ex) {
-           System.out.println("Error in the file I/O");
+    public void leggiDaFileBinario(String nomeFile) throws IOException, ClassNotFoundException{
+    	if(nomeFile=="classifica.dat") {
+    		ObjectInputStream s= new ObjectInputStream(new FileInputStream(nomeFile));
+    		Classifica c = (Classifica) s.readObject();
+            this.classifica=c.getClassifica();
+        }else {
+            throw new IOException();
         }
-	
     }
-    
+     
     @Override
     public Iterator<Giocatore> iterator() {
         return classifica.iterator();
@@ -74,3 +68,4 @@ public class Classifica implements Serializable,Iterable<Giocatore>{
         return this.classifica;
     }  
 }
+

@@ -32,8 +32,8 @@ public class ClassificaTest {
 		assertEquals(false,c.iterator().hasNext());
 	}
 
-	@Test
-	public void testAggiungiGiocatore() throws GiocatoreNonClassificatoException {
+	@Test(expected = Exception.class)
+	public void testAggiungiGiocatore() throws GiocatoreNonClassificatoException, IOException {
 		//Giocatore non presente
 		Giocatore p1 = new Giocatore("Player1");
 		Giocatore p2 = new Giocatore("Player1");	
@@ -49,35 +49,33 @@ public class ClassificaTest {
 		Giocatore p20 = new Giocatore("Player non classificato");
 		p20.setPunteggio(0);
 		
-		try{
-			c.aggiungiGiocatore(p20);
-		}catch(GiocatoreNonClassificatoException ex) {
-			 assertEquals(p20, ex.getG());
-		}
+		c.aggiungiGiocatore(p20);
 	
 	}
 	
-	@Test
-	public void testSerialization() throws IOException, ClassNotFoundException {
+	@Test(expected = Exception.class)
+	public void testLeggiDaFileBinario() throws IOException, ClassNotFoundException,FileNotFoundException {
+		//File corretto
+		c.leggiDaFileBinario("classifica.dat");
+		
+		//File errato
+		c.leggiDaFileBinario("nome_errato_1.txt");
+
+	}
+	
+	@Test(expected = Exception.class)
+	public void testSalvaSuFileBinario() throws IOException {
+		
 		//File corretto
 		c.salvaSuFileBinario("classifica.dat");
 		
-		//File errato
+		//File errato	
 		c.salvaSuFileBinario("nome_errato.txt");
-	}
-	
-	@Test
-	public void testSerializati() throws IOException, ClassNotFoundException,FileNotFoundException {
-		
-		c.leggiDaFileBinario("classifica.dat");
-		
-		c.leggiDaFileBinario("nome_errato_1.txt");
 		
 	}
-	
 	
 	 @Test
-	 public void testResetClassifica() {
+	 public void testResetClassifica() throws IOException {
 		 c.resetClassifica();
 		 assertEquals(0,c.getClassifica().size());
 	 }

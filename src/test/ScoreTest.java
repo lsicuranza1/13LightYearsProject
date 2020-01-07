@@ -18,11 +18,6 @@ public class ScoreTest {
 	}
 
 	@Test
-	public void testScore() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testGetScoreValue() {
 		
 		assertEquals(0,this.score.getScoreValue());

@@ -37,8 +37,4 @@ public class MissileTest {
 		
 	}
 
-	@Test
-	public void testMissile() {
-		fail("Not yet implemented");
-	}
 }

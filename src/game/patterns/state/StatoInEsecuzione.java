@@ -17,11 +17,7 @@ public class StatoInEsecuzione implements Stato {
 
 	@Override
 	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("pausa")) {
-			mainFrame.getFrame().setVisible(false);
-			mainFrame.getFrame().dispose();
-			modalita.setStatoModalita(new StatoPausa());
-		} else if (stato.equals("game_over")) {
+		if (stato.equals("game_over")) {
 			mainFrame.getFrame().setVisible(false);
 			mainFrame.getFrame().dispose();
 			modalita.setStatoModalita(new StatoGameOver());

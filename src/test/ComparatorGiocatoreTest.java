@@ -11,6 +11,7 @@ import gestioneClassifica.Giocatore;
 public class ComparatorGiocatoreTest {
 	
 	private ComparatorGiocatore comparator;
+	
 	@Before
 	public void setUp() throws Exception{
 		this.comparator = new ComparatorGiocatore();

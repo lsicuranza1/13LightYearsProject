@@ -30,10 +30,6 @@ public class MeteoriteTest {
 		
 	}
 
-	@Test
-	public void testMeteorite() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testGetTransform() {

@@ -33,8 +33,5 @@ public class SpaceShipTest {
 		spaceShip.setLives(5);
 		assertEquals(5, this.spaceShip.getLives());
 	}
-	
-	
-	
-	
+		
 }

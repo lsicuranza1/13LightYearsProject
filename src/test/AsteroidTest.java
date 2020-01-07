@@ -16,9 +16,6 @@ public class AsteroidTest {
 
 	private Asteroid asteroid;
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
 		
@@ -26,9 +23,7 @@ public class AsteroidTest {
 
 	}
 
-	/**
-	 * Test method for {@link game.Asteroid#move()}.
-	 */
+
 	@Test
 	public void testMove() {
 
@@ -41,17 +36,7 @@ public class AsteroidTest {
 		assertEquals(transf, this.asteroid.getTransform());
 	}
 
-	/**
-	 * Test method for {@link game.Asteroid#Asteroid(int, int, java.lang.String)}.
-	 */
-	@Test
-	public void testAsteroid() {
-// I don' t think we need this
-	}
 
-	/**
-	 * Test method for {@link game.Asteroid#getTransform2()}.
-	 */
 	@Test
 	public void testGetTransform() {
 		

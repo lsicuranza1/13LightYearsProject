@@ -104,6 +104,15 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		this.timer = new Timer(DELAY, this);
 		this.timer.start();
+		
+//		new Thread() {
+//			public void run() {
+//				if (mainframe.getScore().getScoreValue() > GameConstants.SCORE_LEVEL_WON * level) {
+//					level++;
+//					countToAddObstacles = (int) (countToAddObstacles / GameConstants.DELTA);
+//				}
+//			}
+//		};
 
 	}
 
@@ -633,12 +642,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	}
 	
 	public void checkForLevelPassed() {
-		if (mainframe.getScore().getScoreValue() > GameConstants.SCORE_LEVEL_WON * this.level) {
-			this.level++;
-			this.countToAddObstacles = (int) (this.countToAddObstacles / GameConstants.DELTA);
-			System.out.println("LEVEL PASSED    " + this.countToAddObstacles);
+		if (mainframe.getScore().getScoreValue() > 500 * level) {
+			level++;
+			countToAddObstacles = (int) (countToAddObstacles / 1.05);
 		}
 	}
+	
 
 	public class TAdapter extends KeyAdapter {
 		@Override

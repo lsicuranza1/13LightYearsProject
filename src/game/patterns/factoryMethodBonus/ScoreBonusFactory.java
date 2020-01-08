@@ -5,7 +5,7 @@ import game.ScoreBonus;
 
 public class ScoreBonusFactory extends BonusFactory {
 
-	static int width = 800;
+	static int width = 700;
 	static Random random = new Random();
 	static int randX;
 	static int yBonus = -50;

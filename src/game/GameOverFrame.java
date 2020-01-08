@@ -274,7 +274,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		 Player player = new Player(playerName);
 		 player.setScore(mainFrame.getScore().getScoreValue());
 		 MainFrame.getScoreboard().addPlayer(player);
-		 MainFrame.getScoreboard().save();
+		 MainFrame.getScoreboard().save("scoreboard.dat");
 			 
 		 int position = MainFrame.getScoreboard().getScoreboardList().indexOf(player);
 		 JOptionPane.showMessageDialog(this,"Congratulations "+player.getPlayerTag()+", you entered the ranking in "+(position+1)+" position","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));

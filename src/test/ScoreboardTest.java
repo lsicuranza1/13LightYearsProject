@@ -50,26 +50,20 @@ public class ScoreboardTest {
 	
 	}
 	
-	@Test(expected = Exception.class)
+	@Test
 	public void testReadToBynaryFile() throws IOException, ClassNotFoundException,FileNotFoundException {
 		
 		//Corrected File
-		scoreboard.load("scoreboard.dat");
-		
-		//Uncorrected File
-		scoreboard.load("wrongName.txt");
+		scoreboard.load();
 
 	}
 	
-	@Test(expected = Exception.class)
+	@Test
 	public void testSaveOnBynaryFile() throws IOException {
 		
 		//Corrected File
-		scoreboard.save("scoreboard.dat");
-		
-		//Uncorrected File
-		scoreboard.save("wrongName1.txt");
-		
+		scoreboard.save();
+
 	}
 	
 	 @Test

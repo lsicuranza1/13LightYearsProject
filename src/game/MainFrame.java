@@ -17,12 +17,20 @@ public class MainFrame {
 	// Singleton
 	private static MainFrame istance = null;
 
+	/**
+	 * @return
+	 */
 	public static MainFrame getIstance() {
 		if (istance == null)
 			istance = new MainFrame();
 		return istance;
 	}
 
+	/**
+	 * @param args
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		scoreboard = new Scoreboard();
 		scoreboard.load("scoreboard.dat");
@@ -39,39 +47,66 @@ public class MainFrame {
 		});
 	}
 
+	/**
+	 * @param string
+	 */
 	public void updateModality(String string) {
 		State state = modality.getModalityState();
 		state.stateManagement(modality, string);
 	}
 
+	/**
+	 * @return
+	 */
 	public Modality getModality() {
 		return modality;
 	}
 
+	/**
+	 * @param modality
+	 */
 	public void setModality(Modality modality) {
 		this.modality = modality;
 	}
 
+	/**
+	 * @return
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 
+	/**
+	 * @param frame
+	 */
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
 
+	/**
+	 * @return
+	 */
 	public Score getScore() {
 		return score;
 	}
 
+	/**
+	 * @param score
+	 */
 	public void setScore(Score score) {
 		this.score = score;
 	}
 
+	/**
+	 * @return
+	 */
 	public static Scoreboard getScoreboard() {
 		return scoreboard;
 	}
 
+	/**
+	 * @param scoreboard
+	 */
 	public static void setScoreboard(Scoreboard scoreboard) {
 		MainFrame.scoreboard = scoreboard;
 	}

@@ -9,6 +9,9 @@ public class GameOverState implements State {
 	private GameOverFrame gameOverFrame;
 	
 
+	/**
+	 * 
+	 */
 	public GameOverState() {
 
 		mainFrame = MainFrame.getIstance();
@@ -18,6 +21,9 @@ public class GameOverState implements State {
 
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {
 		

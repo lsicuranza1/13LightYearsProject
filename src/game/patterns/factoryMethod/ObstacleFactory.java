@@ -2,10 +2,17 @@ package game.patterns.factoryMethod;
 
 public class ObstacleFactory {
 	
+	/**
+	 * 
+	 */
 	public ObstacleFactory() {
 		
 	}
 	
+	/**
+	 * @param objectType
+	 * @return
+	 */
 	public Object getObstacle(String objectType) {
 		
 		Object object = null;

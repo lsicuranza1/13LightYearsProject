@@ -25,6 +25,11 @@ public class Settings extends javax.swing.JDialog {
 	private JRadioButton wasd;
 	private JRadioButton arrows;
 	
+	/**
+	 * @param parent
+	 * @param modal
+	 * @param inGame
+	 */
 	public Settings(JFrame parent, boolean modal, boolean inGame) {
 		super(parent, modal);
 		this.inGame = inGame;
@@ -46,6 +51,9 @@ public class Settings extends javax.swing.JDialog {
         
 	}
 
+	/**
+	 * 
+	 */
 	private void initComponents() {
 
 		title = new javax.swing.JLabel();
@@ -170,6 +178,9 @@ public class Settings extends javax.swing.JDialog {
 		pack();
 	}
 
+	/**
+	 * @param evt
+	 */
 	private void effectsActionPerformed(java.awt.event.ActionEvent evt) {
 		 
 		String textButton = this.effects.getText();
@@ -183,6 +194,9 @@ public class Settings extends javax.swing.JDialog {
         }
 	}
 
+	/**
+	 * @param evt
+	 */
 	private void musicActionPerformed(java.awt.event.ActionEvent evt) {
 		
 		String textButton = this.music.getText();
@@ -198,10 +212,16 @@ public class Settings extends javax.swing.JDialog {
         }
 	}
 	
+	/**
+	 * @param evt
+	 */
 	private void wasdActionPerformed(java.awt.event.ActionEvent evt) {
            mod = 1;  
     }
 	
+	/**
+	 * @param evt
+	 */
 	private void arrowsActionPerformed(java.awt.event.ActionEvent evt) {
 	       mod = 0;
 	      

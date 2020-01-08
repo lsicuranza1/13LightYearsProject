@@ -13,6 +13,9 @@ public class ExecutionFrame extends JFrame {
 	public static Sound soundInGame;
     public static Clip clipInGame;
    
+	/**
+	 * 
+	 */
 	public ExecutionFrame() {
 		
 		initComponents();
@@ -25,6 +28,9 @@ public class ExecutionFrame extends JFrame {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	private void initComponents() {
 		
 		this.executionPanel = new PanelExecution();

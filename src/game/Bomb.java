@@ -7,6 +7,11 @@ public class Bomb extends Sprite{
     public static Sound enemyShootSound;
     public static Clip enemyShootClip;
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public Bomb(int x, int y, String path) {			
 		super(x, y, path);
 		
@@ -15,6 +20,9 @@ public class Bomb extends Sprite{
 		enemyShootSound.playSound();	 
 	}
 
+	/**
+	 * 
+	 */
 	public void move() {
 		this.setY(getY()+7);
 	}

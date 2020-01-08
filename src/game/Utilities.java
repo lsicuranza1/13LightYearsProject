@@ -6,6 +6,10 @@ import javax.sound.sampled.Clip;
 
 public class Utilities {
 
+    /**
+     * @param direction
+     * @return
+     */
     public static Clip LoadSound(URL direction) {
     	
         try {

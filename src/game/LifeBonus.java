@@ -6,11 +6,19 @@ public class LifeBonus extends Sprite implements BonusInterface{
 	
 	private AffineTransform transform;
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param imageFileName
+	 */
 	public LifeBonus(int x, int y, String imageFileName) {
 		super(x, y, imageFileName);
 		this.transform = new AffineTransform();
 	}
 
+	/**
+	 *
+	 */
 	@Override 
 	public void move() {
 		
@@ -23,11 +31,17 @@ public class LifeBonus extends Sprite implements BonusInterface{
 		
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public AffineTransform getTransform() {
 		return this.transform;
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public void setTransform(AffineTransform transform) {
 		this.transform = transform;

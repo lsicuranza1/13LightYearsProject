@@ -10,6 +10,11 @@ public class Missile extends Sprite {
 	public static Sound shipShootSound;
     public static Clip shipShootClip;
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public Missile(int x, int y, String path) {
 		super(x, y, path);
 		
@@ -19,6 +24,9 @@ public class Missile extends Sprite {
 		
 	}
 
+	/**
+	 * 
+	 */
 	public void move() {
 
 		this.setY(this.getY() - MISSILE_SPEED);

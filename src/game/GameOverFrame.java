@@ -30,6 +30,9 @@ public class GameOverFrame extends javax.swing.JFrame {
 	public static Sound soundEndGame;
     public static Clip clipEndGame;
  
+	/**
+	 * 
+	 */
 	public GameOverFrame() {
 
 		initComponents();
@@ -44,6 +47,9 @@ public class GameOverFrame extends javax.swing.JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void initComponents() {
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
@@ -254,6 +260,11 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 	}
 
+	/**
+	 * @param evt
+	 * @throws UnclassifiedPlayerException
+	 * @throws IOException
+	 */
 	private void addPlayer(java.awt.event.ActionEvent evt) throws UnclassifiedPlayerException, IOException{
 		String playerName = this.name.getText();
 		 if(playerName.equals("           Insert name") || playerName.equals("")) {
@@ -270,6 +281,9 @@ public class GameOverFrame extends javax.swing.JFrame {
     } 
 		 
 
+	/**
+	 * @param evt
+	 */
 	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic == true) {
 			GameOverFrame.soundEndGame.stopSound();
@@ -278,6 +292,9 @@ public class GameOverFrame extends javax.swing.JFrame {
 		mainFrame.updateModality("start");
 	}
 
+	/**
+	 * @param evt
+	 */
 	private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 		mainFrame.updateModality("running");
@@ -286,10 +303,19 @@ public class GameOverFrame extends javax.swing.JFrame {
 		PanelExecution.setEnemiesDestoyed(0);
 	}
 	
+	/**
+	 * @param evt
+	 */
 	private void clear(java.awt.event.MouseEvent evt) {                                         
         this.name.setText("");
     }
 	
+	/**
+	 * @param url
+	 * @param newW
+	 * @param newH
+	 * @return
+	 */
 	private ImageIcon resizeImageIcon(URL url, int newW, int newH) {
 		ImageIcon image = new ImageIcon(url);
 		Image scaledImage = image.getImage().getScaledInstance(newW, newH, Image.SCALE_DEFAULT);

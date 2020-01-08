@@ -12,10 +12,16 @@ public class MeteoriteFactory extends ObstacleFactory {
 	static int yMeteorite = -50;
 	static String fileNameMeteorite = "../resources/images/meteorite.png";
 	
+	/**
+	 * 
+	 */
 	public MeteoriteFactory() {
 		super();
 	}
 	
+	/**
+	 * @return
+	 */
 	public static Sprite getObstacle() {
 		randX = random.nextInt(width);
 		return new Meteorite(randX, yMeteorite, fileNameMeteorite);

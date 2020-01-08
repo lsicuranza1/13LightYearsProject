@@ -14,6 +14,9 @@ public class DemoFrame extends JFrame {
     public static Clip clipInGame;
     public static Sound gameMusic;
 	 
+	/**
+	 * 
+	 */
 	public DemoFrame() {
 		initComponents();
 		
@@ -24,6 +27,9 @@ public class DemoFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	private void initComponents() {
 		this.panelDemo = new PanelDemo();
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();

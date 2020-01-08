@@ -63,6 +63,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private boolean flagScoreBonus=false;
 	private boolean flagLifeBonus=false;
 
+	/**
+	 * 
+	 */
 	public PanelDemo() {
 
 		this.addKeyListener(new TAdapter());
@@ -121,6 +124,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.timer.start();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		
@@ -156,6 +162,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 		Toolkit.getDefaultToolkit().sync();
 	}
 
+	/**
+	 * @param g
+	 * @throws IOException
+	 */
 	private void doDrawing(Graphics g) throws IOException {
 
 		Graphics2D g2d = (Graphics2D) g;
@@ -197,6 +207,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -222,6 +235,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void stepBonusTrue() {
 		if(countForStep>100) {
 			this.labelText.setText("Be careful to enemies");
@@ -234,6 +250,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		countForStep++;
 	}
 
+	/**
+	 * 
+	 */
 	private void stepBonus() {
 		if(flagLifeBonus && flagScoreBonus) {
 			setFlagBonus(false);
@@ -275,6 +294,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void stepLife() {
 		if (countForStep > 500) {
 			flagLife = false;
@@ -286,6 +308,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		countForStep++;
 	}
 
+	/**
+	 * 
+	 */
 	private void stepScore() {
 		if (countForStep > 500) { 
 			flagScore = false;
@@ -305,6 +330,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		countForStep++;
 	}
 
+	/**
+	 * 
+	 */
 	private void stepFinal() {
 		if (countForStep < 70) {
 			this.labelText.setText("In the space is not so easy");
@@ -330,6 +358,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
+	/**
+	 * 
+	 */
 	private void stepKillEnemies() {
 		this.labelText.setText("Press space to kill the enemies");
 		this.labelText.setForeground(Color.WHITE);
@@ -343,6 +374,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * 
+	 */
 	private void stepEnemies() {
 		if (countForStep > 50) {
 			setFlagEnemies(false);
@@ -360,6 +394,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * 
+	 */
 	private void stepSpaceship() {
 		if (moveSpaceShip) {
 			this.textArea.setVisible(false);
@@ -368,6 +405,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void stepObstacles() {
 		if (countForStep > 800) {
 			countForStep = 0;
@@ -406,16 +446,25 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void deleteObstacles() {
 		meteorites.removeAll(meteorites);
 		asteroids.removeAll(asteroids);
 	}
 	
+	/**
+	 * 
+	 */
 	private void deleteBonus() {
 		lifeBonus.removeAll(lifeBonus);
 		scoreBonus.removeAll(scoreBonus);
 	}
 
+	/**
+	 * 
+	 */
 	private void updateMissiles() {
 
 		List<Missile> missiles = spaceShip.getMissiles();
@@ -433,12 +482,18 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void updateSpaceShip() {
 		spaceShip.move();
 		spaceShip.setBounds();
 
 	}
 
+	/**
+	 * 
+	 */
 	public void updateObstacles() {
 		
 		Random random = new Random();
@@ -486,6 +541,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void updateEnemy() {
 		enemies.add(new EnemySpaceShip(350, 100, fileNameEnemies));
 		Iterator<EnemySpaceShip> et = enemies.iterator();
@@ -500,6 +558,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void moveEnemy() {
 		Iterator<EnemySpaceShip> et = enemies.iterator();
 		while (et.hasNext()) {
@@ -510,6 +571,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	private void checkCollisions() {
 
 		Rectangle2D spaceShipBounds = spaceShip.getBounds();
@@ -620,6 +684,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * @param lives
+	 */
 	public void initLives(Deque<Life> lives) {
 		Life life;
 		int xCoordLife = 10;
@@ -632,6 +699,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void updateLives() {
 		if (lives.size() > 0) {
 			Life life = lives.getLast();
@@ -641,6 +711,9 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateBonus() {
 
 		if (countForStepToLifeBonus >= 300 && !flagLifeBonus) {
@@ -681,60 +754,102 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isMoveSpaceShip() {
 		return moveSpaceShip;
 	}
 
+	/**
+	 * @param moveSpaceShip
+	 */
 	public void setMoveSpaceShip(boolean moveSpaceShip) {
 		this.moveSpaceShip = moveSpaceShip;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isFlagEnemies() {
 		return flagEnemies;
 	}
 
+	/**
+	 * @param flagEnemies
+	 */
 	public void setFlagEnemies(boolean flagEnemies) {
 		this.flagEnemies = flagEnemies;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isFlagObstacles() {
 		return flagObstacles;
 	}
 
+	/**
+	 * @param flagObstacles
+	 */
 	public void setFlagObstacles(boolean flagObstacles) {
 		this.flagObstacles = flagObstacles;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isFlagSpace() {
 		return flagSpace;
 	}
 
+	/**
+	 * @param flagSpace
+	 */
 	public void setFlagSpace(boolean flagSpace) {
 		this.flagSpace = flagSpace;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isFlagBonus() {
 		return flagBonus;
 	}
 
+	/**
+	 * @param flagBonus
+	 */
 	public void setFlagBonus(boolean flagBonus) {
 		this.flagBonus = flagBonus;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isFlagBonusTrue() {
 		return flagBonusTrue;
 	}
 
+	/**
+	 * @param flagBonusTrue
+	 */
 	public void setFlagBonusTrue(boolean flagBonusTrue) {
 		this.flagBonusTrue = flagBonusTrue;
 	}
 
 	public class TAdapter extends KeyAdapter {
+		/**
+		 *
+		 */
 		@Override
 		public void keyReleased(KeyEvent e) {
 			spaceShip.keyReleased(e);
 		}
 
+		/**
+		 *
+		 */
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();

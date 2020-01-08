@@ -8,6 +8,9 @@ public class DemoState implements State {
 	private MainFrame mainFrame = MainFrame.getIstance();
 	private DemoFrame demoFrame;
 
+	/**
+	 * 
+	 */
 	public DemoState() {
 		
 		mainFrame = MainFrame.getIstance();
@@ -16,6 +19,9 @@ public class DemoState implements State {
 		mainFrame.getFrame().setVisible(true);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {
 		

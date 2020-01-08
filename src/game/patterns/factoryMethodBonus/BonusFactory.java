@@ -2,10 +2,17 @@ package game.patterns.factoryMethodBonus;
 
 public class BonusFactory {
 	
+	/**
+	 * 
+	 */
 	public BonusFactory() {
 			
 	}
 	
+	/**
+	 * @param objectType
+	 * @return
+	 */
 	public Object getBonus(String objectType) {
 		
 		Object object = null;

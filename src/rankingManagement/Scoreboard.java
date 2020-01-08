@@ -8,11 +8,19 @@ public class Scoreboard implements Serializable,Iterable<Player>{
     private List<Player> scoreboard;
     private final int maxSize;
 
+    /**
+     * 
+     */
     public Scoreboard() { 
         this.scoreboard=new ArrayList<>();
         this.maxSize=10;
     }
     
+    /**
+     * @param g
+     * @throws UnclassifiedPlayerException
+     * @throws IOException
+     */
     public void addPlayer(Player g) throws UnclassifiedPlayerException, IOException{
     	
         PlayerComparator cg=new PlayerComparator();
@@ -35,11 +43,18 @@ public class Scoreboard implements Serializable,Iterable<Player>{
         
     }
 
+    /**
+     * @throws IOException
+     */
     public void resetScoreboard() throws IOException{
         scoreboard.clear();
         save("scoreboard.dat"); 
     }
 
+    /**
+     * @param fileName
+     * @throws IOException
+     */
     public void save(String fileName) throws IOException{
     	
 		if(fileName == "scoreboard.dat") {		
@@ -52,6 +67,11 @@ public class Scoreboard implements Serializable,Iterable<Player>{
 		
     }
 
+    /**
+     * @param fileName
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public void load(String fileName) throws IOException, ClassNotFoundException{
     	
     	if(fileName == "scoreboard.dat") {
@@ -64,11 +84,17 @@ public class Scoreboard implements Serializable,Iterable<Player>{
         }
     }
      
+    /**
+     *
+     */
     @Override
     public Iterator<Player> iterator() {
         return scoreboard.iterator();
     }
 
+    /**
+     * @return
+     */
     public List<Player> getScoreboardList(){
         return this.scoreboard;
     }  

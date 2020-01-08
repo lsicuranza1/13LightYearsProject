@@ -6,11 +6,19 @@ public class Meteorite extends Sprite implements ObstacleInterface {
 
 	private AffineTransform transform;
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public Meteorite(int x, int y, String path) {
 		super(x, y, path);
 		this.transform = new AffineTransform();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void move() {
 
@@ -24,11 +32,17 @@ public class Meteorite extends Sprite implements ObstacleInterface {
 		this.setTransform(transform);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public AffineTransform getTransform() {
 		return transform;
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public void setTransform(AffineTransform transform) {
 		this.transform = transform;

@@ -27,12 +27,18 @@ public class FrameScoreboard extends JFrame {
 	private Dimension dimFrame;
 	private final Scoreboard scoreboard; 
 	 
+	/**
+	 * @param scoreboard
+	 */
 	public FrameScoreboard(Scoreboard scoreboard) {
 		this.scoreboard = scoreboard;
 		initComponents();
 		refreshScoreboard(scoreboard);
 	}
 	
+	/**
+	 * @param scoreboard
+	 */
 	public final void refreshScoreboard(Scoreboard scoreboard){
         int i=0;
         for(Player g: scoreboard){
@@ -44,6 +50,10 @@ public class FrameScoreboard extends JFrame {
         }
     }
 	
+	/**
+	 * @param evt
+	 * @throws IOException
+	 */
 	private void resetClassifica(MouseEvent evt) throws IOException {                                         
 		scoreboard.resetScoreboard();
         int i=0;
@@ -56,6 +66,9 @@ public class FrameScoreboard extends JFrame {
         }
     }  
 	
+	/**
+	 * 
+	 */
 	@SuppressWarnings("serial")
 	public void initComponents() { 
 		setSize(new Dimension(500, 700));

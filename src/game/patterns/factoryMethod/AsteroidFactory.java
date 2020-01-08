@@ -12,10 +12,16 @@ public class AsteroidFactory extends ObstacleFactory {
 	static int yAsteroid = -50;
 	static String fileNameAsteroid = "../resources/images/asteroid-icon.png";
 	
+	/**
+	 * 
+	 */
 	public AsteroidFactory() {
 		super();
 	}
 	
+	/**
+	 * @return
+	 */
 	public static Sprite getObstacle() {
 		randX = random.nextInt(width);
 		return new Asteroid(randX, yAsteroid, fileNameAsteroid);

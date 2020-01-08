@@ -17,23 +17,40 @@ public class SpaceShip extends SpaceshipStructure {
 	private int lives = 3;
 	private int keyMode = Settings.mod;
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public SpaceShip(int x, int y, String path) {
 		super(x, y, path);
 		this.missiles = new ArrayList<Missile>();
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getLives() {
 		return lives;
 	}
 	
+	/**
+	 * @param lives
+	 */
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
 	
+	/**
+	 * @return
+	 */
 	public List<Missile> getMissiles() {
 		return missiles;
 	}
 
+	/**
+	 * 
+	 */
 	public void move() {
 		
 		this.shootCounter++;
@@ -74,6 +91,9 @@ public class SpaceShip extends SpaceshipStructure {
 	}
 	
 
+	/**
+	 * @param e
+	 */
 	public void keyPressed(KeyEvent e) {
 
 		int key = e.getKeyCode();
@@ -112,6 +132,9 @@ public class SpaceShip extends SpaceshipStructure {
 		}
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void fire() {
 		List<Missile> missiles = this.getMissiles();
@@ -123,6 +146,9 @@ public class SpaceShip extends SpaceshipStructure {
 		
 	}
 
+	/**
+	 * @param e
+	 */
 	public void keyReleased(KeyEvent e) {
 
 		int key = e.getKeyCode();
@@ -160,42 +186,72 @@ public class SpaceShip extends SpaceshipStructure {
 		}
 	}
 	
+	/**
+	 * @return
+	 */
 	public boolean isLeft() {
 		return left;
 	}
 
+	/**
+	 * @param left
+	 */
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isRight() {
 		return right;
 	}
 
+	/**
+	 * @param right
+	 */
 	public void setRight(boolean right) {
 		this.right = right;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isUp() {
 		return up;
 	}
 
+	/**
+	 * @param up
+	 */
 	public void setUp(boolean up) {
 		this.up = up;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isDown() {
 		return down;
 	}
 
+	/**
+	 * @param down
+	 */
 	public void setDown(boolean down) {
 		this.down = down;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isShooting() {
 		return isShooting;
 	}
 
+	/**
+	 * @param isShooting
+	 */
 	public void setShooting(boolean isShooting) {
 		this.isShooting = isShooting;
 	}

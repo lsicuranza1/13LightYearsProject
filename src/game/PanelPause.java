@@ -18,6 +18,9 @@ class PanelPause extends JPanel {
 	private javax.swing.JButton mainMenu;
 	private PanelExecution panelExecution;
 
+	/**
+	 * @param panelExecution
+	 */
 	public PanelPause(PanelExecution panelExecution) {
 		this.panelExecution = panelExecution;
 		JLabel pausedLabel = new JLabel("PAUSED");
@@ -57,6 +60,9 @@ class PanelPause extends JPanel {
 		add(mainMenu);
 	}
  
+	/**
+	 * @param evt
+	 */
 	private void mainMenuActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic==true)
 			ExecutionFrame.soundInGame.stopSound();
@@ -65,6 +71,9 @@ class PanelPause extends JPanel {
 		mainframe.updateModality("start");
 	}
 
+	/**
+	 * @param evt
+	 */
 	private void restartActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic==true)
 			ExecutionFrame.soundInGame.stopSound();
@@ -73,6 +82,9 @@ class PanelPause extends JPanel {
 		mainframe.updateModality("running");
 	}
 
+	/**
+	 * @param evt
+	 */
 	private void resumeActionPerformed(ActionEvent evt) {
 		panelExecution.setFlagPause(false);
 		panelExecution.getTimer().start();

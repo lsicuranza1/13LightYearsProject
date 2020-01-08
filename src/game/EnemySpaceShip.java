@@ -14,11 +14,19 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	private int randY = random.nextInt(300);
 	private int shootCounter = 70;
 		
+	/**
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public EnemySpaceShip(int x, int y, String path) {
 		super(x, y, path);
 		this.bombs = new ArrayList<Bomb>();
 	}
 
+	/**
+	 * 
+	 */
 	public void move() {
 		
 		if(this.getX()>randX) {
@@ -60,6 +68,9 @@ public class EnemySpaceShip extends SpaceshipStructure {
 		
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void fire() {
 		List<Bomb> bomb = this.getBombs();
@@ -70,30 +81,51 @@ public class EnemySpaceShip extends SpaceshipStructure {
 		this.shootCounter++;
 	}
 	
+	/**
+	 * @return
+	 */
 	public List<Bomb> getBombs() {
 		return bombs;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getCountPosition() {
 		return countPosition;
 	}
 
+	/**
+	 * @param countPosition
+	 */
 	public void setCountPosition(int countPosition) {
 		this.countPosition = countPosition;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getRandX() {
 		return randX;
 	}
 
+	/**
+	 * @param randX
+	 */
 	public void setRandX(int randX) {
 		this.randX = randX;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getRandY() {
 		return randY;
 	}
 
+	/**
+	 * @param randY
+	 */
 	public void setRandY(int randY) {
 		this.randY = randY;
 	}

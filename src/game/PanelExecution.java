@@ -62,6 +62,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 	private static int asteroidsDestoyed = 0;
 	private static int enemiesDestoyed = 0;
 
+	/**
+	 * 
+	 */
 	public PanelExecution() {
 		
 		this.addKeyListener(new TAdapter());
@@ -116,6 +119,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -144,6 +150,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 		Toolkit.getDefaultToolkit().sync();
 	}
 
+	/**
+	 * @param g
+	 */
 	private void doDrawing(Graphics g) {
 
 		Graphics2D g2d = (Graphics2D) g;
@@ -184,6 +193,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -227,14 +239,23 @@ public class PanelExecution extends JPanel implements ActionListener {
 		this.repaint();
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isFlagPause() {
 		return flagPause;
 	}
 
+	/**
+	 * @param flagPause
+	 */
 	public void setFlagPause(boolean flagPause) {
 		this.flagPause = flagPause;
 	}
 
+	/**
+	 * 
+	 */
 	private void updateMissiles() {
 
 		List<Missile> missiles = spaceShip.getMissiles();
@@ -252,12 +273,18 @@ public class PanelExecution extends JPanel implements ActionListener {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void updateSpaceShip() {
 		spaceShip.move();
 		spaceShip.setBounds();
 
 	}
 
+	/**
+	 * 
+	 */
 	public void updateObstacles() {
 
 		if (countToAddAsteroid >= 250 / level) {
@@ -298,6 +325,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 	
 	
+	/**
+	 * 
+	 */
 	public void updateBonus() {
 
 		if (countToLifeBonus >= 600 * level) {
@@ -338,6 +368,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 
 	}
 	
+	/**
+	 * @param lives
+	 */
 	public void initLives(Deque<Life> lives) {
 		Life life;
 		int xCoordLife = 10;
@@ -350,6 +383,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void updateLives() {
 		Life life = lives.getLast();
 		if (life.isVisible() == false) {
@@ -357,6 +393,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateEnemies() {
 		
 		int panelWidth = 800; 
@@ -388,6 +427,9 @@ public class PanelExecution extends JPanel implements ActionListener {
     	}
 	}
 	
+	/**
+	 * 
+	 */
 	private void updateBombs() {
 		
 		for(int i=0; i< enemies.size();i++) {
@@ -408,6 +450,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void updatestrayBombs() {
 		for(int i=0; i<strayBombs.size();i++) {
 			Bomb bomb = strayBombs.get(i);
@@ -423,6 +468,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void checkCollisions() {
 
 		Rectangle2D spaceShipBounds = spaceShip.getBounds();
@@ -592,6 +640,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	public class TAdapter extends KeyAdapter {
+		/**
+		 *
+		 */
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if (flagPause == false && timer.isRunning()){
@@ -599,6 +650,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 			}
 		}
 
+		/**
+		 *
+		 */
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
@@ -637,26 +691,44 @@ public class PanelExecution extends JPanel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * @return
+	 */
 	public JDialog getDialogPause() {
 		return dialogPause;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Timer getTimer() {
 		return timer;
 	}
 
+	/**
+	 * @return
+	 */
 	public static int getAsteroidsDestoyed() {
 		return asteroidsDestoyed;
 	}
 
+	/**
+	 * @param asteroidsDestoyed
+	 */
 	public static void setAsteroidsDestoyed(int asteroidsDestoyed) {
 		PanelExecution.asteroidsDestoyed = asteroidsDestoyed;
 	}
 
+	/**
+	 * @return
+	 */
 	public static int getEnemiesDestoyed() {
 		return enemiesDestoyed;
 	}
 
+	/**
+	 * @param enemiesDestoyed
+	 */
 	public static void setEnemiesDestoyed(int enemiesDestoyed) {
 		PanelExecution.enemiesDestoyed = enemiesDestoyed;
 	}	

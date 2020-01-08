@@ -7,12 +7,20 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 	private int angle;
 	private AffineTransform transform;
 
+	/**
+	 * @param x
+	 * @param y
+	 * @param path
+	 */
 	public Asteroid(int x, int y, String path) {
 		super(x, y, path);
 		this.angle = 0;
 		this.transform = new AffineTransform();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void move() {
 
@@ -29,20 +37,32 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 		this.setTransform(transform);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public AffineTransform getTransform() {
 		return this.transform;
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public void setTransform(AffineTransform transform) {
 		this.transform = transform;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getAngle() {
 		return this.angle;
 	}
 
+	/**
+	 * @param angle
+	 */
 	public void setAngle(int angle) {
 		this.angle = angle;
 	}

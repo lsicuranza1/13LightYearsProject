@@ -6,6 +6,9 @@ import java.util.Comparator;
 @SuppressWarnings("serial")
 public class PlayerComparator implements Comparator<Player>,Serializable{
 
+    /**
+     *
+     */
     @Override
     public int compare(Player g1, Player g2) {
         if(g1.equals(g2))

@@ -10,36 +10,60 @@ public class Player implements Serializable{
     private int score; 
     private LocalDate date; 
 
+    /**
+     * @param playerTag
+     */
     public Player(String playerTag) {
         this.playerTag = playerTag;
         this.score = 0;
         this.date= LocalDate.now();
     }
     
+    /**
+     * @return
+     */
     public String getPlayerTag() {
         return playerTag;
     }
     
+    /**
+     * @param tag
+     */
     public void setPlayerTag(String tag) {
     	this.playerTag = tag;
     }
 
+    /**
+     * @return
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * @return
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * @param score
+     */
     public void setScore(int score) {
         this.score = score;
     }
 	
+    /**
+     * @param date
+     */
     public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getVisibleData(){
 		
     	if(date.getMonthValue()<10 && date.getDayOfMonth()<10) {
@@ -52,6 +76,9 @@ public class Player implements Serializable{
     		return date.getDayOfMonth()+"-"+date.getMonthValue()+"-"+date.getYear();
     }
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null)

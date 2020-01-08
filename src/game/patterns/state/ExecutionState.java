@@ -8,6 +8,9 @@ public class ExecutionState implements State {
 	private MainFrame mainFrame;
 	private ExecutionFrame exeFrame;
 
+	/**
+	 * 
+	 */
 	public ExecutionState() {
 		
 		mainFrame = MainFrame.getIstance();
@@ -16,6 +19,9 @@ public class ExecutionState implements State {
 		mainFrame.getFrame().setVisible(true);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {
 		

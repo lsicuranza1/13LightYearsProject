@@ -9,6 +9,9 @@ public class StartingState implements State {
 	private MainFrame mainFrame;
 	private MenuFrame menuFrame;
 
+	/**
+	 * 
+	 */
 	public StartingState() {
 		mainFrame = MainFrame.getIstance();
 		this.menuFrame = new MenuFrame();
@@ -17,6 +20,9 @@ public class StartingState implements State {
 		mainFrame.getFrame().setVisible(true);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {
 		

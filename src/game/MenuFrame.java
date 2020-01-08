@@ -32,6 +32,9 @@ public class MenuFrame extends JFrame {
 	private javax.swing.JLabel background;
 	private Scoreboard scoreboard=MainFrame.getScoreboard();
 
+	/**
+	 * 
+	 */
 	public MenuFrame() {
 		
 		initComponents();
@@ -44,6 +47,9 @@ public class MenuFrame extends JFrame {
 		
 	}
 
+	/**
+	 * 
+	 */
 	private void initComponents() {
 		
 		java.awt.GridBagConstraints gridBagConstraints;
@@ -197,6 +203,9 @@ public class MenuFrame extends JFrame {
 		menuPanel.requestFocus();
 	}
 
+	/**
+	 * @param evt
+	 */
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
 		MenuFrame.gameMusic.stopSound();
@@ -210,6 +219,9 @@ public class MenuFrame extends JFrame {
 		}
 	}
 
+	/**
+	 * @param evt
+	 */
 	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
 		MenuFrame.gameMusic.stopSound();
@@ -221,6 +233,9 @@ public class MenuFrame extends JFrame {
 		}		
 	}
 	
+	/**
+	 * @param evt
+	 */
 	private void scoreBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
 		if(flagScoreboard == false) {
@@ -230,6 +245,9 @@ public class MenuFrame extends JFrame {
 		}	
 	}
 	
+	/**
+	 * @param evt
+	 */
 	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
 		if(flagSettings==false) {
@@ -239,6 +257,12 @@ public class MenuFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * @param url
+	 * @param newW
+	 * @param newH
+	 * @return
+	 */
 	private ImageIcon resizeImageIcon(URL url, int newW, int newH) {
 		ImageIcon image = new ImageIcon(url);
 		Image scaledImage = image.getImage().getScaledInstance(newW, newH, Image.SCALE_DEFAULT);

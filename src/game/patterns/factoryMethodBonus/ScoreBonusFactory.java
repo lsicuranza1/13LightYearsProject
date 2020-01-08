@@ -12,7 +12,8 @@ public class ScoreBonusFactory extends BonusFactory {
 	static String fileNameLifeBonus = "../resources/images/x2-icon.png";
 
 	/**
-	 * @return
+	 * It create a new ScoreBonus object
+	 * @return A new ScoreBonus 
 	 */
 	public static Object getScoreBonus() {
 		randX = random.nextInt(width);

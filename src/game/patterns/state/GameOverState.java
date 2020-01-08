@@ -10,7 +10,7 @@ public class GameOverState implements State {
 	
 
 	/**
-	 * 
+	 * The constructor of GameOverState class
 	 */
 	public GameOverState() {
 
@@ -22,7 +22,7 @@ public class GameOverState implements State {
 	}
 
 	/**
-	 *
+	 * It manages the State. It checks if the state "GameOver" changes to "Running" / "Start"
 	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {

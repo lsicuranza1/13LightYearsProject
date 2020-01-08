@@ -5,21 +5,23 @@ public class Modality {
     private State modalityState;
  
     /**
-     * 
+     * The constructor of Modality class
      */
     public Modality(){
         this.modalityState = new StartingState();
     }
 
 	/**
-	 * @return
+	 *  It returns the Modality
+	 * @return A modality
 	 */
 	public State getModalityState() {
 		return modalityState;
 	}
 
 	/**
-	 * @param modalityState
+	 * It sets a new Modality
+	 * @param modalityState A Modality
 	 */
 	public void setModalityState(State modalityState) {
 		this.modalityState = modalityState;

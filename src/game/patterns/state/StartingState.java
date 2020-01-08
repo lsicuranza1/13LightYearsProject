@@ -10,7 +10,7 @@ public class StartingState implements State {
 	private MenuFrame menuFrame;
 
 	/**
-	 * 
+	 *  The constructor of StartingState class
 	 */
 	public StartingState() {
 		mainFrame = MainFrame.getIstance();
@@ -21,7 +21,7 @@ public class StartingState implements State {
 	}
 
 	/**
-	 *
+	 * It manages the State. It checks if the state "Starting" changes to "Running" / "Demo"
 	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {

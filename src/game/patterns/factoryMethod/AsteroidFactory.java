@@ -13,14 +13,15 @@ public class AsteroidFactory extends ObstacleFactory {
 	static String fileNameAsteroid = "../resources/images/asteroid-icon.png";
 	
 	/**
-	 * 
+	 * The costructor of the AsteroidFactory
 	 */
 	public AsteroidFactory() {
 		super();
 	}
 	
 	/**
-	 * @return
+	 * It create a new Asteroid object
+	 * @return A new Asteroid
 	 */
 	public static Sprite getObstacle() {
 		randX = random.nextInt(width);

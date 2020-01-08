@@ -6,10 +6,10 @@ public class Meteorite extends Sprite implements ObstacleInterface {
 
 	private AffineTransform transform;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param path
+	/**The costructor of Meteorite
+	 * @param x X-Coordinate of the meteorite
+	 * @param y Y-Coordinate of the meteorite
+	 * @param path Path of the image
 	 */
 	public Meteorite(int x, int y, String path) {
 		super(x, y, path);
@@ -17,7 +17,8 @@ public class Meteorite extends Sprite implements ObstacleInterface {
 	}
 
 	/**
-	 *
+	 * Method that manages the movement of the Meteorite
+	 * @see ObstacleInterface
 	 */
 	@Override
 	public void move() {
@@ -33,7 +34,9 @@ public class Meteorite extends Sprite implements ObstacleInterface {
 	}
 
 	/**
-	 *
+	 * Method that returns the parameter transform
+	 * @see ObstacleInterface
+	 * 
 	 */
 	@Override
 	public AffineTransform getTransform() {
@@ -41,7 +44,8 @@ public class Meteorite extends Sprite implements ObstacleInterface {
 	}
 	
 	/**
-	 *
+	 * Method that sets the parameter transform
+	 * @see ObstacleInterface
 	 */
 	@Override
 	public void setTransform(AffineTransform transform) {

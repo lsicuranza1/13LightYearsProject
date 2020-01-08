@@ -9,7 +9,7 @@ public class DemoState implements State {
 	private DemoFrame demoFrame;
 
 	/**
-	 * 
+	 * The constructor of DemoState class
 	 */
 	public DemoState() {
 		
@@ -20,7 +20,7 @@ public class DemoState implements State {
 	}
 
 	/**
-	 *
+	 *  It manages the State. It checks if the state "Demo" changes to "Running"
 	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {

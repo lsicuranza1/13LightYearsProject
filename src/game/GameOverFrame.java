@@ -15,7 +15,7 @@ import game.Sound;
 import game.ExecutionFrame;
 import javax.swing.*;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") 
 public class GameOverFrame extends javax.swing.JFrame {
 	private Dimension dim; 
 	private MainFrame mainFrame = MainFrame.getIstance();
@@ -31,7 +31,7 @@ public class GameOverFrame extends javax.swing.JFrame {
     public static Clip clipEndGame;
  
 	/**
-	 * 
+	 *  The constructor of GameOverFrame.
 	 */
 	public GameOverFrame() {
 
@@ -48,7 +48,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 	}
 
 	/**
-	 * 
+	 *  This method creates all the components of the Frame.
 	 */
 	private void initComponents() {
 
@@ -260,10 +260,11 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 	}
 
-	/**
-	 * @param evt
+	/** This method adds a player to the Scoreboard calling the method in the class Frameboard.
+	 * @param evt ActionEvent
 	 * @throws UnclassifiedPlayerException
 	 * @throws IOException
+	 * @see Frameboard
 	 */
 	private void addPlayer(java.awt.event.ActionEvent evt) throws UnclassifiedPlayerException, IOException{
 		String playerName = this.name.getText();
@@ -274,15 +275,16 @@ public class GameOverFrame extends javax.swing.JFrame {
 		 Player player = new Player(playerName);
 		 player.setScore(mainFrame.getScore().getScoreValue());
 		 MainFrame.getScoreboard().addPlayer(player);
-		 MainFrame.getScoreboard().save("scoreboard.dat");
+		 MainFrame.getScoreboard().save();
 			 
 		 int position = MainFrame.getScoreboard().getScoreboardList().indexOf(player);
 		 JOptionPane.showMessageDialog(this,"Congratulations "+player.getPlayerTag()+", you entered the ranking in "+(position+1)+" position","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
     } 
 		 
 
-	/**
-	 * @param evt
+	/** 
+	 * It brings us to the main menu'.
+	 * @param evt ActionEvent
 	 */
 	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic == true) {
@@ -293,7 +295,8 @@ public class GameOverFrame extends javax.swing.JFrame {
 	}
 
 	/**
-	 * @param evt
+	 * It makes us start a new game.
+	 * @param evt ActionEvent
 	 */
 	private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -303,18 +306,18 @@ public class GameOverFrame extends javax.swing.JFrame {
 		PanelExecution.setEnemiesDestoyed(0);
 	}
 	
-	/**
-	 * @param evt
+	/**	It clears the textArea where you can put the name.
+	 * @param evt MouseEvent
 	 */
 	private void clear(java.awt.event.MouseEvent evt) {                                         
         this.name.setText("");
     }
 	
-	/**
-	 * @param url
-	 * @param newW
-	 * @param newH
-	 * @return
+	/** This method helps to resize the image, according to the new height and the new width
+	 * @param url The path of the image
+	 * @param newW The new width
+	 * @param newH The new height
+	 * @return A scaled image
 	 */
 	private ImageIcon resizeImageIcon(URL url, int newW, int newH) {
 		ImageIcon image = new ImageIcon(url);

@@ -18,8 +18,8 @@ class PanelPause extends JPanel {
 	private javax.swing.JButton mainMenu;
 	private PanelExecution panelExecution;
 
-	/**
-	 * @param panelExecution
+	/** The constructor of PanelPause.
+	 * @param panelExecution The PanelExecution 
 	 */
 	public PanelPause(PanelExecution panelExecution) {
 		this.panelExecution = panelExecution;
@@ -60,8 +60,9 @@ class PanelPause extends JPanel {
 		add(mainMenu);
 	}
  
-	/**
-	 * @param evt
+	/** 
+	 * It allows us to return to the main menu.
+	 * @param evt ActionEvent
 	 */
 	private void mainMenuActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic==true)
@@ -72,7 +73,8 @@ class PanelPause extends JPanel {
 	}
 
 	/**
-	 * @param evt
+	 * It allows us to restart the game.
+	 * @param evt ActionEvent
 	 */
 	private void restartActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic==true)
@@ -83,7 +85,8 @@ class PanelPause extends JPanel {
 	}
 
 	/**
-	 * @param evt
+	 * It allows us to resume the game
+	 * @param evt ActionEvent
 	 */
 	private void resumeActionPerformed(ActionEvent evt) {
 		panelExecution.setFlagPause(false);

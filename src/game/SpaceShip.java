@@ -17,10 +17,10 @@ public class SpaceShip extends SpaceshipStructure {
 	private int lives = 3;
 	private int keyMode = Settings.mod;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param path
+	/** The costructor of SpaceShip
+	 * @param x X-Coordinate of the spaceship
+	 * @param y Y-Coordinate of the spaceship
+	 * @param path Path of the image
 	 */
 	public SpaceShip(int x, int y, String path) {
 		super(x, y, path);
@@ -28,28 +28,31 @@ public class SpaceShip extends SpaceshipStructure {
 	}
 	
 	/**
-	 * @return
+	 * Method that returns the parameter lives
+	 * @return The lives
 	 */
 	public int getLives() {
 		return lives;
 	}
 	
 	/**
-	 * @param lives
+	 * Method that sets the parameter lives
+	 * @param lives The lives
 	 */
 	public void setLives(int lives) {
 		this.lives = lives;
 	}
 	
 	/**
-	 * @return
+	 * Method that returns the parameter missiles
+	 * @return A List of missiles
 	 */
 	public List<Missile> getMissiles() {
 		return missiles;
 	}
 
 	/**
-	 * 
+	 * Method that manages the movement of the spaceship
 	 */
 	public void move() {
 		
@@ -92,8 +95,9 @@ public class SpaceShip extends SpaceshipStructure {
 	
 
 	/**
-	 * @param e
-	 */
+	 * Method that manages when a key is pressed 
+	 * @param e A KeyEvent
+	 */ 
 	public void keyPressed(KeyEvent e) {
 
 		int key = e.getKeyCode();
@@ -133,7 +137,8 @@ public class SpaceShip extends SpaceshipStructure {
 	}
 
 	/**
-	 *
+	 * Method that manages the shooting of the spaceship
+	 * @see SpaceshipStructure
 	 */
 	@Override
 	public void fire() {
@@ -147,7 +152,8 @@ public class SpaceShip extends SpaceshipStructure {
 	}
 
 	/**
-	 * @param e
+	 * Method that handles when a key is released 
+	 * @param e KeyEvent
 	 */
 	public void keyReleased(KeyEvent e) {
 
@@ -187,70 +193,80 @@ public class SpaceShip extends SpaceshipStructure {
 	}
 	
 	/**
-	 * @return
+	 * Method that returns the parameter left
+	 * @return The Left boolean value 
 	 */
 	public boolean isLeft() {
 		return left;
 	}
 
 	/**
-	 * @param left
+	 * Method that sets the parameter left 
+	 * @param left The Left value
 	 */
 	public void setLeft(boolean left) {
 		this.left = left;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter right
+	 * @return The Right boolean value
 	 */
 	public boolean isRight() {
 		return right;
 	}
 
 	/**
-	 * @param right
+	 * Method that sets the parameter right 
+	 * @param right The Rigth value
 	 */
 	public void setRight(boolean right) {
 		this.right = right;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter up
+	 * @return The Up boolean value
 	 */
 	public boolean isUp() {
 		return up;
 	}
 
 	/**
-	 * @param up
+	 * Method that sets the parameter up 
+	 * @param up The Up value
 	 */
 	public void setUp(boolean up) {
 		this.up = up;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter down 
+	 * @return The Down boolean value
 	 */
 	public boolean isDown() {
 		return down;
 	}
 
 	/**
-	 * @param down
+	 * Method that sets the parameter down 
+	 * @param down The Down value
 	 */
 	public void setDown(boolean down) {
 		this.down = down;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter isShooting 
+	 * @return The Shooting boolean value
 	 */
 	public boolean isShooting() {
 		return isShooting;
 	}
 
 	/**
-	 * @param isShooting
+	 * Method that sets the parameter isShooting 
+	 * @param isShooting The Shooting value
 	 */
 	public void setShooting(boolean isShooting) {
 		this.isShooting = isShooting;

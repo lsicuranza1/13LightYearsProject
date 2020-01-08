@@ -12,7 +12,8 @@ public class LifeBonusFactory extends BonusFactory{
 	static String fileNameLifeBonus = "../resources/images/life.png";
 
 	/**
-	 * @return
+	 * It create a new LifeBonus object
+	 * @return A new LifeBonus 
 	 */
 	public static Object getLifeBonus() {
 		randX = random.nextInt(width);

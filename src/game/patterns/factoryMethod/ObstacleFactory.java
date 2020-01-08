@@ -3,15 +3,16 @@ package game.patterns.factoryMethod;
 public class ObstacleFactory {
 	
 	/**
-	 * 
+	 * The constructor of ObstacleFactory class
 	 */
 	public ObstacleFactory() {
 		
 	}
 	
 	/**
-	 * @param objectType
-	 * @return
+	 * It returns an asteroid or a meteorite
+	 * @param objectType A string that identifies the type of object
+	 * @return An object ( Asteroid / Meteorite )
 	 */
 	public Object getObstacle(String objectType) {
 		

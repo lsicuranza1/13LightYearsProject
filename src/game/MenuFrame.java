@@ -32,8 +32,8 @@ public class MenuFrame extends JFrame {
 	private javax.swing.JLabel background;
 	private Scoreboard scoreboard=MainFrame.getScoreboard();
 
-	/**
-	 * 
+	/** The constructor of MenuFrame. In it there is the management of the music track of the menu' window.
+	 *  
 	 */
 	public MenuFrame() {
 		
@@ -48,7 +48,7 @@ public class MenuFrame extends JFrame {
 	}
 
 	/**
-	 * 
+	 * This method create all the components of the Frame
 	 */
 	private void initComponents() {
 		
@@ -204,7 +204,9 @@ public class MenuFrame extends JFrame {
 	}
 
 	/**
-	 * @param evt
+	 * It starts a new game. This method is invoked when the PLAY button is pressed.
+	 * 
+	 * @param evt ActionEvent
 	 */
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
@@ -219,8 +221,9 @@ public class MenuFrame extends JFrame {
 		}
 	}
 
-	/**
-	 * @param evt
+	/** It starts a new demo mode.This method is invoked when the DEMO button is pressed.
+	 *  
+	 * @param evt ActionEvent
 	 */
 	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
@@ -233,8 +236,9 @@ public class MenuFrame extends JFrame {
 		}		
 	}
 	
-	/**
-	 * @param evt
+	/** It opens the scoreboard. This method is invoked when the SCOREBOARD button is pressed.
+	 *  
+	 * @param evt ActionEvent
 	 */
 	private void scoreBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
@@ -245,8 +249,9 @@ public class MenuFrame extends JFrame {
 		}	
 	}
 	
-	/**
-	 * @param evt
+	/** It opens the setting window. This method is invoked when the SETTINGS button is pressed.
+	 * 
+	 * @param evt ActionEvent
 	 */
 	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		
@@ -258,10 +263,11 @@ public class MenuFrame extends JFrame {
 	}
 	
 	/**
-	 * @param url
-	 * @param newW
-	 * @param newH
-	 * @return
+	 * This method helps to resize the image, according to the new height and the new width
+	 * @param url The path of the image
+	 * @param newW The new width
+	 * @param newH The new height
+	 * @return A scaled image
 	 */
 	private ImageIcon resizeImageIcon(URL url, int newW, int newH) {
 		ImageIcon image = new ImageIcon(url);

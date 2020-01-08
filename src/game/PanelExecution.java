@@ -63,7 +63,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	private static int enemiesDestoyed = 0;
 
 	/**
-	 * 
+	 *  The constructor of the PanelExecution class
 	 */
 	public PanelExecution() {
 		
@@ -120,7 +120,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 *
+	 * It manages the paint of all component in the JPanel.
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
@@ -151,7 +151,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * @param g
+	 * A method called by PaintComponent to paint the graphic elements.
+	 * @param g A graphic element
+	 * @see PaintComponent
 	 */
 	private void doDrawing(Graphics g) {
 
@@ -194,7 +196,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 *
+	 * In this method we do all the updates of the graphic elements.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -240,21 +242,23 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * @return
+	 *It checks if the value is a flagPause.
+	 * @return The boolean value of flagObstacles
 	 */
 	public boolean isFlagPause() {
 		return flagPause;
 	}
 
 	/**
-	 * @param flagPause
+	 * It sets the flagPause tag
+	 * @param flagPause A boolean value
 	 */
 	public void setFlagPause(boolean flagPause) {
 		this.flagPause = flagPause;
 	}
 
 	/**
-	 * 
+	 * It updates the Missiles.
 	 */
 	private void updateMissiles() {
 
@@ -274,7 +278,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It updates the Spaceship.
 	 */
 	public void updateSpaceShip() {
 		spaceShip.move();
@@ -283,7 +287,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 *  It updates the Obstacles.
 	 */
 	public void updateObstacles() {
 
@@ -326,7 +330,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	
 	
 	/**
-	 * 
+	 *  It updates the Bonus.
 	 */
 	public void updateBonus() {
 
@@ -369,7 +373,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * @param lives
+	 * 
+	 * It initializes the Lives
+	 * @param lives A Deque of Lives
 	 */
 	public void initLives(Deque<Life> lives) {
 		Life life;
@@ -384,7 +390,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It updates the Lives
 	 */
 	public void updateLives() {
 		Life life = lives.getLast();
@@ -394,7 +400,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 
+	 *  It updates the Enemies
 	 */
 	public void updateEnemies() {
 		
@@ -428,7 +434,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 
+	 *  It updates the Bombs
 	 */
 	private void updateBombs() {
 		
@@ -451,7 +457,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 
+	 * It updates the undestrayBombs
 	 */
 	public void updatestrayBombs() {
 		for(int i=0; i<strayBombs.size();i++) {
@@ -469,7 +475,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It check the collisions beetween the different graphic elements.
 	 */
 	public void checkCollisions() {
 
@@ -651,7 +657,8 @@ public class PanelExecution extends JPanel implements ActionListener {
 		}
 
 		/**
-		 *
+		 * It checks if the game is in pause 
+		 *@see KeyEvent
 		 */
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -692,42 +699,45 @@ public class PanelExecution extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * @return
+	 * It returns the jDialogPause
+	 * @return A JDialog
 	 */
 	public JDialog getDialogPause() {
 		return dialogPause;
 	}
 	
 	/**
-	 * @return
+	 * It returns a timer
+	 * @return A timer
 	 */
 	public Timer getTimer() {
 		return timer;
 	}
 
 	/**
-	 * @return
+	 * It returns the number of Asteroids destroyed
+	 * @return An int value
 	 */
 	public static int getAsteroidsDestoyed() {
 		return asteroidsDestoyed;
 	}
 
-	/**
-	 * @param asteroidsDestoyed
+	/** It sets the number of Asteroids destroyed
+	 * @param asteroidsDestoyed An int value
 	 */
 	public static void setAsteroidsDestoyed(int asteroidsDestoyed) {
 		PanelExecution.asteroidsDestoyed = asteroidsDestoyed;
 	}
 
-	/**
-	 * @return
+	/** It returns the number of Enemies destroyed
+	 * @return An int value
 	 */
 	public static int getEnemiesDestoyed() {
 		return enemiesDestoyed;
 	}
 
-	/**
-	 * @param enemiesDestoyed
+	/** It sets the number of Enemies destroyed
+	 * @param enemiesDestoyed An int value
 	 */
 	public static void setEnemiesDestoyed(int enemiesDestoyed) {
 		PanelExecution.enemiesDestoyed = enemiesDestoyed;

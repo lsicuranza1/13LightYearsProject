@@ -11,7 +11,8 @@ public class Player implements Serializable{
     private LocalDate date; 
 
     /**
-     * @param playerTag
+     * It is the construcor of the Player class
+     * @param playerTag A string of the player's tag
      */
     public Player(String playerTag) {
         this.playerTag = playerTag;
@@ -20,49 +21,56 @@ public class Player implements Serializable{
     }
     
     /**
-     * @return
+     * It returns the tag of the player
+     * @return A string of the player's tag
      */
     public String getPlayerTag() {
         return playerTag;
     }
     
     /**
-     * @param tag
+     * It sets the player's tag
+     * @param tag A string of the player's tag
      */
     public void setPlayerTag(String tag) {
     	this.playerTag = tag;
     }
 
     /**
-     * @return
+     * It returns the score of the player
+     * @return A score
      */
     public int getScore() {
         return score;
     }
 
     /**
-     * @return
+     * It returns the date of when a player was adds in the scoreboard
+     * @return A Localdate
      */
     public LocalDate getDate() {
         return this.date;
     }
 
     /**
-     * @param score
+     * It sets a score for the player
+     * @param score A score
      */
     public void setScore(int score) {
         this.score = score;
     }
 	
     /**
-     * @param date
+     * It sets the date of when a player was adds in the scoreboard
+     * @param date A LocalDate
      */
     public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
 	/**
-	 * @return
+	 * It formats in the correct way the date
+	 * @return A string of the date
 	 */
 	public String getVisibleData(){
 		

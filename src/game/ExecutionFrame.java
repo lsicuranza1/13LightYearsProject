@@ -14,7 +14,7 @@ public class ExecutionFrame extends JFrame {
     public static Clip clipInGame;
    
 	/**
-	 * 
+	 *  The constructor of ExecutionFrame
 	 */
 	public ExecutionFrame() {
 		
@@ -29,7 +29,7 @@ public class ExecutionFrame extends JFrame {
 	}
 	
 	/**
-	 * 
+	 * This method create all the components of the Frame
 	 */
 	private void initComponents() {
 		

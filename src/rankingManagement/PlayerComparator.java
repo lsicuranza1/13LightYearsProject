@@ -7,7 +7,7 @@ import java.util.Comparator;
 public class PlayerComparator implements Comparator<Player>,Serializable{
 
     /**
-     *
+     * It make a comparision between two players
      */
     @Override
     public int compare(Player g1, Player g2) {

@@ -18,9 +18,10 @@ public class Sprite {
     public static Clip enemyExplosionClip;
 
 	/**
-	 * @param x
-	 * @param y
-	 * @param imageFileName
+	 * The costructor of Sprite
+	 * @param x X-Coordinate 
+	 * @param y Y-Coordinate 
+	 * @param imageFileName Path of the image
 	 */
 	public Sprite(int x, int y, String imageFileName) {
 		this.x = x;
@@ -30,7 +31,8 @@ public class Sprite {
 	}
 
 	/**
-	 * @param imageFileName
+	 * This method allows us the load of the image
+	 * @param imageFileName A string that represents the filename
 	 */
 	private void loadImage(String imageFileName) {
 		
@@ -42,85 +44,95 @@ public class Sprite {
 		}
 	}
 
-	/**
-	 * @return
+	/** 
+	 * Method that returns the parameter Visible
+	 * @return The Visible boolean value 
 	 */
 	public boolean isVisible() {
 		return visible;
 	}
 
 	/**
-	 * @param visible
+	 * Method that sets the parameter Visible 
+	 * @param visible The Visible value
 	 */
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter X
+	 * @return The X value 
 	 */
 	public int getX() {
 		return x;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter Y
+	 * @return The Y value
 	 */
 	public int getY() {
 		return y;
 	}
 
 	/**
-	 * @param x
+	 * Method that sets the parameter X 
+	 * @param x The x value
 	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
 	/**
-	 * @param y
+	 * Method that sets the parameter Y
+	 * @param y The y value
 	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
 	/**
-	 * @return
+	 * Method that return the Image value
+	 * @return The image
 	 */
 	public BufferedImage getImage() {
 		return image;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the image width
+	 * @return The width
 	 */
 	public int getWidth() {
 		return this.image.getWidth(null);
 	}
 
 	/**
-	 * @return
+	 * Method that returns the image height
+	 * @return The height
 	 */
 	public int getHeight() {
 		return this.image.getHeight(null);
 	}
 
 	/**
-	 * @return
+	 * Method that returns the Bounds of an image
+	 * @return A Rectangle2D 
 	 */
 	public Rectangle2D getBounds() {
 		return rectangle;
 	}
 
 	/**
-	 * 
+	 *  Method that sets the bounds of an image
 	 */
 	public void setBounds() {
 		this.rectangle.setFrame(this.getX(), this.getY(), this.getWidth(), this.getHeight());
 	}
 	
 	/**
-	 * 
+	 * It removes the Obstacles bounds.
 	 */
 	public void removeBoundsObstacles() {
 		this.rectangle.setFrame(0, 0, 0, 0);
@@ -130,7 +142,7 @@ public class Sprite {
 	}
 	
 	/**
-	 * 
+	 * It removes the Enemy bounds.
 	 */
 	public void removeBoundsEnemies() {
 		this.rectangle.setFrame(0, 0, 0, 0);
@@ -140,7 +152,7 @@ public class Sprite {
 	}
 	
 	/**
-	 * 
+	 * It removes the Bonus bounds.
 	 */
 	public void removeBoundsBonus() {
 		this.rectangle.setFrame(0, 0, 0, 0);

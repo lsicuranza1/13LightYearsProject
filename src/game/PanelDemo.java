@@ -64,7 +64,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private boolean flagLifeBonus=false;
 
 	/**
-	 * 
+	 *  The constructor of PanelDemo.
 	 */
 	public PanelDemo() {
 
@@ -125,7 +125,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 *
+	 *  It manages the paint of all component in the JPanel.
+	 * 
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
@@ -163,8 +164,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * @param g
+	 * A method called by PaintComponent to paint the graphic elements.
+	 * @param g A graphic element
 	 * @throws IOException
+	 * @see PaintComponent
 	 */
 	private void doDrawing(Graphics g) throws IOException {
 
@@ -207,8 +210,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	}
 
-	/**
-	 *
+	/** In this method we do all the checks on the flags.
+	 * 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -236,7 +239,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 *  It does the first step.
 	 */
 	private void stepBonusTrue() {
 		if(countForStep>100) {
@@ -251,7 +254,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It does the step for the Bonus.
 	 */
 	private void stepBonus() {
 		if(flagLifeBonus && flagScoreBonus) {
@@ -295,7 +298,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It does the step for the Life.
 	 */
 	private void stepLife() {
 		if (countForStep > 500) {
@@ -309,7 +312,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It does the step for the Score.
 	 */
 	private void stepScore() {
 		if (countForStep > 500) { 
@@ -331,7 +334,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It does the death step.
 	 */
 	private void stepFinal() {
 		if (countForStep < 70) {
@@ -359,7 +362,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 *  It does the step for the Enemies.
 	 */
 	private void stepKillEnemies() {
 		this.labelText.setText("Press space to kill the enemies");
@@ -375,7 +378,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It does the step to kill the Enemies.
 	 */
 	private void stepEnemies() {
 		if (countForStep > 50) {
@@ -395,7 +398,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It does the step for the Enemies.
 	 */
 	private void stepSpaceship() {
 		if (moveSpaceShip) {
@@ -406,7 +409,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It does the step for the Obstacles.
 	 */
 	private void stepObstacles() {
 		if (countForStep > 800) {
@@ -447,7 +450,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It deletes the Obstacles.
 	 */
 	private void deleteObstacles() {
 		meteorites.removeAll(meteorites);
@@ -455,7 +458,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 
+	 * It deletes the Bonus.
 	 */
 	private void deleteBonus() {
 		lifeBonus.removeAll(lifeBonus);
@@ -463,7 +466,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It updates the Missiles.
 	 */
 	private void updateMissiles() {
 
@@ -483,7 +486,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It updates the Spaceship.
 	 */
 	public void updateSpaceShip() {
 		spaceShip.move();
@@ -492,7 +495,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 *  It updates the Obstacles.
 	 */
 	public void updateObstacles() {
 		
@@ -542,7 +545,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It updates the Enemy.
 	 */
 	public void updateEnemy() {
 		enemies.add(new EnemySpaceShip(350, 100, fileNameEnemies));
@@ -559,7 +562,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It moves the Enemy.
 	 */
 	public void moveEnemy() {
 		Iterator<EnemySpaceShip> et = enemies.iterator();
@@ -572,7 +575,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It check the collisions beetween the different graphic elements.
 	 */
 	private void checkCollisions() {
 
@@ -685,7 +688,8 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * @param lives
+	 * It initializes the Lives
+	 * @param lives A Deque of Lives
 	 */
 	public void initLives(Deque<Life> lives) {
 		Life life;
@@ -700,7 +704,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * It updates the Lives
 	 */
 	public void updateLives() {
 		if (lives.size() > 0) {
@@ -712,7 +716,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * 
+	 * It updates the Bonus
 	 */
 	public void updateBonus() {
 
@@ -755,84 +759,85 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * @return
+	 *  It checks if it's a spaceship
+	 * @return A boolean value
 	 */
 	public boolean isMoveSpaceShip() {
 		return moveSpaceShip;
 	}
 
-	/**
-	 * @param moveSpaceShip
+	/** It sets the spaceship move tag
+	 * @param moveSpaceShip A boolean value
 	 */
 	public void setMoveSpaceShip(boolean moveSpaceShip) {
 		this.moveSpaceShip = moveSpaceShip;
 	}
 
-	/**
-	 * @return
+	/**It checks if the value is a flagEnemies.
+	 * @return The boolean value of flagEnemies
 	 */
 	public boolean isFlagEnemies() {
 		return flagEnemies;
 	}
 
-	/**
-	 * @param flagEnemies
+	/**It sets the value of the flagEnemies.
+	 * @param flagEnemies A boolean value
 	 */
 	public void setFlagEnemies(boolean flagEnemies) {
 		this.flagEnemies = flagEnemies;
 	}
 
-	/**
-	 * @return
+	/**It checks if the value is a flagObstacles.
+	 * @return The boolean value of flagObstacles
 	 */
 	public boolean isFlagObstacles() {
 		return flagObstacles;
 	}
 
-	/**
-	 * @param flagObstacles
+	/**It sets the value of the flagObstacles.
+	 * @param flagObstacles A boolean value
 	 */
 	public void setFlagObstacles(boolean flagObstacles) {
 		this.flagObstacles = flagObstacles;
 	}
 
-	/**
-	 * @return
+	/** It checks if the value is a flagSpace.
+	 * @return The boolean value of flagSpace
 	 */
 	public boolean isFlagSpace() {
 		return flagSpace;
 	}
 
-	/**
-	 * @param flagSpace
+	/** It sets the value of the flagSpace.
+	 * @param flagSpace A boolean value
 	 */
 	public void setFlagSpace(boolean flagSpace) {
 		this.flagSpace = flagSpace;
 	}
 
-	/**
-	 * @return
+	/** It sets the value of the flagBonus.
+	 * @return The boolean value of flagBonus
 	 */
 	public boolean isFlagBonus() {
 		return flagBonus;
 	}
 
-	/**
-	 * @param flagBonus
+	/** It sets the value of the flagBonus.
+	 * @param flagBonus A boolean value
 	 */
 	public void setFlagBonus(boolean flagBonus) {
 		this.flagBonus = flagBonus;
 	}
 
-	/**
-	 * @return
+	/** It sets the value of the flagBonusTrue.
+	 * @return The boolean value of flagBonusTrue
 	 */
 	public boolean isFlagBonusTrue() {
 		return flagBonusTrue;
 	}
 
-	/**
-	 * @param flagBonusTrue
+	/** It sets the value of the flagBonusTrue.
+	 * @param flagBonusTrue A boolean value
 	 */
 	public void setFlagBonusTrue(boolean flagBonusTrue) {
 		this.flagBonusTrue = flagBonusTrue;
@@ -840,7 +845,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 	public class TAdapter extends KeyAdapter {
 		/**
-		 *
+		 * @see KeyEvent
 		 */
 		@Override
 		public void keyReleased(KeyEvent e) {
@@ -848,7 +853,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		}
 
 		/**
-		 *
+		 * @see KeyEvent
 		 */
 		@Override
 		public void keyPressed(KeyEvent e) {

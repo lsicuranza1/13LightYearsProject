@@ -13,14 +13,15 @@ public class MeteoriteFactory extends ObstacleFactory {
 	static String fileNameMeteorite = "../resources/images/meteorite.png";
 	
 	/**
-	 * 
+	 * The costructor of the MeteoriteFactory class.
 	 */
 	public MeteoriteFactory() {
 		super();
 	}
 	
 	/**
-	 * @return
+	 * It create a new Meteorite object
+	 * @return A new Meteorite 
 	 */
 	public static Sprite getObstacle() {
 		randX = random.nextInt(width);

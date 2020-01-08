@@ -27,19 +27,19 @@ public class FrameScoreboard extends JFrame {
 	private Dimension dimFrame;
 	private final Scoreboard scoreboard; 
 	 
-	/**
-	 * @param scoreboard
+	/** The constructor of FrameScoreboard.
+	 *  @param scoreboard The scoreboard read from the file
 	 */
 	public FrameScoreboard(Scoreboard scoreboard) {
 		this.scoreboard = scoreboard;
 		initComponents();
-		refreshScoreboard(scoreboard);
+		refreshTable(scoreboard);
 	}
 	
-	/**
-	 * @param scoreboard
+	/** It updates the values in the table.
+	 * @param scoreboard The scoreboard read from the file
 	 */
-	public final void refreshScoreboard(Scoreboard scoreboard){
+	public final void refreshTable(Scoreboard scoreboard){
         int i=0;
         for(Player g: scoreboard){
             this.tableScoreboard.setValueAt(g.getPlayerTag(),i,1);
@@ -50,11 +50,11 @@ public class FrameScoreboard extends JFrame {
         }
     }
 	
-	/**
-	 * @param evt
+	/** It resets the values in the table.
+	 * @param evt A mouse event
 	 * @throws IOException
-	 */
-	private void resetClassifica(MouseEvent evt) throws IOException {                                         
+	 */ 
+	private void resetTable(MouseEvent evt) throws IOException {                                         
 		scoreboard.resetScoreboard();
         int i=0;
         while(i<10){
@@ -131,7 +131,7 @@ public class FrameScoreboard extends JFrame {
 		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-					resetClassifica(evt);
+					resetTable(evt);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

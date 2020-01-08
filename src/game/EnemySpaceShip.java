@@ -14,10 +14,10 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	private int randY = random.nextInt(300);
 	private int shootCounter = 70;
 		
-	/**
-	 * @param x
-	 * @param y
-	 * @param path
+	/** The costructor of EnemySpaceShip.
+	 * @param x X-Coordinate of the enemy_spaceship
+	 * @param y Y-Coordinate of the enemy_spaceship
+	 * @param path Path of the image
 	 */
 	public EnemySpaceShip(int x, int y, String path) {
 		super(x, y, path);
@@ -25,7 +25,7 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	}
 
 	/**
-	 * 
+	 * Method that manages the movement of the enemySpaceship
 	 */
 	public void move() {
 		
@@ -69,7 +69,8 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	}
 
 	/**
-	 *
+	 * Method that manages the shooting of the enemies.
+	 * @see SpaceshipStructure
 	 */
 	@Override
 	public void fire() {
@@ -82,49 +83,56 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	}
 	
 	/**
-	 * @return
+	 * Method that returns the parameter bombs.
+	 * @return A List of bomb
 	 */
 	public List<Bomb> getBombs() {
 		return bombs;
 	}
 	
 	/**
-	 * @return
+	 * Method that returns the number of position occupied by the EnemySpaceship during his movement.
+	 * @return A number of position
 	 */
 	public int getCountPosition() {
 		return countPosition;
 	}
 
 	/**
-	 * @param countPosition
+	 * Method that sets the number of position occupied by the EnemySpaceship during his movement.
+	 * @param countPosition Number of position occupied
 	 */
 	public void setCountPosition(int countPosition) {
 		this.countPosition = countPosition;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter randX. It's created with the Random library.
+	 * @return The random int randX 
 	 */
 	public int getRandX() {
 		return randX;
 	}
 
 	/**
-	 * @param randX
+	 * Method that sets the parameter randX. It's created with the Random library.
+	 * @param randX The parameter randX
 	 */
 	public void setRandX(int randX) {
 		this.randX = randX;
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter randY. It's created with the Random library.
+	 * @return The random int randY
 	 */
 	public int getRandY() {
 		return randY;
 	}
 
 	/**
-	 * @param randY
+	 * Method that sets the parameter randY 
+	 * @param randY The parameter randY
 	 */
 	public void setRandY(int randY) {
 		this.randY = randY;

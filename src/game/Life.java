@@ -2,10 +2,10 @@ package game;
 
 public class Life extends Sprite {
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param imageFileName
+	/**The costructor of Life
+	 * @param x X-Coordinate of the Life
+	 * @param y Y-Coordinate of the Life
+	 * @param imageFileName Path of the image
 	 */
 	public Life(int x, int y, String imageFileName) {
 		
@@ -13,6 +13,7 @@ public class Life extends Sprite {
 	}
 
 	/**
+	 * Method that manages the movement of the Life.
 	 * 
 	 */
 	public void move() {

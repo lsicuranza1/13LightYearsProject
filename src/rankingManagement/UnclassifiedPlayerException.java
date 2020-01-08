@@ -6,21 +6,24 @@ public class UnclassifiedPlayerException extends Exception {
 	private Player g;
 
     /**
-     * @param g
-     */
+     * The constructor of the UnclassifiedPlayerException
+     * @param g A player
+     */ 
     public UnclassifiedPlayerException(Player g) {
         this.g=g;
     }
  
     /**
-     * @return
+     * It return the Player
+     * @return A Player
      */
     public Player getG() {
         return g;
     }
 
-    /**
-     * @param msg
+    /** 
+     * It sets the message of the exception
+     * @param msg A message
      */
     public UnclassifiedPlayerException(String msg) {
         super(msg);

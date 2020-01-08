@@ -9,7 +9,8 @@ public class Sound {
     private FloatControl volume;
 
     /**
-     * @param sound
+     * Constructor of the class
+     * @param sound A Clip parameter
      */
     public Sound(Clip sound) {
         this.sound = sound;
@@ -17,24 +18,23 @@ public class Sound {
     }
 
     /**
-     * 
+     * This method is used to play the audio track.
      */
     public void playSound() {
         if (Settings.soundEffects) {
-            sound.setFramePosition(0);
             sound.start();
         }
     }
 
     /**
-     * 
+     * This method allows us to keep the song in loop.So when the audio ends, it re-starts from the beginning.
      */
     public void loopSound() {
         sound.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     /**
-     * 
+     * It stops the sounds.
      */
     public void stopSound() {
         sound.stop();
@@ -46,14 +46,17 @@ public class Sound {
     }
 
     /**
-     * @param value
+     * This method changes the volume of the audio track.
+     * @param value is the volume of the song
      */
     public void changeVolume(float value) {
         volume.setValue(value);
     }
 
     /**
-     * @return
+     * @return a boolean value: 
+     * True : if the audio track is running
+     * False : otherwise
      */
     public boolean isRunning() {
         return sound.isRunning();

@@ -6,10 +6,10 @@ public class LifeBonus extends Sprite implements BonusInterface{
 	
 	private AffineTransform transform;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param imageFileName
+	/** The costructor of LifeBonus
+	 * @param x X-Coordinate of the Life 
+	 * @param y Y-Coordinate of the Life
+	 * @param imageFileName Path of the image
 	 */
 	public LifeBonus(int x, int y, String imageFileName) {
 		super(x, y, imageFileName);
@@ -17,7 +17,8 @@ public class LifeBonus extends Sprite implements BonusInterface{
 	}
 
 	/**
-	 *
+	 *Method that manages the movement of the LifeBonus.
+	 *@see BonusInterface
 	 */
 	@Override 
 	public void move() {
@@ -32,7 +33,8 @@ public class LifeBonus extends Sprite implements BonusInterface{
 	}
 
 	/**
-	 *
+	 * Method that returns the parameter transform.
+	 * @see BonusInterface
 	 */
 	@Override
 	public AffineTransform getTransform() {
@@ -40,7 +42,8 @@ public class LifeBonus extends Sprite implements BonusInterface{
 	}
 	
 	/**
-	 *
+	 * Method that sets the parameter transform.
+	 * @see BonusInterface
 	 */
 	@Override
 	public void setTransform(AffineTransform transform) {

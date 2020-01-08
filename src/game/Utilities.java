@@ -7,8 +7,9 @@ import javax.sound.sampled.Clip;
 public class Utilities {
 
     /**
-     * @param direction
-     * @return
+     * This method is responsible for loading the audio track into the game
+     * @param direction It is the path of the sound file
+     * @return clip object or null, if it finds or not the audio
      */
     public static Clip LoadSound(URL direction) {
     	

@@ -26,9 +26,10 @@ public class Settings extends javax.swing.JDialog {
 	private JRadioButton arrows;
 	
 	/**
-	 * @param parent
-	 * @param modal
-	 * @param inGame
+	 * The settings class manages sound effects, music and movement commands (wasd / arrows)
+	 * @param parent The JFrame
+	 * @param modal A boolean
+	 * @param inGame A boolean 
 	 */
 	public Settings(JFrame parent, boolean modal, boolean inGame) {
 		super(parent, modal);
@@ -52,7 +53,7 @@ public class Settings extends javax.swing.JDialog {
 	}
 
 	/**
-	 * 
+	 * Definition of all the graphic components of the window "Settings"
 	 */
 	private void initComponents() {
 
@@ -179,7 +180,8 @@ public class Settings extends javax.swing.JDialog {
 	}
 
 	/**
-	 * @param evt
+	 * This method is invoked when the button "Sound Effects" is pressed
+	 * @param evt ActionEvent
 	 */
 	private void effectsActionPerformed(java.awt.event.ActionEvent evt) {
 		 
@@ -195,7 +197,8 @@ public class Settings extends javax.swing.JDialog {
 	}
 
 	/**
-	 * @param evt
+	 * This method is invoked when the button "Music" is pressed
+	 * @param evt ActionEvent
 	 */
 	private void musicActionPerformed(java.awt.event.ActionEvent evt) {
 		
@@ -213,14 +216,16 @@ public class Settings extends javax.swing.JDialog {
 	}
 	
 	/**
-	 * @param evt
+	 * This method set the awsd keys as commands to move the spaceship
+	 * @param evt ActionEvent
 	 */
 	private void wasdActionPerformed(java.awt.event.ActionEvent evt) {
            mod = 1;  
     }
 	
 	/**
-	 * @param evt
+	 * This method set the arrows as commands to move the spaceship
+	 * @param evt ActionEvent
 	 */
 	private void arrowsActionPerformed(java.awt.event.ActionEvent evt) {
 	       mod = 0;

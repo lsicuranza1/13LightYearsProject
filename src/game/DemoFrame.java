@@ -15,7 +15,7 @@ public class DemoFrame extends JFrame {
     public static Sound gameMusic;
 	 
 	/**
-	 * 
+	 *  The constructor of DemoFrame.
 	 */
 	public DemoFrame() {
 		initComponents();
@@ -28,7 +28,7 @@ public class DemoFrame extends JFrame {
 	}
 	
 	/**
-	 * 
+	 *  This method creates all the components of the Frame.
 	 */
 	private void initComponents() {
 		this.panelDemo = new PanelDemo();

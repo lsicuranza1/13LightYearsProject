@@ -9,7 +9,7 @@ public class ExecutionState implements State {
 	private ExecutionFrame exeFrame;
 
 	/**
-	 * 
+	 * The constructor of ExecutionState class
 	 */
 	public ExecutionState() {
 		
@@ -20,7 +20,7 @@ public class ExecutionState implements State {
 	}
 
 	/**
-	 *
+	 *  It manages the State. It checks if the state "Execution" changes to "Running" / "Start" / "GameOver"
 	 */
 	@Override
 	public void stateManagement(Modality modality, String state) {

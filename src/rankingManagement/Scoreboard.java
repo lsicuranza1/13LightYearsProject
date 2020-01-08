@@ -3,23 +3,30 @@ package rankingManagement;
 import java.io.*;
 import java.util.*;
 
-@SuppressWarnings("serial")
+
 public class Scoreboard implements Serializable,Iterable<Player>{
-    private List<Player> scoreboard;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<Player> scoreboard;
     private final int maxSize;
+    private File fileScoreBoard;
 
     /**
-     * 
+     * The constructor of the Scoreboard class
      */
     public Scoreboard() { 
         this.scoreboard=new ArrayList<>();
         this.maxSize=10;
+        this.fileScoreBoard = new File("./scoreboard.dat");
     }
     
     /**
-     * @param g
-     * @throws UnclassifiedPlayerException
-     * @throws IOException
+     * This method allows us to ass a player to our Scoreboard
+     * @param g A player
+     * @throws UnclassifiedPlayerException A player that is not entered in the scoreboard
+     * @throws IOException Problem in the Input/Output
      */
     public void addPlayer(Player g) throws UnclassifiedPlayerException, IOException{
     	
@@ -38,54 +45,49 @@ public class Scoreboard implements Serializable,Iterable<Player>{
                 return;
         }
         
-        save("scoreboard.dat");
+        save();
         throw new UnclassifiedPlayerException(g);
         
-    }
+    } 
 
     /**
-     * @throws IOException
+     * It resets the scoreboard
+     * @throws IOException Problem in the Input/Output
      */
     public void resetScoreboard() throws IOException{
         scoreboard.clear();
-        save("scoreboard.dat"); 
+        save(); 
     }
 
     /**
-     * @param fileName
-     * @throws IOException
+     * It allows us to save the scoreboard on a file
+     * @throws IOException Problem in the Input/Output
      */
-    public void save(String fileName) throws IOException{
-    	
-		if(fileName == "scoreboard.dat") {		
-			ObjectOutputStream s=new ObjectOutputStream(new FileOutputStream(fileName));
-			s.writeObject(this);
-			s.close();
-        }else {
-            throw new IOException();
-        }
+    public void save() throws IOException{
+    			
+		ObjectOutputStream s=new ObjectOutputStream(new FileOutputStream(fileScoreBoard));
+		s.writeObject(this);
+		s.close();
 		
     }
 
     /**
-     * @param fileName
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * It allows us to load the scoreboard from a file
+     * @throws IOException Problem in the Input/Output
+     * @throws ClassNotFoundException Class not found
      */
-    public void load(String fileName) throws IOException, ClassNotFoundException{
+    public void load() throws IOException, ClassNotFoundException{
     	
-    	if(fileName == "scoreboard.dat") {
-    		ObjectInputStream s= new ObjectInputStream(new FileInputStream(fileName));
-    		Scoreboard c = (Scoreboard) s.readObject();
-            this.scoreboard=c.getScoreboardList();
-            s.close();
-        }else {
-            throw new IOException();
-        }
+    	if (fileScoreBoard.exists()) {
+			ObjectInputStream s= new ObjectInputStream(new FileInputStream(fileScoreBoard));
+			Scoreboard c = (Scoreboard) s.readObject();
+		    this.scoreboard=c.getScoreboardList();
+		    s.close();
+    	}
     }
      
     /**
-     *
+     * It returns an Iterator on the List of the players
      */
     @Override
     public Iterator<Player> iterator() {
@@ -93,7 +95,8 @@ public class Scoreboard implements Serializable,Iterable<Player>{
     }
 
     /**
-     * @return
+     * It return the List of players
+     * @return A List
      */
     public List<Player> getScoreboardList(){
         return this.scoreboard;

@@ -7,10 +7,10 @@ public class Bomb extends Sprite{
     public static Sound enemyShootSound;
     public static Clip enemyShootClip;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param path
+	/** The constructor of Bomb. 
+	 * @param x X-Coordinate of the bomb
+	 * @param y Y-Coordinate of the bomb
+	 * @param path Path of the image
 	 */
 	public Bomb(int x, int y, String path) {			
 		super(x, y, path);
@@ -21,6 +21,7 @@ public class Bomb extends Sprite{
 	}
 
 	/**
+	 * Method that manages the movement of the Bomb.
 	 * 
 	 */
 	public void move() {

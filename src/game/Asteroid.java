@@ -7,10 +7,10 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 	private int angle;
 	private AffineTransform transform;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param path
+	/**The costructor of Asteroid.
+	 * @param x X-Coordinate of the asteroid
+	 * @param y Y-Coordinate of the asteroid
+	 * @param path Path of the image
 	 */
 	public Asteroid(int x, int y, String path) {
 		super(x, y, path);
@@ -19,7 +19,8 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 	}
 
 	/**
-	 *
+	 * Method that manages the movement and the rotation of the asteroid.
+	 * @see ObstacleInterface 
 	 */
 	@Override
 	public void move() {
@@ -38,7 +39,8 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 	}
 
 	/**
-	 *
+	 * Method that returns the parameter transform.
+	 * @see ObstacleInterface
 	 */
 	@Override
 	public AffineTransform getTransform() {
@@ -46,7 +48,8 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 	}
 	
 	/**
-	 *
+	 * Method that sets the parameter transform.
+	 * @see ObstacleInterface
 	 */
 	@Override
 	public void setTransform(AffineTransform transform) {
@@ -54,14 +57,16 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 	}
 
 	/**
-	 * @return
+	 * Method that returns the parameter angle for the rotation.
+	 * @return angle The angle of rotation
 	 */
 	public int getAngle() {
 		return this.angle;
 	}
 
 	/**
-	 * @param angle
+	 * Method that sets the parameter angle for the rotation.
+	 * @param angle The angle of rotation
 	 */
 	public void setAngle(int angle) {
 		this.angle = angle;

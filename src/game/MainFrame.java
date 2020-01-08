@@ -17,8 +17,8 @@ public class MainFrame {
 	// Singleton
 	private static MainFrame istance = null;
 
-	/**
-	 * @return
+	/** It returns the instance of the MainFrame.
+	 * @return A MainFrame
 	 */
 	public static MainFrame getIstance() {
 		if (istance == null)
@@ -27,13 +27,13 @@ public class MainFrame {
 	}
 
 	/**
-	 * @param args
-	 * @throws ClassNotFoundException
-	 * @throws IOException
+	 * @param args args
+	 * @throws ClassNotFoundException Class not found
+	 * @throws IOException Problem in the Input/Output
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		scoreboard = new Scoreboard();
-		scoreboard.load("scoreboard.dat");
+		scoreboard.load();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -47,65 +47,69 @@ public class MainFrame {
 		});
 	}
 
-	/**
-	 * @param string
+	/** It updates the modality of the game.There are four possible modality:
+	 * - Start
+	 * - Running
+	 * - Pause
+	 * - Demo
+	 * @param string The name of the modality
 	 */
 	public void updateModality(String string) {
 		State state = modality.getModalityState();
 		state.stateManagement(modality, string);
 	}
 
-	/**
-	 * @return
+	/** It returns the modality.
+	 * @return The modality
 	 */
 	public Modality getModality() {
 		return modality;
 	}
 
-	/**
-	 * @param modality
+	/** It sets the modality.
+	 * @param modality A modality
 	 */
 	public void setModality(Modality modality) {
 		this.modality = modality;
 	}
 
-	/**
-	 * @return
+	/** It returns the main JFrame.
+	 * @return A JFrame
 	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 
-	/**
-	 * @param frame
+	/** It sets the main JFrame.
+	 * @param frame A JFrame
 	 */
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
 
-	/**
-	 * @return
+	/** It returns the score.
+	 * @return The score
 	 */
 	public Score getScore() {
 		return score;
 	}
 
-	/**
-	 * @param score
+	/** It sets the score.
+	 * @param score The score
 	 */
 	public void setScore(Score score) {
 		this.score = score;
 	}
 
-	/**
-	 * @return
+	/** It returns the scoreboard read from file.
+	 * @return A scoreboard
 	 */
 	public static Scoreboard getScoreboard() {
 		return scoreboard;
 	}
 
-	/**
-	 * @param scoreboard
+	/** It updates the scoreboard fread from file.
+	 * @param scoreboard The scoreboard
 	 */
 	public static void setScoreboard(Scoreboard scoreboard) {
 		MainFrame.scoreboard = scoreboard;

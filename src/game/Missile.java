@@ -10,10 +10,10 @@ public class Missile extends Sprite {
 	public static Sound shipShootSound;
     public static Clip shipShootClip;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param path
+	/**The costructor of Missile
+	 * @param x X-Coordinate of the missile
+	 * @param y Y-Coordinate of the missile
+	 * @param path Path of the image
 	 */
 	public Missile(int x, int y, String path) {
 		super(x, y, path);
@@ -25,7 +25,7 @@ public class Missile extends Sprite {
 	}
 
 	/**
-	 * 
+	 * Method that manages the movement of the missile
 	 */
 	public void move() {
 

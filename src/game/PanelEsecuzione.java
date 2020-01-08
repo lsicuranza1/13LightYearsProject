@@ -44,11 +44,11 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private BufferedImage scrollingBackground;
 	private int yOffset = 0; //variabile per lo scrollingBackground
 	private int yDelta = 1;  //variabile per lo scrollingBackground
-	private static int countToScoreBonus = 0;
-	private static int countToLifeBonus = 0;
-	private static int countToAddAsteroid = 0;
-	private static int countToAddMeteorite = 0;
-	private static int countToAddEnemies = 0;
+	private int countToScoreBonus = 0;
+	private int countToLifeBonus = 0;
+	private int countToAddAsteroid = 0;
+	private int countToAddMeteorite = 0;
+	private int countToAddEnemies = 0;
 	private final int DELAY = 20;
 	private Timer timer;
 	private JLabel levelLabel;
@@ -238,7 +238,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			this.updateBonus();
 			this.updateLives();
 			this.checkCollisions();
-			if (mainframe.getScore().getScoreValue() > 1000 * Math.pow((double) level, 2.0)) {
+			if (mainframe.getScore().getScoreValue() > 500 * Math.pow((double) level, 2.0)) {
 				level++;
 				this.levelLabel.setText("Level: " + level);
 			}
@@ -300,13 +300,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	public void updateObstacles() {
 
 		// maggiore � il valore minore � la frequenza di uscita degli asteroidi
-		if (countToAddAsteroid >= 300 / level) {
+		if (countToAddAsteroid >= 250 / level) {
 			asteroids.add((Asteroid) new ObstacleFactory().getObstacle("asteroid"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToAddAsteroid = 0;
 		}
 		countToAddAsteroid++;
 
-		if (countToAddMeteorite >= 300 / level) {
+		if (countToAddMeteorite >= 250 / level) {
 			meteorites.add((Meteorite) new ObstacleFactory().getObstacle("meteorite"));  //FACTORY METHOD TO CREATE METEORITES
 			countToAddMeteorite = 0;
 		}

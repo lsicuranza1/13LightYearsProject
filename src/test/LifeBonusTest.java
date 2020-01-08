@@ -1,4 +1,4 @@
-package game.patterns.state;
+package test;
 
 import static org.junit.Assert.*;
 

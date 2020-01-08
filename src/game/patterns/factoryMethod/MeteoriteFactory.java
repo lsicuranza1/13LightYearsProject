@@ -7,10 +7,10 @@ import game.Sprite;
 
 public class MeteoriteFactory extends ObstacleFactory {
 	
-	static int D_W = 600; //COSTANTE
+	static int D_W = 800; 
 	static Random random = new Random();
 	static int randX1;
-	static int y_meteorite = -500;
+	static int y_meteorite = -50;
 	static String fileNameMeteorite = "../resources/images/meteorite.png";
 	
 	public MeteoriteFactory() {

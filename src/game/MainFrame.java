@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -26,8 +27,10 @@ public class MainFrame {
 
 	/**
 	 * Launch the application.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		c = new Classifica();
 		c.leggiDaFileBinario("classifica.dat");
 		EventQueue.invokeLater(new Runnable() {

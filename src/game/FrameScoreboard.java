@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -32,7 +33,7 @@ public class FrameScoreboard extends JFrame {
 	/**
 	 * Create the panel.
 	 */
-	
+	 
 	public FrameScoreboard(Classifica c) {
 		this.c = c;
 		initComponents();
@@ -50,7 +51,7 @@ public class FrameScoreboard extends JFrame {
         }
     }
 	
-	private void resetClassifica(MouseEvent evt) {                                         
+	private void resetClassifica(MouseEvent evt) throws IOException {                                         
         c.resetClassifica();
         int i=0;
         while(i<10){
@@ -128,7 +129,12 @@ public class FrameScoreboard extends JFrame {
 		reset.setLayout(null);
 		reset.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                resetClassifica(evt);
+                try {
+					resetClassifica(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 		

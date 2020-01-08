@@ -32,6 +32,7 @@ import game.patterns.factoryMethodBonus.BonusFactory;
 public class PanelEsecuzione extends JPanel implements ActionListener {
 	private MainFrame mainframe = MainFrame.getIstance();
 	private String fileNameSpaceShip, fileNameLife, fileNameEnemy, fileNameBomb;
+	private int level = 1;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
@@ -43,13 +44,14 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private BufferedImage scrollingBackground;
 	private int yOffset = 0; //variabile per lo scrollingBackground
 	private int yDelta = 1;  //variabile per lo scrollingBackground
-	private static int countToScoreBonus = 0;
-	private static int countToLifeBonus = 0;
-	private static int countToAddAsteroid = 0;
-	private static int countToAddMeteorite = 0;
-	private static int countToAddEnemies = 0;
+	private int countToScoreBonus = 0;
+	private int countToLifeBonus = 0;
+	private int countToAddAsteroid = 0;
+	private int countToAddMeteorite = 0;
+	private int countToAddEnemies = 0;
 	private final int DELAY = 20;
 	private Timer timer;
+	private JLabel levelLabel;
 	private JLabel labelLiveScore;
 	private JLabel labelScoreUpdate;
 	private JDialog dialog;
@@ -63,25 +65,33 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	private static int enemiesDestoyed = 0;
 
 	public PanelEsecuzione() {
-
+		
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(false);
 		mainframe.getScore().setScoreValue(0);
+		this.levelLabel = new JLabel("");
 		this.labelLiveScore = new JLabel("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
 		this.labelScoreUpdate = new JLabel("");
 		this.add(this.labelLiveScore);
 		this.add(this.labelScoreUpdate);
+		this.add(this.levelLabel);
 		this.labelScoreUpdate.setVisible(false);
 		
 		this.setLayout(null);
 
 		this.labelLiveScore.setBounds(10, 10, 400, 50);
-		this.labelLiveScore.setForeground(Color.WHITE);
+		this.labelLiveScore.setForeground(Color.GREEN);
 		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
 		
 		this.labelScoreUpdate.setBounds(200, 10, 400, 50);
 		this.labelScoreUpdate.setForeground(Color.GREEN);
 		this.labelScoreUpdate.setFont(new Font("Serif", Font.BOLD, 22));
+		
+		this.levelLabel.setBounds(10, 35, 400, 50);
+		this.levelLabel.setForeground(Color.WHITE);
+		this.levelLabel.setFont(new Font("Serif", Font.BOLD, 22));
+		this.levelLabel.setText("Level: " + this.level);
+		this.levelLabel.setVisible(true);
 		
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameEnemy = "../resources/images/firstEnemy.png";
@@ -228,6 +238,10 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			this.updateBonus();
 			this.updateLives();
 			this.checkCollisions();
+			if (mainframe.getScore().getScoreValue() > 500 * Math.pow((double) level, 2.0)) {
+				level++;
+				this.levelLabel.setText("Level: " + level);
+			}
 			this.yOffset += this.yDelta;
 			
 			if(this.activeBonusScore == true) {
@@ -286,13 +300,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	public void updateObstacles() {
 
 		// maggiore � il valore minore � la frequenza di uscita degli asteroidi
-		if (countToAddAsteroid >= 150) {
+		if (countToAddAsteroid >= 250 / level) {
 			asteroids.add((Asteroid) new ObstacleFactory().getObstacle("asteroid"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToAddAsteroid = 0;
 		}
 		countToAddAsteroid++;
 
-		if (countToAddMeteorite >= 150) {
+		if (countToAddMeteorite >= 250 / level) {
 			meteorites.add((Meteorite) new ObstacleFactory().getObstacle("meteorite"));  //FACTORY METHOD TO CREATE METEORITES
 			countToAddMeteorite = 0;
 		}
@@ -326,7 +340,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	
 	public void updateBonus() {
 
-		if (countToLifeBonus >= 300) {
+		if (countToLifeBonus >= 600 * level) {
 			lifeBonus.add((LifeBonus) new BonusFactory().getBonus("life"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToLifeBonus = 0;
 		}
@@ -344,7 +358,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 		
-		if (countToScoreBonus >= 300) {
+		if (countToScoreBonus >= 400 * level) {
 			scoreBonus.add((ScoreBonus) new BonusFactory().getBonus("score"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToScoreBonus = 0;
 		}
@@ -371,7 +385,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 		for (int i = 0; i < 3; i++) {
 			final int shift = 30; // COSTANTE
-			life = new Life(xCoordLife, 60, fileNameLife);
+			life = new Life(xCoordLife, 80, fileNameLife);
 			lives.add(life);
 			xCoordLife += shift;
 		}
@@ -386,12 +400,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	
 	public void updateEnemies() {
 		
-		int D_W = 800; //COSTANTE
-		int D_H = 800; // COSTANTE
+		int D_W = 800; 
+		int D_H = 800; 
 		Random random = new Random();
 		int randX1;
 		
-		if (countToAddEnemies >= 150) {
+		if (countToAddEnemies >= 800 / level) {
 			randX1 = random.nextInt(D_W);
 			enemies.add(new EnemySpaceShip(randX1, -20, fileNameEnemy));
 			enemies.get(enemies.size()-1).fire();
@@ -479,7 +493,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				if(actual_lives < 6) {
 				spaceShip.setLives(actual_lives+1);
 				int x_shift = lives.getLast().getX();
-				lives.add(new Life(x_shift+30,60,fileNameLife));
+				lives.add(new Life(x_shift+30,80,fileNameLife));
 				lives.getLast().setVisible(true);
 				}
 				life.removeBoundsObstacles();
@@ -651,6 +665,14 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				spaceShip.keyPressed(e);
 		}
 	}
+	
+//	public void checkForLevelWon() {
+//		if (mainframe.getScore().getScoreValue() > 500 * level) {
+//			level++;
+//			this.levelLabel.setText("Level: " + level);
+//		}
+//	}
+	
 	public JDialog getDialog() {
 		return dialog;
 	}

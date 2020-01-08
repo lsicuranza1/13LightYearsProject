@@ -30,6 +30,7 @@ import game.patterns.factoryMethodBonus.BonusFactory;
 @SuppressWarnings("serial")
 public class PanelDemo extends JPanel implements ActionListener {
 	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameEnemies, fileNameLife, fileRedArrow;
+	private JLabel levelLabel;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
@@ -69,12 +70,13 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.setFocusable(false);
 
 		this.setLayout(null);
-
+		
+		this.levelLabel = new JLabel("Level: 1");
 		this.labelLiveScore = new JLabel("Live Score: " + Integer.toString(5231));
 		this.add(this.labelLiveScore);
 
 		this.labelLiveScore.setBounds(10, 10, 400, 50);
-		this.labelLiveScore.setForeground(Color.WHITE);
+		this.labelLiveScore.setForeground(Color.GREEN);
 		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
 
 		this.textArea = new JTextArea(
@@ -83,6 +85,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.textArea.setBounds(200, 130, 300, 100);
 		this.textArea.setBackground(Color.green);
 		this.textArea.setFont(new Font("Serif", Font.BOLD, 16));
+		this.textArea.setEditable(false);
 
 		this.fileNameLife = "../resources/images/life.png";
 		this.fileRedArrow = "../resources/images/freccia-png-rossa-ok.png";
@@ -114,6 +117,12 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.labelText.setBounds(140, 100, 600, 400);
 		this.labelText.setForeground(Color.WHITE);
 		this.labelText.setFont(new Font("Serif", Font.BOLD, 30));
+		
+		this.levelLabel.setBounds(10, 35, 400, 50);
+		this.levelLabel.setForeground(Color.WHITE);
+		this.levelLabel.setFont(new Font("Serif", Font.BOLD, 22));
+		this.levelLabel.setVisible(true);
+		this.add(this.levelLabel);
 
 		this.timer = new Timer(DELAY, this);
 		this.timer.start();
@@ -200,7 +209,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		if (flagScore)
 			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 200, 5, this);
 		if (flagLife)
-			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 150, 30, this);
+			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 150, 50, this);
 
 	}
 
@@ -307,6 +316,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.textArea.setBounds(200, 150, 300, 120);
 			this.textArea.setBackground(Color.green);
 			this.textArea.setFont(new Font("Serif", Font.BOLD, 16));
+			this.textArea.setEditable(false);
 			this.repaint();
 		}
 		count++;
@@ -574,7 +584,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				if(lives.size()>0) {
 					x_shift = lives.getLast().getX();
 				}
-				lives.add(new Life(x_shift+30,60,fileNameLife));
+				lives.add(new Life(x_shift+30,80,fileNameLife));
 				lives.getLast().setVisible(true);
 				}
 				life.removeBoundsObstacles();
@@ -648,7 +658,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 		for (int i = 0; i < 3; i++) {
 			final int shift = 30; // COSTANTE
-			life = new Life(xCoordLife, 60, fileNameLife);
+			life = new Life(xCoordLife, 80, fileNameLife);
 			lives.add(life);
 			xCoordLife += shift;
 		}

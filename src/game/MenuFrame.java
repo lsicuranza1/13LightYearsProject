@@ -17,6 +17,7 @@ import gestioneClassifica.Classifica;
 public class MenuFrame extends JFrame {
 	
 	private MainFrame mainFrame = MainFrame.getIstance();
+	private FrameScoreboard frameBoard;
 	private static final long serialVersionUID = 1L;
 	private Dimension dim = new Dimension(1000,600);
 	public static Sound gameMusic;
@@ -211,16 +212,25 @@ public class MenuFrame extends JFrame {
 		mainFrame.updateModalita("in_esecuzione");
 		PanelEsecuzione.setAsteroidsDestoyed(0);
 		PanelEsecuzione.setEnemiesDestoyed(0);
+		if (flagScoreboard == true) {
+			frameBoard.dispose();
+			flagScoreboard = false;
+		}
 	}
 
 	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		MenuFrame.gameMusic.stopSound();
 		mainFrame.updateModalita("demo");
+		if (flagScoreboard == true) {
+			frameBoard.dispose();
+			flagScoreboard = false;
+		}
+		
 	}
 	
 	private void scoreBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		if(flagScoreboard == false) {
-			FrameScoreboard frameBoard = new FrameScoreboard(this.c);
+			frameBoard = new FrameScoreboard(this.c);
 			frameBoard.setVisible(true);
 			flagScoreboard = true;
 		}	
@@ -232,6 +242,6 @@ public class MenuFrame extends JFrame {
 			set.setVisible(true);
 			flagSettings = true;
 		}
-		}
+	}
 		
 }

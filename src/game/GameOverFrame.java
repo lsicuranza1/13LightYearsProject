@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import game.Utilities;
 import javax.sound.sampled.Clip;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
 import game.Sound;
 import game.ExecutionFrame;
@@ -203,7 +204,10 @@ public class GameOverFrame extends javax.swing.JFrame {
 						addPlayer(evt);
 				    } catch (GiocatoreNonClassificatoException ex) {
 				        JOptionPane.showMessageDialog(panelGameOver, "Spiacenti... non ti sei classificato","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
-				    }					
+				    } catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}					
 					add.setVisible(false);
 					name.setVisible(false);
             }
@@ -252,7 +256,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 	}
 
-	private void addPlayer(java.awt.event.ActionEvent evt) throws GiocatoreNonClassificatoException{
+	private void addPlayer(java.awt.event.ActionEvent evt) throws GiocatoreNonClassificatoException, IOException{
 		String nomeGiocatore = this.name.getText();
 		 if(nomeGiocatore.equals("           Inserire nome") || nomeGiocatore.equals("")) {
 			 nomeGiocatore="Anonimo";

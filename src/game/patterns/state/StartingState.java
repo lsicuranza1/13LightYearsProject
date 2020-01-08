@@ -4,31 +4,30 @@ import game.MainFrame;
 import game.MenuFrame;
 import game.Score;
 
-public class StatoStart implements Stato {
+public class StartingState implements State {
 
 	private MainFrame mainFrame;
-	private MenuFrame menu;
+	private MenuFrame menuFrame;
 
-	public StatoStart() {
+	public StartingState() {
 		mainFrame = MainFrame.getIstance();
-		this.menu = new MenuFrame();
-		mainFrame.setFrame(menu);
+		this.menuFrame = new MenuFrame();
+		mainFrame.setFrame(menuFrame);
 		mainFrame.setScore(new Score());
 		mainFrame.getFrame().setVisible(true);
 	}
 
 	@Override
-	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("in_esecuzione")) {
+	public void stateManagement(Modality modality, String state) {
+		
+		if (state.equals("running")) {
 			mainFrame.getFrame().setVisible(false);
 			mainFrame.getFrame().dispose();
-			modalita.setStatoModalita(new StatoInEsecuzione());
-
-		} else if (stato.equals("demo")) {
+			modality.setModalityState(new ExecutionState());
+		} else if (state.equals("demo")) {
 			mainFrame.getFrame().setVisible(false);
 			mainFrame.getFrame().dispose();
-			modalita.setStatoModalita(new StatoDemo());
+			modality.setModalityState(new DemoState());
 		}
 	}
-
 }

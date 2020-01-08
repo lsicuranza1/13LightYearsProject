@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import game.Utilities;
+import rankingManagement.Player;
+import rankingManagement.UnclassifiedPlayerException;
 import javax.sound.sampled.Clip;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -12,8 +14,7 @@ import java.net.URL;
 import game.Sound;
 import game.ExecutionFrame;
 import javax.swing.*;
-import gestioneClassifica.Giocatore;
-import gestioneClassifica.GiocatoreNonClassificatoException;
+
 @SuppressWarnings("serial")
 public class GameOverFrame extends javax.swing.JFrame {
 	private Dimension dim; 
@@ -22,10 +23,10 @@ public class GameOverFrame extends javax.swing.JFrame {
 	private javax.swing.JButton playAgainButton;
 	private javax.swing.JButton mainMenuButton;
 	private javax.swing.JButton enemy,asteroid;
-	private javax.swing.JLabel sfondo;
+	private javax.swing.JLabel background;
 	private javax.swing.JButton score;
 	private javax.swing.JTextField name;
-	private javax.swing.JButton add;
+	private javax.swing.JButton addButton;
 	public static Sound soundEndGame;
     public static Clip clipEndGame;
  
@@ -35,24 +36,21 @@ public class GameOverFrame extends javax.swing.JFrame {
 		
 		if (Settings.soundMusic == true){
 		
-		ExecutionFrame.soundInGame.stopSound();
-		
-		GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("../resources/sound/endGame.wav"));
-		GameOverFrame.soundEndGame = new Sound(clipEndGame);
-		//GameOverFrame.soundEndGame.playSound();
-		GameOverFrame.soundEndGame.loopSound();
+			ExecutionFrame.soundInGame.stopSound();
+			
+			GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("../resources/sound/endGame.wav"));
+			GameOverFrame.soundEndGame = new Sound(clipEndGame);
+			GameOverFrame.soundEndGame.loopSound();
 		}
 	}
 
 	private void initComponents() {
 
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
-
 		this.dim = new Dimension(1000,600);
 		this.setPreferredSize(dim.getSize());
-		ImageIcon immagineSfondo = ridimensionaImageIcon(getClass().getResource("../resources/images/gameover2.png"),
+		ImageIcon backgroundImage = resizeImageIcon(getClass().getResource("../resources/images/gameover2.png"),
 				(int) dim.getWidth(), (int) dim.getHeight());
-
 		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) dim.getWidth()  / 2,
 				(int) dimDisplay.getHeight() / 2 - (int) dim.getHeight() / 2);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,11 +62,11 @@ public class GameOverFrame extends javax.swing.JFrame {
 		panelGameOver = new javax.swing.JPanel();
 		playAgainButton = new javax.swing.JButton("Play Again");
 		mainMenuButton = new javax.swing.JButton("Main Menu");
-		sfondo = new javax.swing.JLabel();
+		background = new javax.swing.JLabel();
 		score = new javax.swing.JButton("Great, your score is : " + mainFrame.getScore().getScoreValue());
-		enemy = new javax.swing.JButton("Enemies destroyed: " + PanelEsecuzione.getEnemiesDestoyed());
-		asteroid = new javax.swing.JButton("Asteroids destroyed:  "+ PanelEsecuzione.getAsteroidsDestoyed());
-		sfondo.setIcon(immagineSfondo);
+		enemy = new javax.swing.JButton("Enemies destroyed: " + PanelExecution.getEnemiesDestoyed());
+		asteroid = new javax.swing.JButton("Asteroids destroyed:  "+ PanelExecution.getAsteroidsDestoyed());
+		background.setIcon(backgroundImage);
 
 		setName("");
 
@@ -78,7 +76,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		panelGameOver.setOpaque(false);
 		panelGameOver.setPreferredSize(dim.getSize());
 		panelGameOver.setLayout(new java.awt.GridBagLayout());
-
+ 
 		score.setFont(new java.awt.Font("Inc Free", 1, 25));
 		score.setForeground(Color.red);
 		score.setFocusPainted(false);
@@ -100,7 +98,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		panelGameOver.add(score, gridBagConstraints);
 
 		playAgainButton.setFont(new java.awt.Font("Inc Free", 1, 35));
-		playAgainButton.setForeground(Color.CYAN);
+		playAgainButton.setForeground(Color.GREEN);
 		playAgainButton.setFocusPainted(false);
 		playAgainButton.setContentAreaFilled(false);
 		playAgainButton.setBorderPainted(false);
@@ -123,7 +121,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		panelGameOver.add(playAgainButton, gridBagConstraints);
 
 		mainMenuButton.setFont(new java.awt.Font("Inc Free", 1, 24));
-		mainMenuButton.setForeground(Color.orange);
+		mainMenuButton.setForeground(Color.GREEN);
 		mainMenuButton.setFocusPainted(false);
 		mainMenuButton.setContentAreaFilled(false);
 		mainMenuButton.setBorderPainted(false);
@@ -145,7 +143,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		panelGameOver.add(mainMenuButton, gridBagConstraints);
 		
 		enemy.setFont(new java.awt.Font("Inc Free", 1, 24));
-		enemy.setForeground(Color.orange);
+		enemy.setForeground(Color.WHITE);
 		enemy.setVerticalAlignment(1);
 		enemy.setFocusPainted(false);
 		enemy.setContentAreaFilled(false);
@@ -162,7 +160,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		panelGameOver.add(enemy, gridBagConstraints);
 		
 		asteroid.setFont(new java.awt.Font("Inc Free", 1, 24));
-		asteroid.setForeground(Color.orange);
+		asteroid.setForeground(Color.GREEN);
 		asteroid.setVerticalAlignment(1);
 		asteroid.setFocusPainted(false);
 		asteroid.setContentAreaFilled(false);
@@ -178,7 +176,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.insets = new java.awt.Insets(20, 800, 0, 800);
 		panelGameOver.add(asteroid, gridBagConstraints);
 		
-		name = new JTextField("           Inserire nome",40);
+		name = new JTextField("           Insert name",40);
 		name.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clear(evt);
@@ -197,25 +195,25 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.insets = new java.awt.Insets(270, 800, 0, 800);
 		panelGameOver.add(name,gridBagConstraints);
 		
-		add = new JButton("Add to the scoreboard");
-		add.addActionListener(new java.awt.event.ActionListener() {
+		addButton = new JButton("Add to the scoreboard");
+		addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt){
 					try {
 						addPlayer(evt);
-				    } catch (GiocatoreNonClassificatoException ex) {
-				        JOptionPane.showMessageDialog(panelGameOver, "Spiacenti... non ti sei classificato","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
+				    } catch (UnclassifiedPlayerException ex) {
+				        JOptionPane.showMessageDialog(panelGameOver, "Sorry ... you didn't rank!","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
 				    } catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}					
-					add.setVisible(false);
+					}					 
+					addButton.setVisible(false);
 					name.setVisible(false);
             }
 
         });
-		add.setMaximumSize(new java.awt.Dimension(50, 25));
-		add.setMinimumSize(new java.awt.Dimension(50, 25));
-		add.setSize(50, 25);
+		addButton.setMaximumSize(new java.awt.Dimension(50, 25));
+		addButton.setMinimumSize(new java.awt.Dimension(50, 25));
+		addButton.setSize(50, 25);
 		
 		gridBagConstraints = new java.awt.GridBagConstraints();
 		gridBagConstraints.gridx = 0;
@@ -224,7 +222,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.CENTER;
 		gridBagConstraints.insets = new java.awt.Insets(410, 800, 0, 800);
-		panelGameOver.add(add,gridBagConstraints);
+		panelGameOver.add(addButton,gridBagConstraints);
 
 
 		panelGameOver.getAccessibleContext().setAccessibleName("");
@@ -237,7 +235,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 						.addComponent(panelGameOver, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE,
+										.addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE,
 												(int) dim.getWidth(), javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 		layout.setVerticalGroup(
@@ -245,7 +243,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 						.addComponent(panelGameOver, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE,
+										.addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE,
 												(int) dim.getHeight(), javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 
@@ -256,47 +254,46 @@ public class GameOverFrame extends javax.swing.JFrame {
 
 	}
 
-	private void addPlayer(java.awt.event.ActionEvent evt) throws GiocatoreNonClassificatoException, IOException{
-		String nomeGiocatore = this.name.getText();
-		 if(nomeGiocatore.equals("           Inserire nome") || nomeGiocatore.equals("")) {
-			 nomeGiocatore="Anonimo";
+	private void addPlayer(java.awt.event.ActionEvent evt) throws UnclassifiedPlayerException, IOException{
+		String playerName = this.name.getText();
+		 if(playerName.equals("           Insert name") || playerName.equals("")) {
+			 playerName="Anonymous";
 		 }
-		 name.setText("Inserire nome");
-		 Giocatore g = new Giocatore(nomeGiocatore);
-		 g.setPunteggio(mainFrame.getScore().getScoreValue());
-		 MainFrame.getC().aggiungiGiocatore(g);
-		 MainFrame.getC().salvaSuFileBinario("classifica.dat");
+		 name.setText("           Insert name");
+		 Player player = new Player(playerName);
+		 player.setScore(mainFrame.getScore().getScoreValue());
+		 MainFrame.getScoreboard().addPlayer(player);
+		 MainFrame.getScoreboard().save("scoreboard.dat");
 			 
-		 int position = MainFrame.getC().getClassifica().indexOf(g);
-		 JOptionPane.showMessageDialog(this,"Congratulazioni "+g.getTagGiocatore()+" sei entrato in classifica al "+(position+1)+" posto","Risultato",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
+		 int position = MainFrame.getScoreboard().getScoreboardList().indexOf(player);
+		 JOptionPane.showMessageDialog(this,"Congratulations "+player.getPlayerTag()+", you entered the ranking in "+(position+1)+" position","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
     } 
 		 
 
 	protected void mainMenuButtonActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic == true) {
 			GameOverFrame.soundEndGame.stopSound();
-			//MenuFrame.gameMusic.playSound();
 		}
 		
-		mainFrame.updateModalita("start");
+		mainFrame.updateModality("start");
 	}
 
 	private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
-		mainFrame.updateModalita("in_esecuzione");
+		mainFrame.updateModality("running");
 		GameOverFrame.soundEndGame.stopSound();
-		PanelEsecuzione.setAsteroidsDestoyed(0);
-		PanelEsecuzione.setEnemiesDestoyed(0);
+		PanelExecution.setAsteroidsDestoyed(0);
+		PanelExecution.setEnemiesDestoyed(0);
 	}
 	
 	private void clear(java.awt.event.MouseEvent evt) {                                         
         this.name.setText("");
     }
 	
-	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
+	private ImageIcon resizeImageIcon(URL url, int newW, int newH) {
 		ImageIcon image = new ImageIcon(url);
-		Image immagineScalata = image.getImage().getScaledInstance(nuovaW, nuovaH, Image.SCALE_DEFAULT);
-		return new ImageIcon(immagineScalata);
+		Image scaledImage = image.getImage().getScaledInstance(newW, newH, Image.SCALE_DEFAULT);
+		return new ImageIcon(scaledImage);
 	}
 
 }

@@ -2,19 +2,17 @@ package game;
 
 import java.awt.EventQueue;
 import java.io.IOException;
-
 import javax.swing.JFrame;
+import game.patterns.state.Modality;
+import game.patterns.state.State;
+import rankingManagement.Scoreboard;
 
-import game.patterns.state.Modalita;
-import game.patterns.state.Stato;
-import gestioneClassifica.Classifica;
- 
 public class MainFrame {
 
 	private JFrame frame;
-	private Modalita modalita;
+	private Modality modality;
 	private Score score;
-	private static Classifica c;
+	private static Scoreboard scoreboard;
 
 	// Singleton
 	private static MainFrame istance = null;
@@ -25,19 +23,14 @@ public class MainFrame {
 		return istance;
 	}
 
-	/**
-	 * Launch the application.
-	 * @throws IOException 
-	 * @throws ClassNotFoundException 
-	 */
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
-		c = new Classifica();
-		c.leggiDaFileBinario("classifica.dat");
+		scoreboard = new Scoreboard();
+		scoreboard.load("scoreboard.dat");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					MainFrame mainFrame = MainFrame.getIstance();
-					mainFrame.setModalita(new Modalita());
+					mainFrame.setModality(new Modality());
 					mainFrame.setScore(new Score());
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,21 +39,17 @@ public class MainFrame {
 		});
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-
-	public void updateModalita(String string) {
-		Stato stato = modalita.getStatoModalita();
-		stato.gestioneStato(modalita, string);
+	public void updateModality(String string) {
+		State state = modality.getModalityState();
+		state.stateManagement(modality, string);
 	}
 
-	public Modalita getModalita() {
-		return modalita;
+	public Modality getModality() {
+		return modality;
 	}
 
-	public void setModalita(Modalita modalita) {
-		this.modalita = modalita;
+	public void setModality(Modality modality) {
+		this.modality = modality;
 	}
 
 	public JFrame getFrame() {
@@ -79,12 +68,12 @@ public class MainFrame {
 		this.score = score;
 	}
 
-	public static Classifica getC() {
-		return c;
+	public static Scoreboard getScoreboard() {
+		return scoreboard;
 	}
 
-	public static void setC(Classifica c) {
-		MainFrame.c = c;
+	public static void setScoreboard(Scoreboard scoreboard) {
+		MainFrame.scoreboard = scoreboard;
 	}
 	
 }

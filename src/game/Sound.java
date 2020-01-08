@@ -1,6 +1,5 @@
 package game;
 
-
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 

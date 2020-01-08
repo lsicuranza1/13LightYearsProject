@@ -2,40 +2,37 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import javax.swing.JFrame;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import game.MainFrame;
 import game.Score;
-import game.patterns.state.Modalita;
-import game.patterns.state.StatoDemo;
-import game.patterns.state.StatoInEsecuzione;
+import game.patterns.state.Modality;
+import game.patterns.state.DemoState;
+import game.patterns.state.ExecutionState;
 
-public class StatoDemoTest {
+public class DemoSateTest {
 	
-	private Modalita modalita;
+	private Modality modality;
 	private MainFrame mainframe ;
 
 	@Before
 	public void setUp() throws Exception {
 		
-		this.modalita = new Modalita();
+		this.modality = new Modality();
 		this.mainframe = MainFrame.getIstance();
 		this.mainframe.setFrame(new JFrame());
 		this.mainframe.setScore(new Score());
 	}
 
 	@Test
-	public void testGestioneStato() {
-		StatoDemo stato = new StatoDemo();
+	public void testStateManagement() {
+		DemoState state = new DemoState();
 		
-		stato.gestioneStato(this.modalita,"in_esecuzione");
+		state.stateManagement(this.modality,"running");
 		assertEquals("Game",this.mainframe.getFrame().getTitle());
 		assertEquals(1,this.mainframe.getFrame().getContentPane().getComponentCount());
-		assertTrue(this.modalita.getStatoModalita() instanceof StatoInEsecuzione);
+		assertTrue(this.modality.getModalityState() instanceof ExecutionState);
 	}
 
 }

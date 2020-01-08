@@ -1,18 +1,17 @@
 package game;
+
 import game.Sound;
 import game.Settings;
 import game.Utilities;
-
+import rankingManagement.Scoreboard;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
-
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import game.MainFrame;
-import gestioneClassifica.Classifica;
 
 public class MenuFrame extends JFrame {
 	
@@ -21,70 +20,61 @@ public class MenuFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Dimension dim = new Dimension(1000,600);
 	public static Sound gameMusic;
-	public static Clip gameClip;
-	public static boolean demo = false;
+	public static Clip gameClip; 
+	//public static boolean demo = false;
 	public static boolean flagScoreboard = false;
 	public static boolean flagSettings = false;
 	private javax.swing.JButton playButton;
 	private javax.swing.JButton scoreBoardButton;
 	private javax.swing.JButton settingsButton;
 	private javax.swing.JButton demoButton;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JLabel sfondo;
-	private Classifica c=MainFrame.getC();
-	private ImageIcon ridimensionaImageIcon(URL url, int nuovaW, int nuovaH) {
-		ImageIcon image = new ImageIcon(url);
-		Image immagineScalata = image.getImage().getScaledInstance(nuovaW, nuovaH, Image.SCALE_DEFAULT);
-		return new ImageIcon(immagineScalata);
-	}
+	private javax.swing.JPanel menuPanel;
+	private javax.swing.JLabel background;
+	private Scoreboard scoreboard=MainFrame.getScoreboard();
 
 	public MenuFrame() {
+		
 		initComponents();
 		
 		if (Settings.soundMusic == true) {
-			this.gameClip = Utilities.LoadSound(getClass().getResource("../resources/sound/menu_song.wav"));
-            this.gameMusic = new Sound(gameClip);
-            this.gameMusic.loopSound();
+			MenuFrame.gameClip = Utilities.LoadSound(getClass().getResource("../resources/sound/menu_song.wav"));
+            MenuFrame.gameMusic = new Sound(gameClip);
+            MenuFrame.gameMusic.loopSound();
         }
 		
 	}
 
 	private void initComponents() {
+		
 		java.awt.GridBagConstraints gridBagConstraints;
 
-		jPanel1 = new javax.swing.JPanel();
+		menuPanel = new javax.swing.JPanel();
 		playButton = new javax.swing.JButton();
 		scoreBoardButton = new javax.swing.JButton();
 		settingsButton = new javax.swing.JButton();
 		demoButton = new javax.swing.JButton();
-		sfondo = new javax.swing.JLabel();
+		background = new javax.swing.JLabel();
 
-		Image iconaFrame;
-		iconaFrame = new ImageIcon(getClass().getResource("../resources/images/logo_game.png")).getImage();
-		this.setIconImage(iconaFrame);
-
+		Image iconFrame;
+		iconFrame = new ImageIcon(getClass().getResource("../resources/images/logo_game.png")).getImage();
+		this.setIconImage(iconFrame);
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setPreferredSize(dim.getSize());
-
-		ImageIcon immagineSfondo = ridimensionaImageIcon(
-				getClass().getResource("../resources/images/sfondo_menu.png"),(int)dim.getWidth(),(int) dim.getHeight());
-		
-		sfondo.setIcon(immagineSfondo);
-
+		ImageIcon backgroundImage = resizeImageIcon(
+				getClass().getResource("../resources/images/sfondo_menu.png"),(int)dim.getWidth(),(int) dim.getHeight());		
+		background.setIcon(backgroundImage);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("13 Light Years - Menu' Principale");
-
+		setTitle("13 Light Years - Main Menu");
 		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) (dim.getWidth() / 2), (int) dimDisplay.getHeight() / 2 - (int) (dim.getHeight()/ 2));
 		setName("");
-		//setPreferredSize(new java.awt.Dimension(1000, 600));
 		setResizable(false);
 
-		jPanel1.setAlignmentX(0.0F);
-		jPanel1.setMinimumSize(dim.getSize());
-		jPanel1.setName("");
-		jPanel1.setOpaque(false);
-		jPanel1.setPreferredSize(dim.getSize());
-		jPanel1.setLayout(new java.awt.GridBagLayout());
+		menuPanel.setAlignmentX(0.0F);
+		menuPanel.setMinimumSize(dim.getSize());
+		menuPanel.setName("");
+		menuPanel.setOpaque(false);
+		menuPanel.setPreferredSize(dim.getSize());
+		menuPanel.setLayout(new java.awt.GridBagLayout());
 
 		playButton.setBackground(new java.awt.Color(255, 255, 255));
 		playButton.setFont(new java.awt.Font("Gabriola", 0, 40));
@@ -108,7 +98,7 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(269, 70, 0, 695);
-		jPanel1.add(playButton, gridBagConstraints);
+		menuPanel.add(playButton, gridBagConstraints);
 
 		scoreBoardButton.setFont(new java.awt.Font("Gabriola", 0, 40));
 		scoreBoardButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,7 +121,7 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
-		jPanel1.add(scoreBoardButton, gridBagConstraints);
+		menuPanel.add(scoreBoardButton, gridBagConstraints);
 
 		settingsButton.setFont(new java.awt.Font("Gabriola", 0, 40));
 		settingsButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,7 +143,7 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 65, 695);
-		jPanel1.add(settingsButton, gridBagConstraints);
+		menuPanel.add(settingsButton, gridBagConstraints);
 		settingsButton.getAccessibleContext().setAccessibleDescription("");
 
 		demoButton.setFont(new java.awt.Font("Gabriola", 0, 40));
@@ -177,41 +167,43 @@ public class MenuFrame extends JFrame {
 		gridBagConstraints.ipady = 32;
 		gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
 		gridBagConstraints.insets = new java.awt.Insets(18, 70, 0, 695);
-		jPanel1.add(demoButton, gridBagConstraints);
+		menuPanel.add(demoButton, gridBagConstraints);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+						.addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getWidth(),
+										.addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getWidth(),
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 		layout.setVerticalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-						.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+						.addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
 						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 								.addGroup(layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE)
-										.addComponent(sfondo, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getHeight(),
+										.addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, (int) dim.getHeight(),
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addGap(0, 0, Short.MAX_VALUE))));
 
-		jPanel1.getAccessibleContext().setAccessibleName("");
-		jPanel1.getAccessibleContext().setAccessibleDescription("");
+		menuPanel.getAccessibleContext().setAccessibleName("");
+		menuPanel.getAccessibleContext().setAccessibleDescription("");
 
 		pack();
 
-		jPanel1.setFocusable(true);
-		jPanel1.requestFocus();
+		menuPanel.setFocusable(true);
+		menuPanel.requestFocus();
 	}
 
 	private void playButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		
 		MenuFrame.gameMusic.stopSound();
-		mainFrame.updateModalita("in_esecuzione");
-		PanelEsecuzione.setAsteroidsDestoyed(0);
-		PanelEsecuzione.setEnemiesDestoyed(0);
+		mainFrame.updateModality("running");
+		PanelExecution.setAsteroidsDestoyed(0);
+		PanelExecution.setEnemiesDestoyed(0);
+		
 		if (flagScoreboard == true) {
 			frameBoard.dispose();
 			flagScoreboard = false;
@@ -219,29 +211,38 @@ public class MenuFrame extends JFrame {
 	}
 
 	private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		
 		MenuFrame.gameMusic.stopSound();
-		mainFrame.updateModalita("demo");
+		mainFrame.updateModality("demo");
+		
 		if (flagScoreboard == true) {
 			frameBoard.dispose();
 			flagScoreboard = false;
-		}
-		
+		}		
 	}
 	
 	private void scoreBoardButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		
 		if(flagScoreboard == false) {
-			frameBoard = new FrameScoreboard(this.c);
+			frameBoard = new FrameScoreboard(this.scoreboard);
 			frameBoard.setVisible(true);
 			flagScoreboard = true;
 		}	
 	}
 	
 	private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		
 		if(flagSettings==false) {
 			Settings set = new Settings(this, true, false);
 			set.setVisible(true);
 			flagSettings = true;
 		}
+	}
+	
+	private ImageIcon resizeImageIcon(URL url, int newW, int newH) {
+		ImageIcon image = new ImageIcon(url);
+		Image scaledImage = image.getImage().getScaledInstance(newW, newH, Image.SCALE_DEFAULT);
+		return new ImageIcon(scaledImage);
 	}
 		
 }

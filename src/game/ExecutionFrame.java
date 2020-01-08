@@ -8,41 +8,38 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class ExecutionFrame extends JFrame {
 	
-	private PanelEsecuzione panel;
-	private Dimension dim;
+	private PanelExecution executionPanel;
+	private Dimension dimFrame;
 	public static Sound soundInGame;
     public static Clip clipInGame;
    
-   
 	public ExecutionFrame() {
+		
 		initComponents();
 		
 		if (Settings.soundMusic == true) {
 			clipInGame = Utilities.LoadSound(getClass().getResource("../resources/sound/ingame.wav"));
 			soundInGame = new Sound(clipInGame);
-			//soundInGame.playSound();
 			soundInGame.loopSound();
-	}
+		}
 		
-		
-			
 	}
 	
 	private void initComponents() {
-		this.panel = new PanelEsecuzione();
-		this.dim = new Dimension(800,800);
-		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		
+		this.executionPanel = new PanelExecution();
+		this.dimFrame = new Dimension(800,800);
+		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		this.setTitle("Game");
-		this.setLocation((int) dimDisplay.getWidth() / 2 - (int)dim.getWidth() / 2, (int) dimDisplay.getHeight() / 2 - (int)dim.getHeight() / 2);
+		this.setLocation((int) dimDisplay.getWidth() / 2 - (int)dimFrame.getWidth() / 2, (int) dimDisplay.getHeight() / 2 - (int)dimFrame.getHeight() / 2);
 		this.setResizable(false);
-		this.setMinimumSize(dim.getSize());
-		this.setPreferredSize(dim.getSize());
-		this.setMaximumSize(dim.getSize());
-		this.add(panel);
-		panel.setFocusable(true);
-		panel.requestFocus();
+		this.setMinimumSize(dimFrame.getSize());
+		this.setPreferredSize(dimFrame.getSize());
+		this.setMaximumSize(dimFrame.getSize());
+		this.add(executionPanel);
+		executionPanel.setFocusable(true);
+		executionPanel.requestFocus();
 	}
 
 }

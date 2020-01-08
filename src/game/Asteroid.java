@@ -10,7 +10,7 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 	public Asteroid(int x, int y, String path) {
 		super(x, y, path);
 		this.angle = 0;
-		this.transform = new AffineTransform(); // capire se metterla nelle clasi degli altri oggetti
+		this.transform = new AffineTransform();
 	}
 
 	@Override
@@ -25,8 +25,7 @@ public class Asteroid extends Sprite implements ObstacleInterface {
 		AffineTransform transform = new AffineTransform(); 
 		transform.setToTranslation(x, y);
 		transform.concatenate(AffineTransform.getRotateInstance(Math.toRadians(this.getAngle()),
-				this.getWidth() / 2, this.getHeight() / 2));
-		
+				this.getWidth() / 2, this.getHeight() / 2));	
 		this.setTransform(transform);
 	}
 

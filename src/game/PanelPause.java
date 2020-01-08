@@ -3,7 +3,6 @@ package game;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,16 +10,16 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 class PanelPause extends JPanel {
+	
 	private MainFrame mainframe = MainFrame.getIstance();
 	private static final Color BG = new Color(0, 0, 0, 200);
 	private javax.swing.JButton resume;
 	private javax.swing.JButton restart;
 	private javax.swing.JButton mainMenu;
-	private PanelEsecuzione panelEsecuzione;
+	private PanelExecution panelExecution;
 
-	// dependency inception
-	public PanelPause(PanelEsecuzione panelEsecuzione) {
-		this.panelEsecuzione = panelEsecuzione;
+	public PanelPause(PanelExecution panelExecution) {
+		this.panelExecution = panelExecution;
 		JLabel pausedLabel = new JLabel("PAUSED");
 		pausedLabel.setForeground(Color.ORANGE);
 		
@@ -33,9 +32,11 @@ class PanelPause extends JPanel {
 		setBorder(BorderFactory.createEmptyBorder(eb, eb, eb, eb));
 		setLayout(new GridLayout(0, 1, 10, 10));
 		add(pausedPanel);
+		
 		resume = new JButton("RESUME");
 		restart = new JButton("RESTART");
 		mainMenu = new JButton("MAIN MENU");
+		
 		resume.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				resumeActionPerformed(evt);
@@ -55,24 +56,27 @@ class PanelPause extends JPanel {
 		add(restart);
 		add(mainMenu);
 	}
-
-	protected void mainMenuActionPerformed(ActionEvent evt) {
+ 
+	private void mainMenuActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic==true)
 			ExecutionFrame.soundInGame.stopSound();
-		panelEsecuzione.getDialog().setAlwaysOnTop(false);
-		mainframe.updateModalita("start");
+		panelExecution.getDialogPause().setAlwaysOnTop(false);
+		panelExecution.getDialogPause().dispose();
+		mainframe.updateModality("start");
 	}
 
-	protected void restartActionPerformed(ActionEvent evt) {
+	private void restartActionPerformed(ActionEvent evt) {
 		if(Settings.soundMusic==true)
 			ExecutionFrame.soundInGame.stopSound();
-		panelEsecuzione.getDialog().setAlwaysOnTop(false);
-		mainframe.updateModalita("in_esecuzione");
+		panelExecution.getDialogPause().setAlwaysOnTop(false);
+		panelExecution.getDialogPause().dispose();
+		mainframe.updateModality("running");
 	}
 
-	protected void resumeActionPerformed(ActionEvent evt) {
-		panelEsecuzione.setFlagPause(false);
-
+	private void resumeActionPerformed(ActionEvent evt) {
+		panelExecution.setFlagPause(false);
+		panelExecution.getTimer().start();
+		panelExecution.getDialogPause().dispose();
 	}
 
 }

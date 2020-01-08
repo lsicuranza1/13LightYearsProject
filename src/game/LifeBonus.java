@@ -11,7 +11,7 @@ public class LifeBonus extends Sprite implements BonusInterface{
 		this.transform = new AffineTransform();
 	}
 
-	@Override
+	@Override 
 	public void move() {
 		
 		int x = this.getX();

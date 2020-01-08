@@ -5,7 +5,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.sound.sampled.Clip;
-
 import javax.imageio.ImageIO;
 
 public class Sprite {
@@ -15,8 +14,7 @@ public class Sprite {
 	private Rectangle2D rectangle;
 	private BufferedImage image;
 	private boolean visible = true;
-	
-	public static Sound enemyExplosionSound;
+	public static Sound enemyExplosionSound; 
     public static Clip enemyExplosionClip;
 
 	public Sprite(int x, int y, String imageFileName) {
@@ -27,13 +25,13 @@ public class Sprite {
 	}
 
 	private void loadImage(String imageFileName) {
+		
 		try {
-			image = ImageIO.read(getClass().getResource(imageFileName));
-		} catch (IOException e) { //gestire l'eccezione nel contesto in cui viene istanziato l'oggetto
+			this.image = ImageIO.read(getClass().getResource(imageFileName));
+		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Image not loaded");
 		}
-
 	}
 
 	public boolean isVisible() {

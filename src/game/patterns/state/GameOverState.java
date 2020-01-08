@@ -3,13 +3,13 @@ package game.patterns.state;
 import game.MainFrame;
 import game.GameOverFrame;
 
-public class StatoGameOver implements Stato {
+public class GameOverState implements State {
 
 	private MainFrame mainFrame = MainFrame.getIstance();
 	private GameOverFrame gameOverFrame;
 	
 
-	public StatoGameOver() {
+	public GameOverState() {
 
 		mainFrame = MainFrame.getIstance();
 		this.gameOverFrame = new GameOverFrame();
@@ -19,16 +19,16 @@ public class StatoGameOver implements Stato {
 	}
 
 	@Override
-	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("start")) {
+	public void stateManagement(Modality modality, String state) {
+		
+		if (state.equals("start")) {
 			mainFrame.getFrame().setVisible(false);
 			mainFrame.getFrame().dispose();
-			modalita.setStatoModalita(new StatoStart());
-		} else if (stato.equals("in_esecuzione")) {
+			modality.setModalityState(new StartingState());
+		} else if (state.equals("running")) {
 			mainFrame.getFrame().setVisible(false);
 			mainFrame.getFrame().dispose();
-			modalita.setStatoModalita(new StatoInEsecuzione());
+			modality.setModalityState(new ExecutionState());
 		}
 	}
-
 }

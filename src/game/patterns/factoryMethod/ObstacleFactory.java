@@ -17,5 +17,4 @@ public class ObstacleFactory {
 		
 		return object;
 	}
-
 }

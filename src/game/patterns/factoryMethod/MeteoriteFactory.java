@@ -1,16 +1,15 @@
 package game.patterns.factoryMethod;
 
 import java.util.Random;
-
 import game.Meteorite;
 import game.Sprite;
 
 public class MeteoriteFactory extends ObstacleFactory {
 	
-	static int D_W = 800; 
+	static int width = 800; 
 	static Random random = new Random();
-	static int randX1;
-	static int y_meteorite = -50;
+	static int randX;
+	static int yMeteorite = -50;
 	static String fileNameMeteorite = "../resources/images/meteorite.png";
 	
 	public MeteoriteFactory() {
@@ -18,7 +17,7 @@ public class MeteoriteFactory extends ObstacleFactory {
 	}
 	
 	public static Sprite getObstacle() {
-		randX1 = random.nextInt(D_W);
-		return new Meteorite(randX1, y_meteorite, fileNameMeteorite);
+		randX = random.nextInt(width);
+		return new Meteorite(randX, yMeteorite, fileNameMeteorite);
 	}
 }

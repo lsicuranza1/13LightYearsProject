@@ -3,25 +3,26 @@ package game.patterns.state;
 import game.DemoFrame;
 import game.MainFrame;
 
-public class StatoDemo implements Stato {
+public class DemoState implements State {
 
 	private MainFrame mainFrame = MainFrame.getIstance();
 	private DemoFrame demoFrame;
 
-	public StatoDemo() {
+	public DemoState() {
+		
 		mainFrame = MainFrame.getIstance();
 		this.demoFrame = new DemoFrame();
 		mainFrame.setFrame(demoFrame);
 		mainFrame.getFrame().setVisible(true);
-
 	}
 
 	@Override
-	public void gestioneStato(Modalita modalita, String stato) {
-		if (stato.equals("in_esecuzione")) {
+	public void stateManagement(Modality modality, String state) {
+		
+		if (state.equals("running")) {
 			mainFrame.getFrame().setVisible(false);
 			mainFrame.getFrame().dispose();
-			modalita.setStatoModalita(new StatoInEsecuzione());
+			modality.setModalityState(new ExecutionState());
 		}
 	}
 

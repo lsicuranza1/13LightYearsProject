@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package game;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import game.MainFrame;
 
 @SuppressWarnings("serial")
 public class Settings extends javax.swing.JDialog {
@@ -22,25 +17,21 @@ public class Settings extends javax.swing.JDialog {
 	public boolean inGame;
 
 	private javax.swing.JButton effects;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
+	private javax.swing.JLabel labelMusic;
+	private javax.swing.JLabel labelEffects;
+	private javax.swing.JLabel title;
+	private javax.swing.JLabel labelImage;
 	private javax.swing.JButton music;	
 	private JRadioButton wasd;
 	private JRadioButton arrows;
 	
-	/**
-	 * @wbp.nonvisual location=72,299
-	 */
-
-	public Settings(java.awt.Frame parent, boolean modal, boolean inGame) {
+	public Settings(JFrame parent, boolean modal, boolean inGame) {
 		super(parent, modal);
 		this.inGame = inGame;
 		initComponents();
-		ButtonGroup bg = new ButtonGroup();
-        bg.add(this.wasd);
-        bg.add(this.arrows);
+		ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(this.wasd);
+        buttonGroup.add(this.arrows);
        
         if(soundEffects == false)
         	effects.setText("OFF");
@@ -57,12 +48,12 @@ public class Settings extends javax.swing.JDialog {
 
 	private void initComponents() {
 
-		jLabel3 = new javax.swing.JLabel();
-		jLabel2 = new javax.swing.JLabel();
+		title = new javax.swing.JLabel();
+		labelEffects = new javax.swing.JLabel();
 		effects = new javax.swing.JButton();
-		jLabel1 = new javax.swing.JLabel();
+		labelMusic = new javax.swing.JLabel();
 		music = new javax.swing.JButton();
-		jLabel4 = new javax.swing.JLabel();
+		labelImage = new javax.swing.JLabel();
         wasd = new javax.swing.JRadioButton();        
         arrows = new javax.swing.JRadioButton();
 
@@ -74,14 +65,14 @@ public class Settings extends javax.swing.JDialog {
 		setModalityType(null);
 		setResizable(false);
 
-		jLabel3.setFont(new java.awt.Font("Gabriola", 1, 36));
-		jLabel3.setText("Settings");
+		title.setFont(new java.awt.Font("Gabriola", 1, 36));
+		title.setText("Settings");
 
-		jLabel2.setFont(new java.awt.Font("Gabriola", 0, 24));
-		jLabel2.setText("Sound effects");
+		labelEffects.setFont(new java.awt.Font("Gabriola", 0, 18));
+		labelEffects.setText("Sound effects");
 
-		jLabel1.setFont(new java.awt.Font("Gabriola", 0, 24));
-		jLabel1.setText("Music");
+		labelMusic.setFont(new java.awt.Font("Gabriola", 0, 18));
+		labelMusic.setText("Music");
 
 		wasd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,11 +99,11 @@ public class Settings extends javax.swing.JDialog {
 	            }
 	        });    
 	        
-		jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("../resources/images/awsd.png")));
-		jLabel4.setMaximumSize(new java.awt.Dimension(379, 120));
-		jLabel4.setMinimumSize(new java.awt.Dimension(379, 120));
-		jLabel4.setName("");
-		jLabel4.setPreferredSize(new java.awt.Dimension(379, 120));
+		labelImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("../resources/images/awsd.png")));
+		labelImage.setMaximumSize(new java.awt.Dimension(379, 120));
+		labelImage.setMinimumSize(new java.awt.Dimension(379, 120));
+		labelImage.setName("");
+		labelImage.setPreferredSize(new java.awt.Dimension(379, 120));
 		
 		this.addWindowListener(new WindowAdapter()
 	    {
@@ -130,18 +121,18 @@ public class Settings extends javax.swing.JDialog {
 			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap(168, Short.MAX_VALUE)
-					.addComponent(jLabel3)
+					.addComponent(title)
 					.addGap(165))
 				.addGroup(layout.createSequentialGroup()
 					.addGap(25)
 					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelImage, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE)
 						.addGroup(layout.createSequentialGroup()
-							.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+							.addComponent(labelMusic, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(music, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 							.addGap(83)
-							.addComponent(jLabel2)
+							.addComponent(labelEffects)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(effects, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 							.addGap(8)))
@@ -157,15 +148,15 @@ public class Settings extends javax.swing.JDialog {
 			layout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(jLabel3)
+					.addComponent(title)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelEffects, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 						.addComponent(effects, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 						.addComponent(music, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+						.addComponent(labelMusic, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(jLabel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addComponent(labelImage, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(wasd)
@@ -181,32 +172,27 @@ public class Settings extends javax.swing.JDialog {
 
 	private void effectsActionPerformed(java.awt.event.ActionEvent evt) {
 		 
-		String text = this.effects.getText();
+		String textButton = this.effects.getText();
 		 
-	        if (text.compareTo("ON") == 0) {	        	
-	        		soundEffects = false;
-	            this.effects.setText("OFF");
-	            	            
-	        } else {
-	        	soundEffects = true;
-	        	
-	            this.effects.setText("ON");
-	            
-	            
-	        }
+        if (textButton.compareTo("ON") == 0) {	        	
+        	soundEffects = false;
+            this.effects.setText("OFF");         	            
+        } else {
+        	soundEffects = true;        	
+            this.effects.setText("ON");   
+        }
 	}
 
 	private void musicActionPerformed(java.awt.event.ActionEvent evt) {
-		String text = this.music.getText();
+		
+		String textButton = this.music.getText();
 		 
-        if (text.compareTo("ON") == 0) {
+        if (textButton.compareTo("ON") == 0) {
         	soundMusic = false;
-            MenuFrame.gameMusic.stopSound();
-                       
+            MenuFrame.gameMusic.stopSound();          
             this.music.setText("OFF");
         } else {
         	soundMusic = true;
-        	//MenuFrame.gameMusic.playSound();
         	MenuFrame.gameMusic.loopSound();
             this.music.setText("ON");
         }

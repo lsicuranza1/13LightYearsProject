@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,74 +17,63 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
-import gestioneClassifica.*;
+import rankingManagement.*;
 
 public class FrameScoreboard extends JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	private JTable table;
-	private JButton reset;
-	private Dimension dim;
-	private final Classifica c; 
-	/**
-	 * Create the panel.
-	 */
+	private JTable tableScoreboard;
+	private JButton resetButton;
+	private Dimension dimFrame;
+	private final Scoreboard scoreboard; 
 	 
-	public FrameScoreboard(Classifica c) {
-		this.c = c;
+	public FrameScoreboard(Scoreboard scoreboard) {
+		this.scoreboard = scoreboard;
 		initComponents();
-		refreshClassifica(c);
+		refreshScoreboard(scoreboard);
 	}
 	
-	public final void refreshClassifica(Classifica c){
+	public final void refreshScoreboard(Scoreboard scoreboard){
         int i=0;
-        for(Giocatore g: c){
-            this.table.setValueAt(g.getTagGiocatore(),i,1);
-            this.table.setValueAt(g.getPunteggio(),i,2);
-            this.table.setValueAt(DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.ITALY).format(g.getData()), i, 3);
-            this.table.setValueAt(g.getVisibleData(), i, 3);
+        for(Player g: scoreboard){
+            this.tableScoreboard.setValueAt(g.getPlayerTag(),i,1);
+            this.tableScoreboard.setValueAt(g.getScore(),i,2);
+            this.tableScoreboard.setValueAt(DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.ITALY).format(g.getDate()), i, 3);
+            this.tableScoreboard.setValueAt(g.getVisibleData(), i, 3);
             i++; 
         }
     }
 	
 	private void resetClassifica(MouseEvent evt) throws IOException {                                         
-        c.resetClassifica();
+		scoreboard.resetScoreboard();
         int i=0;
         while(i<10){
-            this.table.setValueAt(null,i,0);
-            this.table.setValueAt(null,i,1);
-            this.table.setValueAt(null, i, 2);
-            this.table.setValueAt(null, i, 3);
+            this.tableScoreboard.setValueAt(null,i,0);
+            this.tableScoreboard.setValueAt(null,i,1);
+            this.tableScoreboard.setValueAt(null, i, 2);
+            this.tableScoreboard.setValueAt(null, i, 3);
             i++; 
         }
     }  
 	
 	@SuppressWarnings("serial")
-	public void initComponents() {
+	public void initComponents() { 
 		setSize(new Dimension(500, 700));
 		setTitle("Scoreboard");
 		setResizable(false);
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 15, 100));
-		
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
-		
-		int widthMenu = (int) ((dimDisplay.getWidth() * 35) / 100); //i numeri moltiplicati devono essere uguali sia per la width che per la height
-		int heightMenu = (int) ((dimDisplay.getHeight() * 35) / 100);
-		dim = new Dimension(widthMenu, heightMenu);
-		this.setPreferredSize(dim.getSize());
-		this.setLocation((int) dimDisplay.getWidth() / 2 - widthMenu / 2, (int) dimDisplay.getHeight() / 2 - heightMenu / 2);
-		
+		dimFrame = new Dimension(500, 700);
+		this.setPreferredSize(dimFrame.getSize());
+		this.setLocation((int) dimDisplay.getWidth() / 2 - (int)dimFrame.getWidth() / 2, (int) dimDisplay.getHeight() / 2 - (int)dimFrame.getHeight()/ 2);
 		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(null);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		tableScoreboard = new JTable();
+		tableScoreboard.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"   1", null, null, null},
 				{"   2", null, null, null},
@@ -109,42 +97,40 @@ public class FrameScoreboard extends JFrame {
 				return columnEditables[column];
 			}
 		});
-		table.getColumnModel().getColumn(0).setResizable(false);
-		table.getColumnModel().getColumn(0).setPreferredWidth(46);
-		table.getColumnModel().getColumn(1).setResizable(false);
-		table.getColumnModel().getColumn(2).setResizable(false);
-		table.getColumnModel().getColumn(3).setResizable(false);
-		table.setRowSelectionAllowed(false);
-		table.setRowHeight(40);
+		tableScoreboard.getColumnModel().getColumn(0).setResizable(false);
+		tableScoreboard.getColumnModel().getColumn(0).setPreferredWidth(46);
+		tableScoreboard.getColumnModel().getColumn(1).setResizable(false);
+		tableScoreboard.getColumnModel().getColumn(2).setResizable(false);
+		tableScoreboard.getColumnModel().getColumn(3).setResizable(false);
+		tableScoreboard.setRowSelectionAllowed(false);
+		tableScoreboard.setRowHeight(40);
 		scrollPane.setSize(400, 500);
-		table.setSize(400, 500);
-		table.setDefaultRenderer(String.class, centerRenderer);
+		tableScoreboard.setSize(400, 500);
+		tableScoreboard.setDefaultRenderer(String.class, centerRenderer);
 		
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(tableScoreboard);
 		getContentPane().add(scrollPane);
 		
-		reset = new JButton("Reset");
-		reset.setMaximumSize(new Dimension(65, 29));
-		reset.setMargin(new Insets(0, 14, 2, 14));
-		reset.setLayout(null);
-		reset.addMouseListener(new java.awt.event.MouseAdapter() {
+		resetButton = new JButton("Reset");
+		resetButton.setMaximumSize(new Dimension(65, 29));
+		resetButton.setMargin(new Insets(0, 14, 2, 14));
+		resetButton.setLayout(null);
+		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 try {
 					resetClassifica(evt);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
         });
 		
-		getContentPane().add(reset);
+		getContentPane().add(resetButton);
 		
-		this.addWindowListener(new WindowAdapter()
-	    {
+		this.addWindowListener(new WindowAdapter(){
+			
 	        @Override
-	        public void windowClosing(WindowEvent e)
-	        {
+	        public void windowClosing(WindowEvent e){
 	            MenuFrame.flagScoreboard = false;
 	            e.getWindow().dispose();
 	        }

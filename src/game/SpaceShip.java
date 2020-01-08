@@ -4,25 +4,22 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class SpaceShip extends SpaceshipStructure {
 
 	private int SPACESHIP_SPEED = 8;
-	private int shoot_counter = 25;          //shooting delay =~ 500 milliseconds 
+	private int shootCounter = 25;
 	private List<Missile> missiles;
 	private boolean left = false;
 	private boolean right = false;
 	private boolean up = false;
 	private boolean down = false;
 	private boolean isShooting = false;
-	private int lives = 3; //COSTANTE
+	private int lives = 3;
 	private int keyMode = Settings.mod;
 
 	public SpaceShip(int x, int y, String path) {
-
 		super(x, y, path);
 		this.missiles = new ArrayList<Missile>();
-
 	}
 	
 	public int getLives() {
@@ -33,15 +30,13 @@ public class SpaceShip extends SpaceshipStructure {
 		this.lives = lives;
 	}
 	
-	
 	public List<Missile> getMissiles() {
 		return missiles;
 	}
 
-
 	public void move() {
 		
-		this.shoot_counter++;
+		this.shootCounter++;
 		
 		if (this.isShooting()) {
 			fire();
@@ -83,46 +78,37 @@ public class SpaceShip extends SpaceshipStructure {
 
 		int key = e.getKeyCode();
 		
-		
 		if (key == KeyEvent.VK_SPACE) {
 				this.setShooting(true);
-			}
+		}
+		
 		if (keyMode == 0) {
-			
-			
-			if (key == KeyEvent.VK_LEFT ) {
+					
+			if (key == KeyEvent.VK_LEFT ) 
 				this.setLeft(true);
-			}
 
-			if (key == KeyEvent.VK_RIGHT ) {
+			if (key == KeyEvent.VK_RIGHT )
 				this.setRight(true);
-			}
 
-			if (key == KeyEvent.VK_UP ) {
+			if (key == KeyEvent.VK_UP )
 				this.setUp(true);
-			}
 
-			if (key == KeyEvent.VK_DOWN ) {
+			if (key == KeyEvent.VK_DOWN )
 				this.setDown(true);
-			}
+			
 		}else if(keyMode == 1) {
-			
-						
-			if ( key == KeyEvent.VK_A) {
+								
+			if ( key == KeyEvent.VK_A)
 				this.setLeft(true);
-			}
 
-			if ( key == KeyEvent.VK_D) {
+			if ( key == KeyEvent.VK_D)
 				this.setRight(true);
-			}
 
-			if ( key == KeyEvent.VK_W) {
+			if ( key == KeyEvent.VK_W)
 				this.setUp(true);
-			}
-
-			if ( key == KeyEvent.VK_S) {
+			
+			if ( key == KeyEvent.VK_S)
 				this.setDown(true);
-			}
 		}
 	}
 
@@ -130,9 +116,9 @@ public class SpaceShip extends SpaceshipStructure {
 	public void fire() {
 		List<Missile> missiles = this.getMissiles();
 		
-		if (this.shoot_counter >= 25) {
+		if (this.shootCounter >= 25) {
 			missiles.add(new Missile(this.getX() + this.getWidth() / 2 - 9, this.getY() + this.getHeight() - 90, "../resources/images/missile.png"));
-			this.shoot_counter = 0;
+			this.shootCounter = 0;
 		}
 		
 	}
@@ -143,43 +129,34 @@ public class SpaceShip extends SpaceshipStructure {
 		
 		if (key == KeyEvent.VK_SPACE) {
 				this.setShooting(false);
-			}
+		}
 
 		if (keyMode == 0) {
-			
-			
-			if (key == KeyEvent.VK_LEFT ) {
+					
+			if (key == KeyEvent.VK_LEFT )
 				this.setLeft(false);
-			}
 
-			if (key == KeyEvent.VK_RIGHT ) {
+			if (key == KeyEvent.VK_RIGHT )
 				this.setRight(false);
-			}
 
-			if (key == KeyEvent.VK_UP ) {
+			if (key == KeyEvent.VK_UP )
 				this.setUp(false);
-			}
 
-			if (key == KeyEvent.VK_DOWN ) {
+			if (key == KeyEvent.VK_DOWN )
 				this.setDown(false);
-			}
 		}else if(keyMode == 1) {
 			
-			if ( key == KeyEvent.VK_A) {
+			if ( key == KeyEvent.VK_A)
 				this.setLeft(false);
-			}
 
-			if ( key == KeyEvent.VK_D) {
+			if ( key == KeyEvent.VK_D)
 				this.setRight(false);
-			}
 
-			if ( key == KeyEvent.VK_W) {
+			if ( key == KeyEvent.VK_W)
 				this.setUp(false);
-			}
 
-			if ( key == KeyEvent.VK_S) {
+			if ( key == KeyEvent.VK_S)
 				this.setDown(false);
-			}
 		}
 	}
 	

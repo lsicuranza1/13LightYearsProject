@@ -1,18 +1,12 @@
-/**
- * 
- */
 package test;
 
 import static org.junit.Assert.assertEquals;
-
 import java.awt.geom.AffineTransform;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import game.Asteroid;
 
-public class AsteroidTest {
+public class AsteroidTest { 
 
 	private Asteroid asteroid;
 
@@ -22,7 +16,6 @@ public class AsteroidTest {
 		this.asteroid = new Asteroid(0, 0, "../resources/images/asteroid-icon.png");
 
 	}
-
 
 	@Test
 	public void testMove() {
@@ -35,7 +28,6 @@ public class AsteroidTest {
 		this.asteroid.move();
 		assertEquals(transf, this.asteroid.getTransform());
 	}
-
 
 	@Test
 	public void testGetTransform() {
@@ -58,7 +50,5 @@ public class AsteroidTest {
 		this.asteroid.setTransform(transf);
 		assertEquals(transf,this.asteroid.getTransform());
 	}
-
-
 
 }

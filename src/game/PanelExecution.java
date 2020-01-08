@@ -18,56 +18,55 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
 import game.patterns.factoryMethod.ObstacleFactory;
 import game.patterns.factoryMethodBonus.BonusFactory;
 
 @SuppressWarnings("serial")
-public class PanelEsecuzione extends JPanel implements ActionListener {
+public class PanelExecution extends JPanel implements ActionListener {
 	private MainFrame mainframe = MainFrame.getIstance();
-	private String fileNameSpaceShip, fileNameLife, fileNameEnemy, fileNameBomb;
+	private String fileNameSpaceShip, fileNameLife, fileNameEnemy;
 	private int level = 1;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
 	private List<Meteorite> meteorites;
-	private List<Bomb> bombeVaganti;
+	private List<Bomb> strayBombs;
 	private List<LifeBonus> lifeBonus;
 	private Deque<Life> lives;
 	private List<ScoreBonus> scoreBonus;
+	private List<EnemySpaceShip> enemies;
 	private BufferedImage scrollingBackground;
-	private int yOffset = 0; //variabile per lo scrollingBackground
-	private int yDelta = 1;  //variabile per lo scrollingBackground
+	private int yOffsetScrolling = 0;
+	private int yDeltaScrolling = 1;
 	private int countToScoreBonus = 0;
 	private int countToLifeBonus = 0;
 	private int countToAddAsteroid = 0;
 	private int countToAddMeteorite = 0;
 	private int countToAddEnemies = 0;
+	private int countToAddBonusLabel = 0;
+	private int countTimeScoreBonus = 0;
 	private final int DELAY = 20;
 	private Timer timer;
 	private JLabel levelLabel;
 	private JLabel labelLiveScore;
 	private JLabel labelScoreUpdate;
-	private JDialog dialog;
-	private List<EnemySpaceShip> enemies;
+	private JDialog dialogPause;
 	private boolean flagPause = false;
 	private String scoreUpdate = "";
-	private int count = 0; //serve per conteggiare il tempo in cui la label del bonus rimane sullo schermo
 	private boolean activeBonusScore = false;
-	private int countTimeScoreBonus = 0;
 	private static int asteroidsDestoyed = 0;
 	private static int enemiesDestoyed = 0;
 
-	public PanelEsecuzione() {
+	public PanelExecution() {
 		
 		this.addKeyListener(new TAdapter());
 		this.setFocusable(false);
+		this.setLayout(null);
 		mainframe.getScore().setScoreValue(0);
 		this.levelLabel = new JLabel("");
 		this.labelLiveScore = new JLabel("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
@@ -75,10 +74,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.add(this.labelLiveScore);
 		this.add(this.labelScoreUpdate);
 		this.add(this.levelLabel);
-		this.labelScoreUpdate.setVisible(false);
 		
-		this.setLayout(null);
-
 		this.labelLiveScore.setBounds(10, 10, 400, 50);
 		this.labelLiveScore.setForeground(Color.GREEN);
 		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
@@ -86,6 +82,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.labelScoreUpdate.setBounds(200, 10, 400, 50);
 		this.labelScoreUpdate.setForeground(Color.GREEN);
 		this.labelScoreUpdate.setFont(new Font("Serif", Font.BOLD, 22));
+		this.labelScoreUpdate.setVisible(false);
 		
 		this.levelLabel.setBounds(10, 35, 400, 50);
 		this.levelLabel.setForeground(Color.WHITE);
@@ -96,7 +93,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.fileNameSpaceShip = "../resources/images/spaceship.png";
 		this.fileNameEnemy = "../resources/images/firstEnemy.png";
 		this.fileNameLife = "../resources/images/life.png";
-		this.fileNameBomb = "../resources/images/missile_enemy.png";
 		
 		this.spaceShip = new SpaceShip(350,550, fileNameSpaceShip);
 		this.scoreBonus = new ArrayList<ScoreBonus>();
@@ -107,7 +103,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		this.lives = new ArrayDeque<Life>();
 		this.initLives(lives);
 		this.enemies = new ArrayList<EnemySpaceShip>();
-		this.bombeVaganti = new ArrayList<Bomb>();
+		this.strayBombs = new ArrayList<Bomb>();
 
 		try {
 			this.scrollingBackground = ImageIO.read(getClass().getResource("../resources/images/space.jpg"));
@@ -128,14 +124,14 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			Graphics2D g2d = (Graphics2D) g.create();
 
 			int xPos = (getWidth() - scrollingBackground.getWidth()) / 2;
-			int yPos = yOffset;
+			int yPos = yOffsetScrolling;
 
 			while (yPos > 0) {
 				yPos -= scrollingBackground.getHeight();
 				g2d.drawImage(scrollingBackground, xPos, yPos, this);
 			}
 
-			yPos = yOffset;
+			yPos = yOffsetScrolling;
 			while (yPos < getHeight()) {
 				g2d.drawImage(scrollingBackground, xPos, yPos, this);
 				yPos += scrollingBackground.getHeight();
@@ -145,51 +141,37 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		}
 
 		doDrawing(g);
-
 		Toolkit.getDefaultToolkit().sync();
 	}
 
 	private void doDrawing(Graphics g) {
 
 		Graphics2D g2d = (Graphics2D) g;
-
 		g2d.drawImage(spaceShip.getImage(), spaceShip.getX(), spaceShip.getY(), this);
 
-		List<Missile> missiles = spaceShip.getMissiles();
-		
+		List<Missile> missiles = spaceShip.getMissiles();		
 		for (LifeBonus life: this.lifeBonus) {
-
 			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
-		}
-		
+		}		
 		for (ScoreBonus score: this.scoreBonus) {
-
 			g2d.drawImage(score.getImage(), score.getX(), score.getY(), this);
 		}
-
 		for (Missile missile : missiles) {
-
 			g2d.drawImage(missile.getImage(), missile.getX(), missile.getY(), this);
 		}
-
 		for (Asteroid asteroid : asteroids) {
 			g2d.drawImage(asteroid.getImage(), asteroid.getTransform(), this);
 		}
-
 		for (Meteorite meteorite : meteorites) {
 			g2d.drawImage(meteorite.getImage(), meteorite.getTransform(), this);
 		}
-
 		for (Life life : lives) {
 			g2d.drawImage(life.getImage(), life.getX(), life.getY(), this);
+		}	
+		for (Bomb bomb : strayBombs) {
+			g2d.drawImage(bomb.getImage(), bomb.getX(), bomb.getY(), this);
 		}
-		
-		if(!bombeVaganti.isEmpty()) {
-			for (Bomb bomb : bombeVaganti) {
-				g2d.drawImage(bomb.getImage(), bomb.getX(), bomb.getY(), this);
-			}
-		}
-		
+	
 		for(EnemySpaceShip enemy : enemies) {
         	List<Bomb> lista = enemy.getBombs();
         	g2d.drawImage(enemy.getImage(), enemy.getX(), enemy.getY(), 50, 60, this);
@@ -204,63 +186,45 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (flagPause) {
-			if (dialog == null) {
-				PanelPause deDialogPanel = new PanelPause(this);
-				dialog = new JDialog();
-				dialog.getContentPane().add(deDialogPanel); 
-				dialog.setUndecorated(true); 
-				dialog.pack(); 
-				dialog.setAlwaysOnTop(true);
-				dialog.setLocationRelativeTo(this);
-				dialog.setVisible(true);
-			}
-		} else {
-			if (dialog != null) {
-				dialog.dispose();
-				dialog.setVisible(false);
-				dialog = null;
-			}
-			
-			if (count < 100) {
-				count++;
-			}
-			else {
-				this.labelScoreUpdate.setVisible(false);
-			}
-			
-			this.updateSpaceShip();
-			this.updateMissiles();
-			this.updateObstacles();
-			this.updateBombs();
-			this.updateBombeVaganti();
-			this.updateEnemies();
-			this.updateBonus();
-			this.updateLives();
-			this.checkCollisions();
-			if (mainframe.getScore().getScoreValue() > 500 * Math.pow((double) level, 2.0)) {
-				level++;
-				this.levelLabel.setText("Level: " + level);
-			}
-			this.yOffset += this.yDelta;
-			
-			if(this.activeBonusScore == true) {
-			this.countTimeScoreBonus ++;
-			
-			if(countTimeScoreBonus==1000) {
-			this.activeBonusScore = false;
-			this.countTimeScoreBonus = 0;	
-			this.labelScoreUpdate.setForeground(Color.green);
-			}
-			}
 
-			
-			mainframe.getScore().updateScoreValue(1);
-			this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
-			this.labelScoreUpdate.setText(this.scoreUpdate);
-			this.repaint();
+		if (countToAddBonusLabel < 100) {
+			countToAddBonusLabel++;
 		}
-
+		else {
+			this.labelScoreUpdate.setVisible(false);
+		}
+		
+		this.updateSpaceShip();
+		this.updateMissiles();
+		this.updateObstacles();
+		this.updateBombs();
+		this.updatestrayBombs();
+		this.updateEnemies();
+		this.updateBonus();
+		this.updateLives();
+		this.checkCollisions();
+		
+		if (mainframe.getScore().getScoreValue() > 500 * Math.pow((double) level, 2.0)) {
+			level++;
+			this.levelLabel.setText("Level: " + level);
+		}
+		
+		this.yOffsetScrolling += this.yDeltaScrolling;
+		
+		if(this.activeBonusScore == true) {
+		this.countTimeScoreBonus ++;
+		
+			if(countTimeScoreBonus==1000) {
+				this.activeBonusScore = false;
+				this.countTimeScoreBonus = 0;	
+				this.labelScoreUpdate.setForeground(Color.green);
+			}
+		}
+	
+		mainframe.getScore().updateScoreValue(1);
+		this.labelLiveScore.setText("Live Score: " + Integer.toString(mainframe.getScore().getScoreValue()));
+		this.labelScoreUpdate.setText(this.scoreUpdate);
+		this.repaint();
 	}
 
 	public boolean isFlagPause() {
@@ -276,15 +240,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		List<Missile> missiles = spaceShip.getMissiles();
 
 		for (int i = 0; i < missiles.size(); i++) {
-
 			Missile missile = missiles.get(i);
 
 			if (missile.isVisible()) {
-
 				missile.move();
 				missile.setBounds();
 			} else {
-
 				missiles.remove(i);
 			}
 		}
@@ -299,37 +260,36 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 	public void updateObstacles() {
 
-		// maggiore � il valore minore � la frequenza di uscita degli asteroidi
 		if (countToAddAsteroid >= 250 / level) {
-			asteroids.add((Asteroid) new ObstacleFactory().getObstacle("asteroid"));  //FACTORY METHOD TO CREATE ASTEROIDS
+			asteroids.add((Asteroid) new ObstacleFactory().getObstacle("asteroid"));
 			countToAddAsteroid = 0;
 		}
 		countToAddAsteroid++;
 
 		if (countToAddMeteorite >= 250 / level) {
-			meteorites.add((Meteorite) new ObstacleFactory().getObstacle("meteorite"));  //FACTORY METHOD TO CREATE METEORITES
+			meteorites.add((Meteorite) new ObstacleFactory().getObstacle("meteorite"));
 			countToAddMeteorite = 0;
 		}
 		countToAddMeteorite++;
 
-		Iterator<Asteroid> it_asteroids = asteroids.iterator();
+		Iterator<Asteroid> iteratorAsteroids = asteroids.iterator();
 
-		while (it_asteroids.hasNext()) {
-			Asteroid asteroid = (Asteroid) it_asteroids.next();
+		while (iteratorAsteroids.hasNext()) {
+			Asteroid asteroid = (Asteroid) iteratorAsteroids.next();
 			if (asteroid.getY() >= 800 || !asteroid.isVisible()) {
-				it_asteroids.remove();
+				iteratorAsteroids.remove();
 			} else {
 				asteroid.move();
 				asteroid.setBounds();
 			}
 		}
 
-		Iterator<Meteorite> it_meteorites = meteorites.iterator();
+		Iterator<Meteorite> iteratorMeteorites = meteorites.iterator();
 
-		while (it_meteorites.hasNext()) {
-			Meteorite meteorite = (Meteorite) it_meteorites.next();
+		while (iteratorMeteorites.hasNext()) {
+			Meteorite meteorite = (Meteorite) iteratorMeteorites.next();
 			if (meteorite.getY() >= 800 || !meteorite.isVisible()) {
-				it_meteorites.remove();
+				iteratorMeteorites.remove();
 			} else {
 				meteorite.move();
 				meteorite.setBounds();
@@ -341,17 +301,17 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	public void updateBonus() {
 
 		if (countToLifeBonus >= 600 * level) {
-			lifeBonus.add((LifeBonus) new BonusFactory().getBonus("life"));  //FACTORY METHOD TO CREATE ASTEROIDS
+			lifeBonus.add((LifeBonus) new BonusFactory().getBonus("life"));
 			countToLifeBonus = 0;
 		}
 		countToLifeBonus++;
 
-		Iterator<LifeBonus> it_lifeBonus = lifeBonus.iterator();
+		Iterator<LifeBonus> iteratorLifeBonus = lifeBonus.iterator();
 
-		while (it_lifeBonus.hasNext()) {
-			LifeBonus life = (LifeBonus) it_lifeBonus.next();
+		while (iteratorLifeBonus.hasNext()) {
+			LifeBonus life = (LifeBonus) iteratorLifeBonus.next();
 			if (life.getY() >= 800 || !life.isVisible()) {
-				it_lifeBonus.remove();
+				iteratorLifeBonus.remove();
 			} else {
 				life.move();
 				life.setBounds();
@@ -364,12 +324,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		}
 		countToScoreBonus++;
 
-		Iterator<ScoreBonus> it_scoreBonus = scoreBonus.iterator();
+		Iterator<ScoreBonus> iteratorScoreBonus = scoreBonus.iterator();
 
-		while (it_scoreBonus.hasNext()) {
-			ScoreBonus score = (ScoreBonus) it_scoreBonus.next();
+		while (iteratorScoreBonus.hasNext()) {
+			ScoreBonus score = (ScoreBonus) iteratorScoreBonus.next();
 			if (score.getY() >= 800 || !score.isVisible()) {
-				it_scoreBonus.remove();
+				iteratorScoreBonus.remove();
 			} else {
 				score.move();
 				score.setBounds();
@@ -378,13 +338,12 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 
 	}
 	
-
 	public void initLives(Deque<Life> lives) {
 		Life life;
 		int xCoordLife = 10;
-
-		for (int i = 0; i < 3; i++) {
-			final int shift = 30; // COSTANTE
+		int nLives = 3;
+		for (int i = 0; i < nLives; i++) {
+			final int shift = 30;
 			life = new Life(xCoordLife, 80, fileNameLife);
 			lives.add(life);
 			xCoordLife += shift;
@@ -400,13 +359,13 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	
 	public void updateEnemies() {
 		
-		int D_W = 800; 
-		int D_H = 800; 
+		int panelWidth = 800; 
+		int panelHeight = 800; 
 		Random random = new Random();
 		int randX1;
 		
 		if (countToAddEnemies >= 800 / level) {
-			randX1 = random.nextInt(D_W);
+			randX1 = random.nextInt(panelWidth);
 			enemies.add(new EnemySpaceShip(randX1, -20, fileNameEnemy));
 			enemies.get(enemies.size()-1).fire();
 			countToAddEnemies = 0;
@@ -417,8 +376,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		
     	while(et.hasNext()) {
     		EnemySpaceShip enemy = (EnemySpaceShip)et.next();
-    		if (enemy.getY() >= D_H || !enemy.isVisible()) {
-    			bombeVaganti = enemy.getBombs();;
+    		if (enemy.getY() >= panelHeight || !enemy.isVisible()) {
+    			strayBombs = enemy.getBombs();;
 				et.remove();
 			} else {
 				enemy.fire();
@@ -435,37 +394,31 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			List<Bomb> bombs = enemies.get(i).getBombs();
 
 			for(int j=0;j< bombs.size();j++) {
-				Bomb bomba = bombs.get(j);			
-				if(bomba.isVisible()) {
-					bomba.move();
-					bomba.setBounds();
-		        	if(bomba.getY()>850){		        		
-//		        		bomba.setY(enemies.get(i).getY()+50);
-//		        		bomba.setX(enemies.get(i).getX()+15);
-		        		bomba.setVisible(false);
+				Bomb bomb = bombs.get(j);			
+				if(bomb.isVisible()) {
+					bomb.move();
+					bomb.setBounds();
+		        	if(bomb.getY()>850){		        		
+		        		bomb.setVisible(false);
 		        	}
 				}else {
-					bombs.remove(bomba);
+					bombs.remove(bomb);
 				}
 			}
 		}
-	
-
 	}
 	
-	public void updateBombeVaganti() {
-		if(!bombeVaganti.isEmpty()) {
-			for(int i=0; i<bombeVaganti.size();i++) {
-				Bomb bomba = bombeVaganti.get(i);
-				if(bomba.isVisible()) {
-					bomba.move();
-					bomba.setBounds();
-					if(bomba.getY()>850) {
-						bomba.setVisible(false);
-					}
-				}else {
-					bombeVaganti.remove(bomba);
+	public void updatestrayBombs() {
+		for(int i=0; i<strayBombs.size();i++) {
+			Bomb bomb = strayBombs.get(i);
+			if(bomb.isVisible()) {
+				bomb.move();
+				bomb.setBounds();
+				if(bomb.getY()>850) {
+					bomb.setVisible(false);
 				}
+			}else {
+				strayBombs.remove(bomb);
 			}
 		}
 	}
@@ -480,21 +433,20 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		Rectangle2D missileBounds;
 		Rectangle2D enemyBounds;
 		Rectangle2D bombBounds;
-		Rectangle2D bombeVagantiBounds;
-		
-		
+		Rectangle2D strayBombsBounds;
+		int maxLives = 5;	
 		for (LifeBonus life : this.lifeBonus) {
-
 			bonusBounds = life.getBounds();
-
+			
 			if (bonusBounds.intersects(spaceShipBounds)) {
 				life.removeBoundsObstacles();
 				int actual_lives = this.spaceShip.getLives();
-				if(actual_lives < 6) {
-				spaceShip.setLives(actual_lives+1);
-				int x_shift = lives.getLast().getX();
-				lives.add(new Life(x_shift+30,80,fileNameLife));
-				lives.getLast().setVisible(true);
+				
+				if(actual_lives < maxLives) {
+					spaceShip.setLives(actual_lives+1);
+					int x_shift = lives.getLast().getX();
+					lives.add(new Life(x_shift+30,80,fileNameLife));
+					lives.getLast().setVisible(true);
 				}
 				life.removeBoundsObstacles();
 				life.setVisible(false);
@@ -503,7 +455,6 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		}
 		
 		for (ScoreBonus score : this.scoreBonus) {
-
 			scoreBounds = score.getBounds();
 
 			if (scoreBounds.intersects(spaceShipBounds)) {
@@ -512,20 +463,17 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				this.activeBonusScore = true;
 				this.countTimeScoreBonus = 0;
 			}
-
 		}
 
 		for (Meteorite meteorite : meteorites) {
-
 			meteoriteBounds = meteorite.getBounds();
-
 			if (meteoriteBounds.intersects(spaceShipBounds)) {
 				meteorite.removeBoundsEnemies();
 				spaceShip.setLives(spaceShip.getLives()-1);
 				lives.getLast().setVisible(false);
 				if (spaceShip.getLives() == 0) {
 					timer.stop();
-					MainFrame.getIstance().updateModalita("game_over");
+					MainFrame.getIstance().updateModality("game_over");
 				} else {
 					meteorite.setVisible(false);
 				}
@@ -534,18 +482,17 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 		}
 
 		for (Asteroid asteroid : asteroids) {
-
 			asteroidBounds = asteroid.getBounds();
 
 			if (spaceShipBounds.intersects(asteroidBounds)) {
 				asteroid.removeBoundsEnemies();
 				spaceShip.setLives(spaceShip.getLives()-1);
 				lives.getLast().setVisible(false);
-
+				
 				if (spaceShip.getLives() == 0) {
 					timer.stop();
-					MainFrame.getIstance().updateModalita("game_over");
-				} else {
+					MainFrame.getIstance().updateModality("game_over");
+				}else {
 					asteroid.setVisible(false);
 				}
 			}
@@ -554,47 +501,43 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				missileBounds = missile.getBounds();
 
 				if (missileBounds.intersects(asteroidBounds)) {
-					PanelEsecuzione.setAsteroidsDestoyed(PanelEsecuzione.getAsteroidsDestoyed()+1);
+					PanelExecution.setAsteroidsDestoyed(PanelExecution.getAsteroidsDestoyed()+1);
 					missile.removeBoundsEnemies();
 					missile.setVisible(false);
 					asteroid.setVisible(false);
 					if(activeBonusScore == false) {
-					mainframe.getScore().updateScoreValue(100);
-					this.scoreUpdate = "+100";
-					}
-					else {
-					mainframe.getScore().updateScoreValue(200);	
-					this.scoreUpdate = "+200";
-					this.labelScoreUpdate.setForeground(Color.yellow);
+						mainframe.getScore().updateScoreValue(100);
+						this.scoreUpdate = "+100";
+					}else {
+						mainframe.getScore().updateScoreValue(200);	
+						this.scoreUpdate = "+200";
+						this.labelScoreUpdate.setForeground(Color.yellow);
 					}
 					this.labelScoreUpdate.setVisible(true);
-					this.count = 0;
+					this.countToAddBonusLabel = 0;
 				}
-
 			}
 			
-			for(EnemySpaceShip enemy : enemies) {
-				
+			for(EnemySpaceShip enemy : enemies) {				
 				enemyBounds = enemy.getBounds();
 
 				for(Missile missile : missiles) {
 					missileBounds = missile.getBounds();
 					if(missileBounds.intersects(enemyBounds)) {
-						PanelEsecuzione.setEnemiesDestoyed(PanelEsecuzione.getEnemiesDestoyed()+1);;
+						PanelExecution.setEnemiesDestoyed(PanelExecution.getEnemiesDestoyed()+1);;
 						missile.removeBoundsEnemies();
 						missile.setVisible(false);
 						enemy.setVisible(false);
 						if(activeBonusScore == false) {
-						mainframe.getScore().updateScoreValue(500);
-						this.scoreUpdate = "+500";
-						}
-						else {
-						mainframe.getScore().updateScoreValue(1000);
-						this.scoreUpdate = "+1000";	
-						this.labelScoreUpdate.setForeground(Color.yellow);
+							mainframe.getScore().updateScoreValue(500);
+							this.scoreUpdate = "+500";
+						}else {
+							mainframe.getScore().updateScoreValue(1000);
+							this.scoreUpdate = "+1000";	
+							this.labelScoreUpdate.setForeground(Color.yellow);
 						}
 						this.labelScoreUpdate.setVisible(true);
-						this.count = 0;
+						this.countToAddBonusLabel = 0;
 					}
 				}
 				
@@ -607,7 +550,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 					
 					if (spaceShip.getLives() == 0) {
 						timer.stop();
-						MainFrame.getIstance().updateModalita("game_over");
+						MainFrame.getIstance().updateModality("game_over");
 					} else {
 						enemy.setVisible(false);
 					}
@@ -622,7 +565,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 						
 						if (spaceShip.getLives() == 0) {
 							timer.stop();
-							MainFrame.getIstance().updateModalita("game_over");
+							MainFrame.getIstance().updateModality("game_over");
 						} else {
 							bomb.setVisible(false);
 						}
@@ -630,51 +573,76 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 				}
 				
 			}
-			
-			if(!bombeVaganti.isEmpty()) {
-				for(Bomb bomb : bombeVaganti){
-					bombeVagantiBounds = bomb.getBounds();
-					if(bombeVagantiBounds.intersects(spaceShipBounds)) {
+
+				for(Bomb bomb : strayBombs){
+					strayBombsBounds = bomb.getBounds();
+					if(strayBombsBounds.intersects(spaceShipBounds)) {
 						bomb.removeBoundsEnemies();
 						spaceShip.setLives(spaceShip.getLives()-1);
 						lives.getLast().setVisible(false);
 						if (spaceShip.getLives() == 0) {
 							timer.stop();
-							MainFrame.getIstance().updateModalita("game_over");
+							MainFrame.getIstance().updateModality("game_over");
 						} else {
 							bomb.setVisible(false);
 						}
 					}
-				}
+				}		
 			}
-		}
 	}
 
 	public class TAdapter extends KeyAdapter {
 		@Override
 		public void keyReleased(KeyEvent e) {
-			spaceShip.keyReleased(e);
+			if (flagPause == false && timer.isRunning()){
+				spaceShip.keyReleased(e);
+			}
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int key = e.getKeyCode();
 			if (key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_PAUSE) {
-				flagPause = !flagPause;
-			} else
+				if (flagPause == false) {
+					flagPause = true;
+					timer.stop();
+					
+					if (PanelExecution.this.spaceShip.isDown()){
+						PanelExecution.this.spaceShip.setDown(false);
+					}
+					else if (PanelExecution.this.spaceShip.isUp()){
+						PanelExecution.this.spaceShip.setUp(false);
+					}
+					else if (PanelExecution.this.spaceShip.isRight()){
+						PanelExecution.this.spaceShip.setRight(false);
+					}
+					else if (PanelExecution.this.spaceShip.isLeft()){
+						PanelExecution.this.spaceShip.setLeft(false);
+					}
+					
+					PanelPause deDialogPanel = new PanelPause(PanelExecution.this);
+					dialogPause = new JDialog(PanelExecution.this.mainframe.getFrame(), true);
+					dialogPause.getContentPane().add(deDialogPanel); 
+					dialogPause.setUndecorated(true); 
+					dialogPause.pack(); 
+					dialogPause.setAlwaysOnTop(true);
+					dialogPause.setLocationRelativeTo(PanelExecution.this);
+					dialogPause.setVisible(true);
+				}
+			}
+			
+			if (flagPause == false && timer.isRunning()){
 				spaceShip.keyPressed(e);
+			}
 		}
 	}
 	
-//	public void checkForLevelWon() {
-//		if (mainframe.getScore().getScoreValue() > 500 * level) {
-//			level++;
-//			this.levelLabel.setText("Level: " + level);
-//		}
-//	}
+	public JDialog getDialogPause() {
+		return dialogPause;
+	}
 	
-	public JDialog getDialog() {
-		return dialog;
+	public Timer getTimer() {
+		return timer;
 	}
 
 	public static int getAsteroidsDestoyed() {
@@ -682,7 +650,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	}
 
 	public static void setAsteroidsDestoyed(int asteroidsDestoyed) {
-		PanelEsecuzione.asteroidsDestoyed = asteroidsDestoyed;
+		PanelExecution.asteroidsDestoyed = asteroidsDestoyed;
 	}
 
 	public static int getEnemiesDestoyed() {
@@ -690,9 +658,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	}
 
 	public static void setEnemiesDestoyed(int enemiesDestoyed) {
-		PanelEsecuzione.enemiesDestoyed = enemiesDestoyed;
-	}
-	
-	
+		PanelExecution.enemiesDestoyed = enemiesDestoyed;
+	}	
 
 }

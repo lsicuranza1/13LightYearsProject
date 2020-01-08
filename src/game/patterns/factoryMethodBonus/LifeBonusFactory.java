@@ -3,18 +3,17 @@ package game.patterns.factoryMethodBonus;
 import java.util.Random;
 import game.LifeBonus;
 
-public class LifeBonusFactory {
-	
+public class LifeBonusFactory extends BonusFactory{
 
-	static int D_W = 700;
+	static int width = 700;
 	static Random random = new Random();
-	static int randX1;
-	static int y_bonus = -50;
+	static int randX;
+	static int yBonus = -50;
 	static String fileNameLifeBonus = "../resources/images/life.png";
 
 	public static Object getLifeBonus() {
-		randX1 = random.nextInt(D_W);
-		return new LifeBonus(randX1,y_bonus,fileNameLifeBonus);
+		randX = random.nextInt(width);
+		return new LifeBonus(randX,yBonus,fileNameLifeBonus);
 		
 	}
 

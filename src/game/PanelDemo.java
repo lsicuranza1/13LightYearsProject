@@ -30,6 +30,7 @@ import game.patterns.factoryMethodBonus.BonusFactory;
 @SuppressWarnings("serial")
 public class PanelDemo extends JPanel implements ActionListener {
 	private String fileNameSpaceShip, fileNameAsteroid, fileNameMeteorite, fileNameEnemies, fileNameLife, fileRedArrow;
+	private JLabel levelLabel;
 	private SpaceShip spaceShip;
 	private List<Missile> missiles;
 	private List<Asteroid> asteroids;
@@ -69,12 +70,13 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.setFocusable(false);
 
 		this.setLayout(null);
-
+		
+		this.levelLabel = new JLabel("Level: 1");
 		this.labelLiveScore = new JLabel("Live Score: " + Integer.toString(5231));
 		this.add(this.labelLiveScore);
 
 		this.labelLiveScore.setBounds(10, 10, 400, 50);
-		this.labelLiveScore.setForeground(Color.WHITE);
+		this.labelLiveScore.setForeground(Color.GREEN);
 		this.labelLiveScore.setFont(new Font("Serif", Font.BOLD, 22));
 
 		this.textArea = new JTextArea(
@@ -83,6 +85,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.textArea.setBounds(200, 130, 300, 100);
 		this.textArea.setBackground(Color.green);
 		this.textArea.setFont(new Font("Serif", Font.BOLD, 16));
+		this.textArea.setEditable(false);
 
 		this.fileNameLife = "../resources/images/life.png";
 		this.fileRedArrow = "../resources/images/freccia-png-rossa-ok.png";
@@ -114,6 +117,12 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.labelText.setBounds(140, 100, 600, 400);
 		this.labelText.setForeground(Color.WHITE);
 		this.labelText.setFont(new Font("Serif", Font.BOLD, 30));
+		
+		this.levelLabel.setBounds(10, 35, 400, 50);
+		this.levelLabel.setForeground(Color.WHITE);
+		this.levelLabel.setFont(new Font("Serif", Font.BOLD, 22));
+		this.levelLabel.setVisible(true);
+		this.add(this.levelLabel);
 
 		this.timer = new Timer(DELAY, this);
 		this.timer.start();
@@ -200,7 +209,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		if (flagScore)
 			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 200, 5, this);
 		if (flagLife)
-			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 150, 30, this);
+			g2d.drawImage(ImageIO.read(getClass().getResource(fileRedArrow)), 150, 50, this);
 
 	}
 
@@ -236,6 +245,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.labelText.setVisible(true);
 			setFlagEnemies(true);
 			setFlagBonusTrue(false);
+			count = 0;
 		}
 		count++;
 	}
@@ -294,7 +304,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepScore() {
-		if (count > 500) { // change to 500, troppo poco tempo
+		if (count > 500) { 
 			flagScore = false;
 			count = 0;
 			this.textArea.setVisible(false);
@@ -306,6 +316,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.textArea.setBounds(200, 150, 300, 120);
 			this.textArea.setBackground(Color.green);
 			this.textArea.setFont(new Font("Serif", Font.BOLD, 16));
+			this.textArea.setEditable(false);
 			this.repaint();
 		}
 		count++;
@@ -313,18 +324,20 @@ public class PanelDemo extends JPanel implements ActionListener {
 	}
 
 	private void stepFinal() {
-		if (count < 50) {
+		if (count < 70) {
 			this.labelText.setText("In the space is not so easy");
 			this.labelText.setForeground(Color.WHITE);
 			this.labelText.setVisible(true);
 			count++;
-		} else if (count < 100) {
+		} else if (count < 120) {
 			this.labelText.setText("Good Game");
 			this.labelText.setForeground(Color.RED);
 			count++;
 		} else {
 			timer.stop();
-			DemoFrame.soundInGame.stopSound();
+			if(Settings.soundMusic == true) {
+				DemoFrame.soundInGame.stopSound();	
+				}			
 			MainFrame.getIstance().updateModalita("in_esecuzione");
 		}
 		this.updateMissiles();
@@ -377,14 +390,14 @@ public class PanelDemo extends JPanel implements ActionListener {
 	private void stepObstacles() {
 		if (count > 800) {
 			count = 0;
-			this.labelText.setText("They aren't only bad things. Take the bonus");
+			this.labelText.setText("There aren't only bad things. Take a bonus");
 			this.labelText.setForeground(Color.WHITE);
 			this.labelText.setVisible(true);
 			this.deleteObstacles();
 			setFlagObstacles(false);
 			setFlagBonus(true);
-		} else if (count > 51) {
-			if (this.labelText.isVisible() && countAhia < 20) {
+		} else if (count > 100) {
+			if (this.labelText.isVisible() && countAhia < 50) {
 				countAhia++;
 			} else {
 				this.labelText.setVisible(false);
@@ -395,7 +408,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			this.checkCollisions();
 			this.repaint();
 			count++;
-		} else if (count > 50) {
+		} else if (count > 100) {
 			this.labelText.setVisible(false);
 			this.updateLives();
 			this.updateObstacles();
@@ -453,10 +466,10 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 		int y_asteroid = -500;
 		int y_meteorite = -500;
-		int D_W = 1000; // COSTANTE
-		int D_H = 600; // COSTANTE
+		int D_W = 800; // COSTANTE
+		int D_H = 800; // COSTANTE
 
-		// maggiore ï¿½ il valore minore ï¿½ la frequenza di uscita degli asteroidi
+		// maggiore è il valore minore è la frequenza di uscita degli asteroidi
 		if (countToAddAsteroid >= 150) {
 			int randX1 = random.nextInt(D_W);
 			asteroids.add(new Asteroid(randX1, y_asteroid, fileNameAsteroid));
@@ -545,7 +558,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 					setFlagObstacles(false);
 					setFlagBonus(true);
 					count=0;
-					this.labelText.setText("They aren't only bad things. Take the bonus");
+					this.labelText.setText("There aren't only bad things. Take a bonus");
 					this.labelText.setForeground(Color.WHITE);
 					this.labelText.setVisible(true);
 				}
@@ -571,7 +584,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 				if(lives.size()>0) {
 					x_shift = lives.getLast().getX();
 				}
-				lives.add(new Life(x_shift+30,60,fileNameLife));
+				lives.add(new Life(x_shift+30,80,fileNameLife));
 				lives.getLast().setVisible(true);
 				}
 				life.removeBoundsObstacles();
@@ -612,7 +625,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 					setFlagObstacles(false);
 					setFlagBonus(true);
 					count = 0;
-					this.labelText.setText("They aren't only bad things. Take the bonus");
+					this.labelText.setText("There aren't only bad things. Take a bonus");
 					this.labelText.setForeground(Color.WHITE);
 					this.labelText.setVisible(true);
 					
@@ -645,7 +658,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 
 		for (int i = 0; i < 3; i++) {
 			final int shift = 30; // COSTANTE
-			life = new Life(xCoordLife, 60, fileNameLife);
+			life = new Life(xCoordLife, 80, fileNameLife);
 			lives.add(life);
 			xCoordLife += shift;
 		}
@@ -761,6 +774,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 			if (isMoveSpaceShip() && (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_DOWN
 					|| key == KeyEvent.VK_UP)) {
 				labelText.setText("Avoid meteorites and asteroids");
+				count = 0;
 				labelText.setBounds(140, 70, 600, 400);
 				labelText.setFont(new Font("Serif", Font.BOLD, 30));
 				setFlagObstacles(true);

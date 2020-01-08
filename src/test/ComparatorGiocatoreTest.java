@@ -10,10 +10,11 @@ import gestioneClassifica.Giocatore;
 
 public class ComparatorGiocatoreTest {
 	
-	private ComparatorGiocatore c;
+	private ComparatorGiocatore comparator;
+	
 	@Before
 	public void setUp() throws Exception{
-		this.c = new ComparatorGiocatore();
+		this.comparator = new ComparatorGiocatore();
 	}
 	
 	
@@ -23,15 +24,15 @@ public class ComparatorGiocatoreTest {
 		//Test equal
 		Giocatore p1 = new Giocatore("Player1");
 		Giocatore p2 = new Giocatore("Player1");
-		assertEquals(c.compare(p1, p2),0);
+		assertEquals(this.comparator.compare(p1, p2),0);
 		
 		//Test greater
 		p1.setPunteggio(10);
-		assertEquals(c.compare(p1, p2),-1);
+		assertEquals(this.comparator.compare(p1, p2),-1);
 		
 		//Test less
 		p2.setPunteggio(20);
-		assertEquals(c.compare(p1, p2),1);
+		assertEquals(this.comparator.compare(p1, p2),1);
 		
 	}
 

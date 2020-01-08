@@ -34,7 +34,7 @@ public class StatoStartTest {
 		Stato stato = new StatoStart();
 
 		stato.gestioneStato(m, "in_esecuzione");
-		assertEquals("Gioco", main.getFrame().getTitle());
+		assertEquals("Game", main.getFrame().getTitle());
 		assertEquals(1, main.getFrame().getContentPane().getComponentCount());
 		assertTrue(m.getStatoModalita() instanceof StatoInEsecuzione);
 		

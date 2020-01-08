@@ -12,39 +12,38 @@ import game.ScoreBonus;
 public class ScoreBonusTest {
 	
 	private ScoreBonus bonus;
+	private AffineTransform transf;
 
 	@Before
 	public void setUp() throws Exception {
 		
 		this.bonus = new ScoreBonus(10,10,"../resources/images/x2-icon.png");
+		this.transf = new AffineTransform();
 	}
 
 	@Test
 	public void testMove() {
 		
-        AffineTransform transf = new AffineTransform();
-		transf.setToTranslation(bonus.getX(), bonus.getY()+5);
-		bonus.move();
-		assertEquals(transf, bonus.getTransform());
+        this.transf.setToTranslation(this.bonus.getX(), this.bonus.getY()+5);
+		this.bonus.move();
+		assertEquals(this.transf, this.bonus.getTransform());
 		
 	}
 
 	@Test
 	public void testGetTransform() {
 		
-		AffineTransform transf = new AffineTransform();
-		transf.setToTranslation(bonus.getX(), bonus.getY()+5);
-		bonus.move();
-		assertEquals(transf,bonus.getTransform());
+		this.transf.setToTranslation(bonus.getX(), bonus.getY()+5);
+		this.bonus.move();
+		assertEquals(this.transf,this.bonus.getTransform());
 	}
 	
 	@Test
 	public void testSetTransform() {
-		AffineTransform transf = new AffineTransform();
-        transf.setToTranslation(50,50);
-        
-        bonus.setTransform(transf);
-        assertEquals(transf,bonus.getTransform());
+		
+        this.transf.setToTranslation(20,20); 
+        this.bonus.setTransform(this.transf);
+        assertEquals(this.transf,this.bonus.getTransform());
                
 	}
 

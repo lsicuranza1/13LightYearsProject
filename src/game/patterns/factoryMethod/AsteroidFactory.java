@@ -7,10 +7,10 @@ import game.Sprite;
 
 public class AsteroidFactory extends ObstacleFactory {
 	
-	static int D_W = 600; //COSTANTE
+	static int D_W = 800;
 	static Random random = new Random();
 	static int randX1;
-	static int y_asteroid = -500;
+	static int y_asteroid = -50;
 	static String fileNameAsteroid = "../resources/images/asteroid-icon.png";
 	
 	public AsteroidFactory() {

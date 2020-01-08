@@ -8,7 +8,6 @@ public class Life extends Sprite {
 	}
 
 	public void move() {
-		
 	}
 
 }

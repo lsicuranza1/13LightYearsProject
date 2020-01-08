@@ -358,7 +358,7 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 			}
 		}
 		
-		if (countToScoreBonus >= 600 * level) {
+		if (countToScoreBonus >= 400 * level) {
 			scoreBonus.add((ScoreBonus) new BonusFactory().getBonus("score"));  //FACTORY METHOD TO CREATE ASTEROIDS
 			countToScoreBonus = 0;
 		}
@@ -400,8 +400,8 @@ public class PanelEsecuzione extends JPanel implements ActionListener {
 	
 	public void updateEnemies() {
 		
-		int D_W = 800; //COSTANTE
-		int D_H = 800; // COSTANTE
+		int D_W = 800; 
+		int D_H = 800; 
 		Random random = new Random();
 		int randX1;
 		

@@ -55,7 +55,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) dim.getWidth()  / 2,
 				(int) dimDisplay.getHeight() / 2 - (int) dim.getHeight() / 2);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Game Over");
+		setTitle("GameOver");
 		this.setResizable(false);
 
 		java.awt.GridBagConstraints gridBagConstraints;

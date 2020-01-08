@@ -90,5 +90,35 @@ public class EnemySpaceShip extends SpaceshipStructure {
 		return bombs;
 	}
 	
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
+	public int getNewX_1() {
+		return newX_1;
+	}
+
+
+	public void setNewX_1(int newX_1) {
+		this.newX_1 = newX_1;
+	}
+
+
+	public int getNewY_1() {
+		return newY_1;
+	}
+
+
+	public void setNewY_1(int newY_1) {
+		this.newY_1 = newY_1;
+	}
+
+
 	
 }

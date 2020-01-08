@@ -8,7 +8,7 @@ public class Giocatore implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final String tagGiocatore;
+	private String tagGiocatore;
     private int punteggio; 
     private LocalDate data; 
 
@@ -20,6 +20,10 @@ public class Giocatore implements Serializable{
     
     public String getTagGiocatore() {
         return tagGiocatore;
+    }
+    
+    public void setTagGiocatore(String tag) {
+    	this.tagGiocatore = tag;
     }
 
     public int getPunteggio() {

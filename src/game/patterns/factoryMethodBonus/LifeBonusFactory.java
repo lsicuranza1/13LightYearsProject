@@ -3,7 +3,7 @@ package game.patterns.factoryMethodBonus;
 import java.util.Random;
 import game.LifeBonus;
 
-public class LifeBonusFactory {
+public class LifeBonusFactory extends BonusFactory {
 	
 
 	static int D_W = 600;

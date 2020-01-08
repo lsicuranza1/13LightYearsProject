@@ -160,7 +160,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		panelGameOver.add(enemy, gridBagConstraints);
 		
 		asteroid.setFont(new java.awt.Font("Inc Free", 1, 24));
-		asteroid.setForeground(Color.GREEN);
+		asteroid.setForeground(Color.WHITE);
 		asteroid.setVerticalAlignment(1);
 		asteroid.setFocusPainted(false);
 		asteroid.setContentAreaFilled(false);

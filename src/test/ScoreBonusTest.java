@@ -17,7 +17,7 @@ public class ScoreBonusTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.bonus = new ScoreBonus(10,10,"../resources/images/x2-icon.png");
+		this.bonus = new ScoreBonus(10,10,"x2-icon.png");
 		this.transf = new AffineTransform();
 	}
 

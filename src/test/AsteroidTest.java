@@ -13,7 +13,7 @@ public class AsteroidTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.asteroid = new Asteroid(0, 0, "../resources/images/asteroid-icon.png");
+		this.asteroid = new Asteroid(0, 0, "asteroid-icon.png");
 
 	}
 

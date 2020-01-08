@@ -37,7 +37,7 @@ public class MenuFrame extends JFrame {
 		initComponents();
 		
 		if (Settings.soundMusic == true) {
-			MenuFrame.gameClip = Utilities.LoadSound(getClass().getResource("../resources/sound/menu_song.wav"));
+			MenuFrame.gameClip = Utilities.LoadSound(getClass().getResource("menu_song.wav"));
             MenuFrame.gameMusic = new Sound(gameClip);
             MenuFrame.gameMusic.loopSound();
         }
@@ -56,12 +56,12 @@ public class MenuFrame extends JFrame {
 		background = new javax.swing.JLabel();
 
 		Image iconFrame;
-		iconFrame = new ImageIcon(getClass().getResource("../resources/images/logo_game.png")).getImage();
+		iconFrame = new ImageIcon(getClass().getResource("logo_game.png")).getImage();
 		this.setIconImage(iconFrame);
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setPreferredSize(dim.getSize());
 		ImageIcon backgroundImage = resizeImageIcon(
-				getClass().getResource("../resources/images/sfondo_menu.png"),(int)dim.getWidth(),(int) dim.getHeight());		
+				getClass().getResource("sfondo_menu.png"),(int)dim.getWidth(),(int) dim.getHeight());		
 		background.setIcon(backgroundImage);
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("13 Light Years - Main Menu");

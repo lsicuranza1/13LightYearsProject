@@ -16,7 +16,7 @@ public class MeteoriteTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.meteorite = new Meteorite(0,0, "../resources/images/meteorite.png");
+		this.meteorite = new Meteorite(0,0, "meteorite.png");
 	}
 
 	@Test

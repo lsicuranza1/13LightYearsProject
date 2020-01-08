@@ -9,7 +9,7 @@ public class LifeBonusFactory extends BonusFactory{
 	static Random random = new Random();
 	static int randX;
 	static int yBonus = -50;
-	static String fileNameLifeBonus = "../resources/images/life.png";
+	static String fileNameLifeBonus = "life.png";
 
 	public static Object getLifeBonus() {
 		randX = random.nextInt(width);

@@ -80,21 +80,21 @@ public class Sprite {
 	
 	public void removeBoundsObstacles() {
 		this.rectangle.setFrame(0, 0, 0, 0);
-		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("../resources/sound/enemyExplosion2.wav"));
+		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("enemyExplosion2.wav"));
 		enemyExplosionSound = new Sound(enemyExplosionClip);
 		enemyExplosionSound.playSound();
 	}
 	
 	public void removeBoundsEnemies() {
 		this.rectangle.setFrame(0, 0, 0, 0);
-		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("../resources/sound/enemyExplosion.wav"));
+		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("enemyExplosion.wav"));
 		enemyExplosionSound = new Sound(enemyExplosionClip);
 		enemyExplosionSound.playSound();
 	}
 	
 	public void removeBoundsBonus() {
 		this.rectangle.setFrame(0, 0, 0, 0);
-		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("../resources/sound/bonus.wav"));
+		enemyExplosionClip = Utilities.LoadSound(getClass().getResource("bonus.wav"));
 		enemyExplosionSound = new Sound(enemyExplosionClip);
 		enemyExplosionSound.playSound();
 	}

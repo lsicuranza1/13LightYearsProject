@@ -82,12 +82,12 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.textArea.setFont(new Font("Serif", Font.BOLD, 16));
 		this.textArea.setEditable(false);
 
-		this.fileNameLife = "../resources/images/life.png";
-		this.fileRedArrow = "../resources/images/freccia-png-rossa-ok.png";
-		this.fileNameSpaceShip = "../resources/images/spaceship.png";
-		this.fileNameAsteroid = "../resources/images/asteroid-icon.png";
-		this.fileNameMeteorite = "../resources/images/meteorite.png";
-		this.fileNameEnemies = "../resources/images/firstEnemy.png";
+		this.fileNameLife = "life.png";
+		this.fileRedArrow = "freccia-png-rossa-ok.png";
+		this.fileNameSpaceShip = "spaceship.png";
+		this.fileNameAsteroid = "asteroid-icon.png";
+		this.fileNameMeteorite = "meteorite.png";
+		this.fileNameEnemies = "firstEnemy.png";
 
 		this.spaceShip = new SpaceShip(350, 500, fileNameSpaceShip);
 		this.missiles = this.spaceShip.getMissiles();
@@ -100,7 +100,7 @@ public class PanelDemo extends JPanel implements ActionListener {
 		this.enemies = new ArrayList<EnemySpaceShip>();
 
 		try {
-			this.scrollingBackground = ImageIO.read(getClass().getResource("../resources/images/space.jpg"));
+			this.scrollingBackground = ImageIO.read(getClass().getResource("space.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

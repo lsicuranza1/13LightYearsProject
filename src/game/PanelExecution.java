@@ -90,9 +90,9 @@ public class PanelExecution extends JPanel implements ActionListener {
 		this.levelLabel.setText("Level: " + this.level);
 		this.levelLabel.setVisible(true);
 		
-		this.fileNameSpaceShip = "../resources/images/spaceship.png";
-		this.fileNameEnemy = "../resources/images/firstEnemy.png";
-		this.fileNameLife = "../resources/images/life.png";
+		this.fileNameSpaceShip = "spaceship.png";
+		this.fileNameEnemy = "firstEnemy.png";
+		this.fileNameLife = "life.png";
 		
 		this.spaceShip = new SpaceShip(350,550, fileNameSpaceShip);
 		this.scoreBonus = new ArrayList<ScoreBonus>();
@@ -106,7 +106,7 @@ public class PanelExecution extends JPanel implements ActionListener {
 		this.strayBombs = new ArrayList<Bomb>();
 
 		try {
-			this.scrollingBackground = ImageIO.read(getClass().getResource("../resources/images/space.jpg"));
+			this.scrollingBackground = ImageIO.read(getClass().getResource("space.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

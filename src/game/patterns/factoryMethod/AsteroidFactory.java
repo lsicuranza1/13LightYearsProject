@@ -10,7 +10,7 @@ public class AsteroidFactory extends ObstacleFactory {
 	static Random random = new Random();
 	static int randX;
 	static int yAsteroid = -50;
-	static String fileNameAsteroid = "../resources/images/asteroid-icon.png";
+	static String fileNameAsteroid = "asteroid-icon.png";
 	
 	public AsteroidFactory() {
 		super();

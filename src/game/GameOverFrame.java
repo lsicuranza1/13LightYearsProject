@@ -38,7 +38,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		
 			ExecutionFrame.soundInGame.stopSound();
 			
-			GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("../resources/sound/endGame.wav"));
+			GameOverFrame.clipEndGame = Utilities.LoadSound(getClass().getResource("endGame.wav"));
 			GameOverFrame.soundEndGame = new Sound(clipEndGame);
 			GameOverFrame.soundEndGame.loopSound();
 		}
@@ -49,7 +49,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 		Dimension dimDisplay = Toolkit.getDefaultToolkit().getScreenSize();
 		this.dim = new Dimension(1000,600);
 		this.setPreferredSize(dim.getSize());
-		ImageIcon backgroundImage = resizeImageIcon(getClass().getResource("../resources/images/gameover2.png"),
+		ImageIcon backgroundImage = resizeImageIcon(getClass().getResource("gameover2.png"),
 				(int) dim.getWidth(), (int) dim.getHeight());
 		this.setLocation((int) dimDisplay.getWidth() / 2 - (int) dim.getWidth()  / 2,
 				(int) dimDisplay.getHeight() / 2 - (int) dim.getHeight() / 2);
@@ -201,7 +201,7 @@ public class GameOverFrame extends javax.swing.JFrame {
 					try {
 						addPlayer(evt);
 				    } catch (UnclassifiedPlayerException ex) {
-				        JOptionPane.showMessageDialog(panelGameOver, "Sorry ... you didn't rank!","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
+				        JOptionPane.showMessageDialog(panelGameOver, "Sorry ... you didn't rank!","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("logo_game2.png")));
 				    } catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -263,10 +263,10 @@ public class GameOverFrame extends javax.swing.JFrame {
 		 Player player = new Player(playerName);
 		 player.setScore(mainFrame.getScore().getScoreValue());
 		 MainFrame.getScoreboard().addPlayer(player);
-		 MainFrame.getScoreboard().save("scoreboard.dat");
+		 MainFrame.getScoreboard().save();
 			 
 		 int position = MainFrame.getScoreboard().getScoreboardList().indexOf(player);
-		 JOptionPane.showMessageDialog(this,"Congratulations "+player.getPlayerTag()+", you entered the ranking in "+(position+1)+" position","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("../resources/images/logo_game2.png")));
+		 JOptionPane.showMessageDialog(this,"Congratulations "+player.getPlayerTag()+", you entered the ranking in "+(position+1)+" position","Result",JOptionPane.INFORMATION_MESSAGE,new ImageIcon(getClass().getResource("logo_game2.png")));
     } 
 		 
 

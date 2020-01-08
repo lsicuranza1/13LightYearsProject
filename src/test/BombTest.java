@@ -12,7 +12,7 @@ public class BombTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.bomb =  new Bomb(0, 0, "../resources/images/missile_enemy.png");
+		this.bomb =  new Bomb(0, 0, "missile_enemy.png");
 		
 	}
 

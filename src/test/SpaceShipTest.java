@@ -18,7 +18,7 @@ public class SpaceShipTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.spaceShip = new SpaceShip(0,0, "../resources/images/spaceship.png");
+		this.spaceShip = new SpaceShip(0,0, "spaceship.png");
 		SPACESHIP_SPEED = 8;
 	}
 	

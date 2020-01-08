@@ -117,7 +117,7 @@ public class SpaceShip extends SpaceshipStructure {
 		List<Missile> missiles = this.getMissiles();
 		
 		if (this.shootCounter >= 25) {
-			missiles.add(new Missile(this.getX() + this.getWidth() / 2 - 9, this.getY() + this.getHeight() - 90, "../resources/images/missile.png"));
+			missiles.add(new Missile(this.getX() + this.getWidth() / 2 - 9, this.getY() + this.getHeight() - 90, "missile.png"));
 			this.shootCounter = 0;
 		}
 		

@@ -99,7 +99,7 @@ public class Settings extends javax.swing.JDialog {
 	            }
 	        });    
 	        
-		labelImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("../resources/images/awsd.png")));
+		labelImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("awsd.png")));
 		labelImage.setMaximumSize(new java.awt.Dimension(379, 120));
 		labelImage.setMinimumSize(new java.awt.Dimension(379, 120));
 		labelImage.setName("");

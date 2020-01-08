@@ -10,7 +10,7 @@ public class MeteoriteFactory extends ObstacleFactory {
 	static Random random = new Random();
 	static int randX;
 	static int yMeteorite = -50;
-	static String fileNameMeteorite = "../resources/images/meteorite.png";
+	static String fileNameMeteorite = "meteorite.png";
 	
 	public MeteoriteFactory() {
 		super();

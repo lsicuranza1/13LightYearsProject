@@ -13,7 +13,7 @@ public class EnemySpaceShipTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.enemy = new EnemySpaceShip(0,0, "../resources/images/spaceship.png");
+		this.enemy = new EnemySpaceShip(0,0, "spaceship.png");
 	}
 
 	@Test

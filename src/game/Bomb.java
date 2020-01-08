@@ -10,7 +10,7 @@ public class Bomb extends Sprite{
 	public Bomb(int x, int y, String path) {			
 		super(x, y, path);
 		
-		enemyShootClip = Utilities.LoadSound(getClass().getResource("../resources/sound/enemyShoot.wav"));
+		enemyShootClip = Utilities.LoadSound(getClass().getResource("enemyShoot.wav"));
 		enemyShootSound = new Sound(enemyShootClip);
 		enemyShootSound.playSound();	 
 	}

@@ -17,7 +17,7 @@ public class LifeBonusTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.bonus = new LifeBonus(10,10,"../resources/images/life.png");
+		this.bonus = new LifeBonus(10,10,"life.png");
 	}
 
 

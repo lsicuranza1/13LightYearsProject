@@ -64,7 +64,7 @@ public class EnemySpaceShip extends SpaceshipStructure {
 	public void fire() {
 		List<Bomb> bomb = this.getBombs();
 		if(this.shootCounter>=70) {
-			bomb.add(new Bomb(this.getX() + this.getWidth()/2-5,this.getY() + this.getHeight()-9,"../resources/images/missile_enemy.png"));
+			bomb.add(new Bomb(this.getX() + this.getWidth()/2-5,this.getY() + this.getHeight()-9,"missile_enemy.png"));
 			this.shootCounter = 0;
 		}		
 		this.shootCounter++;

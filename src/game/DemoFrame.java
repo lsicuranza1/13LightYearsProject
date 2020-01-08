@@ -18,7 +18,7 @@ public class DemoFrame extends JFrame {
 		initComponents();
 		
 		if ( Settings.soundMusic == true) {
-			clipInGame = Utilities.LoadSound(getClass().getResource("../resources/sound/ingame.wav"));
+			clipInGame = Utilities.LoadSound(getClass().getResource("ingame.wav"));
 			soundInGame = new Sound(clipInGame);
 			soundInGame.loopSound();
 		}

@@ -18,7 +18,7 @@ public class MissileTest {
 		
 		this.board_heigth = 800;
 		this.missile_speed = 15;
-		this.missile = new Missile(0,this.board_heigth,"../resources/images/missile.png");
+		this.missile = new Missile(0,this.board_heigth,"missile.png");
 		
 	}
 

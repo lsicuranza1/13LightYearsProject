@@ -25,7 +25,7 @@ public class MainFrame {
 
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		scoreboard = new Scoreboard();
-		scoreboard.load("scoreboard.dat");
+		scoreboard.load();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

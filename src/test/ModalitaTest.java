@@ -12,25 +12,25 @@ import game.patterns.state.StatoStart;
 
 public class ModalitaTest {
 	
-	private Modalita modalità;
+	private Modalita modalita;
 	
 	@Before
 	public void setUp() throws Exception {
-		this.modalità = new Modalita();
+		this.modalita = new Modalita();
 		
 		
 	}
 
 	@Test
 	public void testGetStatoModalita() {
-		assertTrue(this.modalità.getStatoModalita() instanceof StatoStart);
+		assertTrue(this.modalita.getStatoModalita() instanceof StatoStart);
 	}
 
 	@Test
 	public void testSetStatoModalita() {
 		StatoInEsecuzione state = new StatoInEsecuzione();
-		this.modalità.setStatoModalita(state);
-		assertEquals(state,this.modalità.getStatoModalita());
+		this.modalita.setStatoModalita(state);
+		assertEquals(state,this.modalita.getStatoModalita());
 	}
 
 }

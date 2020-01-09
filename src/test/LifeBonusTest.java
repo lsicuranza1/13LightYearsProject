@@ -12,40 +12,40 @@ import game.LifeBonus;
 public class LifeBonusTest {
 	
 	private LifeBonus bonus;
+	private AffineTransform transform;
 
 
 	@Before
 	public void setUp() throws Exception {
 		
 		this.bonus = new LifeBonus(10,10,"../resources/images/life.png");
+		this.transform = new AffineTransform();
 	}
 
 
 	@Test
 	public void testMove() {
         
-		AffineTransform transf = new AffineTransform();
-		
-		transf.setToTranslation(bonus.getX(), bonus.getY()+5);
-		bonus.move();
-		assertEquals(transf, bonus.getTransform());
+		this.transform.setToTranslation(this.bonus.getX(), this.bonus.getY()+5);
+		this.bonus.move();
+		assertEquals(this.transform, this.bonus.getTransform());
 	}
 
 	@Test
 	public void testGetTransform() {
-		AffineTransform transf = new AffineTransform();
-		transf.setToTranslation(bonus.getX(), bonus.getY()+5);
-		bonus.move();
-		assertEquals(transf,bonus.getTransform());
+		
+		this.transform.setToTranslation(this.bonus.getX(), this.bonus.getY()+5);
+		this.bonus.move();
+		assertEquals(this.transform,bonus.getTransform());
 	}
 	
 	@Test
 	public void testSetTransform() {
-		AffineTransform transf = new AffineTransform();
-        transf.setToTranslation(50,50);
+	
+        this.transform.setToTranslation(50,50);
         
-        bonus.setTransform(transf);
-        assertEquals(transf,bonus.getTransform());
+        this.bonus.setTransform(this.transform);
+        assertEquals(this.transform,this.bonus.getTransform());
         
         
 	}

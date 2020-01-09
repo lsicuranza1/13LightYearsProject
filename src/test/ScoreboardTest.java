@@ -55,9 +55,6 @@ public class ScoreboardTest {
 		
 		//Corrected File
 		scoreboard.load();
-		
-		//Uncorrected File
-		scoreboard.load();
 
 	}
 	
@@ -66,10 +63,7 @@ public class ScoreboardTest {
 		
 		//Corrected File
 		scoreboard.save();
-		
-		//Uncorrected File
-		scoreboard.save();
-		
+
 	}
 	
 	 @Test
